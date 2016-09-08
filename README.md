@@ -1,8 +1,8 @@
 # RoboApp
-members:
-Kurtis Davis,
-Alex Vild,
-Luke Shays,
-Quintin Fettes,
-Seattle Ruzek,
-Zach Taylor
+## Members
+* Kurtis Davis
+* Alex Vild
+* Luke Shays
+* Quintin Fettes
+* Seattle Ruzek
+* Zach Taylor
