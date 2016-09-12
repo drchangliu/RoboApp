@@ -1,0 +1,8 @@
+The app can be installed from google playstore:
+
+https://play.google.com/store/apps/details?id=com.robodoot.dr.facetracktest
+
+
+Or from the apk (and adb):
+
+adb install RoboApp.apk

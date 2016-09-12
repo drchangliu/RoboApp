@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <TextView android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="30dip"
+        android:text="                 Readme
+
+ Servo Control: Allows for manual control of servos
+
+ Console: Allows for manual debugging with arduino/pololu
+
+ Behavior Mode: The activity containing facial and audio detection
+
+ Color Tracking: The activity which contains the color tracking code" />
+
+</LinearLayout>

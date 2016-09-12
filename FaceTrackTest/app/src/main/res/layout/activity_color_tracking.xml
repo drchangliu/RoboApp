@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.robodoot.dr.RoboApp.ColorTrackingActivity"
+    xmlns:opencv="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal" >
+
+        <com.robodoot.roboapp.CatCameraView
+            android:id="@+id/color_tracking_camera_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".33"
+            opencv:camera_id = "front" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".33"
+            android:orientation="vertical">
+
+            <!--<LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/switch_battery"
+                    android:checked="false" />
+
+                <com.robodoot.roboapp.BatteryView
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    app:batteryShowPercent="true"
+                    android:id="@+id/battery_view" />
+
+            </LinearLayout>-->
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seek_bar_low_h"
+                android:max="255"
+                android:progress="0" />
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seek_bar_high_h"
+                android:max="255"
+                android:progress="255" />
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seek_bar_low_s"
+                android:max="255"
+                android:progress="0" />
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seek_bar_high_s"
+                android:max="255"
+                android:progress="255" />
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seek_bar_low_v"
+                android:max="255"
+                android:progress="0" />
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seek_bar_high_v"
+                android:max="255"
+                android:layout_gravity="center_horizontal"
+                android:progress="255" />
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="show thresholded"
+                android:id="@+id/switch_threshold"
+                android:checked="false" />
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="back camera"
+                android:id="@+id/switch_camera"
+                android:checked="false" />
+
+            <!--<LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Load Red"
+                    android:id="@+id/button_load_red"
+                    android:layout_weight=".33"
+                    android:onClick="loadColor" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Load Green"
+                    android:id="@+id/button_load_green"
+                    android:layout_weight=".33"
+                    android:onClick="loadColor" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Load Blue"
+                    android:id="@+id/button_load_blue"
+                    android:layout_weight=".33"
+                    android:onClick="loadColor" />
+            </LinearLayout>-->
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Save Red"
+                    android:id="@+id/button_save_red"
+                    android:layout_weight=".33"
+                    android:onClick="setColor" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Save Green"
+                    android:id="@+id/button_save_green"
+                    android:layout_weight=".33"
+                    android:onClick="setColor" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Save Blue"
+                    android:id="@+id/button_save_blue"
+                    android:layout_weight=".33"
+                    android:onClick="setColor" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Load Red"
+                    android:id="@+id/button_load_red"
+                    android:layout_weight=".33"
+                    android:onClick="loadColor" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Load Green"
+                    android:id="@+id/button_load_green"
+                    android:layout_weight=".33"
+                    android:onClick="loadColor" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Load Blue"
+                    android:id="@+id/button_load_blue"
+                    android:layout_weight=".33"
+                    android:onClick="loadColor" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
