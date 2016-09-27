@@ -71,6 +71,8 @@ public class CatEmotion {
 
     public void reCalcFace() {
         //Call Listen here
+
+        // Here we prevent a mood greater than or less than 120.
         if(scale>120)scale=120;
         if(scale<-120)scale=-120;
 
@@ -410,13 +412,14 @@ public class CatEmotion {
         reCalcFace();
     }
 
-    public void smiledAt()
-    {
-
+    public void smiledAt() {
         scale+=55;
         reCalcFace();
     }
 
-
+    public void loveMeCat(){
+        scale+=120;
+        reCalcFace();
+    }
 
 }

@@ -600,7 +600,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Capture speech input from microphone.
+     * Here we will start the voice recognition process.
      */
     private void promptSpeechInput() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -690,6 +690,9 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                         Intent intent = new Intent(this, MainActivity.class);
 
                         startActivity(intent);
+                    }
+                    if (result.contains("love")) {
+                        kitty.loveMeCat();
                     }
                     //Clear the arrayList for the next time a button is pressed.
                     result.clear();
