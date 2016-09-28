@@ -21,3 +21,12 @@ The end product will be a robotic bobcat which can navigate an environment based
 RoboCat is able to respond to voice commands after the touch of a button.  it also currently has basic color recognition and facial detection provided through <a href="http://opencv.org/">OpenCV.</a>
 
 Also currently available in the app are activities which allow terminal contact with the pololu, for log purposes, and to manually send values to the servos (The servos are what allow the bobcat to maneuver through the environment).
+
+##Organization of Repo
+./doc contains the documentation of all scripts written for FaceTrackTest
+
+./FaceTrackTest is the actual Roboapp and contains all code
+
+./legacy_files contains inherited files from previous teams with little use or no known use. See README in that directory
+
+./proj_doc contains all non-code documents relating to our oftware development cycle. See README in that directory
