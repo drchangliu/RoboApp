@@ -29,4 +29,4 @@ Also currently available in the app are activities which allow terminal contact 
 
 ./legacy_files contains inherited files from previous teams with little use or no known use. See README in that directory
 
-./proj_doc contains all non-code documents relating to our oftware development cycle. See README in that directory
+./proj_doc contains all non-code documents relating to our software development cycle. See README in that directory
