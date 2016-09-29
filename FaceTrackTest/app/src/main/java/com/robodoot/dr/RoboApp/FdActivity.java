@@ -9,6 +9,7 @@ import java.util.Locale;
 import android.content.ActivityNotFoundException;
 import android.os.Environment;
 import android.speech.RecognizerIntent;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.app.Activity;
 import android.content.Context;
@@ -77,6 +78,7 @@ import static org.bytedeco.javacpp.opencv_imgcodecs.cvLoadImage;
  * detection and color tracking. Image processing occurs in the {@link #onCameraFrame} method.
  */
 public class FdActivity extends Activity implements GestureDetector.OnGestureListener, CvCameraViewListener2 {
+    // FUNCTION AND VARIABLE DEFINTIONS
     private Logger mFaceRectLogger;
     private Logger mSpeechTextLogger;
     boolean initialized = false;
@@ -87,6 +89,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     private boolean cameraIsChecked = false;
 
     private ImageButton btnSpeak;
+    private Button btnMenu;
     private final int REQ_CODE_SPEECH_INPUT=100;
     private ArrayList<String> result;
     private static final String good = "good";
@@ -159,6 +162,12 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     TextView tempTextView;
 
     private String tempText;
+
+    // Function to open menu activity
+    public void openMenu(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -290,11 +299,21 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+        // Speech button click action
         btnSpeak = (ImageButton) findViewById(R.id.btnSpeak);
         btnSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 promptSpeechInput();
+            }
+        });
+
+        // Menu button on click action
+        btnMenu = (Button) findViewById(R.id.btnMenu);
+        btnMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                openMenu();
             }
         });
 

@@ -14,14 +14,7 @@
             <option value="$PROJECT_DIR$/openCVLibrary300" />
           </set>
         </option>
-        <option name="myModules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/libraries/usbSerialForAndroid" />
-            <option value="$PROJECT_DIR$/openCVLibrary300" />
-          </set>
-        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
