@@ -1,0 +1,5 @@
+Github link is to a project that already implements color tracking in OpenCV for android.  If we stick with OpenCV it might be beneficial to scan through this code to get ideas for improvements.
+Stackoverflow link it to a discussion about color detection in android without using openCV. This link might be helpful if we implement color tracking in something other than openCV.
+
+Notes:
+We decided that it would be best if we could dump openCV and move to all native android APIs for robocat development. Android already has a face detection API to work with, but I have not found anything related to color recognition. 
