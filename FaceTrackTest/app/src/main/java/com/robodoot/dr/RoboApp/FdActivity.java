@@ -69,6 +69,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.IntBuffer;
 import java.util.Random;
+import java.util.Stack;
 import java.util.Vector;
 
 import static org.bytedeco.javacpp.opencv_imgcodecs.cvLoadImage;
@@ -637,10 +638,10 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
      * This is called after speech recognition. The recognized words come in as a list of strings
      * and are processed to make the cat perform actions or change emotion state.
      */
+    
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         switch (requestCode) {
             case REQ_CODE_SPEECH_INPUT: {
                 if  (resultCode==RESULT_OK && null!=data) {
@@ -665,53 +666,61 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                     if (result.contains("home") || result.contains("straight")) {
                         virtualCat.resetHead();
                     }
-                    if (result.contains("good")) {
+                    else if (result.contains("good")) {
                         //Make the cat happy.
                         kitty.smiledAt();
                     }
-                    if (result.contains("bad")) {
+                    else if (result.contains("bad")) {
                         //Make the cat mad.
                         kitty.frownedAt();
                     }
-                    if (result.contains("left")) {
+                    else if (result.contains("left")) {
                         //Make the cat head move left
                         virtualCat.turnHeadLeft();
                     }
-                    if (result.contains("walk")||result.contains("walking") || result.contains("come")) {
+                    else if (result.contains("walk")||result.contains("walking") || result.contains("come")) {
                         virtualCat.stepForward();
                     }
                     //if (result.contains("right") || result.contains("write")) {
                     // does this work? we'll see
-                    if (!Collections.disjoint(result, Arrays.asList("right", "write", "white"))) {
+                    else if (!Collections.disjoint(result, Arrays.asList("right", "write", "white"))) {
                         //Make the cat head move right
                         virtualCat.turnHeadRight();
                     }
-                    if (result.contains("green")) {
+                    else if (result.contains("green")) {
                         trackingGreen = true;
                         trackingRed = false;
                     }
-                    if (result.contains("red")) {
+                    else if (result.contains("red")) {
                         trackingGreen = false;
                         trackingRed = true;
                     }
-                    if (result.contains("blue")) {
+                    else if (result.contains("blue")) {
                         trackingGreen = trackingRed = false;
                     }
-                    if (result.contains("up")) {
+                    else if (result.contains("up")) {
                         virtualCat.turnHeadUp();
                     }
-                    if (result.contains("down")) {
+                    else if (result.contains("down")) {
                         virtualCat.turnHeadDown();
                     }
-                    if (result.contains("menu")) {
+                    else if (result.contains("menu")) {
                         entry.clear();
                         //showVideoFeed();
                         Intent intent = new Intent(this, MainActivity.class);
 
                         startActivity(intent);
                     }
-                    if (result.contains("love")) {
+                    else if (result.contains("love")) {
                         kitty.loveMeCat();
+                    }
+                    else {
+                        Context context = getApplicationContext();
+                        CharSequence commandNotFound = "Command not found!";
+                        int duration = Toast.LENGTH_SHORT;
+
+                        Toast notFoundToast = Toast.makeText(context, commandNotFound, duration);
+                        notFoundToast.show();
                     }
                     //Clear the arrayList for the next time a button is pressed.
                     result.clear();
