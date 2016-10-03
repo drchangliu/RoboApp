@@ -1,0 +1,42 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.robodoot.roboapp.CompTestFragment">
+
+
+    <!--<FloatingActionButton-->
+        <!--android:layout_width="56dp"-->
+        <!--android:layout_height="56dp"-->
+        <!--android:background="@drawable/action_button_bg"-->
+        <!--android:text="New Button"-->
+        <!--android:id="@+id/button1"-->
+        <!--android:layout_gravity="bottom|right"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:layout_marginBottom="48dp"-->
+        <!--android:padding="16dp"-->
+        <!--android:elevation="8dp"/>-->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addItemButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_black_24dp"
+        android:elevation="4dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="48dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView android:layout_width="match_parent" android:layout_height="match_parent"
+            android:text="@string/hello_comptest_fragment" />
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/comptest_listview" />
+
+    </RelativeLayout>
+
+</FrameLayout>
