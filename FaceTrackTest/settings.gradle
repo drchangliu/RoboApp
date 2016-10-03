@@ -1,3 +1,0 @@
-include ':app', ':usbSerialForAndroid'
-include ':openCVLibrary300'
-project(':usbSerialForAndroid').projectDir = new File('libraries/usbSerialForAndroid')
