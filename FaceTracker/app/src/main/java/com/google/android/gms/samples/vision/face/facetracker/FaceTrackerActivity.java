@@ -42,7 +42,7 @@ import com.google.android.gms.samples.vision.face.facetracker.ui.camera.GraphicO
 import java.io.IOException;
 
 /**
- * Activity for the face tracker app.  This app detects faces with the rear facing camera, and draws
+ * Activity for the face tracker app.  This app detects faces with the front facing camera, and draws
  * overlay graphics to indicate the position, size, and ID of each face.
  */
 public final class FaceTrackerActivity extends AppCompatActivity {
@@ -144,8 +144,8 @@ public final class FaceTrackerActivity extends AppCompatActivity {
 
         mCameraSource = new CameraSource.Builder(context, detector)
                 .setRequestedPreviewSize(640, 480)
-                .setFacing(CameraSource.CAMERA_FACING_BACK)
-                .setRequestedFps(30.0f)
+                .setFacing(CameraSource.CAMERA_FACING_FRONT)
+                .setRequestedFps(15.0f)
                 .build();
     }
 
