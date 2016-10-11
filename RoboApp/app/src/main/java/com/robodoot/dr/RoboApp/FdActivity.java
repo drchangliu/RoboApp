@@ -6,26 +6,31 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Locale;
-import android.content.ActivityNotFoundException;
-import android.os.Environment;
-import android.speech.RecognizerIntent;
-import android.widget.Button;
-import android.widget.ImageButton;
+
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.graphics.Bitmap;
+import android.media.MediaRecorder;
+import android.os.Environment;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.media.MediaRecorder;
 
 import com.robodoot.dr.facetracktest.R;
 import com.robodoot.roboapp.ColorValues;
@@ -77,8 +82,9 @@ import static org.bytedeco.javacpp.opencv_imgcodecs.cvLoadImage;
 /**
  * Behavior mode activity. This is the main activity of the app. It uses OpenCV/JavaCV for face
  * detection and color tracking. Image processing occurs in the {@link #onCameraFrame} method.
+ * uses built in hardware functions to use the Android accelerometer data (SensorEventListener)
  */
-public class FdActivity extends Activity implements GestureDetector.OnGestureListener, CvCameraViewListener2 {
+public class FdActivity extends Activity implements GestureDetector.OnGestureListener, CvCameraViewListener2, SensorEventListener {
     // FUNCTION AND VARIABLE DEFINTIONS
     private Logger mFaceRectLogger;
     private Logger mSpeechTextLogger;
@@ -163,6 +169,11 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     TextView tempTextView;
 
     private String tempText;
+
+    // private variables for accelerometer declatation
+    private SensorManager senSensorManager;
+    private Sensor senAccelerometer;
+
 
     // Function to open menu activity
     public void openMenu(){
@@ -288,7 +299,13 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fd);
+
+        // initializing accelerometer variables and registering listener (listening for movement)
+        senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
         //debugging = true;
 
@@ -356,6 +373,18 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         }
     }
 
+    // for logging accelerometer data
+    @Override
+    public void onSensorChanged(SensorEvent event){
+
+    }
+
+    // for logging accelerometer data
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy){
+
+    }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -363,6 +392,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             mOpenCvCameraView.disableView();
         //record(imageCaptureDirectory);
         frameNumber = 0;
+        // for accelerometer, also need to stop listening on pause
+        senSensorManager.unregisterListener(this);
     }
 
     @Override
@@ -386,6 +417,9 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         frameNumber = 0;
 
         mFaceRectLogger.addRecordToLog("\n" + new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date()));
+
+        // need to start listening again for movement for accelerometer on resume
+        senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
@@ -638,7 +672,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
      * This is called after speech recognition. The recognized words come in as a list of strings
      * and are processed to make the cat perform actions or change emotion state.
      */
-    
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
