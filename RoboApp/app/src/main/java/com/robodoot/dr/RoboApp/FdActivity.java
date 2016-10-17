@@ -5,10 +5,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Locale;
+
+import android.Manifest;
 import android.content.ActivityNotFoundException;
+import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.speech.RecognizerIntent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.app.Activity;
@@ -72,13 +79,20 @@ import java.util.Random;
 import java.util.Stack;
 import java.util.Vector;
 
+import edu.cmu.pocketsphinx.Assets;
+import edu.cmu.pocketsphinx.Hypothesis;
+import edu.cmu.pocketsphinx.RecognitionListener;
+import edu.cmu.pocketsphinx.SpeechRecognizer;
+import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
+
+import static android.widget.Toast.makeText;
 import static org.bytedeco.javacpp.opencv_imgcodecs.cvLoadImage;
 
 /**
  * Behavior mode activity. This is the main activity of the app. It uses OpenCV/JavaCV for face
  * detection and color tracking. Image processing occurs in the {@link #onCameraFrame} method.
  */
-public class FdActivity extends Activity implements GestureDetector.OnGestureListener, CvCameraViewListener2 {
+public class FdActivity extends Activity implements GestureDetector.OnGestureListener, CvCameraViewListener2, RecognitionListener {
     // FUNCTION AND VARIABLE DEFINTIONS
     private Logger mFaceRectLogger;
     private Logger mSpeechTextLogger;
@@ -163,6 +177,23 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     TextView tempTextView;
 
     private String tempText;
+
+    // Pocketsphinx variables
+    /* Named searches allow to quickly reconfigure the decoder */
+    private static final String KWS_SEARCH = "wakeup";
+    private static final String FORECAST_SEARCH = "forecast";
+    private static final String DIGITS_SEARCH = "digits";
+    private static final String PHONE_SEARCH = "phones";
+    private static final String MENU_SEARCH = "menu";
+
+    /* Keyword we are looking for to activate menu */
+    private static final String KEYPHRASE = "oh mighty computer";
+
+    /* Used to handle permission request */
+    private static final int PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
+
+    private SpeechRecognizer recognizer;
+    private HashMap<String, Integer> captions;
 
     // Function to open menu activity
     public void openMenu(){
@@ -290,6 +321,14 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     public void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_fd);
 
+        // Pocketsphinx Captions
+        captions = new HashMap<String, Integer>();
+        captions.put(KWS_SEARCH, R.string.kws_caption);
+        captions.put(MENU_SEARCH, R.string.menu_caption);
+        captions.put(DIGITS_SEARCH, R.string.digits_caption);
+        captions.put(PHONE_SEARCH, R.string.phone_caption);
+        captions.put(FORECAST_SEARCH, R.string.forecast_caption);
+
         //debugging = true;
 
         psswd.add(CHAR.U); psswd.add(CHAR.U);  psswd.add(CHAR.D); psswd.add(CHAR.D);
@@ -354,7 +393,162 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                 && lines.length > 0) {
             blueValues = new ColorValues(lines[0]);
         }
+
+        ((TextView) findViewById(R.id.caption_text))
+                .setText("Preparing the recognizer");
+        // Check for record audio permission & setup recognizer
+        int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO);
+        if (permissionCheck == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, PERMISSIONS_REQUEST_RECORD_AUDIO);
+            return;
+        }
+        runRecognizerSetup();
     }
+
+    // Requesting permission to record audio
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PERMISSIONS_REQUEST_RECORD_AUDIO) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                runRecognizerSetup();
+            } else {
+                finish();
+            }
+        }
+    }
+
+    /* *******************
+        START POCKETSPHINX IMPLEMENTATION
+       *******************
+     */
+    // These next two functions setup the pocketsphinx recognizer
+    private void runRecognizerSetup() {
+        // Recognizer initialization is a time-consuming and it involves IO,
+        // so we execute it in async task
+        new AsyncTask<Void, Void, Exception>() {
+            @Override
+            protected Exception doInBackground(Void... params) {
+                try {
+                    Assets assets = new Assets(FdActivity.this);
+                    File assetDir = assets.syncAssets();
+                    setupRecognizer(assetDir);
+                } catch (IOException e) {
+                    return e;
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Exception result) {
+                if (result != null) {
+                    ((TextView) findViewById(R.id.caption_text))
+                            .setText("Failed to init recognizer " + result);
+                } else {
+                    switchSearch(KWS_SEARCH);
+                }
+            }
+        }.execute();
+    }
+
+    @Override
+    public void onPartialResult(Hypothesis hypothesis) {
+        if (hypothesis == null)
+            return;
+
+        String text = hypothesis.getHypstr();
+        if (text.equals(KEYPHRASE))
+            switchSearch(MENU_SEARCH);
+        else if (text.equals(DIGITS_SEARCH))
+            switchSearch(DIGITS_SEARCH);
+        else if (text.equals(PHONE_SEARCH))
+            switchSearch(PHONE_SEARCH);
+        else if (text.equals(FORECAST_SEARCH))
+            switchSearch(FORECAST_SEARCH);
+        else
+            ((TextView) findViewById(R.id.result_text)).setText(text);
+    }
+
+    /**
+     * This callback is called when we stop the recognizer.
+     */
+    @Override
+    public void onResult(Hypothesis hypothesis) {
+        ((TextView) findViewById(R.id.result_text)).setText("");
+        if (hypothesis != null) {
+            String text = hypothesis.getHypstr();
+            makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onBeginningOfSpeech() {
+    }
+
+    /**
+     * We stop recognizer here to get a final result
+     */
+    @Override
+    public void onEndOfSpeech() {
+        if (!recognizer.getSearchName().equals(KWS_SEARCH))
+            switchSearch(KWS_SEARCH);
+    }
+
+    private void switchSearch(String searchName) {
+        recognizer.stop();
+
+        // If we are not spotting, start listening with timeout (10000 ms or 10 seconds).
+        if (searchName.equals(KWS_SEARCH))
+            recognizer.startListening(searchName);
+        else
+            recognizer.startListening(searchName, 10000);
+
+        String caption = getResources().getString(captions.get(searchName));
+        ((TextView) findViewById(R.id.caption_text)).setText(caption);
+    }
+
+    private void setupRecognizer(File assetsDir) throws IOException {
+        // The recognizer can be configured to perform multiple searches
+        // of different kind and switch between them
+
+        recognizer = SpeechRecognizerSetup.defaultSetup()
+                .setAcousticModel(new File(assetsDir, "en-us-ptm"))
+                .setDictionary(new File(assetsDir, "cmudict-en-us.dict"))
+
+                .setRawLogDir(assetsDir) // To disable logging of raw audio comment out this call (takes a lot of space on the device)
+                .setKeywordThreshold(1e-45f) // Threshold to tune for keyphrase to balance between false alarms and misses
+                .setBoolean("-allphone_ci", true)  // Use context-independent phonetic search, context-dependent is too slow for mobile
+
+
+                .getRecognizer();
+        recognizer.addListener(this);
+
+        /** In your application you might not need to add all those searches.
+         * They are added here for demonstration. You can leave just one.
+         */
+
+        // Create keyword-activation search.
+        recognizer.addKeyphraseSearch(KWS_SEARCH, KEYPHRASE);
+
+        // Create grammar-based search for selection between demos
+        File menuGrammar = new File(assetsDir, "menu.gram");
+        recognizer.addGrammarSearch(MENU_SEARCH, menuGrammar);
+
+        // Create grammar-based search for digit recognition
+        File digitsGrammar = new File(assetsDir, "digits.gram");
+        recognizer.addGrammarSearch(DIGITS_SEARCH, digitsGrammar);
+
+        // Create language model search
+        File languageModel = new File(assetsDir, "weather.dmp");
+        recognizer.addNgramSearch(FORECAST_SEARCH, languageModel);
+
+        // Phonetic search
+        File phoneticModel = new File(assetsDir, "en-phone.dmp");
+        recognizer.addAllphoneSearch(PHONE_SEARCH, phoneticModel);
+    }
+
 
     @Override
     public void onPause() {
@@ -392,6 +586,12 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     public void onDestroy() {
         super.onDestroy();
         mOpenCvCameraView.disableView();
+
+        // Turn off pocket sphinx recognizer
+        if (recognizer != null) {
+            recognizer.cancel();
+            recognizer.shutdown();
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1322,5 +1522,16 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             UserColors.add(IDcount, new Scalar(0, 0, 0));
             IDcount++;
         }
+    }
+
+    // Two more pocketsphinx overrides
+    @Override
+    public void onError(Exception error) {
+        ((TextView) findViewById(R.id.caption_text)).setText(error.getMessage());
+    }
+
+    @Override
+    public void onTimeout() {
+        switchSearch(KWS_SEARCH);
     }
 }

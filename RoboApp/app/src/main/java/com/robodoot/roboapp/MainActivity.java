@@ -1,20 +1,30 @@
 package com.robodoot.roboapp;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.speech.SpeechRecognizer;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.robodoot.dr.facetracktest.R;
+
+import java.io.File;
+import java.io.IOException;
 
 public class MainActivity extends FragmentActivity implements
         NavigationDrawerCallbacks, HomeFragment.OnFragmentInteractionListener,
@@ -30,11 +40,10 @@ public class MainActivity extends FragmentActivity implements
 
     public static int log_count = 0;
     public static final int LOG_SIZE = 100;
-    public static String[] logEntries = new String[LOG_SIZE]; // This value may need to be changed so all entries fit on screen
+    public static String[] logEntries = new String[LOG_SIZE]; // This value may need to be changed so all entries fit on scree
 
-
-
-
+    private static final int PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
+    private SpeechRecognizer recognizer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +72,6 @@ public class MainActivity extends FragmentActivity implements
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-
-
-
 
         Fragment fragment = null;
         Intent intent = null;

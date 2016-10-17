@@ -11,6 +11,17 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    packagingOptions {
+        exclude "/data/app/com.robodoot.dr.facetracktest-1/base.apk!/lib/armeabi-v7a/libopencv_imgproc.so"
+        exclude "/data/app/com.robodoot.dr.facetracktest-1/lib/arm/armeabi-v7a/libopencv_imgproc.so"
+        exclude "/vendor/lib/libopencv_imgproc.so"
+        exclude "/system/lib/libopencv_imgproc.so"
+        exclude "/data/app/com.robodoot.dr.facetracktest-1/base.apk!/lib/armeabi-v7a/libjniopencv_core.s"
+        exclude "/data/app/com.robodoot.dr.facetracktest-1/lib/arm/armeabi-v7a/libjniopencv_core.s"
+        exclude "/vendor/lib/libjniopencv_core.s"
+        exclude "/system/lib/libjniopencv_core.s"
+
+    }
     buildTypes {
         release {
             minifyEnabled false
