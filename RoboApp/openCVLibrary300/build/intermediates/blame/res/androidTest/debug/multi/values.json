@@ -1,6 +1,10 @@
 [
     {
-        "outputFile": "C:\\linux_files\\RoboApp\\RoboApp\\openCVLibrary300\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+        "outputFile": "/Users/kurtisdavis/Documents/RoboApp/RoboApp/openCVLibrary300/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values/values.xml",
+        "map": []
+    },
+    {
+        "outputFile": "/Users/kurtisdavis/Documents/RoboApp/RoboApp/C:\\linux_files\\RoboApp\\RoboApp\\openCVLibrary300\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
         "map": []
     }
 ]

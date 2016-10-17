@@ -101,6 +101,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     private ArrayList<String> result;
     private static final String good = "good";
     private static final String bad = "bad";
+    private static final String cry = "cry";
+    private static final String disgust = "stupid cat";
 
     private GestureDetector gDetector;
     public enum CHAR {U, D, L, R}
@@ -707,6 +709,14 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                     else if (result.contains("bad")) {
                         //Make the cat mad.
                         kitty.frownedAt();
+                    }
+                    else if (result.contains("cry")){
+                        //Make the cat cry
+                        kitty.cryingAt();
+                    }
+                    else if (result.contains("stupid cat")){
+                        //Make cat disgusted
+                        kitty.distgustedAt();
                     }
                     else if (result.contains("left")) {
                         //Make the cat head move left

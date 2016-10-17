@@ -12,6 +12,7 @@ import java.util.TimerTask;
  * Created by stopn_000 on 11/16/2015.
  */
 public class CatEmotion {
+
     public enum EMOTION {HAPPY, HAPPY_TONGUE, HAPPIER, HEARTS, ANNOYED, SAD, SADDER, CONCERNED, CRYING, DISGUSTED, HEARTS_TONGUE, KAWAII_EYES_CLOSED, KAWAII_EYES_OPEN, LOOK_RIGHT, LOOK_LEFT, YAWNING}
     private EMOTION state;
     private int scale;
@@ -74,14 +75,19 @@ public class CatEmotion {
 
         // Here we prevent a mood greater than or less than 120.
         if(scale>120)scale=120;
-        if(scale<-120)scale=-120;
+        if(scale<-170)scale=-170;
 
         context.runOnUiThread(new Runnable() {
             @Override
             public void run() {
 
                 if (default_display) {
-                    if (scale <= -100) {
+
+                    if (scale <= -166) {
+                        state = EMOTION.DISGUSTED;
+                    }if (scale <= -133) {
+                        state = EMOTION.CRYING;
+                    }if (scale <= -100) {
                         state = EMOTION.SADDER;
                     } else if (scale <= -66) {
                         state = EMOTION.SAD;
@@ -421,5 +427,12 @@ public class CatEmotion {
         scale+=120;
         reCalcFace();
     }
-
+    public void cryingAt(){
+        scale-=133;
+        reCalcFace();
+    }
+    public void distgustedAt(){
+        scale-=166;
+        reCalcFace();
+    }
 }
