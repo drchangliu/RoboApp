@@ -89,6 +89,11 @@ public class MainActivity extends FragmentActivity implements
                 intent = new Intent("com.robodoot.dr.RoboApp.ColorTrackingActivity");
                 break;
             case 3:
+                log_console("Face Tracking");
+                intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
+                //fragment = new ReadmeFragment();
+                break;
+            case 4:
                 log_console("Readme Displayed");
                 fragment = new ReadmeFragment();
                 break;
