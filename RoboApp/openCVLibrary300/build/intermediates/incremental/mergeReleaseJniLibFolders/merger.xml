@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/kurtisdavis/Documents/RoboApp/RoboApp/openCVLibrary300/src/main/jniLibs"/></dataSet><dataSet config="release"><source path="/Users/kurtisdavis/Documents/RoboApp/RoboApp/openCVLibrary300/src/release/jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="E:\Alex Vild\Documents\School\4560\master\RoboApp\RoboApp\openCVLibrary300\src\main\jniLibs"/></dataSet><dataSet config="release"><source path="E:\Alex Vild\Documents\School\4560\master\RoboApp\RoboApp\openCVLibrary300\src\release\jniLibs"/></dataSet></merger>
