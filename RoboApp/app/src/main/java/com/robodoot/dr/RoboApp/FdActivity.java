@@ -712,6 +712,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                     }
                     else if (result.contains("cry")){
                         //Make the cat cry
+                        Log.w("Cryingwah", "This is happening");
                         kitty.cryingAt();
                     }
                     else if (result.contains("stupid cat")){
