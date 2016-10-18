@@ -1,7 +1,10 @@
 package com.robodoot.dr.RoboApp;
 
+import android.util.Log;
 import android.widget.ImageView;
 import com.robodoot.dr.facetracktest.R;
+
+import org.opencv.ml.EM;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -12,6 +15,7 @@ import java.util.TimerTask;
  * Created by stopn_000 on 11/16/2015.
  */
 public class CatEmotion {
+
     public enum EMOTION {HAPPY, HAPPY_TONGUE, HAPPIER, HEARTS, ANNOYED, SAD, SADDER, CONCERNED, CRYING, DISGUSTED, HEARTS_TONGUE, KAWAII_EYES_CLOSED, KAWAII_EYES_OPEN, LOOK_RIGHT, LOOK_LEFT, YAWNING}
     private EMOTION state;
     private int scale;
@@ -74,14 +78,20 @@ public class CatEmotion {
 
         // Here we prevent a mood greater than or less than 120.
         if(scale>120)scale=120;
-        if(scale<-120)scale=-120;
+        if(scale < -180)scale= -180;
 
         context.runOnUiThread(new Runnable() {
             @Override
             public void run() {
 
                 if (default_display) {
-                    if (scale <= -100) {
+                    String test = Integer.toString(scale);
+                    if (scale <= -166) {
+                        state = EMOTION.DISGUSTED;
+                    } else if (scale <= -133) {
+                        state = EMOTION.CRYING;
+                    } else if (scale <= -100) {
+                        Log.w("Sadder","I am sad");
                         state = EMOTION.SADDER;
                     } else if (scale <= -66) {
                         state = EMOTION.SAD;
@@ -125,6 +135,7 @@ public class CatEmotion {
                         pic.setImageResource(R.drawable.face_concerned);
                         break;
                     case CRYING:
+                        Log.w("Crying", "yeah buddy");
                         pic.setImageResource(R.drawable.face_crying);
                         break;
                     case DISGUSTED:
@@ -390,7 +401,7 @@ public class CatEmotion {
         {
             happiness+=toAdd;
             if(happiness>120)happiness=120;
-            if(happiness<-120)happiness=-120;
+            if(happiness<-120)happiness=-10;
 
         }
 
@@ -421,5 +432,12 @@ public class CatEmotion {
         scale+=120;
         reCalcFace();
     }
-
+    public void cryingAt(){
+        scale = -166;
+        reCalcFace();
+    }
+    public void distgustedAt(){
+        scale = -180;
+        reCalcFace();
+    }
 }

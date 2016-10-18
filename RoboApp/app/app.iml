@@ -102,7 +102,13 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-vision/9.4.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-safeguard" />
+<<<<<<< HEAD
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
+=======
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/pre-dexed" />
+>>>>>>> 4e99e1659c80c74b2c94d670d3690aff9a11f5eb
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
@@ -144,6 +150,5 @@
     <orderEntry type="library" exported="" name="opencv" level="project" />
     <orderEntry type="module" module-name="openCVLibrary300" exported="" />
     <orderEntry type="module" module-name="appFaceTracker" exported="" />
-    <orderEntry type="library" exported="" name="android-android-24" level="project" />
   </component>
 </module>

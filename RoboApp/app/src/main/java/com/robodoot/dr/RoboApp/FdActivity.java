@@ -101,6 +101,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     private ArrayList<String> result;
     private static final String good = "good";
     private static final String bad = "bad";
+    private static final String cry = "cry";
+    private static final String disgust = "stupid cat";
 
     private GestureDetector gDetector;
     public enum CHAR {U, D, L, R}
@@ -173,6 +175,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     // private variables for accelerometer declatation
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
+    private long lastUpdate = 0;
+    private float last_x, last_y, last_z;
 
 
     // Function to open menu activity
@@ -375,8 +379,29 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
     // for logging accelerometer data
     @Override
-    public void onSensorChanged(SensorEvent event){
+    public void onSensorChanged(SensorEvent sensorEvent){
+            Sensor mySensor = sensorEvent.sensor;
+            if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER){
+            float x = sensorEvent.values[0];
+            float y = sensorEvent.values[1];
+            float z = sensorEvent.values[2];
 
+            long curTime = System.currentTimeMillis();
+            if ((curTime - lastUpdate) > 100){
+                long diffTime = (curTime - lastUpdate);
+                lastUpdate = curTime;
+
+                String xs = Float.toString(sensorEvent.values[0]);
+                String ys = Float.toString(sensorEvent.values[1]);
+                String zs = Float.toString(sensorEvent.values[2]);
+
+                Log.w("Accelerometer", "(" + xs + ", " + ys + ", " + zs + ")");
+
+                last_x = x;
+                last_y = y;
+                last_z = z;
+            }
+        }
     }
 
     // for logging accelerometer data
@@ -708,6 +733,15 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                         //Make the cat mad.
                         kitty.frownedAt();
                     }
+                    else if (result.contains("cry")){
+                        //Make the cat cry
+                        Log.w("Cryingwah", "This is happening");
+                        kitty.cryingAt();
+                    }
+                    else if (result.contains("stupid cat")){
+                        //Make cat disgusted
+                        kitty.distgustedAt();
+                    }
                     else if (result.contains("left")) {
                         //Make the cat head move left
                         virtualCat.turnHeadLeft();
@@ -747,6 +781,10 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                     }
                     else if (result.contains("love")) {
                         kitty.loveMeCat();
+                    }
+                    else if (result.contains("find") && result.contains("me")){
+                        Intent intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
+                        startActivity(intent);
                     }
                     else {
                         Context context = getApplicationContext();
