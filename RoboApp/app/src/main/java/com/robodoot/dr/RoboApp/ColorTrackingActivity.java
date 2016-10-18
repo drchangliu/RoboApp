@@ -35,7 +35,9 @@ import org.opencv.imgproc.Imgproc;
  * This activity can be used to determine the min/max HSV color values to use for color tracking,
  * and store them on the external storage of the device.
  */
-public class ColorTrackingActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2, VirtualCat.CatBatteryListener, CompoundButton.OnCheckedChangeListener {
+public class
+
+ColorTrackingActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2, VirtualCat.CatBatteryListener, CompoundButton.OnCheckedChangeListener {
     private static final String TAG = "ColorTrackingActivity";
 
     private CatCameraView mOpenCvCameraView;
