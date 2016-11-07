@@ -1,0 +1,1 @@
+'Sync' is the assets folder required to use assets in pocketsphinx

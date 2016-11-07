@@ -7,19 +7,24 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Locale;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.graphics.Bitmap;
 import android.media.MediaRecorder;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -77,6 +82,13 @@ import java.util.Random;
 import java.util.Stack;
 import java.util.Vector;
 
+import edu.cmu.pocketsphinx.Assets;
+import edu.cmu.pocketsphinx.Hypothesis;
+import edu.cmu.pocketsphinx.RecognitionListener;
+import edu.cmu.pocketsphinx.SpeechRecognizer;
+import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
+
+import static android.widget.Toast.makeText;
 import static org.bytedeco.javacpp.opencv_imgcodecs.cvLoadImage;
 
 /**
@@ -84,7 +96,7 @@ import static org.bytedeco.javacpp.opencv_imgcodecs.cvLoadImage;
  * detection and color tracking. Image processing occurs in the {@link #onCameraFrame} method.
  * uses built in hardware functions to use the Android accelerometer data (SensorEventListener)
  */
-public class FdActivity extends Activity implements GestureDetector.OnGestureListener, CvCameraViewListener2, SensorEventListener {
+public class FdActivity extends Activity implements GestureDetector.OnGestureListener, CvCameraViewListener2, SensorEventListener, RecognitionListener{
     // FUNCTION AND VARIABLE DEFINTIONS
     private Logger mFaceRectLogger;
     private Logger mSpeechTextLogger;
@@ -92,6 +104,19 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
     private ArrayList<opencv_core.Mat> framesForVideo = new ArrayList<opencv_core.Mat>();
     private int frameNumber;
+
+    /* psphx1: Variable declarations */
+
+    // The pocketsphinx recognizer
+    private SpeechRecognizer recognizer;
+    private static final String KWS_SEARCH = "wakeup";
+    // Keyword we are using to start command listening
+    private static final String START_LISTENING_STRING = "okay rufus";
+    // Used when getting permission to listen
+    private static final int PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
+    private static final String CAT_COMMANDS = "cat";
+
+    /* End pocketsphinx variable declarations */
 
     private boolean cameraIsChecked = false;
 
@@ -172,7 +197,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
     private String tempText;
 
-    // private variables for accelerometer declatation
+    // private variables for accelerometer declaration
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
     private long lastUpdate = 0;
@@ -375,6 +400,19 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                 && lines.length > 0) {
             blueValues = new ColorValues(lines[0]);
         }
+
+        // psphx1: Pocketsphinx creation stuff
+        ((TextView) findViewById(R.id.caption_text))
+                .setText("Loading voice recognition...");
+        // Check if user has given permission to record audio
+        int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO);
+        if (permissionCheck == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, PERMISSIONS_REQUEST_RECORD_AUDIO);
+            return;
+        }
+
+        // We need to start the pocketsphinx recognizer
+        runRecognizerSetup();
     }
 
     // for logging accelerometer data
@@ -450,6 +488,12 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        if (recognizer != null) {
+            recognizer.cancel();
+            recognizer.shutdown();
+        }
+
         mOpenCvCameraView.disableView();
     }
 
@@ -691,6 +735,130 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         } catch (ActivityNotFoundException a) {
             Toast.makeText(getApplicationContext(), getString(R.string.speech_not_supported), Toast.LENGTH_SHORT).show();
         }
+    }
+    // pshpx1: Pocketsphinx functions and overrides
+
+    // This function loads the pocketsphinx recognizer, allowing active listening
+    private void runRecognizerSetup() {
+        // Recognizer initialization is a time-consuming and it involves IO,
+        // so we execute it in async task
+        new AsyncTask<Void, Void, Exception>() {
+            @Override
+            protected Exception doInBackground(Void... params) {
+                try {
+                    Assets assets = new Assets(FdActivity.this);
+                    File assetDir = assets.syncAssets();
+                    setupRecognizer(assetDir);
+                } catch (IOException e) {
+                    return e;
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Exception result) {
+                if (result != null) {
+                    ((TextView) findViewById(R.id.caption_text))
+                            .setText("Failed to init recognizer " + result);
+                } else {
+                    // Now we will start the keyword search, where we are listening for "Okay rufus"...
+                    switchSearch(KWS_SEARCH);
+                }
+            }
+        }.execute();
+    }
+    private void setupRecognizer(File assetsDir) throws IOException {
+        // The recognizer can be configured to perform multiple searches
+        // of different kind and switch between them
+
+        recognizer = SpeechRecognizerSetup.defaultSetup()
+                .setAcousticModel(new File(assetsDir, "en-us-ptm"))
+                .setDictionary(new File(assetsDir, "cmudict-en-us.dict"))
+
+                .setRawLogDir(assetsDir) // To disable logging of raw audio comment out this call (takes a lot of space on the device)
+                .setKeywordThreshold(1e-45f) // Threshold to tune for keyphrase to balance between false alarms and misses
+                .setBoolean("-allphone_ci", true)  // Use context-independent phonetic search, context-dependent is too slow for mobile
+
+
+                .getRecognizer();
+        recognizer.addListener(this);
+
+        /** In your application you might not need to add all those searches.
+         * They are added here for demonstration. You can leave just one.
+         */
+
+        // Create keyword-activation search.
+        recognizer.addKeyphraseSearch(KWS_SEARCH, START_LISTENING_STRING);
+
+        // Create grammar-based search for command recognition
+        File catGrammar = new File(assetsDir, "commands.gram");
+        recognizer.addGrammarSearch(CAT_COMMANDS, catGrammar);
+    }
+
+    /* This function switches the search we are using for pocketsphinx.
+       The search accessed by passing in KWS_SEARCH is a keyword search,
+       used to get the cat's attention.
+
+       The other search is a grammatical search that only looks for specific commands.
+     */
+    private void switchSearch(String searchName) {
+        recognizer.stop();
+
+        if (searchName.equals(KWS_SEARCH))
+            recognizer.startListening(searchName);
+        else
+            recognizer.startListening(searchName, 10000);
+    }
+
+    // Used to allow pocketsphinx to take over speech recognition
+    @Override
+    public void onBeginningOfSpeech() {
+    }
+
+    @Override
+    public void onEndOfSpeech() {
+        // If we are done processing speech, go back to keyword search (Listening for "okay rufus"
+        if (!recognizer.getSearchName().equals(KWS_SEARCH))
+            switchSearch(KWS_SEARCH);
+    }
+    /**
+     * In partial result we get quick updates about current hypothesis. In
+     * keyword spotting mode we can react here, in other modes we need to wait
+     * for final result in onResult.
+     */
+    @Override
+    public void onPartialResult(Hypothesis hypothesis) {
+        if (hypothesis == null)
+            return;
+
+        String text = hypothesis.getHypstr();
+        makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+        // So, if we say, "okay rufus"...
+        if (text.equals(START_LISTENING_STRING)){
+            // We start the search of specific grammars...
+            switchSearch(CAT_COMMANDS);
+        }
+    }
+
+    /**
+     * This callback is called when we stop the pocketsphinx recognizer.
+     */
+    @Override
+    public void onResult(Hypothesis hypothesis) {
+        if (hypothesis != null) {
+            String text = hypothesis.getHypstr();
+            makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onTimeout() {
+        switchSearch(KWS_SEARCH);
+    }
+
+    @Override
+    public void onError(Exception error) {
+        ((TextView) findViewById(R.id.caption_text)).setText(error.getMessage());
     }
 
     /**
