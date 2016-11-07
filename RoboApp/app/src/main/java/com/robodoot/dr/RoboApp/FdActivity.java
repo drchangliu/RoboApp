@@ -11,15 +11,17 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PointF;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.graphics.Bitmap;
-import android.media.MediaRecorder;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -32,6 +34,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.vision.CameraSource;
+import com.google.android.gms.vision.MultiProcessor;
+import com.google.android.gms.vision.Tracker;
+import com.google.android.gms.vision.face.Face;
+import com.google.android.gms.vision.face.FaceDetector;
 import com.robodoot.dr.facetracktest.R;
 import com.robodoot.roboapp.ColorValues;
 import com.robodoot.roboapp.Direction;
@@ -89,6 +96,10 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     private Logger mFaceRectLogger;
     private Logger mSpeechTextLogger;
     boolean initialized = false;
+
+    //new camera variables start
+    private CameraSource mCameraSource = null;
+    //new facetracker variables end
 
     private ArrayList<opencv_core.Mat> framesForVideo = new ArrayList<opencv_core.Mat>();
     private int frameNumber;
@@ -346,11 +357,17 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         arrows[3]=(ImageView)findViewById(R.id.arrow_left);
         //for (int i = 0; i < 4; i++) arrows[i].setVisibility(View.INVISIBLE);
 
-        mOpenCvCameraView = (JavaCameraView) findViewById(R.id.fd_activity_surface_view);
-        mOpenCvCameraView.setCvCameraViewListener(this);
+        //Begin new face Tracking stuff
+
+
+
+        //End new face tracking stuff
+
+       // mOpenCvCameraView = (JavaCameraView) findViewById(R.id.fd_activity_surface_view);
+        //mOpenCvCameraView.setCvCameraViewListener(this);
+
         kitty = new CatEmotion(this);
         kitty.pic=(ImageView)findViewById(R.id.image_place_holder);
-
         debug1 = (TextView)findViewById(R.id.debugText1);
         debug2 = (TextView)findViewById(R.id.debugText2);
         debug3 = (TextView)findViewById(R.id.debugText3);
@@ -359,8 +376,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         debug2.setAlpha(0f);
         debug3.setAlpha(0f);
 
-        mOpenCvCameraView.setAlpha(0f);
-        mOpenCvCameraView.bringToFront();
+        //mOpenCvCameraView.setAlpha(0f);
+        //mOpenCvCameraView.bringToFront();
 
         String[] lines;
         if ((lines = new Logger("red_color_values", false).ReadLines()) != null
@@ -375,7 +392,48 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                 && lines.length > 0) {
             blueValues = new ColorValues(lines[0]);
         }
+
+        //New Face Tracker Code
+        createCameraSource();
+
+
+
+        //End New Face Tracker Code
     }
+    //New Face Tracker Code
+
+    private void createCameraSource() {
+
+        Context context = getApplicationContext();
+        FaceDetector detector = new FaceDetector.Builder(context)
+                .setProminentFaceOnly(true)
+                .build();
+
+        detector.setProcessor(
+                new MultiProcessor.Builder<>(new FaceTrackerFactory())
+                        .build());
+
+        mCameraSource = new CameraSource.Builder(context, detector)
+                .setRequestedPreviewSize(640, 480)
+                .setFacing(CameraSource.CAMERA_FACING_FRONT)
+                .setRequestedFps(15.0f)
+                .build();
+    }
+
+    private void startCameraSource() {
+        if (mCameraSource != null) {
+            try {
+                mCameraSource.start();
+            } catch (IOException e) {
+                Log.e(TAG, "Unable to start camera source.", e);
+                mCameraSource.release();
+                mCameraSource = null;
+            } catch(SecurityException e){
+                Log.e(TAG, "No Permission granted.", e);
+            }
+        }
+    }
+    //End New Face Tracker Code
 
     // for logging accelerometer data
     @Override
@@ -395,7 +453,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                 String ys = Float.toString(sensorEvent.values[1]);
                 String zs = Float.toString(sensorEvent.values[2]);
 
-                Log.w("Accelerometer", "(" + xs + ", " + ys + ", " + zs + ")");
+                //Log.w("Accelerometer", "(" + xs + ", " + ys + ", " + zs + ")");
 
                 last_x = x;
                 last_y = y;
@@ -413,8 +471,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     @Override
     public void onPause() {
         super.onPause();
-        if (mOpenCvCameraView != null)
-            mOpenCvCameraView.disableView();
+        /*if (mOpenCvCameraView != null)
+            mOpenCvCameraView.disableView();*/
         //record(imageCaptureDirectory);
         frameNumber = 0;
         // for accelerometer, also need to stop listening on pause
@@ -426,13 +484,16 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         //pololu.onResume(getIntent(), this);
         virtualCat.onResume(getIntent(), this);
 
+
         super.onResume();
         //pololu.home();
         if (!initialized) {
             initialized = true;
             virtualCat.resetHead();
         }
-        OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this, mLoaderCallback);
+        //OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this, mLoaderCallback);
+
+        startCameraSource();
 
         entry.clear();
         //showVideoFeed();
@@ -450,7 +511,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mOpenCvCameraView.disableView();
+        //mOpenCvCameraView.disableView();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -520,6 +581,10 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         framesForVideo.clear();
     }
 
+
+    //I changed this to add the requires ID, I wasn't modifying this code, but the error showed
+    //up - Q
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private final void saveMat(String path, Mat mat) {
         File file = new File(path).getAbsoluteFile();
         file.getParentFile().mkdirs();
@@ -1138,7 +1203,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // FACE DETECTION
     ////////////////////////////////////////////////////////////////////////////////////////////////
-
+/*
     public int checkForRecognition(Mat face)
     {
         Random rand = new Random();
@@ -1162,39 +1227,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         return 0;
 
     }
-
-    /*private void trackFavFace(Rect faceRect) {
-        mFaceRectLogger.addRecordToLog(faceRect.x + ", " + faceRect.y + ", " + faceRect.width + ", " + faceRect.height);
-
-        int sumX = faceRect.x + faceRect.width / 2;
-        int sumY = faceRect.y + faceRect.height / 2;
-        for (int i = FavFaceLocationBuffer.length - 1; i > 0; i--) {
-
-            FavFaceLocationBuffer[i] = FavFaceLocationBuffer[i - 1];
-            sumX = sumX + FavFaceLocationBuffer[i].x + FavFaceLocationBuffer[i].width / 2;
-            sumY = sumY + FavFaceLocationBuffer[i].y + FavFaceLocationBuffer[i].height / 2;
-
-        }
-
-        FavFaceLocationBuffer[0] = faceRect;
-
-        if (FavFaceLocationBuffer[FavFaceLocationBuffer.length - 1].size().area() < 2) return;
-        int AvgX = sumX / FavFaceLocationBuffer.length;
-        int AvgY = sumY / FavFaceLocationBuffer.length;
-
-        double pX = (double) AvgX / (double) mRgba.width();
-        double pY = (double) AvgY / (double) mRgba.height();
-
-        if (pX < 0.42) pololu.cameraYawSpeed(0.5f - (float) pX);
-        else if (pY < 0.42) pololu.cameraPitchSpeed(-0.5f + (float)pY);
-        else if (pX > 0.58) pololu.cameraYawSpeed(0.5f - (float)pX);
-        else if (pY > 0.58) pololu.cameraPitchSpeed(-0.5f + (float) pY);
-
-        setTextFieldText("pX = " + pX + "   " + (0.5f - (float) pX), debug1);
-        setTextFieldText("pY = " + pY + "   " + (0.5f - (float) pY), debug2);
-        //else pololu.stopNeckMotors();
-    }*/
-
+*/
+/*
     public boolean adjustFaceBuffer(Rect faceRect)
     {
         int sumX = faceRect.x+faceRect.width/2;
@@ -1252,39 +1286,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
         return false;
     }
-
-    /*public void turnCamera(Directions d)
-    {
-        dir = d;
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                for(int i=0;i<4;i++)arrows[i].setVisibility(View.INVISIBLE);
-
-                switch (dir) {
-                    case UP:
-                        arrows[0].setVisibility(View.VISIBLE);
-                        pololu.cameraPitchSpeed(0.05f);
-                        break;
-                    case RIGHT:
-                        pololu.cameraYawSpeed(-0.05f);
-                        arrows[1].setVisibility(View.VISIBLE);
-                        break;
-                    case DOWN:
-                        pololu.cameraPitchSpeed(-0.05f);
-                        arrows[2].setVisibility(View.VISIBLE);
-                        break;
-                    case LEFT:
-                        pololu.cameraYawSpeed(0.05f);
-                        arrows[3].setVisibility(View.VISIBLE);
-                        break;
-                    default:
-                        pololu.stopNeckMotors();
-                }
-            }
-        });
-    }*/
-
+*/
     private void addNewUser() {
         Random rand = new Random();
         UserColors.add(IDcount, new Scalar(rand.nextInt(255),rand.nextInt(255),rand.nextInt(255)));
@@ -1395,4 +1397,42 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             IDcount++;
         }
     }
+
+    private class FaceTrackerFactory implements MultiProcessor.Factory<Face> {
+        @Override
+        public Tracker<Face> create(Face face) {
+            return new MotionFaceTracker();
+        }
+        //was GraphicFaceTracker
+    }
+
+    private class MotionFaceTracker extends Tracker<Face> {
+        PointF trackPosition;
+
+
+        MotionFaceTracker() {
+            super();
+        }
+
+        @Override
+        public void onNewItem(int faceId, Face item) {
+            super.onNewItem(faceId, item);
+            //openMenu();
+        }
+
+        /**
+         * Update the position/characteristics of the face within the overlay.
+         */
+        @Override
+        public void onUpdate(FaceDetector.Detections<Face> detectionResults, Face face) {
+            super.onUpdate(detectionResults, face);
+            float x = -1*face.getPosition().x + face.getWidth() / 2;
+            float y = face.getPosition().y + face.getHeight() / 2;
+            Log.d("face position", "(" + x + ", " + y + ")");
+            trackPosition=new PointF(x, y);
+
+            virtualCat.lookToward(trackPosition);
+        }
+    }
 }
+

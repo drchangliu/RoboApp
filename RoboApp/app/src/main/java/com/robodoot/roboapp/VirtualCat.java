@@ -2,6 +2,7 @@ package com.robodoot.roboapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.PointF;
 
 import org.opencv.core.Point;
 
@@ -51,6 +52,8 @@ public abstract class VirtualCat {
     public abstract void turnHeadDown();
 
     public abstract void lookToward(Point relPos);
+
+    public abstract void lookToward(PointF relPos);
 
     public abstract void lookAwayFrom(Point relPos);
 

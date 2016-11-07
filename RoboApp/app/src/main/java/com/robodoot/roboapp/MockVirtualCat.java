@@ -1,5 +1,6 @@
 package com.robodoot.roboapp;
 
+import android.graphics.PointF;
 import android.os.Handler;
 import android.util.Log;
 
@@ -89,6 +90,10 @@ public class MockVirtualCat extends VirtualCat {
 
     @Override
     public void lookToward(Point relPos) {}
+
+    @Override
+    public void lookToward(PointF relPos) {}
+
     @Override
     public void lookAwayFrom(Point relPos) {}
 

@@ -2,6 +2,7 @@ package com.robodoot.roboapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.PointF;
 import android.util.Log;
 
 import com.robodoot.dr.RoboApp.PololuHandler;
@@ -89,6 +90,27 @@ public class PololuVirtualCat extends VirtualCat {
         // maybe should do this
         relPos.x = Util.clamp(relPos.x, -0.5, 0.5);
         relPos.y = Util.clamp(relPos.y, -0.5, 0.5);
+
+        // maybe something like this
+        int yaw = (int)(relPos.x * p.NECK_YAW_SERVO_RANGE / 8.0f);
+        //int yaw = (int)(relPos.x * p.NECK_YAW_SERVO_MAX * 0.1f);
+        if (Math.abs(yaw) >= 25) {
+            p.addToYaw(yaw);
+        }
+        int pitch = (int)(relPos.y * p.NECK_PITCH_SERVO_MAX / 10.0f);
+        //int pitch = (int) (relPos.y * p.NECK_PITCH_SERVO_MAX * 0.075f);
+        if (Math.abs(pitch) >= 25) {
+            p.addToPitch(pitch);
+        }
+    }
+
+    public void lookToward(PointF relfPos) {
+        // maybe should do this
+        Log.d("Pos Before clamp: ", "(" + relfPos.x + ", " + relfPos.y + ")");
+        Point relPos=new Point();
+        relPos.x = Util.clamp(relfPos.x, -0.5, 0.5);
+        relPos.y = Util.clamp(relfPos.y, -0.5, 0.5);
+        Log.d("Pos After clamp: ", "(" + relPos.x + ", " + relPos.y + ")");
 
         // maybe something like this
         int yaw = (int)(relPos.x * p.NECK_YAW_SERVO_RANGE / 8.0f);

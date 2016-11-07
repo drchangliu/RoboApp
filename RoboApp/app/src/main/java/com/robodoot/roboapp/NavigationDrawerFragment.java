@@ -127,6 +127,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         items.add(new NavigationItem("Behavior Mode", getResources().getDrawable(R.drawable.ic_menu_check)));
         items.add(new NavigationItem("Color Tracking", getResources().getDrawable(R.drawable.ic_menu_check)));
         items.add(new NavigationItem("Face Tracking", getResources().getDrawable(R.drawable.ic_menu_check)));
+        items.add(new NavigationItem("Background Face Tracking", getResources().getDrawable(R.drawable.ic_menu_check)));
         items.add(new NavigationItem("About", getResources().getDrawable(R.drawable.ic_menu_check)));
         return items;
     }
