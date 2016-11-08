@@ -1431,7 +1431,11 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             Log.d("face position", "(" + x + ", " + y + ")");
             trackPosition=new PointF(x, y);
 
-            virtualCat.lookToward(trackPosition);
+            if(!(x>-25&&x<25)) {
+                if(!(y>-25&&y<25)) {
+                    virtualCat.lookToward(trackPosition);
+                }
+            }
         }
     }
 }

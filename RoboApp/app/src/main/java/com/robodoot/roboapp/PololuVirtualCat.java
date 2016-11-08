@@ -108,20 +108,20 @@ public class PololuVirtualCat extends VirtualCat {
         // maybe should do this
         Log.d("Pos Before clamp: ", "(" + relfPos.x + ", " + relfPos.y + ")");
         Point relPos=new Point();
-        relPos.x = Util.clamp(relfPos.x, -0.5, 0.5);
-        relPos.y = Util.clamp(relfPos.y, -0.5, 0.5);
+        relPos.x = Util.clamp(relfPos.x, -0.01, 0.01);
+        relPos.y = Util.clamp(relfPos.y, -0.01, 0.01);
         Log.d("Pos After clamp: ", "(" + relPos.x + ", " + relPos.y + ")");
 
         // maybe something like this
-        int yaw = (int)(relPos.x * p.NECK_YAW_SERVO_RANGE / 8.0f);
-        //int yaw = (int)(relPos.x * p.NECK_YAW_SERVO_MAX * 0.1f);
-        if (Math.abs(yaw) >= 25) {
+        int yaw = (int)(relPos.x * p.NECK_YAW_SERVO_RANGE );
+        if (Math.abs(yaw) >= 10) {
             p.addToYaw(yaw);
+            Log.d("Yaw Modifier: ", "(" + yaw + ")");
         }
-        int pitch = (int)(relPos.y * p.NECK_PITCH_SERVO_MAX / 10.0f);
-        //int pitch = (int) (relPos.y * p.NECK_PITCH_SERVO_MAX * 0.075f);
+        int pitch = (int)(relPos.y * p.NECK_PITCH_SERVO_MAX );
         if (Math.abs(pitch) >= 25) {
             p.addToPitch(pitch);
+            Log.d("Pitch Modifier: ", "(" + pitch + ")");
         }
     }
 
