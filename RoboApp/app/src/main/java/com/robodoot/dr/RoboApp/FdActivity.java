@@ -665,8 +665,6 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             //showVideoFeed();
             Intent intent = new Intent(this, MainActivity.class);
 
-            //intent.putExtra("pololu", pololu);
-
             startActivity(intent);
         }
 
