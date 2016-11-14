@@ -1403,12 +1403,10 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         public Tracker<Face> create(Face face) {
             return new MotionFaceTracker();
         }
-        //was GraphicFaceTracker
     }
 
     private class MotionFaceTracker extends Tracker<Face> {
         PointF trackPosition;
-
 
         MotionFaceTracker() {
             super();
@@ -1427,14 +1425,14 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         public void onUpdate(FaceDetector.Detections<Face> detectionResults, Face face) {
             super.onUpdate(detectionResults, face);
             float x = -1*face.getPosition().x + face.getWidth() / 2;
-            float y = face.getPosition().y + face.getHeight() / 2;
+            float y = face.getPosition().y + face.getHeight() / 2 - 300.0f; //bottom of screen is 0
+            //middle not quite 300, works for now
+
             Log.d("face position", "(" + x + ", " + y + ")");
             trackPosition=new PointF(x, y);
 
-            if(!(x>-25&&x<25)) {
-                if(!(y>-25&&y<25)) {
-                    virtualCat.lookToward(trackPosition);
-                }
+            if( Math.sqrt(Math.pow(x, 2.0)+Math.pow(y, 2.0))>25.0) {
+                virtualCat.lookToward(trackPosition);
             }
         }
     }
