@@ -107,10 +107,10 @@ public class PololuHandler {
                 UsbManager usbManager = (UsbManager) parent.getSystemService(Context.USB_SERVICE);
                 maestro.setDevice(usbManager, device);
                 isConnected = true;
-            } else if (UsbManager.ACTION_USB_DEVICE_DETACHED.equals(action)) {
+            }
+            else if (UsbManager.ACTION_USB_DEVICE_DETACHED.equals(action)) {
                 maestro.setDevice(null, null);
-            }/* else {
-            }*/
+            }
         }
     }
 
