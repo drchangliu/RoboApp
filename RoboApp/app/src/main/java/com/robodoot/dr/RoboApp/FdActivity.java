@@ -7,21 +7,26 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Locale;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.PointF;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -51,35 +56,12 @@ import com.robodoot.roboapp.MainActivity;
 import com.robodoot.roboapp.PololuVirtualCat;
 import com.robodoot.roboapp.VirtualCat;
 
-/* -- OPENCVRMV
-import org.bytedeco.javacpp.opencv_core;
-import org.bytedeco.javacpp.opencv_face;
-import org.bytedeco.javacpp.opencv_face.*;
-
-import org.bytedeco.javacpp.opencv_imgproc;*/
-import org.bytedeco.javacv.FFmpegFrameRecorder;
-import org.bytedeco.javacv.Frame;
-import org.bytedeco.javacv.OpenCVFrameConverter;
-
-/*-- OPENCVRMV
-import org.opencv.android.BaseLoaderCallback;
-import org.opencv.android.CameraBridgeViewBase;
-import org.opencv.android.JavaCameraView;
-import org.opencv.android.LoaderCallbackInterface;
-import org.opencv.android.OpenCVLoader;
-import org.opencv.android.Utils;
-import org.opencv.core.Core;
-import org.opencv.core.CvException;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfRect;
-import org.opencv.core.Point;
-import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
-import org.opencv.core.Size;
-import org.opencv.imgproc.Imgproc;
-import org.opencv.objdetect.CascadeClassifier;
-import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;*/
+// Psphx imports
+import edu.cmu.pocketsphinx.Assets;
+import edu.cmu.pocketsphinx.Hypothesis;
+import edu.cmu.pocketsphinx.RecognitionListener;
+import edu.cmu.pocketsphinx.SpeechRecognizer;
+import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -89,6 +71,8 @@ import java.nio.IntBuffer;
 import java.util.Random;
 import java.util.Stack;
 import java.util.Vector;
+
+import static android.widget.Toast.makeText;
 
 //-- OPENCVRMV
 // import static org.bytedeco.javacpp.opencv_imgcodecs.cvLoadImage;
@@ -100,7 +84,7 @@ import java.util.Vector;
  */
 //-- OPENCVRMV
 // add back CvCameraViewListener2 to implements
-public class FdActivity extends Activity implements GestureDetector.OnGestureListener, SensorEventListener {
+public class FdActivity extends Activity implements GestureDetector.OnGestureListener, SensorEventListener, RecognitionListener {
     // FUNCTION AND VARIABLE DEFINTIONS
     private Logger mFaceRectLogger;
     private Logger mSpeechTextLogger;
@@ -115,6 +99,20 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     private int frameNumber;
 
     private boolean cameraIsChecked = false;
+
+    /* psphx1: Variable declarations */
+
+    // The pocketsphinx recognizer
+    private SpeechRecognizer recognizer;
+    private static final String KWS_SEARCH = "wakeup";
+    // Keyword we are using to start command listening
+    private static final String START_LISTENING_STRING = "okay rufus";
+    // Used when getting permission to listen
+    private static final int PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
+    private static final int PERMISSIONS_REQUEST_CAMERA = 1;
+    private static final String CAT_COMMANDS = "cat";
+
+    /* End pocketsphinx variable declarations */
 
     private ImageButton btnSpeak;
     private Button btnMenu;
@@ -214,104 +212,9 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-    /* -- OPENCVRMV
-    private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
-        @Override
-        public void onManagerConnected(int status) {
-            switch (status) {
-                case LoaderCallbackInterface.SUCCESS: {
 
-                    try {
-                        InputStream is = null;
-                        FileOutputStream os = null;
-                        File cascadeDir = null;
-                        try {
-                            // load cascade file from application resources
-                            is = getResources().openRawResource(
-                                    R.raw.lbpcascade_frontalface); //opens resource for openCV cascade classifier
-                                                                    //classifier is trained with afew hundred examples then can be applied to a region of interest
-                                                                    // outputs 1 if object is likely to have object, 0 otherwise
-                                                                    // see http://docs.opencv.org/2.4/modules/objdetect/doc/cascade_classification.html
-                            cascadeDir = getDir("cascade", Context.MODE_PRIVATE);
-                            mCascadeFile = new File(cascadeDir,
-                                    "lbpcascade_frontalface.xml");
-                            os = new FileOutputStream(mCascadeFile);
-
-                            byte[] buffer = new byte[4096]; // a temporary buffer to facilitate IO
-                            filter = new boolean[5];
-                            int bytesRead;
-                                while ((bytesRead = is.read(buffer)) != -1) {
-                                    os.write(buffer, 0, bytesRead);
-                                }
-                        }
-                        finally {
-                            if (is != null) is.close();
-                            if (os != null) os.close();
-                            //if (cascadeDir != null) cascadeDir.delete();
-                        }
-
-                        InputStream isS = null;
-                        File cascadeDirS;
-                        File cascadeFileS = null;
-                        FileOutputStream osS = null;
-                        try {
-                            // --------------------------------- load smile
-                            // classificator -----------------------------------
-                            isS = getResources().openRawResource(
-                                    R.raw.haarcascade_smile);
-                            cascadeDirS = getDir("cascadeS",
-                                    Context.MODE_PRIVATE);
-                            cascadeFileS = new File(cascadeDirS,
-                                    "haarcascade_smile.xml");
-                            osS = new FileOutputStream(cascadeFileS);
-
-                            byte[] bufferS = new byte[4096];
-                            int bytesReadS;
-                            while ((bytesReadS = isS.read(bufferS)) != -1) {
-                                osS.write(bufferS, 0, bytesReadS);
-                            }
-                        }
-                        finally {
-                            if (isS != null) isS.close();
-                            if (osS != null) osS.close();
-                        }
-
-                        mJavaDetectorFace = new CascadeClassifier(
-                                mCascadeFile.getAbsolutePath());
-                        if (mJavaDetectorFace.empty()) {
-                            mJavaDetectorFace = null;
-                        } else
-
-
-                        mJavaDetectorSmile = new CascadeClassifier(
-                                cascadeFileS.getAbsolutePath());
-                        if (mJavaDetectorSmile.empty()) {
-                            mJavaDetectorSmile = null;
-                        }
-                        cascadeDir.delete();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    mOpenCvCameraView.setCameraIndex(1);
-                    mOpenCvCameraView.enableFpsMeter();
-                    mOpenCvCameraView.enableView();
-
-                }
-                break;
-                default: {
-                    super.onManagerConnected(status);
-                }
-                break;
-            }
-        }
-    };
-    */
     private String timestamp;
     private String imageCaptureDirectory;
-
-    // -- OPENCVRMV
-    // private ColorValues redValues = null, greenValues = null, blueValues = null;
 
     public FdActivity() {
         mDetectorName = new String[2];
@@ -418,7 +321,24 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         //New Face Tracker Code
         createCameraSource();
 
+        // psphx1: Pocketsphinx creation stuff
+        ((TextView) findViewById(R.id.caption_text))
+                .setText("Loading voice recognition...");
+        // Check if user has given permission to record audio
+        int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO);
+        if (permissionCheck == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, PERMISSIONS_REQUEST_RECORD_AUDIO);
 
+            int permissionCheck2 = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA);
+            if (permissionCheck2 == PackageManager.PERMISSION_DENIED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSIONS_REQUEST_CAMERA);
+                return;
+            }
+            return;
+        }
+
+        // We need to start the pocketsphinx recognizer
+        runRecognizerSetup();
 
         //End New Face Tracker Code
     }
@@ -533,6 +453,10 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (recognizer != null) {
+            recognizer.cancel();
+            recognizer.shutdown();
+        }
         //mOpenCvCameraView.disableView();
     }
 
@@ -778,6 +702,123 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         } catch (ActivityNotFoundException a) {
             Toast.makeText(getApplicationContext(), getString(R.string.speech_not_supported), Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+    // This function loads the pocketsphinx recognizer, allowing active listening
+    private void runRecognizerSetup() {
+        // Recognizer initialization is a time-consuming and it involves IO,
+        // so we execute it in async task
+        new AsyncTask<Void, Void, Exception>() {
+            @Override
+            protected Exception doInBackground(Void... params) {
+                try {
+                    Assets assets = new Assets(FdActivity.this);
+                    File assetDir = assets.syncAssets();
+                    setupRecognizer(assetDir);
+                } catch (IOException e) {
+                    return e;
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Exception result) {
+                if (result != null) {
+                    ((TextView) findViewById(R.id.caption_text))
+                            .setText("Failed to init recognizer " + result);
+                } else {
+                    // Now we will start the keyword search, where we are listening for "Okay rufus"...
+                    ((TextView) findViewById(R.id.caption_text))
+                            .setText("Speech Detection Active");
+                    switchSearch(KWS_SEARCH);
+                }
+            }
+        }.execute();
+    }
+    private void setupRecognizer(File assetsDir) throws IOException {
+        // The recognizer can be configured to perform multiple searches
+        // of different kind and switch between them
+
+        recognizer = SpeechRecognizerSetup.defaultSetup()
+                .setAcousticModel(new File(assetsDir, "en-us-ptm"))
+                .setDictionary(new File(assetsDir, "cmudict-en-us.dict"))
+
+                .setRawLogDir(assetsDir) // To disable logging of raw audio comment out this call (takes a lot of space on the device)
+                .setKeywordThreshold(1e-45f) // Threshold to tune for keyphrase to balance between false alarms and misses
+                .setBoolean("-allphone_ci", true)  // Use context-independent phonetic search, context-dependent is too slow for mobile
+
+
+                .getRecognizer();
+        recognizer.addListener(this);
+
+        // Create keyword-activation search.
+        recognizer.addKeyphraseSearch(KWS_SEARCH, START_LISTENING_STRING);
+
+        // Create grammar-based search for command recognition
+        File catGrammar = new File(assetsDir, "commands.gram");
+        recognizer.addGrammarSearch(CAT_COMMANDS, catGrammar);
+    }
+
+    /* This function switches the search we are using for pocketsphinx.
+       The search accessed by passing in KWS_SEARCH is a keyword search,
+       used to get the cat's attention.
+
+       The other search is a grammatical search that only looks for specific commands.
+     */
+    private void switchSearch(String searchName) {
+        recognizer.stop();
+
+        if (searchName.equals(KWS_SEARCH))
+            recognizer.startListening(searchName);
+        else
+            recognizer.startListening(searchName, 10000);
+    }
+
+    // Used to allow pocketsphinx to take over speech recognition
+    @Override
+    public void onBeginningOfSpeech() {
+    }
+
+    @Override
+    public void onEndOfSpeech() {
+        // If we are done processing speech, go back to keyword search (Listening for "okay rufus")
+        if (!recognizer.getSearchName().equals(KWS_SEARCH))
+            switchSearch(KWS_SEARCH);
+    }
+    // React to KWS search
+    @Override
+    public void onPartialResult(Hypothesis hypothesis) {
+        if (hypothesis == null)
+            return;
+
+        String text = hypothesis.getHypstr();
+        // So, if we say, "okay rufus"...
+        if (text.equals(START_LISTENING_STRING)){
+            Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+            // We start the search of specific grammars...
+            switchSearch(CAT_COMMANDS);
+        }
+    }
+
+    // React to commands
+    @Override
+    public void onResult(Hypothesis hypothesis) {
+        if (hypothesis != null) {
+            String text = hypothesis.getHypstr();
+            // Testing
+            makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onTimeout() {
+        switchSearch(KWS_SEARCH);
+    }
+
+    @Override
+    public void onError(Exception error) {
+        ((TextView) findViewById(R.id.caption_text)).setText(error.getMessage());
     }
 
     /**

@@ -119,6 +119,14 @@
         android:layout_above="@+id/btnSpeak"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/arrow_right"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="33dp"
+        android:id="@+id/caption_text" />
+
 
 </RelativeLayout>
 
