@@ -11,7 +11,6 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/appFaceTracker" />
             <option value="$PROJECT_DIR$/libraries/usbSerialForAndroid" />
-            <option value="$PROJECT_DIR$/openCVLibrary300" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

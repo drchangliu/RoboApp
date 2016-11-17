@@ -4,7 +4,8 @@ import android.util.Log;
 import android.widget.ImageView;
 import com.robodoot.dr.facetracktest.R;
 
-import org.opencv.ml.EM;
+// -- OPENCVRMV
+// import org.opencv.ml.EM;
 
 import java.util.ArrayList;
 import java.util.Random;

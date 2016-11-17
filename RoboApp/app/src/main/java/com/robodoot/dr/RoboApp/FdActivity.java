@@ -40,11 +40,14 @@ import com.google.android.gms.vision.Tracker;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 import com.robodoot.dr.facetracktest.R;
-import com.robodoot.roboapp.ColorValues;
+// -- OPENCVRMV
+// import com.robodoot.roboapp.ColorValues;
 import com.robodoot.roboapp.Direction;
-import com.robodoot.roboapp.ImageUtil;
+// -- OPENCVRMV
+// import com.robodoot.roboapp.ImageUtil;
 import com.robodoot.roboapp.MainActivity;
-import com.robodoot.roboapp.Person;
+// -- OPENCVRMV
+// import com.robodoot.roboapp.Person;
 import com.robodoot.roboapp.PololuVirtualCat;
 import com.robodoot.roboapp.VirtualCat;
 
@@ -56,6 +59,8 @@ import org.bytedeco.javacpp.opencv_imgproc;
 import org.bytedeco.javacv.FFmpegFrameRecorder;
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.OpenCVFrameConverter;
+
+/*-- OPENCVRMV
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
@@ -73,7 +78,7 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
-import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
+import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;*/
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -84,14 +89,17 @@ import java.util.Random;
 import java.util.Stack;
 import java.util.Vector;
 
-import static org.bytedeco.javacpp.opencv_imgcodecs.cvLoadImage;
+//-- OPENCVRMV
+// import static org.bytedeco.javacpp.opencv_imgcodecs.cvLoadImage;
 
 /**
  * Behavior mode activity. This is the main activity of the app. It uses OpenCV/JavaCV for face
  * detection and color tracking. Image processing occurs in the {@link #onCameraFrame} method.
  * uses built in hardware functions to use the Android accelerometer data (SensorEventListener)
  */
-public class FdActivity extends Activity implements GestureDetector.OnGestureListener, CvCameraViewListener2, SensorEventListener {
+//-- OPENCVRMV
+// add back CvCameraViewListener2 to implements
+public class FdActivity extends Activity implements GestureDetector.OnGestureListener, SensorEventListener {
     // FUNCTION AND VARIABLE DEFINTIONS
     private Logger mFaceRectLogger;
     private Logger mSpeechTextLogger;
@@ -125,45 +133,53 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
     private CatEmotion kitty;
     public enum Directions {UP, DOWN, LEFT, RIGHT, CENTER}
+    /* -- OPENCVRMV
     private Mat mRgba;
     private Mat mRgbaForColorTracking;
     private Mat mGray;
     private Mat tempMat1;
     private MatOfRect faces;
-    private MatOfRect smiles;
+    private MatOfRect smiles;*/
     private ImageView[] arrows;
     private RelativeLayout frame;
     private Bitmap bmp;
     private Directions dir;
 
+
+    /* -- OPENCVRMV
     private Rect[] FavFaceLocationBuffer;
     private Rect[] FaceLocationBuffer;
     private Mat[]  FaceMatBuffer;
-    private Mat[]  EigenMats;
+    private Mat[]  EigenMats;*/
     private int IDcount;
+    /* -- OPENCVRMV
     private ArrayList<Scalar> UserColors;
-    private ArrayList<ArrayList<Mat>> TrainingSets;
+    private ArrayList<ArrayList<Mat>> TrainingSets;*/
     private FaceRecognizer faceRecognizer;
 
+   /* -- OPENCVRMV
     private ArrayList<Person> peopleLastCameraFrame;
-    private ArrayList<Person> peopleThisCameraFrame;
+    private ArrayList<Person> peopleThisCameraFrame;*/
     private ArrayList<ArrayList<Integer>> SimilarID;
 
     private int refreshRecognizer;
 
     private File mCascadeFile;
+    /* -- OPENCVRMV
     private CascadeClassifier mJavaDetectorFace;
-    private CascadeClassifier mJavaDetectorSmile;
+    private CascadeClassifier mJavaDetectorSmile;*/
 
     private String[] mDetectorName;
 
     private float mRelativeFaceSize = 0.1f;
     private int mAbsoluteFaceSize = 0;
 
-    private JavaCameraView mOpenCvCameraView;
+    // -- OPENCVRMV
+    // private JavaCameraView mOpenCvCameraView;
     boolean[] filter;
 
-    private Size stds = new Size(80,80);
+    // -- OPENCVRMV
+    // private Size stds = new Size(80,80);
 
     private double xCenter = -1;
     double yCenter = -1;
@@ -195,7 +211,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-
+    /* -- OPENCVRMV
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {
@@ -287,17 +303,19 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             }
         }
     };
-
+    */
     private String timestamp;
     private String imageCaptureDirectory;
 
-    private ColorValues redValues = null, greenValues = null, blueValues = null;
+    // -- OPENCVRMV
+    // private ColorValues redValues = null, greenValues = null, blueValues = null;
 
     public FdActivity() {
         mDetectorName = new String[2];
         mDetectorName[JAVA_DETECTOR] = "Java";
+        /* -- OPENCVRMV
         peopleThisCameraFrame = new ArrayList<Person>();
-        peopleLastCameraFrame = new ArrayList<Person>();
+        peopleLastCameraFrame = new ArrayList<Person>();*/
         SimilarID = new ArrayList<ArrayList<Integer>>();
         //pololu = new PololuHandler();
         virtualCat = new PololuVirtualCat();
@@ -379,6 +397,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         //mOpenCvCameraView.setAlpha(0f);
         //mOpenCvCameraView.bringToFront();
 
+        /* -- OPENCVRMV
         String[] lines;
         if ((lines = new Logger("red_color_values", false).ReadLines()) != null
                 && lines.length > 0) {
@@ -391,7 +410,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         if ((lines = new Logger("color_values", false).ReadLines()) != null
                 && lines.length > 0) {
             blueValues = new ColorValues(lines[0]);
-        }
+        }*/
 
         //New Face Tracker Code
         createCameraSource();
@@ -543,7 +562,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         return false;
     }
 
-    private void record(String directory) {
+   /* -- OPENCVRMV
+   private void record(String directory) {
         opencv_core.Mat[] frames = new opencv_core.Mat[framesForVideo.size()];
         framesForVideo.toArray(frames);
 
@@ -579,11 +599,9 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             f.release();
         }
         framesForVideo.clear();
-    }
+    }*/
 
-
-    //I changed this to add the requires ID, I wasn't modifying this code, but the error showed
-    //up - Q
+    /* -- OPENCVRMV
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private final void saveMat(String path, Mat mat) {
         File file = new File(path).getAbsoluteFile();
@@ -600,7 +618,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         } catch (IOException | ClassCastException ex) {
             System.err.println("ERROR: Could not save mat to file: " + path);
         }
-    }
+    }*/
 
     private void setTextFieldText(String message, TextView field)
     {
@@ -618,6 +636,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         });
     }
 
+    /* -- OPENCVRMV
     private void showVideoFeed()
     {
         runOnUiThread(new Runnable() {
@@ -627,8 +646,9 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                 debugging = true;
             }
         });
-    }
+    }*/
 
+    /* -- OPENCVRMV
     private void hideVideoFeed()
     {
         runOnUiThread(new Runnable() {
@@ -637,7 +657,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                 mOpenCvCameraView.setAlpha(0.0f);
             }
         });
-    }
+    }*/
 
     private boolean onSwipe(Direction direction) {
         if(direction == Direction.right) {
@@ -715,10 +735,11 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
     @Override
     public void onLongPress(MotionEvent arg0) {
-        if(mOpenCvCameraView.getAlpha()>0.5f)
+       /*  -- OPENCVRMV
+       if(mOpenCvCameraView.getAlpha()>0.5f)
             mOpenCvCameraView.setAlpha(0.0f);
         else
-            mOpenCvCameraView.setAlpha(0.80f);
+            mOpenCvCameraView.setAlpha(0.80f);*/
     }
 
     @Override
@@ -798,7 +819,6 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                     }
                     else if (result.contains("cry")){
                         //Make the cat cry
-                        Log.w("Cryingwah", "This is happening");
                         kitty.cryingAt();
                     }
                     else if (result.contains("stupid cat")){
@@ -868,10 +888,13 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // GENERAL/SHARED OPENCV
     ////////////////////////////////////////////////////////////////////////////////////////////////
+/* -- OPENCVRMV (note: this is a big one)
 
-    /**
+    */
+/**
      * initialize stuff related to opencv
-     */
+     *//*
+
     public void onCameraViewStarted(int width, int height) {
         TextView loading = (TextView)findViewById(R.id.LoadingText);
         loading.setAlpha(1.0f);
@@ -914,13 +937,16 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         for(int i = 0;i<12;i++)FaceMatBuffer[i].release();
     }
 
-    /**
+    */
+/**
      * Process a video frame (do face detection, color tracking)
      * @param inputFrame the image to process
      * @return a possibly modified inputFrame to be displayed
-     */
+     *//*
+
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        /*peopleThisCameraFrame.clear();
+        */
+/*peopleThisCameraFrame.clear();
 
         try {
             inputFrame.rgba().copyTo(mRgba);
@@ -1041,7 +1067,9 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                     IDsToCheck.add(peopleThisCameraFrame.get(i).ID);
                 }
 
-                *//*int favID = kitty.getFavPerson(IDsToCheck);
+                *//*
+*/
+/*int favID = kitty.getFavPerson(IDsToCheck);
                 Person favPerson = peopleThisCameraFrame.get(0);
 
                 if (favID > 20) {
@@ -1052,6 +1080,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                         }
                     }
                 }*//*
+*/
+/*
 
                 peopleLastCameraFrame.clear();
                 peopleLastCameraFrame.addAll(peopleThisCameraFrame);
@@ -1061,7 +1091,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             Log.i(TAG, "Exception " + e.getMessage());
             System.gc();
             return null;
-        }*/
+        }*//*
+
 
         inputFrame.rgba().copyTo(mRgba);
         Core.flip(mRgba.t(), mRgba, 0);
@@ -1086,8 +1117,10 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 //            //Log.i(TAG, "object is " + relGreenObjectPos.x + ", " + relGreenObjectPos.y + " from the center");
 //        }
         }
-        /*Point relBlueObjectPos = trackColor(inputFrame, blueValues);
-        reactToBlueObject(relBlueObjectPos);*/
+        */
+/*Point relBlueObjectPos = trackColor(inputFrame, blueValues);
+        reactToBlueObject(relBlueObjectPos);*//*
+
 
         return mRgba;
     }
@@ -1096,10 +1129,12 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     // COLOR TRACKING
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /**
+    */
+/**
      * Make the cat react to a red object.
      * @param relRedObjectPos The relative position of the red object.
-     */
+     *//*
+
     private void reactToRedObject(Point relRedObjectPos) {
         if (relRedObjectPos == null) return;
 
@@ -1107,10 +1142,12 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         virtualCat.lookAwayFrom(relRedObjectPos);
     }
 
-    /**
+    */
+/**
      * Make the cat react to a green object.
      * @param relGreenObjectPos The relative position of the green object.
-     */
+     *//*
+
     private void reactToGreenObject(Point relGreenObjectPos) {
         if (relGreenObjectPos == null) return;
 
@@ -1119,12 +1156,14 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         virtualCat.lookToward(relGreenObjectPos);
     }
 
-    /**
+    */
+/**
      * Track an object by color.
      * @param inputFrame The image to process.
      * @param cv The min/max HSV values to see.
      * @return a Point position of object or null if no object found normalized to range [-0.5, 0.5]
-     */
+     *//*
+
     private Point trackColor(CameraBridgeViewBase.CvCameraViewFrame inputFrame, ColorValues cv) {
         if (cv == null)
             return null;
@@ -1197,6 +1236,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
         return objectCoords;
     }
+*/
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // FACE DETECTION
@@ -1285,7 +1325,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         return false;
     }
 */
-    private void addNewUser() {
+ /*  -- OPENCVRMV
+ private void addNewUser() {
         Random rand = new Random();
         UserColors.add(IDcount, new Scalar(rand.nextInt(255),rand.nextInt(255),rand.nextInt(255)));
         Log.i(TAG, "Adding New User with color " + UserColors.get(IDcount).toString() + " and ID " + IDcount);
@@ -1394,7 +1435,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             UserColors.add(IDcount, new Scalar(0, 0, 0));
             IDcount++;
         }
-    }
+    }*/
 
     private class FaceTrackerFactory implements MultiProcessor.Factory<Face> {
         @Override
@@ -1429,9 +1470,10 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             Log.d("face position", "(" + x + ", " + y + ")");
             trackPosition=new PointF(x, y);
 
+            /* -- OPENCVRMV
             if( Math.sqrt(Math.pow(x, 2.0)+Math.pow(y, 2.0))>25.0) {
                 virtualCat.lookToward(trackPosition);
-            }
+            }*/
         }
     }
 }

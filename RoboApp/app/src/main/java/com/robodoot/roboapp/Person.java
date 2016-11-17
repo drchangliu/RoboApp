@@ -1,3 +1,6 @@
+/*
+  -- OPENCVRMV
+
 package com.robodoot.roboapp;
 
 import org.opencv.core.Rect;
@@ -5,9 +8,11 @@ import org.opencv.core.Scalar;
 
 import java.util.ArrayList;
 
+*/
 /**
  * Created by alex on 3/14/16.
- */
+ *//*
+
 public class Person {
     public Rect face;
     public int ID;
@@ -95,3 +100,4 @@ public class Person {
 
     }
 }
+*/

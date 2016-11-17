@@ -1,3 +1,6 @@
+/*
+-- OPENCVRMV
+
 package com.robodoot.roboapp;
 
 import android.content.Context;
@@ -10,11 +13,13 @@ import org.opencv.android.JavaCameraView;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 
+*/
 /**
  * Created by alex on 3/5/16.
  * Camera view that sets its fps range to the supported range with the maximum high end.
  * Not sure if this helps at all (default is probably the max)
- */
+ *//*
+
 public class CatCameraView extends JavaCameraView {
     private static final String TAG = "CatCameraView";
 
@@ -52,4 +57,4 @@ public class CatCameraView extends JavaCameraView {
         params.setPreviewFpsRange(maxRange[0], maxRange[1]);
         mCamera.setParameters(params);
     }
-}
+}*/

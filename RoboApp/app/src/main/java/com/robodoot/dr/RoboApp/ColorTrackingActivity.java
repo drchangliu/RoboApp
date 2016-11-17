@@ -1,3 +1,6 @@
+/*
+-- OPENCVRMV
+
 package com.robodoot.dr.RoboApp;
 
 import android.app.Activity;
@@ -31,10 +34,12 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
+*/
 /**
  * This activity can be used to determine the min/max HSV color values to use for color tracking,
  * and store them on the external storage of the device.
- */
+ *//*
+
 public class
 
 ColorTrackingActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2, VirtualCat.CatBatteryListener, CompoundButton.OnCheckedChangeListener {
@@ -54,9 +59,11 @@ ColorTrackingActivity extends Activity implements CameraBridgeViewBase.CvCameraV
     private Logger mBlueLogger;
 
 
-    /**
+    */
+/**
      * Called when the activity is first created.
-     */
+     *//*
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_color_tracking);
@@ -73,9 +80,11 @@ ColorTrackingActivity extends Activity implements CameraBridgeViewBase.CvCameraV
         ((Switch)findViewById(R.id.switch_camera)).setOnCheckedChangeListener(this);
         //((Switch)findViewById(R.id.switch_battery)).setOnCheckedChangeListener(this);;
 
-        /*mBatteryView = (BatteryView) findViewById(R.id.battery_view);
+        */
+/*mBatteryView = (BatteryView) findViewById(R.id.battery_view);
         mBatteryView.setConnected(true);
-        mBatteryView.setAlpha(0.0f); // hide initially*/
+        mBatteryView.setAlpha(0.0f); // hide initially*//*
+
 
         mSeekBarLowH = (SeekBar) findViewById(R.id.seek_bar_low_h);
         mSeekBarHighH = (SeekBar) findViewById(R.id.seek_bar_high_h);
@@ -145,9 +154,11 @@ ColorTrackingActivity extends Activity implements CameraBridgeViewBase.CvCameraV
             case R.id.switch_threshold:
                 mShowThreshold = isChecked;
                 break;
-            /*case R.id.switch_battery:
+            */
+/*case R.id.switch_battery:
                 mBatteryView.setAlpha(isChecked ? 1.0f : 0.0f);
-                break;*/
+                break;*//*
+
         }
     }
 
@@ -330,3 +341,4 @@ ColorTrackingActivity extends Activity implements CameraBridgeViewBase.CvCameraV
         mSeekBarHighV.setProgress(cv.highV);
     }
 }
+*/

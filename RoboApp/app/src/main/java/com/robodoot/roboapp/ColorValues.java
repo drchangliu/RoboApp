@@ -1,8 +1,12 @@
+/* -- OPENCVRMV
+
 package com.robodoot.roboapp;
 
+*/
 /**
  * Created by alex on 4/19/16.
- */
+ *//*
+
 public class ColorValues {
     public int lowH;
     public int highH;
@@ -28,4 +32,4 @@ public class ColorValues {
             throw new IllegalArgumentException("need string containing 6 integer values");
         }
     }
-}
+}*/

@@ -86,7 +86,8 @@ public class MainActivity extends FragmentActivity implements
                 this.finish();
                 break;
             case 2:
-                intent = new Intent("com.robodoot.dr.RoboApp.ColorTrackingActivity");
+                // -- OPENCVRMV
+                // intent = new Intent("com.robodoot.dr.RoboApp.ColorTrackingActivity");
                 break;
             case 3:
                 log_console("Face Tracking");

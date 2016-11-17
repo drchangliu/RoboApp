@@ -1,11 +1,12 @@
 package com.robodoot.roboapp;
 
-import org.opencv.core.Rect;
+// -- OPENCVRMV
+// import org.opencv.core.Rect;
 
 /**
  * Created by alex on 3/14/16.
  */
-public class Util {
+public class Util {/* -- OPENCVRMV
     static boolean checkSimilarRect(Rect r1, Rect r2)
     {
         double maxRange = (r1.width + r2.width) / 20.0;
@@ -23,7 +24,7 @@ public class Util {
         double sizeDiff = Math.abs(r1.area()-r2.area());
 
         return range < maxRange && sizeDiff < maxSizeDiff;
-    }
+    }*/
 
     public static int clamp(int val, int min, int max) {
         return Math.max(min, Math.min(max, val));

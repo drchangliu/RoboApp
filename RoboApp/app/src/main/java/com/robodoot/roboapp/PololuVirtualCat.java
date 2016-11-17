@@ -7,7 +7,8 @@ import android.util.Log;
 
 import com.robodoot.dr.RoboApp.PololuHandler;
 
-import org.opencv.core.Point;
+//  -- OPENCVRMV
+// import org.opencv.core.Point;
 
 /**
  * A concrete implementation of the VirtualCat interface which controls the cat by communicating
@@ -84,7 +85,7 @@ public class PololuVirtualCat extends VirtualCat {
     /**
      * Make the cat look toward a point relative to the center of the camera's view.
      * @param relPos Expects a value in the range [-0.5, 0.5]
-     */
+     *//* -- OPENCVRMV
     @Override
     public void lookToward(Point relPos) {
         // maybe should do this
@@ -102,8 +103,9 @@ public class PololuVirtualCat extends VirtualCat {
         if (Math.abs(pitch) >= 25) {
             p.addToPitch(pitch);
         }
-    }
+    }*/
 
+    /* -- OPENCVRMV
     public void lookToward(PointF relfPos) {
         // maybe should do this
         Log.d("Pos Before clamp: ", "(" + relfPos.x + ", " + relfPos.y + ")");
@@ -125,12 +127,12 @@ public class PololuVirtualCat extends VirtualCat {
             p.addToPitch(pitch);
             Log.d("Pitch Modifier: ", "(" + pitch + ")");
         //}
-    }
+    }*/
 
     /**
      * Make the cat look away from a point relative to the center of the camera's view.
      * @param relPos Expects a value in the range [-0.5, 0.5]
-     */
+     *//* -- OPENCVRMV
     @Override
     public void lookAwayFrom(Point relPos) {
         // maybe should do this
@@ -141,7 +143,7 @@ public class PololuVirtualCat extends VirtualCat {
         p.x = -(relPos.x > 0 ? 0.5f - relPos.x : -0.5f + relPos.x);
         p.y = -(relPos.y > 0 ? 0.5f - relPos.y : -0.5f + relPos.y);
         lookToward(p);
-    }
+    }*/
 
     public void resetHead() {
         p.home();

@@ -4,7 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PointF;
 
-import org.opencv.core.Point;
+// -- OPENCVRMV
+// import org.opencv.core.Point;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,11 +52,14 @@ public abstract class VirtualCat {
 
     public abstract void turnHeadDown();
 
-    public abstract void lookToward(Point relPos);
+    // -- OPENCVRMV
+    // public abstract void lookToward(Point relPos);
 
-    public abstract void lookToward(PointF relPos);
+    // -- OPENCVRMV
+    // public abstract void lookToward(PointF relPos);
 
-    public abstract void lookAwayFrom(Point relPos);
+    // -- OPENCVRMV
+    // public abstract void lookAwayFrom(Point relPos);
 
     public abstract void resetHead();
 }

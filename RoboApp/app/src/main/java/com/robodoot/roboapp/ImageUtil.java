@@ -1,3 +1,6 @@
+/* -- OPENCVRMV
+
+
 package com.robodoot.roboapp;
 
 import android.content.Context;
@@ -18,9 +21,11 @@ import org.opencv.imgproc.Imgproc;
 
 import java.io.InputStream;
 
+*/
 /**
  * Created by alex on 3/14/16.
- */
+ *//*
+
 public class ImageUtil {
     public static opencv_core.Mat convert(Mat m)
     {
@@ -88,3 +93,4 @@ public class ImageUtil {
         return bitmap;
     }
 }
+*/

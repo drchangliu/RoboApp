@@ -25,7 +25,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':openCVLibrary300')
     compile project(':appFaceTracker')
     compile files('libs/javacv.jar')
     compile files('libs/javacpp.jar')
