@@ -2,16 +2,30 @@
 
 grammar commands;
 
-<digit> = oh    |
-          zero  |
-          one   |
-          two   |
-          three |
-          four  |
-          five  |
-          six   |
-          seven |
-          eight |
-          nine  ;
+<digit> = home  |
+          straight |
+          menu  |
+          good  |
+          bad   |
+          stupid   |
+          i     |
+          love  |
+          you   |
+          cat   |
+          walk  |
+          come  |
+          left  |
+          right |
+          up    |
+          down  |
+          walk  |
+          reset |
+          reset |
+          green |
+          red   |
+          blue  |
+          yellow    |
+          you   |
+          cry   ;
 
 public <digits> = <digit>+;

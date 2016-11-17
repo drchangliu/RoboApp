@@ -19,10 +19,12 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
@@ -343,6 +345,20 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         //End New Face Tracker Code
     }
     //New Face Tracker Code
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PERMISSIONS_REQUEST_RECORD_AUDIO) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                runRecognizerSetup();
+            } else {
+                finish();
+            }
+        }
+    }
 
     private void createCameraSource() {
 
@@ -729,8 +745,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                             .setText("Failed to init recognizer " + result);
                 } else {
                     // Now we will start the keyword search, where we are listening for "Okay rufus"...
-                    ((TextView) findViewById(R.id.caption_text))
-                            .setText("Speech Detection Active");
+                    TextView loadingVoice = (TextView)findViewById(R.id.caption_text);
+                    loadingVoice.setAlpha(0.0f);
                     switchSearch(KWS_SEARCH);
                 }
             }
@@ -795,9 +811,15 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         String text = hypothesis.getHypstr();
         // So, if we say, "okay rufus"...
         if (text.equals(START_LISTENING_STRING)){
-            Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
-            // We start the search of specific grammars...
-            switchSearch(CAT_COMMANDS);
+            MediaPlayer meow = MediaPlayer.create(getApplicationContext(), R.raw.meow);
+            meow.start();
+            meow.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+                public void onCompletion(MediaPlayer player) {
+                    player.stop();
+                    player.release();
+                    // We start the search of specific grammars...
+                    switchSearch(CAT_COMMANDS);
+                }});
         }
     }
 
@@ -806,8 +828,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     public void onResult(Hypothesis hypothesis) {
         if (hypothesis != null) {
             String text = hypothesis.getHypstr();
-            // Testing
-            makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+            doCommand(text);
         }
     }
 
@@ -821,111 +842,77 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         ((TextView) findViewById(R.id.caption_text)).setText(error.getMessage());
     }
 
-    /**
-     * This is called after speech recognition. The recognized words come in as a list of strings
-     * and are processed to make the cat perform actions or change emotion state.
-     */
+    void doCommand (String result) {
+        if (result.contains("home") || result.contains("straight")) {
+            virtualCat.resetHead();
+        }
+        else if (result.contains("good")) {
+            //Make the cat happy.
+            kitty.smiledAt();
+        }
+        else if (result.contains("bad")) {
+            //Make the cat mad.
+            kitty.frownedAt();
+        }
+        else if (result.contains("cry")){
+            //Make the cat cry
+            kitty.cryingAt();
+        }
+        else if (result.contains("stupid cat")){
+            //Make cat disgusted
+            kitty.distgustedAt();
+        }
+        else if (result.contains("left")) {
+            //Make the cat head move left
+            virtualCat.turnHeadLeft();
+        }
+        else if (result.contains("walk")||result.contains("walking") || result.contains("come")) {
+            virtualCat.stepForward();
+        }
+        //if (result.contains("right") || result.contains("write")) {
+        // does this work? we'll see
+        else if (result.contains("right")) {
+            //Make the cat head move right
+            virtualCat.turnHeadRight();
+        }
+        else if (result.contains("green")) {
+            trackingGreen = true;
+            trackingRed = false;
+        }
+        else if (result.contains("red")) {
+            trackingGreen = false;
+            trackingRed = true;
+        }
+        else if (result.contains("blue")) {
+            trackingGreen = trackingRed = false;
+        }
+        else if (result.contains("up")) {
+            virtualCat.turnHeadUp();
+        }
+        else if (result.contains("down")) {
+            virtualCat.turnHeadDown();
+        }
+        else if (result.contains("menu")) {
+            entry.clear();
+            //showVideoFeed();
+            Intent intent = new Intent(this, MainActivity.class);
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case REQ_CODE_SPEECH_INPUT: {
-                if  (resultCode==RESULT_OK && null!=data) {
-                    //Insert ArrayList stuff
-                    result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    mSpeechTextLogger.addRecordToLog(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date()));
-                    ArrayList<String> tmpList = new ArrayList<>();
-                    for (int i=0; i< result.size(); i++) {
-                        String tmp = result.get(i);
-                        Log.w("WORDS1", tmp);
-                        if(tmp.contains(" ")) {
-                            tmpList.addAll(Arrays.asList(tmp.split(" ")));
-                        }
-                        mSpeechTextLogger.addRecordToLog(result.get(i));
-                    }
-                    result.addAll(tmpList);
-                    for (int i=0; i<result.size(); i++) {
-                        String tmp = result.get(i);
-                        Log.w("WORDS2", tmp);
-                    }
-                    //Make a call to analyze the words and update cat's mood.
-                    if (result.contains("home") || result.contains("straight")) {
-                        virtualCat.resetHead();
-                    }
-                    else if (result.contains("good")) {
-                        //Make the cat happy.
-                        kitty.smiledAt();
-                    }
-                    else if (result.contains("bad")) {
-                        //Make the cat mad.
-                        kitty.frownedAt();
-                    }
-                    else if (result.contains("cry")){
-                        //Make the cat cry
-                        kitty.cryingAt();
-                    }
-                    else if (result.contains("stupid cat")){
-                        //Make cat disgusted
-                        kitty.distgustedAt();
-                    }
-                    else if (result.contains("left")) {
-                        //Make the cat head move left
-                        virtualCat.turnHeadLeft();
-                    }
-                    else if (result.contains("walk")||result.contains("walking") || result.contains("come")) {
-                        virtualCat.stepForward();
-                    }
-                    //if (result.contains("right") || result.contains("write")) {
-                    // does this work? we'll see
-                    else if (!Collections.disjoint(result, Arrays.asList("right", "write", "white"))) {
-                        //Make the cat head move right
-                        virtualCat.turnHeadRight();
-                    }
-                    else if (result.contains("green")) {
-                        trackingGreen = true;
-                        trackingRed = false;
-                    }
-                    else if (result.contains("red")) {
-                        trackingGreen = false;
-                        trackingRed = true;
-                    }
-                    else if (result.contains("blue")) {
-                        trackingGreen = trackingRed = false;
-                    }
-                    else if (result.contains("up")) {
-                        virtualCat.turnHeadUp();
-                    }
-                    else if (result.contains("down")) {
-                        virtualCat.turnHeadDown();
-                    }
-                    else if (result.contains("menu")) {
-                        entry.clear();
-                        //showVideoFeed();
-                        Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        else if (result.contains("love")) {
+            kitty.loveMeCat();
+        }
+        else if (result.contains("find") && result.contains("me")){
+            Intent intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
+            startActivity(intent);
+        }
+        else {
+            Context context = getApplicationContext();
+            CharSequence commandNotFound = "Command not found!";
+            int duration = Toast.LENGTH_SHORT;
 
-                        startActivity(intent);
-                    }
-                    else if (result.contains("love")) {
-                        kitty.loveMeCat();
-                    }
-                    else if (result.contains("find") && result.contains("me")){
-                        Intent intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
-                        startActivity(intent);
-                    }
-                    else {
-                        Context context = getApplicationContext();
-                        CharSequence commandNotFound = "Command not found!";
-                        int duration = Toast.LENGTH_SHORT;
-
-                        Toast notFoundToast = Toast.makeText(context, commandNotFound, duration);
-                        notFoundToast.show();
-                    }
-                    //Clear the arrayList for the next time a button is pressed.
-                    result.clear();
-                }
-                break;
-            }
+            Toast notFoundToast = Toast.makeText(context, commandNotFound, duration);
+            notFoundToast.show();
         }
     }
 
