@@ -1429,7 +1429,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             Log.d("face position", "(" + x + ", " + y + ")");
             trackPosition=new PointF(x, y);
 
-            if( Math.sqrt(Math.pow(x, 2.0)+Math.pow(y, 2.0))>25.0) {
+            if( Math.sqrt(Math.pow(x, 2.0)+Math.pow(y, 2.0))>=5.0) {
                 virtualCat.lookToward(trackPosition);
             }
         }

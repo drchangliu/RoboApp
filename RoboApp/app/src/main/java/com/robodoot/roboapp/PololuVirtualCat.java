@@ -115,16 +115,17 @@ public class PololuVirtualCat extends VirtualCat {
         // maybe something like this
         //int yaw = (int)(relPos.x * p.NECK_YAW_SERVO_RANGE );
         int yaw = (int)(relPos.x);
-        //if (Math.abs(yaw) >= 5) {
+        if (Math.abs(yaw) >= 5) {
             p.addToYaw(yaw);
             Log.d("Yaw Modifier: ", "(" + yaw + ")");
+        }
         //}
         //int pitch = (int)(relPos.y * p.NECK_PITCH_SERVO_MAX );
         int pitch = (int)(relPos.y);
-        //if (Math.abs(pitch) >= 5) {
+        if (Math.abs(pitch) >= 5) {
             p.addToPitch(pitch);
             Log.d("Pitch Modifier: ", "(" + pitch + ")");
-        //}
+        }
     }
 
     /**
