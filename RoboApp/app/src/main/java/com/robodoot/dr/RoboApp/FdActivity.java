@@ -51,11 +51,12 @@ import com.robodoot.roboapp.MainActivity;
 import com.robodoot.roboapp.PololuVirtualCat;
 import com.robodoot.roboapp.VirtualCat;
 
+/* -- OPENCVRMV
 import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_face;
 import org.bytedeco.javacpp.opencv_face.*;
 
-import org.bytedeco.javacpp.opencv_imgproc;
+import org.bytedeco.javacpp.opencv_imgproc;*/
 import org.bytedeco.javacv.FFmpegFrameRecorder;
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.OpenCVFrameConverter;
@@ -109,7 +110,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     private CameraSource mCameraSource = null;
     //new facetracker variables end
 
-    private ArrayList<opencv_core.Mat> framesForVideo = new ArrayList<opencv_core.Mat>();
+    // -- OPENCVRMV
+    // private ArrayList<opencv_core.Mat> framesForVideo = new ArrayList<opencv_core.Mat>();
     private int frameNumber;
 
     private boolean cameraIsChecked = false;
@@ -155,7 +157,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     /* -- OPENCVRMV
     private ArrayList<Scalar> UserColors;
     private ArrayList<ArrayList<Mat>> TrainingSets;*/
-    private FaceRecognizer faceRecognizer;
+    // -- OPENCVRMV
+    // private FaceRecognizer faceRecognizer;
 
    /* -- OPENCVRMV
     private ArrayList<Person> peopleLastCameraFrame;
