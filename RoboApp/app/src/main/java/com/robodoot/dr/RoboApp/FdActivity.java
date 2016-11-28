@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 
 import android.app.Activity;
@@ -75,10 +76,12 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 
+import java.io.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.Math;
 import java.nio.IntBuffer;
 import java.util.Random;
 import java.util.Stack;
@@ -188,6 +191,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     private Sensor senAccelerometer;
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
+    // array of arrays to store the accelerometer data in x, y, z format
+    private ArrayList<ArrayList<String>> accData = new ArrayList<ArrayList<String>>();
 
 
     // Function to open menu activity
@@ -449,12 +454,17 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                 long diffTime = (curTime - lastUpdate);
                 lastUpdate = curTime;
 
+                // if ((Math.abs(x - sensorEvent.values[0]) > ))
+
                 String xs = Float.toString(sensorEvent.values[0]);
                 String ys = Float.toString(sensorEvent.values[1]);
                 String zs = Float.toString(sensorEvent.values[2]);
 
-                //Log.w("Accelerometer", "(" + xs + ", " + ys + ", " + zs + ")");
-
+                ArrayList<String> accDataSingle = new ArrayList<String>();
+                accDataSingle.add(xs);
+                accDataSingle.add(ys);
+                accDataSingle.add(zs);
+                accData.add(accDataSingle);
                 last_x = x;
                 last_y = y;
                 last_z = z;
@@ -470,6 +480,10 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
     @Override
     public void onPause() {
+        Log.d("Pause", "onPause() called");
+        for (ArrayList<String> it : accData){
+            Log.d("Accelerometer", " " + it);
+        }
         super.onPause();
         /*if (mOpenCvCameraView != null)
             mOpenCvCameraView.disableView();*/

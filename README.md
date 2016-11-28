@@ -26,11 +26,12 @@ Also currently available in the app are activities which allow terminal contact 
 `./doc` contains the documentation of all scripts written for FaceTrackTest
 
 `./RoboApp` is the actual Roboapp and contains all code.
-Color Tracking: located in ./RoboApp/app/src/main/java/robodoot/RoboApp/FdActivity.java
+Color Tracking and Face Tracking: located in `./RoboApp/app/src/main/java/robodoot/RoboApp/FdActivity.java`
 
 `./legacy_files` contains inherited files from previous teams with little use or no known use. See README in that directory
 
 `./proj_doc` contains all non-code documents relating to our software development cycle. See README in that directory
 
-`./FaceTracker` is a seperate app, composed of started and custom code, written to track multiple faces in a video feed. Will
-implement into our RoboApp. Currently, it detects whether each eye is open and uses facial markers to determine happiness.
+`./FaceTracker` is a seperate app, composed of started and custom code, written to track multiple faces in a video feed. Also incorporated into the main RoboApp and is able to be used. Currently, it detects whether each eye is open and uses facial markers to determine happiness.
+
+`./BatteryInformation` is another standalone app used to detect the level of battery charge on the Android device, it is already incorporated into the main RoboApp.
