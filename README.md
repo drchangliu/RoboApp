@@ -25,7 +25,8 @@ Also currently available in the app are activities which allow terminal contact 
 ##Organization of Repo
 `./doc` contains the documentation of all scripts written for FaceTrackTest
 
-`./RoboApp` is the actual Roboapp and contains all code.
+`./RoboApp` is the actual Roboapp and contains all code.   
+
 Color Tracking and Face Tracking: located in `./RoboApp/app/src/main/java/robodoot/RoboApp/FdActivity.java`
 
 `./legacy_files` contains inherited files from previous teams with little use or no known use. See README in that directory
