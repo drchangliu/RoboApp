@@ -760,7 +760,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                 .setAcousticModel(new File(assetsDir, "en-us-ptm"))
                 .setDictionary(new File(assetsDir, "cmudict-en-us.dict"))
 
-                .setRawLogDir(assetsDir) // To disable logging of raw audio comment out this call (takes a lot of space on the device)
+                //.setRawLogDir(assetsDir) // To disable logging of raw audio comment out this call (takes a lot of space on the device)
                 .setKeywordThreshold(1e-45f) // Threshold to tune for keyphrase to balance between false alarms and misses
                 .setBoolean("-allphone_ci", true)  // Use context-independent phonetic search, context-dependent is too slow for mobile
 
@@ -813,13 +813,10 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         if (text.equals(START_LISTENING_STRING)){
             MediaPlayer meow = MediaPlayer.create(getApplicationContext(), R.raw.meow);
             meow.start();
-            meow.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
-                public void onCompletion(MediaPlayer player) {
-                    player.stop();
-                    player.release();
-                    // We start the search of specific grammars...
-                    switchSearch(CAT_COMMANDS);
-                }});
+            while(meow.isPlaying());
+            meow.stop();
+            meow.release();
+            switchSearch(CAT_COMMANDS);
         }
     }
 
