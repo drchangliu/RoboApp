@@ -207,7 +207,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     private Sensor senAccelerometer;
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
-
+    // array of arrays to store the accelerometer data in x, y, z format
+    private ArrayList<ArrayList<String>> accData = new ArrayList<ArrayList<String>>();
 
     // Function to open menu activity
     public void openMenu(){
@@ -412,7 +413,11 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                 String zs = Float.toString(sensorEvent.values[2]);
 
                 //Log.w("Accelerometer", "(" + xs + ", " + ys + ", " + zs + ")");
-
+                ArrayList<String> accDataSingle = new ArrayList<String>();
+                accDataSingle.add(xs);
+                accDataSingle.add(ys);
+                accDataSingle.add(zs);
+                accData.add(accDataSingle);
                 last_x = x;
                 last_y = y;
                 last_z = z;
@@ -428,6 +433,10 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
     @Override
     public void onPause() {
+        Log.d("Pause", "onPause() called");
+        for (ArrayList<String> it : accData){
+            Log.d("Accelerometer", " " + it);
+        }
         super.onPause();
         /*if (mOpenCvCameraView != null)
             mOpenCvCameraView.disableView();*/
