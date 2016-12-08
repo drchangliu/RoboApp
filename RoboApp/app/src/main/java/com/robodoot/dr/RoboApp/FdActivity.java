@@ -1,8 +1,10 @@
 package com.robodoot.dr.RoboApp;
 
 import java.io.ObjectOutputStream;
+import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Locale;
@@ -47,14 +49,8 @@ import com.google.android.gms.vision.Tracker;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 import com.robodoot.dr.facetracktest.R;
-// -- OPENCVRMV
-// import com.robodoot.roboapp.ColorValues;
 import com.robodoot.roboapp.Direction;
-// -- OPENCVRMV
-// import com.robodoot.roboapp.ImageUtil;
 import com.robodoot.roboapp.MainActivity;
-// -- OPENCVRMV
-// import com.robodoot.roboapp.Person;
 import com.robodoot.roboapp.PololuVirtualCat;
 import com.robodoot.roboapp.VirtualCat;
 
@@ -76,6 +72,7 @@ import java.util.Vector;
 
 import static android.widget.Toast.makeText;
 
+
 //-- OPENCVRMV
 // import static org.bytedeco.javacpp.opencv_imgcodecs.cvLoadImage;
 
@@ -84,8 +81,7 @@ import static android.widget.Toast.makeText;
  * detection and color tracking. Image processing occurs in the {@link #onCameraFrame} method.
  * uses built in hardware functions to use the Android accelerometer data (SensorEventListener)
  */
-//-- OPENCVRMV
-// add back CvCameraViewListener2 to implements
+
 public class FdActivity extends Activity implements GestureDetector.OnGestureListener, SensorEventListener, RecognitionListener {
     // FUNCTION AND VARIABLE DEFINTIONS
     private Logger mFaceRectLogger;
@@ -96,8 +92,6 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     private CameraSource mCameraSource = null;
     //new facetracker variables end
 
-    // -- OPENCVRMV
-    // private ArrayList<opencv_core.Mat> framesForVideo = new ArrayList<opencv_core.Mat>();
     private int frameNumber;
 
     private boolean cameraIsChecked = false;
@@ -111,7 +105,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     private static final String START_LISTENING_STRING = "okay rufus";
     // Used when getting permission to listen
     private static final int PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
-    private static final int PERMISSIONS_REQUEST_CAMERA = 1;
+    private static final int PERMISSIONS_REQUEST_CAMERA = 2;
+    private static final int PERMISSIONS_REQUEST_MULTIPLE=3;
     private static final String CAT_COMMANDS = "cat";
 
     /* End pocketsphinx variable declarations */
@@ -135,54 +130,26 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
     private CatEmotion kitty;
     public enum Directions {UP, DOWN, LEFT, RIGHT, CENTER}
-    /* -- OPENCVRMV
-    private Mat mRgba;
-    private Mat mRgbaForColorTracking;
-    private Mat mGray;
-    private Mat tempMat1;
-    private MatOfRect faces;
-    private MatOfRect smiles;*/
     private ImageView[] arrows;
     private RelativeLayout frame;
     private Bitmap bmp;
     private Directions dir;
 
 
-    /* -- OPENCVRMV
-    private Rect[] FavFaceLocationBuffer;
-    private Rect[] FaceLocationBuffer;
-    private Mat[]  FaceMatBuffer;
-    private Mat[]  EigenMats;*/
     private int IDcount;
-    /* -- OPENCVRMV
-    private ArrayList<Scalar> UserColors;
-    private ArrayList<ArrayList<Mat>> TrainingSets;*/
-    // -- OPENCVRMV
-    // private FaceRecognizer faceRecognizer;
-
-   /* -- OPENCVRMV
-    private ArrayList<Person> peopleLastCameraFrame;
-    private ArrayList<Person> peopleThisCameraFrame;*/
     private ArrayList<ArrayList<Integer>> SimilarID;
 
     private int refreshRecognizer;
 
     private File mCascadeFile;
-    /* -- OPENCVRMV
-    private CascadeClassifier mJavaDetectorFace;
-    private CascadeClassifier mJavaDetectorSmile;*/
 
     private String[] mDetectorName;
 
     private float mRelativeFaceSize = 0.1f;
     private int mAbsoluteFaceSize = 0;
 
-    // -- OPENCVRMV
-    // private JavaCameraView mOpenCvCameraView;
     boolean[] filter;
 
-    // -- OPENCVRMV
-    // private Size stds = new Size(80,80);
 
     private double xCenter = -1;
     double yCenter = -1;
@@ -222,11 +189,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     public FdActivity() {
         mDetectorName = new String[2];
         mDetectorName[JAVA_DETECTOR] = "Java";
-        /* -- OPENCVRMV
-        peopleThisCameraFrame = new ArrayList<Person>();
-        peopleLastCameraFrame = new ArrayList<Person>();*/
         SimilarID = new ArrayList<ArrayList<Integer>>();
-        //pololu = new PololuHandler();
         virtualCat = new PololuVirtualCat();
 
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -303,45 +266,32 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         debug2.setAlpha(0f);
         debug3.setAlpha(0f);
 
-        //mOpenCvCameraView.setAlpha(0f);
-        //mOpenCvCameraView.bringToFront();
-
-        /* -- OPENCVRMV
-        String[] lines;
-        if ((lines = new Logger("red_color_values", false).ReadLines()) != null
-                && lines.length > 0) {
-            redValues = new ColorValues(lines[0]);
-        }
-        if ((lines = new Logger("green_color_values", false).ReadLines()) != null
-                && lines.length > 0) {
-            greenValues = new ColorValues(lines[0]);
-        }
-        if ((lines = new Logger("color_values", false).ReadLines()) != null
-                && lines.length > 0) {
-            blueValues = new ColorValues(lines[0]);
-        }*/
-
-        //New Face Tracker Code
-        createCameraSource();
-
         // psphx1: Pocketsphinx creation stuff
         ((TextView) findViewById(R.id.caption_text))
                 .setText("Loading voice recognition...");
         // Check if user has given permission to record audio
-        int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO);
-        if (permissionCheck == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, PERMISSIONS_REQUEST_RECORD_AUDIO);
 
-            int permissionCheck2 = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA);
-            if (permissionCheck2 == PackageManager.PERMISSION_DENIED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSIONS_REQUEST_CAMERA);
-                return;
-            }
-            return;
+        List<String> PermissionListTmp = new ArrayList<String>();
+
+        int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA);
+        if (permissionCheck == PackageManager.PERMISSION_DENIED) {
+            PermissionListTmp.add(Manifest.permission.CAMERA);
+        }else if(permissionCheck == PackageManager.PERMISSION_GRANTED){
+            createCameraSource();
         }
 
-        // We need to start the pocketsphinx recognizer
-        runRecognizerSetup();
+        permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO);
+        if (permissionCheck == PackageManager.PERMISSION_DENIED) {
+            PermissionListTmp.add(Manifest.permission.RECORD_AUDIO);
+        }else if(permissionCheck == PackageManager.PERMISSION_GRANTED){
+            //runRecognizerSetup();
+        }
+
+        if(PermissionListTmp.size()>0){
+            String[] PermissionList = new String[PermissionListTmp.size()];
+            PermissionList = PermissionListTmp.toArray(PermissionList);
+            ActivityCompat.requestPermissions(this, PermissionList, PERMISSIONS_REQUEST_MULTIPLE);
+        }
 
         //End New Face Tracker Code
     }
@@ -354,9 +304,25 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
         if (requestCode == PERMISSIONS_REQUEST_RECORD_AUDIO) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                runRecognizerSetup();
+                //runRecognizerSetup();
             } else {
                 finish();
+            }
+        }else if (requestCode == PERMISSIONS_REQUEST_CAMERA) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                createCameraSource();
+            } else {
+                finish();
+            }
+        }else if(requestCode==PERMISSIONS_REQUEST_MULTIPLE){
+            for(int i = 0; i<permissions.length; ++i){
+                if(grantResults.length>i && grantResults[i] == PackageManager.PERMISSION_GRANTED){
+                    if (permissions[i]==Manifest.permission.CAMERA) {
+                        createCameraSource();
+                    } else if(permissions[i]==Manifest.permission.RECORD_AUDIO){
+                        //runRecognizerSetup();
+                    }
+                }
             }
         }
     }
@@ -372,10 +338,12 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                 new MultiProcessor.Builder<>(new FaceTrackerFactory())
                         .build());
 
+        //TODO: this works for a high res front camera with high framerate, adjust camera
+        //to work with any size/ framerate
         mCameraSource = new CameraSource.Builder(context, detector)
-                .setRequestedPreviewSize(640, 480)
+                .setRequestedPreviewSize(1024, 768)
                 .setFacing(CameraSource.CAMERA_FACING_FRONT)
-                .setRequestedFps(15.0f)
+                .setRequestedFps(30.0f)
                 .build();
     }
 
@@ -448,28 +416,24 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
     @Override
     public void onResume() {
-        //pololu.onResume(getIntent(), this);
         virtualCat.onResume(getIntent(), this);
 
 
-        super.onResume();
-        //pololu.home();
+        super.onResume();;
         if (!initialized) {
             initialized = true;
             virtualCat.resetHead();
         }
-        //OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this, mLoaderCallback);
 
         startCameraSource();
 
         entry.clear();
-        //showVideoFeed();
 
         timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
         imageCaptureDirectory = Environment.getExternalStorageDirectory().getPath() + "/RoboApp/" + timestamp;
         frameNumber = 0;
 
-        mFaceRectLogger.addRecordToLog("\n" + new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date()));
+        //mFaceRectLogger.addRecordToLog("\n" + new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date()));
 
         // need to start listening again for movement for accelerometer on resume
         senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
@@ -482,7 +446,6 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             recognizer.cancel();
             recognizer.shutdown();
         }
-        //mOpenCvCameraView.disableView();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -491,20 +454,6 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
     @Override
     public boolean onTouchEvent(MotionEvent me) {
-//        if(me.getAction()==MotionEvent.ACTION_BUTTON_PRESS&&!cameraIsChecked)
-//        {
-//            cameraIsChecked = !cameraIsChecked;
-//            mOpenCvCameraView.setAlpha(0.8f);
-//            mOpenCvCameraView.bringToFront();
-//        }
-//        else if(me.getAction()==MotionEvent.ACTION_BUTTON_RELEASE&&cameraIsChecked)
-//        {
-//            cameraIsChecked = !cameraIsChecked;
-//            mOpenCvCameraView.setAlpha(0f);
-//
-//
-//        }
-
         return gDetector.onTouchEvent(me);
     }
 
@@ -513,64 +462,6 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         // TODO Auto-generated method stub
         return false;
     }
-
-   /* -- OPENCVRMV
-   private void record(String directory) {
-        opencv_core.Mat[] frames = new opencv_core.Mat[framesForVideo.size()];
-        framesForVideo.toArray(frames);
-
-        String path = directory + "/output" + System.currentTimeMillis() + ".mp4";
-        File file = new File(path).getAbsoluteFile();
-        file.getParentFile().mkdirs();
-
-        FFmpegFrameRecorder recorder = new FFmpegFrameRecorder(path, 200, 150);
-
-        try {
-            recorder.setVideoCodec(13); // CODEC_ID_MPEG4 //CODEC_ID_MPEG1VIDEO
-            // //http://stackoverflow.com/questions/14125758/javacv-ffmpegframerecorder-properties-explanation-needed
-
-            recorder.setFrameRate(10); // This is the frame rate for video. If you really want to have good video quality you need to provide large set of images.
-            recorder.setPixelFormat(0); // PIX_FMT_YUV420P
-
-            recorder.start();
-            OpenCVFrameConverter frameConverter = new OpenCVFrameConverter.ToMat();
-            for (int i = 0; i < frames.length; i++) {
-                Frame f = frameConverter.convert(frames[i]);
-                recorder.record(f);
-            }
-            recorder.stop();
-        } catch (Exception e) {
-            e.printStackTrace();
-            for (opencv_core.Mat f : framesForVideo) {
-                f.release();
-            }
-            framesForVideo.clear();
-        }
-
-        for (opencv_core.Mat f : framesForVideo) {
-            f.release();
-        }
-        framesForVideo.clear();
-    }*/
-
-    /* -- OPENCVRMV
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private final void saveMat(String path, Mat mat) {
-        File file = new File(path).getAbsoluteFile();
-        file.getParentFile().mkdirs();
-        try {
-            int cols = mat.cols();
-            byte[] data = new byte[(int) mat.total() * mat.channels()];
-            mat.get(0, 0, data);
-            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path))) {
-                oos.writeObject(cols);
-                oos.writeObject(data);
-                oos.close();
-            }
-        } catch (IOException | ClassCastException ex) {
-            System.err.println("ERROR: Could not save mat to file: " + path);
-        }
-    }*/
 
     private void setTextFieldText(String message, TextView field)
     {
@@ -587,29 +478,6 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             }
         });
     }
-
-    /* -- OPENCVRMV
-    private void showVideoFeed()
-    {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mOpenCvCameraView.setAlpha(1.0f);
-                debugging = true;
-            }
-        });
-    }*/
-
-    /* -- OPENCVRMV
-    private void hideVideoFeed()
-    {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mOpenCvCameraView.setAlpha(0.0f);
-            }
-        });
-    }*/
 
     private boolean onSwipe(Direction direction) {
         if(direction == Direction.right) {
@@ -687,11 +555,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
     @Override
     public void onLongPress(MotionEvent arg0) {
-       /*  -- OPENCVRMV
-       if(mOpenCvCameraView.getAlpha()>0.5f)
-            mOpenCvCameraView.setAlpha(0.0f);
-        else
-            mOpenCvCameraView.setAlpha(0.80f);*/
+       //TODO
     }
 
     @Override
@@ -922,557 +786,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // GENERAL/SHARED OPENCV
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-/* -- OPENCVRMV (note: this is a big one)
 
-    */
-/**
-     * initialize stuff related to opencv
-     *//*
-
-    public void onCameraViewStarted(int width, int height) {
-        TextView loading = (TextView)findViewById(R.id.LoadingText);
-        loading.setAlpha(1.0f);
-        mGray = new Mat();
-        mRgba = new Mat();
-        mRgbaForColorTracking = new Mat();
-        tempMat1 = new Mat();
-        faces = new MatOfRect();
-        smiles = new MatOfRect();
-        FavFaceLocationBuffer = new Rect[5];
-        for(int i = 0;i<5;i++)FavFaceLocationBuffer[i]=new Rect(new Point(0,0),new Size(1,1));
-        FaceLocationBuffer = new Rect[15];
-        for(int i = 0;i<15;i++)FaceLocationBuffer[i]=new Rect(new Point(0,0),new Size(1,1));
-        FaceMatBuffer  = new Mat[15];
-        for(int i = 0;i<15;i++)FaceMatBuffer[i]=new Mat();
-        EigenMats = new Mat[10];
-        for(int i = 0;i<10;i++)EigenMats[i]=new Mat();
-        IDcount = 1;
-        UserColors = new ArrayList<Scalar>();
-        UserColors.add(0, new Scalar(0, 0, 0));
-        TrainingSets = new ArrayList<ArrayList<Mat>>();
-        TrainingSets.add(0,new ArrayList<Mat>());
-        faceRecognizer = opencv_face.createFisherFaceRecognizer();
-        //kitty.pic.setVisibility(View.GONE);
-        //loadTestFaces();
-        refreshRecognizer=0;
-        entry.clear();
-
-        loading.setAlpha(0f);
-    }
-
-    public void onCameraViewStopped() {
-        mGray.release();
-        mRgba.release();
-        mRgbaForColorTracking.release();
-        tempMat1.release();
-        faces.release();
-        smiles.release();
-        for(int i = 0;i<9;i++)EigenMats[i].release();
-        for(int i = 0;i<12;i++)FaceMatBuffer[i].release();
-    }
-
-    */
-/*
-     * Process a video frame (do face detection, color tracking)
-     * @param inputFrame the image to process
-     * @return a possibly modified inputFrame to be displayed
-     *//*
-
-    public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        */
-/*peopleThisCameraFrame.clear();
-
-        try {
-            inputFrame.rgba().copyTo(mRgba);
-            inputFrame.gray().copyTo(mGray);
-
-            Core.flip(mRgba.t(), mRgba, 0);
-            Core.flip(mGray.t(), mGray, 0);
-
-            if (mAbsoluteFaceSize == 0) {
-                int height = mGray.rows();
-                if (Math.round(height * mRelativeFaceSize) > 0) {
-                    mAbsoluteFaceSize = Math.round(height * mRelativeFaceSize);
-                }
-            }
-
-            // detect faces
-            if (mJavaDetectorFace != null)
-                mJavaDetectorFace.detectMultiScale(mGray, faces, 1.1, 2, 2, new Size(mAbsoluteFaceSize, mAbsoluteFaceSize), new Size());
-
-            Rect biggestFace = new Rect(new Point(0, 0), new Size(1, 1));
-
-            Rect[] facesArray = faces.toArray();
-
-            // for each face
-            for (int i = 0; i < facesArray.length; i++) {
-                // calculate center position of face
-                xCenter = (facesArray[i].x + facesArray[i].width + facesArray[i].x) / 2;
-                yCenter = (facesArray[i].y + facesArray[i].y + facesArray[i].height) / 2;
-                Point center = new Point(xCenter, yCenter);
-
-                Rect r = facesArray[i];
-
-                // make mat from submat containing only the face
-                mGray.submat(r).copyTo(tempMat1);
-                // equalize the grayscale values (stretch them out)
-                Imgproc.equalizeHist(tempMat1, tempMat1);
-
-                // attempt to recognize the face
-                int recoID = checkForRecognition(tempMat1);
-
-                // convert from grayscale to rgba
-                Imgproc.cvtColor(tempMat1, tempMat1, Imgproc.COLOR_GRAY2RGBA);
-
-                if (recoID < 21) {
-                    // copy the submat we were working with back into the area it occupied in the original mat (the current frame)
-                    tempMat1.copyTo(mRgba.submat(r));
-                    // draw a red rectangle around the face
-                    Imgproc.rectangle(mRgba, r.br(), r.tl(), new Scalar(255, 0, 0), 8);
-                    // keep track of biggest face
-                    if (r.size().area() > biggestFace.size().area()) biggestFace = r;
-                } else {
-                    // calculate mouth rect
-                    Point mouthPt1 = new Point(r.x + r.width / 10, r.y + r.height / 2 + r.height / 10);
-                    Point mouthPt2 = new Point(r.x + r.width - r.width / 10, r.y + r.height - r.height / 10);
-                    Rect mouthRect = new Rect(mouthPt1, mouthPt2);
-
-                    //Imgproc.rectangle(mRgba, mouthRect.br(), mouthRect.tl(), new Scalar(0, 255, 0), 4);
-
-                    // detect smiles
-                    if (mJavaDetectorSmile != null)
-                        mJavaDetectorSmile.detectMultiScale(mGray.submat(mouthRect), smiles, 1.1, 6, 0, new Size(mouthRect.width * 0.6, mouthRect.height * 0.6), new Size());
-                    Rect[] smileArray = smiles.toArray();
-                    boolean smiling = false;
-                    // if detected any smiles, set smiling
-                    if (smileArray.length > 0) smiling = true;
-
-                    // flip the mouth rect
-                    Core.flip(mGray.submat(mouthRect), mGray.submat(mouthRect), -1);
-                    // detect flipped smiles (frowns)
-                    if (mJavaDetectorSmile != null)
-                        mJavaDetectorSmile.detectMultiScale(mGray.submat(mouthRect), smiles, 1.05, 4, 0, new Size(mouthRect.width * 0.4, mouthRect.height * 0.4), new Size());
-                    Rect[] frownArray = smiles.toArray();
-
-                    // if detected any frowns, set frowning if not smiling
-                    boolean frowning = frownArray.length > 0 && !smiling;
-
-                    // add person
-                    peopleThisCameraFrame.add(new Person(recoID, r, smiling, frowning));
-                    //setTextFieldText(Integer.toString(recoID),debug1);
-                }
-            }
-
-            if (biggestFace.size().area() != 1) {
-                Rect r = biggestFace;
-                Point mouthPt1 = new Point(r.x + r.width / 10, r.y + r.height / 2 + r.height / 10);
-                Point mouthPt2 = new Point(r.x + r.width - r.width / 10, r.y + r.height - r.height / 10);
-                Rect mouthRect = new Rect(mouthPt1, mouthPt2);
-                //find the number of smiles
-
-                Imgproc.rectangle(mRgba, mouthRect.br(), mouthRect.tl(), new Scalar(0, 255, 0), 4);
-
-                if (mJavaDetectorSmile != null)
-                    mJavaDetectorSmile.detectMultiScale(mGray.submat(mouthRect), smiles, 1.4, 3, 0, new Size(mouthRect.width * 0.6, mouthRect.height * 0.4), new Size());
-
-                Rect[] smileArray = smiles.toArray();
-
-                if (smileArray.length > 0) kitty.smiledAt();
-                if (adjustFaceBuffer(biggestFace)) {
-
-                    addNewUser();
-                }
-
-                //if (peopleThisCameraFrame.size() == 0) trackFavFace(biggestFace);
-            }
-
-            if (peopleThisCameraFrame.size() > 0) {
-                ArrayList<Integer> IDsToCheck = new ArrayList<Integer>();
-
-                for (int i = 0; i < peopleThisCameraFrame.size(); i++) {
-                    for (int j = 0; j < peopleLastCameraFrame.size(); j++) {
-                        peopleThisCameraFrame.get(i).checkID(SimilarID, UserColors);
-                        peopleThisCameraFrame.get(i).checkSimilar(peopleLastCameraFrame.get(j),SimilarID, UserColors);
-                    }
-                    kitty.lookedAt(peopleThisCameraFrame.get(i).ID, peopleThisCameraFrame.get(i).smiling, peopleThisCameraFrame.get(i).frowning);
-                    Scalar color = UserColors.get(peopleThisCameraFrame.get(i).ID);
-                    Imgproc.rectangle(mRgba, peopleThisCameraFrame.get(i).face.br(), peopleThisCameraFrame.get(i).face.tl(), color, 8);
-
-                    IDsToCheck.add(peopleThisCameraFrame.get(i).ID);
-                }
-
-                *//*
-*/
-/*int favID = kitty.getFavPerson(IDsToCheck);
-                Person favPerson = peopleThisCameraFrame.get(0);
-
-                if (favID > 20) {
-                    for (int i = 0; i < peopleThisCameraFrame.size(); i++) {
-                        if (peopleThisCameraFrame.get(i).ID == favID) {
-                            favPerson = peopleThisCameraFrame.get(i);
-                            trackFavFace(favPerson.face);
-                        }
-                    }
-                }*//*
-*/
-/*
-
-                peopleLastCameraFrame.clear();
-                peopleLastCameraFrame.addAll(peopleThisCameraFrame);
-                kitty.reCalcFace();
-            }
-        } catch (Exception e) {
-            Log.i(TAG, "Exception " + e.getMessage());
-            System.gc();
-            return null;
-        }*//*
-
-
-        inputFrame.rgba().copyTo(mRgba);
-        Core.flip(mRgba.t(), mRgba, 0);
-
-        //saveMat(imageCaptureDirectory + "/image_" + (frameNumber++) + ".jpg", mRgba);
-        //framesForVideo.add(ImageUtil.CopyMatToIplImage(mRgba));
-        //framesForVideo.add(ImageUtil.OpenCVMatToJavaCVMat(mRgba));
-
-        if (trackingRed) {
-            Point relRedObjectPos = trackColor(inputFrame, redValues);
-            reactToRedObject(relRedObjectPos);
-        }
-        if (trackingGreen) {
-            Point relGreenObjectPos = trackColor(inputFrame, greenValues);
-            reactToGreenObject(relGreenObjectPos);
-//        if (relGreenObjectPos != null) {
-//            double len = Math.sqrt(Math.pow(relGreenObjectPos.x, 2) + Math.pow(relGreenObjectPos.y, 2));
-//            if (len == 0.0) return mRgba;
-//            Point norm = relGreenObjectPos;
-//            setTextFieldText("pX = " + norm.x, debug1);
-//            setTextFieldText("pY = " + norm.y, debug2);
-//            //Log.i(TAG, "object is " + relGreenObjectPos.x + ", " + relGreenObjectPos.y + " from the center");
-//        }
-        }
-        */
-/*Point relBlueObjectPos = trackColor(inputFrame, blueValues);
-        reactToBlueObject(relBlueObjectPos);*//*
-
-
-        return mRgba;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // COLOR TRACKING
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    */
-/*
-     * Make the cat react to a red object.
-     * @param relRedObjectPos The relative position of the red object.
-     *//*
-
-    private void reactToRedObject(Point relRedObjectPos) {
-        if (relRedObjectPos == null) return;
-
-        Log.i(TAG, "red rel pos: " + relRedObjectPos);
-        virtualCat.lookAwayFrom(relRedObjectPos);
-    }
-
-    */
-/*
-     * Make the cat react to a green object.
-     * @param relGreenObjectPos The relative position of the green object.
-     *//*
-
-    private void reactToGreenObject(Point relGreenObjectPos) {
-        if (relGreenObjectPos == null) return;
-
-        Log.i(TAG, "green rel pos: " + relGreenObjectPos);
-        //virtualCat.lookToward(new Point(relGreenObjectPos.y, relGreenObjectPos.x));
-        virtualCat.lookToward(relGreenObjectPos);
-    }
-
-    */
-/*
-     * Track an object by color.
-     * @param inputFrame The image to process.
-     * @param cv The min/max HSV values to see.
-     * @return a Point position of object or null if no object found normalized to range [-0.5, 0.5]
-     *//*
-
-    private Point trackColor(CameraBridgeViewBase.CvCameraViewFrame inputFrame, ColorValues cv) {
-        if (cv == null)
-            return null;
-        Mat imgThresholded = null;
-        Point objectCoords = null;
-        try {
-            inputFrame.rgba().copyTo(mRgbaForColorTracking);
-
-            // resize to transpose dimensions because reasons. not necessary with opencv 3.1.0
-            Imgproc.resize(mRgbaForColorTracking, mRgbaForColorTracking, mRgbaForColorTracking.t().size());
-
-            imgThresholded = new Mat();
-            Imgproc.cvtColor(mRgbaForColorTracking, imgThresholded, Imgproc.COLOR_RGB2HSV); //Convert the captured frame from BGR to HSV
-
-            Core.inRange(imgThresholded, new Scalar(cv.lowH, cv.lowS, cv.lowV), new Scalar(cv.highH, cv.highS, cv.highV), imgThresholded); //Threshold the image
-
-            // morphological opening (removes small objects from the foreground)
-            Imgproc.erode(imgThresholded, imgThresholded, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(5, 5)));
-            Imgproc.dilate(imgThresholded, imgThresholded, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(5, 5)));
-
-            // morphological closing (removes small holes from the foreground)
-            Imgproc.dilate(imgThresholded, imgThresholded, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(5, 5)));
-            Imgproc.erode(imgThresholded, imgThresholded, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(5, 5)));
-
-            // Calculate the moments of the thresholded image
-            // the moments stuff is missing from opencv 3.0.0 so we have to use javacv for this.
-            // get the mat data from imgThresholded as a byte array
-            int length = (int) (imgThresholded.total() * imgThresholded.elemSize());
-            byte buffer[] = new byte[length];
-            imgThresholded.get(0, 0, buffer);
-
-            // construct a javacv mat from the byte array
-            opencv_core.Mat momentsMat = new opencv_core.Mat(imgThresholded.height(), imgThresholded.width(), imgThresholded.type());
-            momentsMat.data().put(buffer);
-
-            // compute moments
-            opencv_core.Moments oMoments = opencv_imgproc.moments(momentsMat);
-
-            double dM01 = oMoments.m01();
-            double dM10 = oMoments.m10();
-            double dArea = oMoments.m00();
-
-            momentsMat.release();
-
-            // if area <= 100000, considered to be noise
-            if (dArea > 100000) {
-                //calculate the position of the object
-                double posX = dM10 / dArea;
-                double posY = dM01 / dArea;
-
-                if (posX >= 0 && posY >= 0) {
-                    // compute relative position of the object
-                    objectCoords = new Point();
-                    // all weird because the image is transposed and resized
-                    objectCoords.y = -(posX - mRgbaForColorTracking.width() / 4.0f) / (mRgbaForColorTracking.width() / 2.0f);
-                    objectCoords.x = -(posY - mRgbaForColorTracking.height() / 2.0f) /  mRgbaForColorTracking.height();
-
-                    Log.i(TAG, "I SEE A COLOR OBJECT");
-                }
-            }
-
-        } catch (Exception e) {
-            Log.i(TAG, "Exception " + e.getMessage());
-        }
-
-        if (imgThresholded != null) {
-            // free imgThresholded resources
-            imgThresholded.release();
-        }
-
-        return objectCoords;
-    }
-*/
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // FACE DETECTION
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-    public int checkForRecognition(Mat face)
-    {
-        Random rand = new Random();
-        if (IDcount<=21)return 0;
-        Mat check = face.clone();
-        Imgproc.resize(check, check, stds);
-        opencv_core.Mat temp = ImageUtil.convert(check);
-        int ID = faceRecognizer.predict(temp);
-
-        if(ID>20) {
-            face.copyTo(TrainingSets.get(ID).get(rand.nextInt(TrainingSets.get(ID).size())));
-//            refreshRecognizer++;
-//            if(refreshRecognizer>100){
-//
-//                resetRecognizer();
-//                refreshRecognizer=0;
-//            }
-
-            return ID;
-        }
-        return 0;
-
-    }
-*/
-/*
-    public boolean adjustFaceBuffer(Rect faceRect)
-    {
-        int sumX = faceRect.x+faceRect.width/2;
-        int sumY = faceRect.y+faceRect.height/2;
-        int sumA = (int)faceRect.size().area();
-        for(int i=FaceLocationBuffer.length-1;i>0;i--)
-        {
-            FaceMatBuffer[i - 1].copyTo(FaceMatBuffer[i]);
-            FaceLocationBuffer[i]= FaceLocationBuffer[i-1];
-            sumX = sumX + FaceLocationBuffer[i].x+FaceLocationBuffer[i].width/2;
-            sumY = sumY + FaceLocationBuffer[i].y+FaceLocationBuffer[i].height/2;
-            sumA = sumA + (int)FaceLocationBuffer[i].size().area();
-        }
-
-        FaceLocationBuffer[0]=faceRect;
-        mRgba.submat(faceRect).copyTo(FaceMatBuffer[0]);
-        Imgproc.cvtColor(FaceMatBuffer[0], FaceMatBuffer[0], Imgproc.COLOR_RGB2GRAY);
-
-        if(FaceLocationBuffer[FaceLocationBuffer.length-1].size().area()<2)return false;
-        int AvgX = sumX/ FaceLocationBuffer.length;
-        int AvgY = sumY/ FaceLocationBuffer.length;
-        int AvgA = sumA/ FaceLocationBuffer.length;
-
-        int count = 0;
-        for(int i=0;i< FaceLocationBuffer.length;i++)
-        {
-            double dist = Math.sqrt(Math.pow(FaceLocationBuffer[i].x+FaceLocationBuffer[i].width/2-AvgX,2)+Math.pow(FaceLocationBuffer[i].y+FaceLocationBuffer[i].height/2-AvgY,2));
-            if (dist<20) {
-                double areaChange = Math.abs(FaceLocationBuffer[i].size().area() / AvgA - 1);
-                if (areaChange < 0.15)
-                    count++;
-            }
-        }
-
-        int j=0;
-        if (count>=EigenMats.length) {
-            for (int i = 0; i < FaceLocationBuffer.length; i++) {
-                if (j>=EigenMats.length) break;
-                if (Math.sqrt(Math.pow(FaceLocationBuffer[i].x+FaceLocationBuffer[i].width/2 - AvgX, 2) + Math.pow(FaceLocationBuffer[i].y+FaceLocationBuffer[i].height/2 - AvgY, 2)) < 20)
-                    if (Math.abs(FaceLocationBuffer[i].size().area() / AvgA - 1) < 0.15) {
-                        FaceMatBuffer[i].copyTo(EigenMats[j]);
-                        j++;
-                    }
-            }
-
-            for(int i = 0;i<FaceLocationBuffer.length;i++)
-            {
-                FaceMatBuffer[i].release();
-                FaceMatBuffer[i]=new Mat();
-                FaceLocationBuffer[i]=new Rect(new Point(0,0),new Size(1,1));
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-*/
- /*  -- OPENCVRMV
- private void addNewUser() {
-        Random rand = new Random();
-        UserColors.add(IDcount, new Scalar(rand.nextInt(255),rand.nextInt(255),rand.nextInt(255)));
-        Log.i(TAG, "Adding New User with color " + UserColors.get(IDcount).toString() + " and ID " + IDcount);
-
-        int count = 0;
-
-        TrainingSets.add(IDcount, new ArrayList<Mat>());
-
-        for(int i=0; i<EigenMats.length;i++)
-        {
-            Imgproc.resize(EigenMats[i], EigenMats[i], stds);
-            TrainingSets.get(IDcount).add(i, EigenMats[i].clone());
-
-        }
-        int k = 0;
-
-        for(int i=1;i<TrainingSets.size();i++)
-        {
-            for(int j=0;j<TrainingSets.get(i).size();j++)
-            {
-                count++;
-            }
-        }
-
-        opencv_core.MatVector TrainingMats = new opencv_core.MatVector(count);
-        opencv_core.Mat labels = new opencv_core.Mat(count,1,opencv_core.CV_32SC1);
-        IntBuffer labelsBuf = labels.getIntBuffer();
-
-        for(int i=1;i<TrainingSets.size();i++)
-        {
-            for(int j=0;j<TrainingSets.get(i).size();j++)
-            {
-                Imgproc.resize(TrainingSets.get(i).get(j),TrainingSets.get(i).get(j),stds);
-                opencv_core.Mat temp = ImageUtil.convert(TrainingSets.get(i).get(j));
-
-                if (temp == null) {
-                    Log.i(TAG, "null image in training set");
-                    continue;
-                }
-
-                TrainingMats.put(k,temp);
-                labelsBuf.put(k,i);
-                k++;
-            }
-        }
-        //faceRecognizer.clear();
-
-        faceRecognizer.train(TrainingMats, labels);
-
-        IDcount++;
-    }
-
-    private void loadTestFaces() {
-        // for each set
-        for (int i = 1; i <= 20; i++) {
-            TrainingSets.add(i, new ArrayList<Mat>());
-
-            Log.d(TAG, "Processing person " + i);
-
-            // for each image in set
-            for(int j = 0; j <= 4; j++) {
-                // load image bitmap
-                Bitmap load = ImageUtil.GetBitmapFromContextAssets(getApplicationContext(), "FaceCases/" + i + "-" + j + ".jpg");
-
-                // convert to opencv mat
-                TrainingSets.get(i).add(j, new Mat());
-                Utils.bitmapToMat(load, TrainingSets.get(i).get(j));
-                Imgproc.cvtColor(TrainingSets.get(i).get(j), TrainingSets.get(i).get(j), Imgproc.COLOR_RGB2GRAY);
-                Imgproc.equalizeHist(TrainingSets.get(i).get(j), TrainingSets.get(i).get(j));
-
-                // detect faces
-                if (mJavaDetectorFace != null)
-                    mJavaDetectorFace.detectMultiScale(TrainingSets.get(i).get(j), faces, 1.1, 2, 2, new Size(mAbsoluteFaceSize, mAbsoluteFaceSize), new Size());
-
-                // find biggest face
-                Rect biggestFace = new Rect(new Point(0, 0), new Size(1, 1));
-                Rect[] facesArray = faces.toArray();
-                if (facesArray.length > 0) {
-                    for (int k = 0; k < facesArray.length; k++) {
-                        Rect r = facesArray[k];
-                        if (r.size().area() > biggestFace.size().area())
-                            biggestFace = r;
-                    }
-
-                    // replace the image containing the face with its subimage containing only the face
-                    TrainingSets.get(i).get(j).submat(biggestFace).copyTo(TrainingSets.get(i).get(j));
-
-                    Imgproc.resize(TrainingSets.get(i).get(j), TrainingSets.get(i).get(j), stds);
-                }
-                else
-                {
-                    TrainingSets.get(i).get(j).submat(0, 80, 0, 80).copyTo(TrainingSets.get(i).get(j));
-                }
-
-                bmp = null;
-                Mat m = TrainingSets.get(i).get(j);
-                // pretty sure this is intentional (rows and cols swapped)
-                Mat tmp = new Mat (m.cols(), m.rows(), CvType.CV_8UC1, new Scalar(4));
-                try {
-                    Imgproc.cvtColor(m, tmp, Imgproc.COLOR_GRAY2RGBA);
-                    bmp = Bitmap.createBitmap(tmp.cols(), tmp.rows(), Bitmap.Config.ARGB_8888);
-                    Utils.matToBitmap(tmp, bmp);
-                }
-                catch (CvException e){Log.d("Exception", e.getMessage());}
-            }
-            UserColors.add(IDcount, new Scalar(0, 0, 0));
-            IDcount++;
-        }
-    }*/
 
     private class FaceTrackerFactory implements MultiProcessor.Factory<Face> {
         @Override
@@ -1501,16 +815,17 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         public void onUpdate(FaceDetector.Detections<Face> detectionResults, Face face) {
             super.onUpdate(detectionResults, face);
             float x = -1*face.getPosition().x + face.getWidth() / 2;
-            float y = face.getPosition().y + face.getHeight() / 2 - 300.0f; //bottom of screen is 0
-            //middle not quite 300, works for now
+            float y = face.getPosition().y + face.getHeight() / 2 - 512;
+            //middle not quite 512, works for now
+            //TODO: 512 is set for the preview size above, take the hardcoded number out
 
-            Log.d("face position", "(" + x + ", " + y + ")");
             trackPosition=new PointF(x, y);
 
-            /* -- OPENCVRMV
-            if( Math.sqrt(Math.pow(x, 2.0)+Math.pow(y, 2.0))>25.0) {
+            //if distance from center is < half a face size
+            // done so that "good enough" scales for faces at multiple distances
+            if( Math.sqrt(Math.pow(x, 2.0)+Math.pow(y, 2.0))>Math.pow(face.getWidth()/2, 2)+Math.pow(face.getHeight()/2, 2)){
                 virtualCat.lookToward(trackPosition);
-            }*/
+            }
         }
     }
 }

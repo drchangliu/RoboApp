@@ -82,56 +82,20 @@ public class PololuVirtualCat extends VirtualCat {
         p.addToPitch((int)(-p.NECK_PITCH_SERVO_RANGE));
     }
 
-    /**
-     * Make the cat look toward a point relative to the center of the camera's view.
-     * @param relPos Expects a value in the range [-0.5, 0.5]
-     *//* -- OPENCVRMV
-    @Override
-    public void lookToward(Point relPos) {
-        // maybe should do this
-        relPos.x = Util.clamp(relPos.x, -0.5, 0.5);
-        relPos.y = Util.clamp(relPos.y, -0.5, 0.5);
 
-        // maybe something like this
-        int yaw = (int)(relPos.x * p.NECK_YAW_SERVO_RANGE / 8.0f);
-        //int yaw = (int)(relPos.x * p.NECK_YAW_SERVO_MAX * 0.1f);
-        if (Math.abs(yaw) >= 25) {
-            p.addToYaw(yaw);
-        }
-        int pitch = (int)(relPos.y * p.NECK_PITCH_SERVO_MAX / 10.0f);
-        //int pitch = (int) (relPos.y * p.NECK_PITCH_SERVO_MAX * 0.075f);
-        if (Math.abs(pitch) >= 25) {
-            p.addToPitch(pitch);
-        }
-    }*/
-
-    /* -- OPENCVRMV
     public void lookToward(PointF relfPos) {
-        // maybe should do this
-        Log.d("Pos Before clamp: ", "(" + relfPos.x + ", " + relfPos.y + ")");
-        Point relPos=new Point();
-        relPos.x = Util.clamp(relfPos.x, -20.0f, 20.0f);
-        relPos.y = Util.clamp(relfPos.y, -20.0f, 20.0f);
-        Log.d("Pos After clamp: ", "(" + relPos.x + ", " + relPos.y + ")");
+        relfPos.x = Util.clamp(relfPos.x, -50.0f, 50.0f);
+        relfPos.y = Util.clamp(relfPos.y, -50.0f, 50.0f);
 
-        // maybe something like this
-        //int yaw = (int)(relPos.x * p.NECK_YAW_SERVO_RANGE );
-        int yaw = (int)(relPos.x);
-        //if (Math.abs(yaw) >= 5) {
-            p.addToYaw(yaw);
-            Log.d("Yaw Modifier: ", "(" + yaw + ")");
-        //}
-        //int pitch = (int)(relPos.y * p.NECK_PITCH_SERVO_MAX );
-        int pitch = (int)(relPos.y);
-        //if (Math.abs(pitch) >= 5) {
-            p.addToPitch(pitch);
-            Log.d("Pitch Modifier: ", "(" + pitch + ")");
-        //}
-    }*/
+        int yaw = (int)(relfPos.x);
+        p.addToYaw(yaw);
+
+        int pitch = (int)(relfPos.y);
+        p.addToPitch(pitch);
+    }
 
     /**
      * Make the cat look away from a point relative to the center of the camera's view.
-     * @param relPos Expects a value in the range [-0.5, 0.5]
      *//* -- OPENCVRMV
     @Override
     public void lookAwayFrom(Point relPos) {

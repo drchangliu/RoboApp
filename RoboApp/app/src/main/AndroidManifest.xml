@@ -2,14 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.robodoot.dr.facetracktest">
 
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera.front" android:required="true"/>
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-feature android:name="android.hardware.camera.front" />
     <uses-feature android:name="android.hardware.camera.front.autofocus" />
+    <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES" android:value="face"></meta-data>
 
     <application
         android:allowBackup="true"
@@ -55,6 +55,10 @@
             android:parentActivityName="com.robodoot.roboapp.MainActivity"
             android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme">
+            android:parentActivityName="com.robodoot.roboapp.MainActivity"
+            android:label="Face Tracker"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="com.robodoot.dr.RoboApp.FaceTrackerActivity" />
 

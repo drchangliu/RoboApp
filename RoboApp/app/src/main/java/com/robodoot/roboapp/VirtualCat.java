@@ -55,8 +55,7 @@ public abstract class VirtualCat {
     // -- OPENCVRMV
     // public abstract void lookToward(Point relPos);
 
-    // -- OPENCVRMV
-    // public abstract void lookToward(PointF relPos);
+    public abstract void lookToward(PointF relPos);
 
     // -- OPENCVRMV
     // public abstract void lookAwayFrom(Point relPos);
