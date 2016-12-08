@@ -79,7 +79,7 @@ import static android.widget.Toast.makeText;
 //-- OPENCVRMV
 // import static org.bytedeco.javacpp.opencv_imgcodecs.cvLoadImage;
 
-/**
+/*
  * Behavior mode activity. This is the main activity of the app. It uses OpenCV/JavaCV for face
  * detection and color tracking. Image processing occurs in the {@link #onCameraFrame} method.
  * uses built in hardware functions to use the Android accelerometer data (SensorEventListener)
@@ -975,7 +975,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     }
 
     */
-/**
+/*
      * Process a video frame (do face detection, color tracking)
      * @param inputFrame the image to process
      * @return a possibly modified inputFrame to be displayed
@@ -1167,7 +1167,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     */
-/**
+/*
      * Make the cat react to a red object.
      * @param relRedObjectPos The relative position of the red object.
      *//*
@@ -1180,7 +1180,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     }
 
     */
-/**
+/*
      * Make the cat react to a green object.
      * @param relGreenObjectPos The relative position of the green object.
      *//*
@@ -1194,7 +1194,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     }
 
     */
-/**
+/*
      * Track an object by color.
      * @param inputFrame The image to process.
      * @param cv The min/max HSV values to see.
