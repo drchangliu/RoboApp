@@ -7,15 +7,9 @@ android {
     defaultConfig {
         applicationId "com.robodoot.dr.facetracktest"
         minSdkVersion 15
-<<<<<<< HEAD
         targetSdkVersion 25
         versionCode 2
         versionName "2.0"
-=======
-        targetSdkVersion 24
-        versionCode 3
-        versionName "2.1"
->>>>>>> 900b7e81c0f9f9efd98f20ae4003f5aa77970474
     }
     buildTypes {
         release {

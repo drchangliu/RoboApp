@@ -283,8 +283,6 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             runRecognizerSetup();
         }
 
-
-
         if(PermissionListTmp.size()>0){
             String[] PermissionList = new String[PermissionListTmp.size()];
             PermissionList = PermissionListTmp.toArray(PermissionList);
