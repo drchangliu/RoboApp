@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.robodoot.dr.facetracktest.R;
+import com.roboapp.batteryinformation.BatteryActivity;
 
 public class MainActivity extends FragmentActivity implements
         NavigationDrawerCallbacks, HomeFragment.OnFragmentInteractionListener,
@@ -98,9 +99,11 @@ public class MainActivity extends FragmentActivity implements
                 break;
             case 4:
                 log_console("Arduino Communication");
+                intent = new Intent("com.robodoot.dr.RoboApp.ArduinoComms");
                 break;
             case 5:
                 log_console("Battery Info");
+                intent = new Intent("com.roboapp.batteryinformation.BatteryActivity");
             case 6:
                 log_console("Readme Displayed");
                 fragment = new ReadmeFragment();
