@@ -72,13 +72,8 @@ import java.util.Vector;
 
 import static android.widget.Toast.makeText;
 
-
-//-- OPENCVRMV
-// import static org.bytedeco.javacpp.opencv_imgcodecs.cvLoadImage;
-
-/*
- * Behavior mode activity. This is the main activity of the app. It uses OpenCV/JavaCV for face
- * detection and color tracking. Image processing occurs in the {@link #onCameraFrame} method.
+/**
+ * Behavior mode activity. This is the main activity of the app.
  * uses built in hardware functions to use the Android accelerometer data (SensorEventListener)
  */
 
@@ -253,7 +248,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
         //End new face tracking stuff
 
-       // mOpenCvCameraView = (JavaCameraView) findViewById(R.id.fd_activity_surface_view);
+        // mOpenCvCameraView = (JavaCameraView) findViewById(R.id.fd_activity_surface_view);
         //mOpenCvCameraView.setCvCameraViewListener(this);
 
         kitty = new CatEmotion(this);
@@ -279,14 +274,24 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         }else if(permissionCheck == PackageManager.PERMISSION_GRANTED){
             createCameraSource();
         }
-
+        // Get permissions for RoboCat
+        int voicePermissions = 0;
         permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO);
         if (permissionCheck == PackageManager.PERMISSION_DENIED) {
             PermissionListTmp.add(Manifest.permission.RECORD_AUDIO);
         }else if(permissionCheck == PackageManager.PERMISSION_GRANTED){
-            //runRecognizerSetup();
+            voicePermissions++;
         }
-
+        permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permissionCheck == PackageManager.PERMISSION_DENIED) {
+            PermissionListTmp.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }else if(permissionCheck == PackageManager.PERMISSION_GRANTED){
+            voicePermissions++;
+        }
+        // If external storage & record audio are enabled
+        if (voicePermissions == 2){
+            runRecognizerSetup();
+        }
         if(PermissionListTmp.size()>0){
             String[] PermissionList = new String[PermissionListTmp.size()];
             PermissionList = PermissionListTmp.toArray(PermissionList);
@@ -301,28 +306,28 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == PERMISSIONS_REQUEST_RECORD_AUDIO) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //runRecognizerSetup();
-            } else {
-                finish();
-            }
-        }else if (requestCode == PERMISSIONS_REQUEST_CAMERA) {
+        int voicePermission = 0;
+        if (requestCode == PERMISSIONS_REQUEST_CAMERA) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 createCameraSource();
             } else {
                 finish();
             }
-        }else if(requestCode==PERMISSIONS_REQUEST_MULTIPLE){
+        }
+        else if(requestCode==PERMISSIONS_REQUEST_MULTIPLE){
             for(int i = 0; i<permissions.length; ++i){
                 if(grantResults.length>i && grantResults[i] == PackageManager.PERMISSION_GRANTED){
-                    if (permissions[i]==Manifest.permission.CAMERA) {
+                    if (permissions[i].equals(Manifest.permission.CAMERA)) {
                         createCameraSource();
-                    } else if(permissions[i]==Manifest.permission.RECORD_AUDIO){
-                        //runRecognizerSetup();
+                    } else if(permissions[i].equals(Manifest.permission.RECORD_AUDIO)){
+                        voicePermission++;
+                    } else if(permissions[i].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+                        voicePermission++;
                     }
                 }
+            }
+            if(voicePermission == 2){
+                runRecognizerSetup();
             }
         }
     }
@@ -365,8 +370,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     // for logging accelerometer data
     @Override
     public void onSensorChanged(SensorEvent sensorEvent){
-            Sensor mySensor = sensorEvent.sensor;
-            if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER){
+        Sensor mySensor = sensorEvent.sensor;
+        if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER){
             float x = sensorEvent.values[0];
             float y = sensorEvent.values[1];
             float z = sensorEvent.values[2];
@@ -555,7 +560,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
     @Override
     public void onLongPress(MotionEvent arg0) {
-       //TODO
+        //TODO
     }
 
     @Override
@@ -632,12 +637,9 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         recognizer = SpeechRecognizerSetup.defaultSetup()
                 .setAcousticModel(new File(assetsDir, "en-us-ptm"))
                 .setDictionary(new File(assetsDir, "cmudict-en-us.dict"))
-
                 //.setRawLogDir(assetsDir) // To disable logging of raw audio comment out this call (takes a lot of space on the device)
                 .setKeywordThreshold(1e-45f) // Threshold to tune for keyphrase to balance between false alarms and misses
                 .setBoolean("-allphone_ci", true)  // Use context-independent phonetic search, context-dependent is too slow for mobile
-
-
                 .getRecognizer();
         recognizer.addListener(this);
 
@@ -785,7 +787,6 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             notFoundToast.show();
         }
     }
-
 
 
     private class FaceTrackerFactory implements MultiProcessor.Factory<Face> {
