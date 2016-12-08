@@ -274,14 +274,24 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         }else if(permissionCheck == PackageManager.PERMISSION_GRANTED){
             createCameraSource();
         }
-
+        // Get permissions for RoboCat
+        int voicePermissions = 0;
         permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO);
         if (permissionCheck == PackageManager.PERMISSION_DENIED) {
             PermissionListTmp.add(Manifest.permission.RECORD_AUDIO);
         }else if(permissionCheck == PackageManager.PERMISSION_GRANTED){
-            //runRecognizerSetup();
+            voicePermissions++;
         }
-
+        permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permissionCheck == PackageManager.PERMISSION_DENIED) {
+            PermissionListTmp.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }else if(permissionCheck == PackageManager.PERMISSION_GRANTED){
+            voicePermissions++;
+        }
+        // If external storage & record audio are enabled
+        if (voicePermissions == 2){
+            runRecognizerSetup();
+        }
         if(PermissionListTmp.size()>0){
             String[] PermissionList = new String[PermissionListTmp.size()];
             PermissionList = PermissionListTmp.toArray(PermissionList);
@@ -296,28 +306,28 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == PERMISSIONS_REQUEST_RECORD_AUDIO) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //runRecognizerSetup();
-            } else {
-                finish();
-            }
-        }else if (requestCode == PERMISSIONS_REQUEST_CAMERA) {
+        int voicePermission = 0;
+        if (requestCode == PERMISSIONS_REQUEST_CAMERA) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 createCameraSource();
             } else {
                 finish();
             }
-        }else if(requestCode==PERMISSIONS_REQUEST_MULTIPLE){
+        }
+        else if(requestCode==PERMISSIONS_REQUEST_MULTIPLE){
             for(int i = 0; i<permissions.length; ++i){
                 if(grantResults.length>i && grantResults[i] == PackageManager.PERMISSION_GRANTED){
-                    if (permissions[i]==Manifest.permission.CAMERA) {
+                    if (permissions[i].equals(Manifest.permission.CAMERA)) {
                         createCameraSource();
-                    } else if(permissions[i]==Manifest.permission.RECORD_AUDIO){
-                        //runRecognizerSetup();
+                    } else if(permissions[i].equals(Manifest.permission.RECORD_AUDIO)){
+                        voicePermission++;
+                    } else if(permissions[i].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+                        voicePermission++;
                     }
                 }
+            }
+            if(voicePermission == 2){
+                runRecognizerSetup();
             }
         }
     }
