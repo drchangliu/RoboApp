@@ -77,6 +77,11 @@ import static android.widget.Toast.makeText;
  * uses built in hardware functions to use the Android accelerometer data (SensorEventListener)
  */
 
+//TODO: command not found always shows when using continuous speech
+    //TODO: OnResume method seems broken for speech
+    //TODO: OnResume also not implemented for passive face tracking
+    //TODO: OnDestroy methods needed for both.
+
 public class FdActivity extends Activity implements GestureDetector.OnGestureListener, SensorEventListener, RecognitionListener {
     // FUNCTION AND VARIABLE DEFINTIONS
     private Logger mFaceRectLogger;
@@ -823,6 +828,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             //middle not quite 512, works for now
             //TODO: 512 is set for the preview size above, take the hardcoded number out
 
+            Log.d(TAG, "HERE");
             trackPosition=new PointF(x, y);
 
             //if distance from center is < half a face size
