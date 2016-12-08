@@ -19,4 +19,6 @@
     <usb-device vendor-id="8187" product-id="139"/>
     <usb-device vendor-id="8187" product-id="140"/>
     <usb-device vendor-id="8187" product-id="133"/>
+    <usb-device vendor-id="9025" />
+    <!-- Vendor ID of Arduino -->
 </resources>

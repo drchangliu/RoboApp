@@ -26,6 +26,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':appFaceTracker')
+    compile project(':appBatteryInformation')
     compile files('libs/javacv.jar')
     compile files('libs/javacpp.jar')
     compile files('libs/usb-serial-for-android-v010.jar')

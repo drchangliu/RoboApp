@@ -85,18 +85,23 @@ public class MainActivity extends FragmentActivity implements
             case 1:
                 this.finish();
                 break;
-            case 2:
+           /* case 2:
                 // -- OPENCVRMV
                 // intent = new Intent("com.robodoot.dr.RoboApp.ColorTrackingActivity");
-                break;
-            case 3:
+                break;*/
+            case 2:
                 log_console("Face Tracking");
                 intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
                 break;
-            case 4:
+            case 3:
                 log_console("Background Face Tracking");
                 break;
+            case 4:
+                log_console("Arduino Communication");
+                break;
             case 5:
+                log_console("Battery Info");
+            case 6:
                 log_console("Readme Displayed");
                 fragment = new ReadmeFragment();
                 break;
