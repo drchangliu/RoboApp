@@ -92,8 +92,8 @@ public class MockVirtualCat extends VirtualCat {
     /*@Override
     public void lookToward(Point relPos) {}*/
 
-    /*@Override
-    public void lookToward(PointF relPos) {}*/
+    @Override
+    public void lookToward(PointF relPos) {}
 
     /*@Override
     public void lookAwayFrom(Point relPos) {}*/
