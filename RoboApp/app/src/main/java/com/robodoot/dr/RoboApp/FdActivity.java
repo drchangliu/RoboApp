@@ -271,7 +271,6 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA);
         if (permissionCheck == PackageManager.PERMISSION_DENIED) {
             PermissionListTmp.add(Manifest.permission.CAMERA);
-            //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSIONS_REQUEST_CAMERA);
         }else if(permissionCheck == PackageManager.PERMISSION_GRANTED){
             createCameraSource();
         }
@@ -280,7 +279,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         if (permissionCheck == PackageManager.PERMISSION_DENIED) {
             PermissionListTmp.add(Manifest.permission.RECORD_AUDIO);
         }else if(permissionCheck == PackageManager.PERMISSION_GRANTED){
-            runRecognizerSetup();
+            //runRecognizerSetup();
         }
 
         if(PermissionListTmp.size()>0){
@@ -300,7 +299,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
         if (requestCode == PERMISSIONS_REQUEST_RECORD_AUDIO) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                runRecognizerSetup();
+                //runRecognizerSetup();
             } else {
                 finish();
             }
@@ -334,10 +333,12 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                 new MultiProcessor.Builder<>(new FaceTrackerFactory())
                         .build());
 
+        //TODO: this works for a high res front camera with high framerate, adjust camera
+        //to work with any size/ framerate
         mCameraSource = new CameraSource.Builder(context, detector)
-                .setRequestedPreviewSize(640, 480)
+                .setRequestedPreviewSize(1024, 768)
                 .setFacing(CameraSource.CAMERA_FACING_FRONT)
-                .setRequestedFps(15.0f)
+                .setRequestedFps(30.0f)
                 .build();
     }
 
@@ -427,7 +428,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         imageCaptureDirectory = Environment.getExternalStorageDirectory().getPath() + "/RoboApp/" + timestamp;
         frameNumber = 0;
 
-        mFaceRectLogger.addRecordToLog("\n" + new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date()));
+        //mFaceRectLogger.addRecordToLog("\n" + new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date()));
 
         // need to start listening again for movement for accelerometer on resume
         senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
@@ -808,13 +809,15 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         public void onUpdate(FaceDetector.Detections<Face> detectionResults, Face face) {
             super.onUpdate(detectionResults, face);
             float x = -1*face.getPosition().x + face.getWidth() / 2;
-            float y = face.getPosition().y + face.getHeight() / 2 - 300.0f; //bottom of screen is 0
-            //middle not quite 300, works for now
+            float y = face.getPosition().y + face.getHeight() / 2 - 512;
+            //middle not quite 512, works for now
+            //TODO: 512 is set for the preview size above, take the hardcoded number out
 
-            Log.d("face position", "(" + x + ", " + y + ")");
             trackPosition=new PointF(x, y);
 
-            if( Math.sqrt(Math.pow(x, 2.0)+Math.pow(y, 2.0))>25.0) {
+            //if distance from center is < half a face size
+            // done so that "good enough" scales for faces at multiple distances
+            if( Math.sqrt(Math.pow(x, 2.0)+Math.pow(y, 2.0))>Math.pow(face.getWidth()/2, 2)+Math.pow(face.getHeight()/2, 2)){
                 virtualCat.lookToward(trackPosition);
             }
         }
