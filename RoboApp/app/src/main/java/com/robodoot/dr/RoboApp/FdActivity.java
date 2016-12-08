@@ -280,7 +280,7 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         if (permissionCheck == PackageManager.PERMISSION_DENIED) {
             PermissionListTmp.add(Manifest.permission.RECORD_AUDIO);
         }else if(permissionCheck == PackageManager.PERMISSION_GRANTED){
-            //runRecognizerSetup();
+            runRecognizerSetup();
         }
 
 
