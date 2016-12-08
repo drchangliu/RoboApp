@@ -517,11 +517,9 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
    /* -- OPENCVRMV
    private void record(String directory) {
         opencv_core.Mat[] frames = new opencv_core.Mat[framesForVideo.size()];
-        framesForVideo.toArray(frames);
 
         String path = directory + "/output" + System.currentTimeMillis() + ".mp4";
         File file = new File(path).getAbsoluteFile();
-        file.getParentFile().mkdirs();
 
         FFmpegFrameRecorder recorder = new FFmpegFrameRecorder(path, 200, 150);
 
@@ -550,7 +548,6 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         for (opencv_core.Mat f : framesForVideo) {
             f.release();
         }
-        framesForVideo.clear();
     }*/
 
     /* -- OPENCVRMV
