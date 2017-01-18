@@ -456,6 +456,9 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             recognizer.cancel();
             recognizer.shutdown();
         }
+        if (mCameraSource != null) {
+            mCameraSource.release();
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
