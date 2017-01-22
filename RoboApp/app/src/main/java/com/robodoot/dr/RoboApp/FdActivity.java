@@ -341,7 +341,8 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
         Context context = getApplicationContext();
         FaceDetector detector = new FaceDetector.Builder(context)
-                .setProminentFaceOnly(true)
+                .setProminentFaceOnly(true) //track only biggest, most centered face
+                .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS) //look for smile and eye positions
                 .build();
 
         detector.setProcessor(
@@ -826,12 +827,21 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         @Override
         public void onUpdate(FaceDetector.Detections<Face> detectionResults, Face face) {
             super.onUpdate(detectionResults, face);
+
+            //use happiness rating
+            float happiness = face.getIsSmilingProbability();
+            if (happiness>0.75f){
+                kitty.detectedSmile();
+            }else if (happiness<0.1f){
+                kitty.detectedFrown();
+            }
+            //end use happiness rating
+
             float x = -1*face.getPosition().x + face.getWidth() / 2;
             float y = face.getPosition().y + face.getHeight() / 2 - 512;
             //middle not quite 512, works for now
             //TODO: 512 is set for the preview size above, take the hardcoded number out
 
-            Log.d(TAG, "HERE");
             trackPosition=new PointF(x, y);
 
             //if distance from center is < half a face size
