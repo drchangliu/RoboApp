@@ -27,3 +27,14 @@
 *.exe
 *.out
 *.app
+
+#Android Studio 2.2
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+.externalNativeBuild
