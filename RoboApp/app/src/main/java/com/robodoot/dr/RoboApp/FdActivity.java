@@ -417,6 +417,10 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             Log.d("Accelerometer", " " + it);
         }
         super.onPause();
+        // Stop the recognizer
+        if (recognizer != null) {
+            recognizer.cancel();
+        }
         /*if (mOpenCvCameraView != null)
             mOpenCvCameraView.disableView();*/
         //record(imageCaptureDirectory);
@@ -434,6 +438,11 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         if (!initialized) {
             initialized = true;
             virtualCat.resetHead();
+        }
+
+        // Restart recognizer
+        if(recognizer != null) {
+            runRecognizerSetup();
         }
 
         startCameraSource();
