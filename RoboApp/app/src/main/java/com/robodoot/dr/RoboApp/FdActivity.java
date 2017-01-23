@@ -709,7 +709,6 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     public void onResult(Hypothesis hypothesis) {
         if (hypothesis != null) {
             String text = hypothesis.getHypstr();
-            Log.i("speechRecognizer", text);
             doCommand(text);
         }
     }
