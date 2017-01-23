@@ -417,6 +417,10 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             Log.d("Accelerometer", " " + it);
         }
         super.onPause();
+        // Stop the recognizer
+        if (recognizer != null) {
+            recognizer.cancel();
+        }
         /*if (mOpenCvCameraView != null)
             mOpenCvCameraView.disableView();*/
         //record(imageCaptureDirectory);
@@ -434,6 +438,11 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         if (!initialized) {
             initialized = true;
             virtualCat.resetHead();
+        }
+
+        // Restart recognizer
+        if(recognizer != null) {
+            runRecognizerSetup();
         }
 
         startCameraSource();
@@ -646,12 +655,9 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         recognizer = SpeechRecognizerSetup.defaultSetup()
                 .setAcousticModel(new File(assetsDir, "en-us-ptm"))
                 .setDictionary(new File(assetsDir, "cmudict-en-us.dict"))
-
                 //.setRawLogDir(assetsDir) // To disable logging of raw audio comment out this call (takes a lot of space on the device)
                 .setKeywordThreshold(1e-45f) // Threshold to tune for keyphrase to balance between false alarms and misses
                 .setBoolean("-allphone_ci", true)  // Use context-independent phonetic search, context-dependent is too slow for mobile
-
-
                 .getRecognizer();
         recognizer.addListener(this);
 

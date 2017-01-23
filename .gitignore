@@ -28,10 +28,12 @@
 *.out
 *.app
 
-#Android Studio 2.2
+# Android Studio 2.2
 *.iml
 .gradle
 /local.properties
+/.idea/misc.xml
+/.idea/encodings.xml
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store
