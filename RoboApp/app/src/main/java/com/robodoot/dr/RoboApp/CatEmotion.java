@@ -88,11 +88,10 @@ public class CatEmotion {
                 if (default_display) {
                     String test = Integer.toString(scale);
                     if (scale <= -166) {
-                        state = EMOTION.DISGUSTED;
-                    } else if (scale <= -133) {
                         state = EMOTION.CRYING;
+                    } else if (scale <= -133) {
+                        state = EMOTION.DISGUSTED;
                     } else if (scale <= -100) {
-                        Log.w("Sadder","I am sad");
                         state = EMOTION.SADDER;
                     } else if (scale <= -66) {
                         state = EMOTION.SAD;
@@ -434,11 +433,11 @@ public class CatEmotion {
         reCalcFace();
     }
     public void cryingAt(){
-        scale = -166;
+        scale = -180;
         reCalcFace();
     }
     public void distgustedAt(){
-        scale = -180;
+        scale = -166;
         reCalcFace();
     }
 }
