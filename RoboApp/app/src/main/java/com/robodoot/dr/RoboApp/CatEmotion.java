@@ -19,7 +19,7 @@ public class CatEmotion {
 
     public enum EMOTION {HAPPY, HAPPY_TONGUE, HAPPIER, HEARTS, ANNOYED, SAD, SADDER, CONCERNED, CRYING, DISGUSTED, HEARTS_TONGUE, KAWAII_EYES_CLOSED, KAWAII_EYES_OPEN, LOOK_RIGHT, LOOK_LEFT, YAWNING}
     private EMOTION state;
-    private int scale;
+    private float scale;
     private Timer tm;
     private TimerTask calc;
     public  ImageView pic;
@@ -86,7 +86,7 @@ public class CatEmotion {
             public void run() {
 
                 if (default_display) {
-                    String test = Integer.toString(scale);
+                    String test = Float.toString(scale);
                     if (scale <= -166) {
                         state = EMOTION.CRYING;
                     } else if (scale <= -133) {
@@ -438,6 +438,16 @@ public class CatEmotion {
     }
     public void distgustedAt(){
         scale = -166;
+        reCalcFace();
+    }
+
+    public void detectedSmile() {
+        scale+=0.5f;
+        reCalcFace();
+    }
+
+    public void detectedFrown() {
+        scale-=0.5f;
         reCalcFace();
     }
 }
