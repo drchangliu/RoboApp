@@ -83,7 +83,8 @@ import static android.widget.Toast.makeText;
     //TODO: OnResume also not implemented for passive face tracking
     //TODO: OnDestroy methods needed for both.
 
-public class FdActivity extends Activity implements GestureDetector.OnGestureListener, SensorEventListener, RecognitionListener {
+public class FdActivity extends Activity implements
+    GestureDetector.OnGestureListener, SensorEventListener, RecognitionListener {
     // FUNCTION AND VARIABLE DEFINTIONS
     private Logger mFaceRectLogger;
     private Logger mSpeechTextLogger;
@@ -176,11 +177,13 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
     // array of arrays to store the accelerometer data in x, y, z format
-    private ArrayList<ArrayList<String>> accData = new ArrayList<ArrayList<String>>();
+    public static ArrayList<ArrayList<String>> accData = new ArrayList<ArrayList<String>>();
 
     // Function to open menu activity
     public void openMenu(){
         Intent intent = new Intent(this, MainActivity.class);
+        // sending accelerometer data to the main activity
+        intent.putExtra("accData", accData);
         startActivity(intent);
     }
 
@@ -383,12 +386,14 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
                 String ys = Float.toString(sensorEvent.values[1]);
                 String zs = Float.toString(sensorEvent.values[2]);
 
-                //Log.w("Accelerometer", "(" + xs + ", " + ys + ", " + zs + ")");
-                ArrayList<String> accDataSingle = new ArrayList<String>();
-                accDataSingle.add(xs);
-                accDataSingle.add(ys);
-                accDataSingle.add(zs);
-                accData.add(accDataSingle);
+                 ArrayList<String> accPoint = new ArrayList<String>();
+
+                accPoint.add(xs);
+                accPoint.add(ys);
+                accPoint.add(zs);
+
+                accData.add(accPoint);
+
                 last_x = x;
                 last_y = y;
                 last_z = z;
@@ -404,10 +409,10 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
 
     @Override
     public void onPause() {
-        Log.d("Pause", "onPause() called");
-        for (ArrayList<String> it : accData){
-            Log.d("Accelerometer", " " + it);
-        }
+        // Log.d("Pause", "onPause() called");
+        // for (ArrayList<String> it : accData){
+        //     Log.d("Accelerometer", " " + it);
+        // }
         super.onPause();
         // Stop the recognizer
         if (recognizer != null) {
