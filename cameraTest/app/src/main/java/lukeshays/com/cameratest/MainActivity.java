@@ -1,11 +1,14 @@
 package lukeshays.com.cameratest;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -25,14 +28,70 @@ public class MainActivity extends AppCompatActivity {
     static boolean Blue = false;
     static int colorDistance = 75;
     Button captureButtonGreen;
+    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
+
+    /*@Override
+    protected void onPause() {
+        super.onPause();
+        myCamera.release();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        myCamera.release();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        myCamera = getCameraInstance();
+    }*/
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_CAMERA: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
+        }
+
         if(checkCameraHardware(getApplicationContext())){
             myCamera = getCameraInstance();
+            if(myCamera != null) {
+                boolean duh = true;
+            }
         }
         if(myCamera != null){
             // Create our Preview view and set it as the content of our activity.
@@ -136,10 +195,13 @@ public class MainActivity extends AppCompatActivity {
             final int halfWidth = width / 2;
 
             // Calculate the largest inSampleSize value that is a power of 2 and keeps both
-            // height and width larger than the requested height and width.
+            // height and width less than or equal to the requested height and width.
             while ((halfHeight / inSampleSize) >= reqHeight
                     && (halfWidth / inSampleSize) >= reqWidth) {
                 inSampleSize *= 2;
+            }
+            if(halfHeight / inSampleSize > reqHeight || halfWidth / inSampleSize > reqWidth){
+                inSampleSize *=2;
             }
         }
 
