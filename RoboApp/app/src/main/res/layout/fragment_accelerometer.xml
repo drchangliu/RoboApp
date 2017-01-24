@@ -1,0 +1,20 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.robodoot.roboapp.AccelerometerFragment"
+    android:background="@android:color/black"
+    android:id="@+id/fragment_accelerometer">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:paddingLeft="0dp">
+        <TextView
+            android:id="@+id/place"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="> Message from Arduino: 'Hello'"
+            android:textColor="#00FF00"/>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -14,13 +14,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import com.robodoot.dr.facetracktest.R;
+import com.robodoot.dr.RoboApp.FdActivity;
 
 public class MainActivity extends FragmentActivity implements
         NavigationDrawerCallbacks, HomeFragment.OnFragmentInteractionListener,
         ReadmeFragment.OnFragmentInteractionListener,
         CompTestFragment.OnFragmentInteractionListener,
-        ConsoleFragment.OnFragmentInteractionListener{
+        ConsoleFragment.OnFragmentInteractionListener,
+        AccelerometerFragment.OnFragmentInteractionListener{
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -31,9 +35,6 @@ public class MainActivity extends FragmentActivity implements
     public static int log_count = 0;
     public static final int LOG_SIZE = 100;
     public static String[] logEntries = new String[LOG_SIZE]; // This value may need to be changed so all entries fit on screen
-
-
-
 
 
     @Override
@@ -55,17 +56,16 @@ public class MainActivity extends FragmentActivity implements
         transaction.commit();
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
     }
 
+
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-
-
-
 
         Fragment fragment = null;
         Intent intent = null;
@@ -100,9 +100,10 @@ public class MainActivity extends FragmentActivity implements
                 log_console("Readme Displayed");
                 fragment = new ReadmeFragment();
                 break;
-            //case 5:
-              //  intent = new Intent("com.robodoot.dr.RoboApp.Readme");
-              //  break;
+            case 6:
+                log_console("Accelerometer Data Displayed");
+                fragment = new AccelerometerFragment();
+                break;
             default:
                 break;
 
