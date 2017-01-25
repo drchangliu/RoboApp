@@ -18,7 +18,7 @@ The project, led by <a href="https://www.ohio.edu/engineering/about/people/profi
 The end product will be a robotic bobcat which can navigate an environment based on sight.  The cat, called Robocat from here, will be able to find food, in the form of a charging station, as well as form affinities for people it is familiar with.  Robocat, beyond visual input, will also  accept audio input.  Robocat will be able to recognize and react to  its own name as well as several other phrases and the volume of the audio.
 
 ##Current State
-RoboCat is able to accurately track faces. This is done at all times while the app is at the behavior screen. 
+RoboCat is able to accurately track faces. This is done at all times while the app is at the behavior screen.
 While connected to the cat, the cat will turn its "head" to center the biggest, most centered face
 in its camera view. Note: this is currently set to work with the front camera of a phone shooting
 a 1024x768 image at 30fps. These values can be modified in createCameraSource() in fdActivity.java.
@@ -41,3 +41,9 @@ Color Tracking and Face Tracking: located in `./RoboApp/app/src/main/java/robodo
 `./FaceTracker` is a seperate app, composed of started and custom code, written to track multiple faces in a video feed. Also incorporated into the main RoboApp and is able to be used. Currently, it detects whether each eye is open and uses facial markers to determine happiness.
 
 `./BatteryInformation` is another standalone app used to detect the level of battery charge on the Android device, it is already incorporated into the main RoboApp.
+
+##Privacy Policy
+We require access to these permissions within the application:
+'Camera' For facial recognition and color tracking. We do not store any of this data for our own use, the camera just gives information to the code for the cat to track
+'Microphone' Pocketsphinx is used within this application to provide always on voice listening. We do not log or store the data that is heard, we just take the commands as strings and use them in our code.
+'Storage' Storing data such as accelerometer data or voice commands to the phone for debugging purposes.
