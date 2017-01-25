@@ -12,12 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 import com.robodoot.dr.facetracktest.R;
-import com.robodoot.dr.RoboApp.FdActivity;
 
 public class MainActivity extends FragmentActivity implements
         NavigationDrawerCallbacks, HomeFragment.OnFragmentInteractionListener,
@@ -86,8 +82,10 @@ public class MainActivity extends FragmentActivity implements
                 this.finish();
                 break;
             case 2:
-                // -- OPENCVRMV
-                // intent = new Intent("com.robodoot.dr.RoboApp.ColorTrackingActivity");
+                // New ColorTracking
+                log_console("Color Tracking");
+                Intent myIntent = new Intent(this, ColorTrackingActivity.class);
+                this.startActivity(myIntent);
                 break;
             case 3:
                 log_console("Face Tracking");

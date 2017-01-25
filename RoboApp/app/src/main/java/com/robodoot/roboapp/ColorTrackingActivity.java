@@ -1,4 +1,4 @@
-package lukeshays.com.cameratest;
+package com.robodoot.roboapp;
 
 import android.Manifest;
 import android.content.Context;
@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -17,10 +18,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import com.robodoot.dr.facetracktest.R;
+
+public class ColorTrackingActivity extends AppCompatActivity {
 
     private Camera myCamera = null;
-    private CameraPreview myPreview;
+    private ColorTrackingCamera myPreview;
     private BitmapFactory.Options options=new BitmapFactory.Options();
     private boolean sizeChecked = false;
     static boolean Red = true;
@@ -76,7 +79,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_color_tracking);
+
+        int numCams = Camera.getNumberOfCameras();
 
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(this,
@@ -89,13 +94,11 @@ public class MainActivity extends AppCompatActivity {
 
         if(checkCameraHardware(getApplicationContext())){
             myCamera = getCameraInstance();
-            if(myCamera != null) {
-                boolean duh = true;
-            }
         }
+
         if(myCamera != null){
             // Create our Preview view and set it as the content of our activity.
-            myPreview = new CameraPreview(this, myCamera);
+            myPreview = new ColorTrackingCamera(this, myCamera);
             myCamera.setDisplayOrientation(90);
             FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
             preview.addView(myPreview);
@@ -218,9 +221,10 @@ public class MainActivity extends AppCompatActivity {
     public static Camera getCameraInstance(){
         Camera c = null;
         try {
-            c = Camera.open(); // attempt to get a Camera instance
+            c = Camera.open(1); // attempt to get a Camera instance
         }
         catch (Exception e){
+            Log.d("Camera Error", e.getMessage());
             // Camera is not available (in use or does not exist)
         }
         return c; // returns null if camera is unavailable

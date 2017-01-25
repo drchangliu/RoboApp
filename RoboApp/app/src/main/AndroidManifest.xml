@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.robodoot.dr.facetracktest" >
+    package="com.robodoot.dr.facetracktest">
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-feature android:name="android.hardware.camera.front" android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="true" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-feature android:name="android.hardware.camera.front.autofocus" />
-    <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES" android:value="face"></meta-data>
+
+    <meta-data
+        android:name="com.google.android.gms.vision.DEPENDENCIES"
+        android:value="face" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name="com.robodoot.dr.RoboApp.FdActivity"
             android:label="@string/title_activity_fd"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
                 <action android:name="com.robodoot.dr.RoboApp.FdActivity" />
@@ -36,8 +41,8 @@
         </activity>
         <activity
             android:name="com.robodoot.roboapp.MainActivity"
-            android:parentActivityName="com.robodoot.dr.RoboApp.FdActivity"
-            android:label="Menu" >
+            android:label="Menu"
+            android:parentActivityName="com.robodoot.dr.RoboApp.FdActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,15 +56,18 @@
         <activity
             android:name="com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:parentActivityName="com.robodoot.roboapp.MainActivity"
             android:label="Face Tracker"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="fullSensor">
+            android:parentActivityName="com.robodoot.roboapp.MainActivity"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="com.robodoot.dr.RoboApp.FaceTrackerActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+        <activity android:name="com.robodoot.roboapp.ColorTrackingActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
