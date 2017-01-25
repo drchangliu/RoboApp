@@ -44,6 +44,8 @@ Color Tracking and Face Tracking: located in `./RoboApp/app/src/main/java/robodo
 
 ##Privacy Policy
 We require access to these permissions within the application:
-'Camera' For facial recognition and color tracking. We do not store any of this data for our own use, the camera just gives information to the code for the cat to track
-'Microphone' Pocketsphinx is used within this application to provide always on voice listening. We do not log or store the data that is heard, we just take the commands as strings and use them in our code.
-'Storage' Storing data such as accelerometer data or voice commands to the phone for debugging purposes.
+`Camera` For facial recognition and color tracking. We do not store any of this data for our own use, the camera just gives information to the code for the cat to track
+
+`Microphone` Pocketsphinx is used within this application to provide always on voice listening. We do not log or store the data that is heard, we just take the commands as strings and use them in our code.
+
+`Storage` Storing data such as accelerometer data or voice commands to the phone for debugging purposes.
