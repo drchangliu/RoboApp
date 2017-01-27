@@ -608,7 +608,7 @@ public class FdActivity extends Activity implements
     // This function loads the pocketsphinx recognizer, allowing active listening
     private void runRecognizerSetup() {
         TextView loadingVoice = (TextView)findViewById(R.id.caption_text);
-        loadingVoice.setAlpha(255);
+        loadingVoice.setAlpha(1.0f);
         // Recognizer initialization is a time-consuming and it involves IO,
         // so we execute it in async task
         new AsyncTask<Void, Void, Exception>() {
@@ -824,6 +824,7 @@ public class FdActivity extends Activity implements
     }
 
 
+
     private class FaceTrackerFactory implements MultiProcessor.Factory<Face> {
         @Override
         public Tracker<Face> create(Face face) {
@@ -831,7 +832,8 @@ public class FdActivity extends Activity implements
         }
     }
 
-    private class MotionFaceTracker extends Tracker<Face> {
+    //TODO: Change Back to private when finished with unit testing
+    public class MotionFaceTracker extends Tracker<Face> {
         PointF trackPosition;
 
         MotionFaceTracker() {
@@ -852,27 +854,33 @@ public class FdActivity extends Activity implements
             super.onUpdate(detectionResults, face);
 
             //use happiness rating
-            float happiness = face.getIsSmilingProbability();
-            if (happiness>0.75f){
-                kitty.detectedSmile();
-            }else if (happiness<0.1f){
-                kitty.detectedFrown();
-            }
+            emotionalReaction(face.getIsSmilingProbability());
             //end use happiness rating
 
-            float x = -1*face.getPosition().x + face.getWidth() / 2;
+            float x = -1 * face.getPosition().x + face.getWidth() / 2;
             float y = face.getPosition().y + face.getHeight() / 2 - 512;
             //middle not quite 512, works for now
             //TODO: 512 is set for the preview size above, take the hardcoded number out
 
-            trackPosition=new PointF(x, y);
+            trackPosition = new PointF(x, y);
 
             //if distance from center is < half a face size
             // done so that "good enough" scales for faces at multiple distances
-            if( Math.sqrt(Math.pow(x, 2.0)+Math.pow(y, 2.0))>Math.pow(face.getWidth()/2, 2)+Math.pow(face.getHeight()/2, 2)){
+            if (Math.sqrt(Math.pow(x, 2.0) + Math.pow(y, 2.0)) > Math.pow(face.getWidth() / 2, 2) + Math.pow(face.getHeight() / 2, 2)) {
                 virtualCat.lookToward(trackPosition);
             }
         }
+    }
+    //TODO: Put helper back in MotionFaceTracker after unit testing
+    public boolean emotionalReaction(float smileProb){
+        if (smileProb>0.75f){
+            kitty.detectedSmile();
+            return true;
+        }else if (smileProb<0.1f){
+            kitty.detectedFrown();
+            return false;
+        }
+        return false;
     }
 }
 

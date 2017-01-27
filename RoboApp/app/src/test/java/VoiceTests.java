@@ -2,6 +2,7 @@ import android.content.Context;
 
 import com.robodoot.dr.RoboApp.CatEmotion;
 import com.robodoot.dr.RoboApp.FdActivity;
+import com.robodoot.dr.RoboApp.FdActivity.MotionFaceTracker;
 
 import org.junit.Test;
 
@@ -12,6 +13,7 @@ import static org.mockito.Mockito.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import static org.junit.Assert.assertEquals;
 public class VoiceTests {
 
     @Test
