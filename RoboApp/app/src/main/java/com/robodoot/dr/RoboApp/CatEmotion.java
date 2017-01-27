@@ -451,4 +451,8 @@ public class CatEmotion {
         scale-=0.5f;
         reCalcFace();
     }
+
+    public float getScale() {
+        return scale;
+    }
 }

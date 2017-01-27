@@ -724,7 +724,11 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
         ((TextView) findViewById(R.id.caption_text)).setText(error.getMessage());
     }
 
-    void doCommand (String result) {
+    public float testCase(){
+        return kitty.getScale();
+    }
+
+    public void doCommand (String result) {
         if (recognizer.getSearchName().equals(KWS_SEARCH)){
             // No point in displaying keyword command
             if(!result.equals("okay robo cat")){
@@ -769,8 +773,6 @@ public class FdActivity extends Activity implements GestureDetector.OnGestureLis
             else if (result.contains("walk")||result.contains("walking") || result.contains("come")) {
                 virtualCat.stepForward();
             }
-            //if (result.contains("right") || result.contains("write")) {
-            // does this work? we'll see
             else if (result.contains("right")) {
                 //Make the cat head move right
                 virtualCat.turnHeadRight();
