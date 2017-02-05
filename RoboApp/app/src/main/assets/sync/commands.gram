@@ -26,17 +26,10 @@ grammar commands;
           blue  |
           yellow    |
           you   |
-          the   |
-          am    |
-          are   |
           how   |
-          why   |
-          when  |
-          will  |
           see   |
           look  |
           watch |
-          now   |
           then  |
           later |
           soon  |
@@ -65,10 +58,6 @@ grammar commands;
           go    |
           yes   |
           no    |
-          today |
-          tomorrow  |
-          some  |
-          time  |
           accelerometer |
           speak |
           face  |

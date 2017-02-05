@@ -646,7 +646,7 @@ public class FdActivity extends Activity implements
                 .setAcousticModel(new File(assetsDir, "en-us-ptm"))
                 .setDictionary(new File(assetsDir, "cmudict-en-us.dict"))
                 //.setRawLogDir(assetsDir) // To disable logging of raw audio comment out this call (takes a lot of space on the device)
-                .setKeywordThreshold(1e-45f) // Threshold to tune for keyphrase to balance between false alarms and misses
+                .setKeywordThreshold(1e-40f) // Threshold to tune for keyphrase to balance between false alarms and misses
                 .setBoolean("-allphone_ci", true)  // Use context-independent phonetic search, context-dependent is too slow for mobile
                 .getRecognizer();
         recognizer.addListener(this);
@@ -808,29 +808,23 @@ public class FdActivity extends Activity implements
             else if (result.contains("love")) {
                 kitty.loveMeCat();
             }
-            else if (result.contains("accelerometer")){
-
-            }
-            else if (result.contains("face") && result.contains("tracking")){
-
-            }
             else if (result.contains("color") && result.contains("tracking")){
 
             }
             else if (result.contains("face") && result.contains("tracking")){
-
+                Intent intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
+                startActivity(intent);
             }
             else if (result.contains("stay")){
 
             }
             else if (result.contains("shake")){
-
+                //TODO this would be a good command to get started with talking to the servos
             }
             else if (result.contains("find") && result.contains("me")){
                 Intent intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
                 startActivity(intent);
             }
-
             else {
                 Context context = getApplicationContext();
                 CharSequence commandNotFound = "Command not found, given: " + result;
