@@ -808,10 +808,29 @@ public class FdActivity extends Activity implements
             else if (result.contains("love")) {
                 kitty.loveMeCat();
             }
+            else if (result.contains("accelerometer")){
+
+            }
+            else if (result.contains("face") && result.contains("tracking")){
+
+            }
+            else if (result.contains("color") && result.contains("tracking")){
+
+            }
+            else if (result.contains("face") && result.contains("tracking")){
+
+            }
+            else if (result.contains("stay")){
+
+            }
+            else if (result.contains("shake")){
+
+            }
             else if (result.contains("find") && result.contains("me")){
                 Intent intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
                 startActivity(intent);
             }
+
             else {
                 Context context = getApplicationContext();
                 CharSequence commandNotFound = "Command not found, given: " + result;

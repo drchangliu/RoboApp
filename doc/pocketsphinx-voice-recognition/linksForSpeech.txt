@@ -1,0 +1,8 @@
+different commands used in android speech recognizer
+https://developer.android.com/reference/android/speech/SpeechRecognizer.html
+
+small tutorial for making some of androids speech cababilities 
+https://developer.android.com/training/wearables/apps/voice.html
+
+a different tutorial for making your first speech recognizing app for android
+http://www.techrepublic.com/blog/software-engineer/make-your-next-android-app-a-good-listener/
