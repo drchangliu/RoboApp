@@ -8,6 +8,8 @@
 * Zach Taylor
 
 
+[Click here to view in the Google Play Store](https://play.google.com/store/apps/details?id=com.robodoot.dr.facetracktest)
+
 
 # RoboApp readme file from last year's project
 ## Team project for CS 4560
