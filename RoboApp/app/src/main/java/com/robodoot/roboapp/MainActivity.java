@@ -56,12 +56,10 @@ public class MainActivity extends FragmentActivity implements
         transaction.commit();
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
     }
-
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
@@ -71,13 +69,6 @@ public class MainActivity extends FragmentActivity implements
         Intent intent = null;
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         switch(position) {
-            /*case 1:
-                fragment = new CompTestFragment();
-                Toast.makeText(this, "Unit Testing", Toast.LENGTH_SHORT).show();
-                break;*/
-            /*case 0:
-                fragment = new HomeFragment();
-                break;*/
             case 0:
                 fragment = new ConsoleFragment();
                 //Toast.makeText(this, "Console", Toast.LENGTH_SHORT).show();
@@ -86,21 +77,14 @@ public class MainActivity extends FragmentActivity implements
                 this.finish();
                 break;
             case 2:
-                // -- OPENCVRMV
-                // intent = new Intent("com.robodoot.dr.RoboApp.ColorTrackingActivity");
-                break;
-            case 3:
                 log_console("Face Tracking");
                 intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
                 break;
-            case 4:
-                log_console("Background Face Tracking");
-                break;
-            case 5:
+            case 3:
                 log_console("Readme Displayed");
                 fragment = new ReadmeFragment();
                 break;
-            case 6:
+            case 4:
                 log_console("Accelerometer Data Displayed");
                 fragment = new AccelerometerFragment();
                 break;
@@ -123,7 +107,6 @@ public class MainActivity extends FragmentActivity implements
 
     }
 
-
     @Override
     public void onBackPressed() {
         if (mNavigationDrawerFragment.isDrawerOpen())
@@ -131,7 +114,6 @@ public class MainActivity extends FragmentActivity implements
         else
             super.onBackPressed();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -144,7 +126,6 @@ public class MainActivity extends FragmentActivity implements
         }
         return super.onCreateOptionsMenu(menu);
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
