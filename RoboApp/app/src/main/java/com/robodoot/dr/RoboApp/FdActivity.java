@@ -646,7 +646,7 @@ public class FdActivity extends Activity implements
                 .setAcousticModel(new File(assetsDir, "en-us-ptm"))
                 .setDictionary(new File(assetsDir, "cmudict-en-us.dict"))
                 //.setRawLogDir(assetsDir) // To disable logging of raw audio comment out this call (takes a lot of space on the device)
-                .setKeywordThreshold(1e-45f) // Threshold to tune for keyphrase to balance between false alarms and misses
+                .setKeywordThreshold(1e-40f) // Threshold to tune for keyphrase to balance between false alarms and misses
                 .setBoolean("-allphone_ci", true)  // Use context-independent phonetic search, context-dependent is too slow for mobile
                 .getRecognizer();
         recognizer.addListener(this);
@@ -774,7 +774,7 @@ public class FdActivity extends Activity implements
                 //Make the cat head move left
                 virtualCat.turnHeadLeft();
             }
-            else if (result.contains("walk")||result.contains("walking") || result.contains("come")) {
+            else if (result.contains("walk")||result.contains("walking") || result.contains("come") || result.contains("come here")) {
                 virtualCat.stepForward();
             }
             else if (result.contains("right")) {
@@ -805,8 +805,18 @@ public class FdActivity extends Activity implements
 
                 startActivity(intent);
             }
-            else if (result.contains("love")) {
+            else if (result.contains("I love you")) {
                 kitty.loveMeCat();
+            }
+            else if (result.contains("color") && result.contains("tracking")){
+
+            }
+            else if (result.contains("face") && result.contains("tracking")){
+                Intent intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
+                startActivity(intent);
+            }
+            else if (result.contains("stay")){
+
             }
             else if (result.contains("find") && result.contains("me")){
                 Intent intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");

@@ -26,6 +26,48 @@ grammar commands;
           blue  |
           yellow    |
           you   |
+          how   |
+          see   |
+          look  |
+          watch |
+          then  |
+          later |
+          soon  |
+          come  |
+          shake |
+          roll  |
+          over  |
+          sit   |
+          stay  |
+          run   |
+          here  |
+          there |
+          everywhere    |
+          everyone  |
+          me    |
+          him   |
+          her   |
+          it    |
+          will  |
+          not   |
+          can't |
+          cannot    |
+          won't |
+          stop  |
+          start |
+          go    |
+          yes   |
+          no    |
+          accelerometer |
+          speak |
+          face  |
+          tracking  |
+          color |
+          console   |
+          open  |
+          close |
+          about |
+          find  |
           cry   ;
 
 public <digits> = <digit>+;

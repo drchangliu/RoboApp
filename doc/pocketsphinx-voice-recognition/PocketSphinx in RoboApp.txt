@@ -1,0 +1,73 @@
+### Using PocketSphinx
+
+# Table of Contents:
+1. Intro
+2. Use
+3. Installation
+4. Functionality
+5. Known Bugs
+---------------------------------
+
+
+	1. Intro
+
+Refer to the linksForSpeech.txt file for any relevant links regarding the PocketSphinx library.
+
+Okay, so PocketSphinx is a bit daunting to use at first, but is really pretty simple now that it has been installed. It is what is used to allow for the continuous listening functionality.
+
+
+	2. Use
+
+To use the speech recognition in the app, simply talk to the app in behavior mode (when the cat's face is on screen) with the command "Okay Robo Cat". This will then activate the alternate behavior mode that listens for a list of commands, at which point you can give the cat a command, such as "Good", which effects the cat's mood.
+
+
+	3. Installation
+
+Pocketsphinx was installed by:
+
+1- Placing the jniLibs directory with all needed files in RoboApp/RoboApp/app/src/main
+2- Placing assets/sync directory within RoboApp/RoboApp/app/src/main/assets, to allow for placement of .dict and .gram files that are used to give pocketsphinx the words it listens for
+3- PLace pocketpshinx-android-5prealpha-nolib.jar in RoboApp/RoboApp/app/libs
+
+To install new commands using PocketSphinx, the words needed for the command must be placed in the commands.gram file within the RoboApp/RoboApp/app/src/main/assets/sync directory. This file contains a list of words that are used after the "Okay Robo Cat" is recognized that can be used in the code base to make the cat do something.
+
+
+	4. Functionality
+
+Currently, all of the files related to voice recognition are located in one of two places:
+
+1- in RoboApp/RoboApp/app/src/main/assets/sync, there are two main files, cmudict-en-us.dict and commands.gram. The .dict file contains a huge list of words and their phonetic representation so that .gram files have a phonetic representation associated with the words inside the file and so that when the keyword search is being used the cat can listen for the keyword (in this case "okay robo cat". The .gram file contains a list of words to search for when using the grammatical search- the search that is used to find a command to give.
+	
+TO ADD A NEW COMMAND, YOU MUST ADD THE WORDS NECESARRY TO THE COMMANDS.GRAM FILE
+
+All of the code that sets up the pocketsphinx recognizer and gives commands functionality can be found in the FdActivity.java file, located at:
+
+RoboApp/RoboApp/app/src/main/java/com/robodoot/dr/RoboApp/FdActivity.java
+
+In general, this is where a lot of the work of RoboCat is written.
+
+The pocketsphinx code is written in the following fashion:
+
+- The recognizer is setup with certain parameters in the runRecognizerSetup() and setupRecognizer() functions.
+
+- During setup, the keyword search is started. The app uses two pocketsphinx searches- keyword and grammatical. The keyword search is used to wait until the user says "Okay robo cat" to do a command. The grammatical search is used to find a command the user gives the cat.
+
+- The onPartialResult() function is used in the keyword search. When the hypothesis matches the START_LISTENING_STRING variable (currently "Okay robo cat"), the keyword search is stopped and we switch to the grammatical search (that uses the commands.gram file in the assets directory).
+
+- The onResult() function is used with the grammatical search. It generates a hypothesized string and sends it to the doCommand() function.
+
+- The doCommand() function is just a large if else statement that checks for certain commands, and does an action as a result
+
+- The onEndOfSpeech() override is used to switch to keyword search after a command is given
+
+This is essentially how active listening works in the app.
+
+
+	5. Known Bugs:
+
+- The recognizer is very touchy and does not do well in noisy environments
+
+- The "okay robo cat" command is activated at inappropriate times
+
+
+The active listening code was written by Alex Vild and Kurtis Davis.
