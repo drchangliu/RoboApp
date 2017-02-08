@@ -1,17 +1,11 @@
 package com.robodoot.dr.RoboApp;
 
-import java.io.ObjectOutputStream;
-import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Locale;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -23,13 +17,9 @@ import android.hardware.SensorManager;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Environment;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
-import android.speech.RecognizerIntent;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -38,11 +28,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.MultiProcessor;
@@ -63,18 +55,12 @@ import edu.cmu.pocketsphinx.SpeechRecognizer;
 import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.IntBuffer;
-import java.util.Random;
-import java.util.Stack;
 import java.util.Vector;
 
-import static android.widget.Toast.makeText;
 
 /**
- * Behavior mode activity. This is the main activity of the app.
+ * Behavior mode activity. This is the fragment_camerapreview activity of the app.
  * uses built in hardware functions to use the Android accelerometer data (SensorEventListener)
  */
 
@@ -182,7 +168,7 @@ public class FdActivity extends Activity implements
     // Function to open menu activity
     public void openMenu(){
         Intent intent = new Intent(this, MainActivity.class);
-        // sending accelerometer data to the main activity
+        // sending accelerometer data to the fragment_camerapreview activity
         intent.putExtra("accData", accData);
         startActivity(intent);
     }
@@ -210,6 +196,17 @@ public class FdActivity extends Activity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fd);
+
+        ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Log.i(TAG, "CHECKED");
+                } else {
+                    Log.i(TAG, "UNCHECKED");
+                }
+            }
+        });
 
         // initializing accelerometer variables and registering listener (listening for movement)
         senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -253,13 +250,6 @@ public class FdActivity extends Activity implements
 
         kitty = new CatEmotion(this);
         kitty.pic=(ImageView)findViewById(R.id.image_place_holder);
-        debug1 = (TextView)findViewById(R.id.debugText1);
-        debug2 = (TextView)findViewById(R.id.debugText2);
-        debug3 = (TextView)findViewById(R.id.debugText3);
-
-        debug1.setAlpha(0f);
-        debug2.setAlpha(0f);
-        debug3.setAlpha(0f);
 
         // psphx1: Pocketsphinx creation stuff
         ((TextView) findViewById(R.id.caption_text))
@@ -336,7 +326,7 @@ public class FdActivity extends Activity implements
 
         Context context = getApplicationContext();
         FaceDetector detector = new FaceDetector.Builder(context)
-                .setProminentFaceOnly(true) //track only biggest, most centered face
+                //.setProminentFaceOnly(true) //track only biggest, most centered face
                 .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS) //look for smile and eye positions
                 .build();
 

@@ -3,26 +3,19 @@ package com.robodoot.roboapp;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.robodoot.dr.facetracktest.R;
 
-import java.util.ArrayList;
-
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ConsoleFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ConsoleFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Created by qfett on 2/8/2017.
  */
-public class ConsoleFragment extends Fragment {
+
+public class CameraPreviewFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -36,7 +29,7 @@ public class ConsoleFragment extends Fragment {
 
 
 
-    private OnFragmentInteractionListener mListener;
+    private ConsoleFragment.OnFragmentInteractionListener mListener;
 
     /**
      * Use this factory method to create a new instance of
@@ -47,8 +40,8 @@ public class ConsoleFragment extends Fragment {
      * @return A new instance of fragment ConsoleFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ConsoleFragment newInstance(String param1, String param2) {
-        ConsoleFragment fragment = new ConsoleFragment();
+    public static CameraPreviewFragment newInstance(String param1, String param2) {
+        CameraPreviewFragment fragment = new CameraPreviewFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,7 +53,7 @@ public class ConsoleFragment extends Fragment {
 
 
 
-    public ConsoleFragment() {
+    public CameraPreviewFragment() {
         // Required empty public constructor
     }
 
@@ -82,8 +75,7 @@ public class ConsoleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_camerapreview, container, false);
-        TextView tv = (TextView)view.findViewById(R.id.place);
+        View view = inflater.inflate(R.layout.fragment_console, container, false);
         tv.setText("Score: ");
 
         return view;
@@ -100,7 +92,7 @@ public class ConsoleFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            mListener = (ConsoleFragment.OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -150,5 +142,5 @@ public class ConsoleFragment extends Fragment {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
-
 }
+

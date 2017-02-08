@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BatteryInfo/BatteryInfo.iml" filepath="$PROJECT_DIR$/BatteryInfo/BatteryInfo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/BatteryInfo/BatteryInfo.iml" filepath="$PROJECT_DIR$/BatteryInfo/BatteryInfo.iml" />
       <module fileurl="file://$PROJECT_DIR$/RoboApp.iml" filepath="$PROJECT_DIR$/RoboApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/appFaceTracker/appFaceTracker.iml" filepath="$PROJECT_DIR$/appFaceTracker/appFaceTracker.iml" />

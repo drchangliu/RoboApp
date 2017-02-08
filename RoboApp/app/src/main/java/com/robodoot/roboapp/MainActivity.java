@@ -63,7 +63,7 @@ public class MainActivity extends FragmentActivity implements
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
+        // update the fragment_camerapreview content by replacing fragments
 
         Fragment fragment = null;
         Intent intent = null;
@@ -163,17 +163,6 @@ public class MainActivity extends FragmentActivity implements
             }
         }
     }
-/*
-    public void AddMessage(View view) {
-        TextView disp = (TextView)findViewById(R.id.sendtext);
-        CharSequence curr = disp.getText();
-        CharSequence msg = ((EditText)findViewById(R.id.message)).getText();
-        String newText = curr.toString() + "\n" + msg.toString();
-        char[] newT = newText.toCharArray();
-        disp.setText(newT, 0, newT.length);
-        ((EditText)findViewById(R.id.message)).setText("");
-        return;
-    } */
 
 
     public void log_console(String in){
