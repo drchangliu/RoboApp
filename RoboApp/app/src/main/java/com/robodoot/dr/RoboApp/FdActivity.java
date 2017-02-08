@@ -326,7 +326,7 @@ public class FdActivity extends Activity implements
 
         Context context = getApplicationContext();
         FaceDetector detector = new FaceDetector.Builder(context)
-                //.setProminentFaceOnly(true) //track only biggest, most centered face
+                .setProminentFaceOnly(true) //track only biggest, most centered face
                 .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS) //look for smile and eye positions
                 .build();
 
