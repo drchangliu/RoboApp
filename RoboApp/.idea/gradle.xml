@@ -8,6 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/BatteryInfo" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/appFaceTracker" />
             <option value="$PROJECT_DIR$/libraries/usbSerialForAndroid" />
@@ -16,6 +17,7 @@
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/BatteryInfo" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/appFaceTracker" />
             <option value="$PROJECT_DIR$/libraries/usbSerialForAndroid" />

@@ -9,6 +9,7 @@ import java.util.Vector;
 
 public class ColorFinder {
     public String area = "";
+    public boolean isCatFace;
 
     private CallbackInterface callback;
 
@@ -16,7 +17,8 @@ public class ColorFinder {
         this.callback = callback;
     }
 
-    public void findDominantColor(Bitmap bitmap) {
+    public void findDominantColor(Bitmap bitmap, boolean catFace) {
+        isCatFace = catFace;
         new GetDominantColor().execute(bitmap);
     }
 
@@ -71,7 +73,7 @@ public class ColorFinder {
                     double[] labComp = new double[3];
                     double[] labPic = new double[3];
 
-                    if(ColorTrackingActivity.Red){
+                    if(ColorTrackingActivity.Red || isCatFace){
                         ColorUtils.colorToLAB(Color.RED, labComp);
                     }
                     else if(ColorTrackingActivity.Green){
@@ -84,6 +86,8 @@ public class ColorFinder {
                     ColorUtils.colorToLAB(pixel, labPic);
 
                     double distance = ColorUtils.distanceEuclidean(labComp, labPic);
+                    double testDistance = ColorTrackingActivity.colorDistance;
+                    if(isCatFace){ testDistance = 70; }
 
                     if(distance <= ColorTrackingActivity.colorDistance){
                         selectedColorPixels++;

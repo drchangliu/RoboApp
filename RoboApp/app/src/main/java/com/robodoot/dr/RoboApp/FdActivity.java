@@ -1,46 +1,39 @@
 package com.robodoot.dr.RoboApp;
 
-import java.io.ObjectOutputStream;
-import java.io.ObjectOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Locale;
-
 import android.Manifest;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.graphics.PointF;
+import android.hardware.Camera;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Environment;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
-import android.provider.MediaStore;
-import android.speech.RecognizerIntent;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,28 +43,27 @@ import com.google.android.gms.vision.Tracker;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 import com.robodoot.dr.facetracktest.R;
+import com.robodoot.roboapp.ColorFinder;
+import com.robodoot.roboapp.ColorTrackingCamera;
 import com.robodoot.roboapp.Direction;
 import com.robodoot.roboapp.MainActivity;
 import com.robodoot.roboapp.PololuVirtualCat;
 import com.robodoot.roboapp.VirtualCat;
 
-// Psphx imports
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
 import edu.cmu.pocketsphinx.Assets;
 import edu.cmu.pocketsphinx.Hypothesis;
 import edu.cmu.pocketsphinx.RecognitionListener;
 import edu.cmu.pocketsphinx.SpeechRecognizer;
 import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.IntBuffer;
-import java.util.Random;
-import java.util.Stack;
-import java.util.Vector;
-
-import static android.widget.Toast.makeText;
+// Psphx imports
 
 /**
  * Behavior mode activity. This is the main activity of the app.
@@ -93,6 +85,16 @@ public class FdActivity extends Activity implements
     //new camera variables start
     private CameraSource mCameraSource = null;
     //new facetracker variables end
+
+    // Start ColorTracking variables
+    private Camera myCamera = null;
+    private ColorTrackingCamera myPreview;
+    private BitmapFactory.Options options = new BitmapFactory.Options();
+    private boolean sizeChecked = false;
+    FaceDetector detector = null;
+    FrameLayout preview = null;
+    TextView colorArea = null;
+    // End ColorTracking variables
 
     private int frameNumber;
 
@@ -157,8 +159,6 @@ public class FdActivity extends Activity implements
     double yCenter = -1;
 
     private boolean debugging = false;
-    private boolean trackingGreen = false;
-    private boolean trackingRed = false;
 
     //PololuHandler pololu;
     VirtualCat virtualCat;
@@ -299,7 +299,50 @@ public class FdActivity extends Activity implements
         }
 
         //End New Face Tracker Code
+
+        // ColorTracking Button Stuff Below
+        colorArea = (TextView) findViewById(R.id.textView3);
+        colorArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myCamera.takePicture(null, null, mPicture);
+            }
+        });
+        // Switch should toggle between colortracking and facetracking
+        final Switch toggleColorTracking = (Switch) findViewById(R.id.switch1);
+        toggleColorTracking.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    // End facetracking
+                    if (mCameraSource != null) {
+                        mCameraSource.release();
+                    }
+                    detector = null;
+                    // Start colortracking
+                    myCamera = Camera.open(1);
+                    myPreview = new ColorTrackingCamera(getApplicationContext(), myCamera);
+                    preview = (FrameLayout) findViewById(R.id.camera_preview1);
+                    myCamera.setDisplayOrientation(90);
+                    preview.addView(myPreview);
+                    myCamera.startPreview();
+                }
+                else{
+                    //End colorTracking
+                    preview.removeAllViews();
+                    myPreview = null;
+                    if(myCamera != null){
+                        myCamera.release();
+                    }
+                    colorArea.setText("START TRACKING");
+                    // Start facetracking
+                    createCameraSource();
+                    startCameraSource();
+                }
+            }
+        });
+        // End ColorTracking Button stuff
     }
+
     //New Face Tracker Code
 
     @Override
@@ -335,7 +378,7 @@ public class FdActivity extends Activity implements
     private void createCameraSource() {
 
         Context context = getApplicationContext();
-        FaceDetector detector = new FaceDetector.Builder(context)
+        detector = new FaceDetector.Builder(context)
                 .setProminentFaceOnly(true) //track only biggest, most centered face
                 .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS) //look for smile and eye positions
                 .build();
@@ -424,6 +467,12 @@ public class FdActivity extends Activity implements
         frameNumber = 0;
         // for accelerometer, also need to stop listening on pause
         senSensorManager.unregisterListener(this);
+        preview.removeAllViews();
+        myPreview = null;
+        if(myCamera != null){
+            myCamera.release();
+        }
+        colorArea.setText("START TRACKING");
     }
 
     @Override
@@ -468,6 +517,11 @@ public class FdActivity extends Activity implements
         }
         if (mCameraSource != null) {
             mCameraSource.release();
+        }
+        preview.removeAllViews();
+        myPreview = null;
+        if(myCamera != null){
+            myCamera.release();
         }
     }
 
@@ -608,7 +662,7 @@ public class FdActivity extends Activity implements
     // This function loads the pocketsphinx recognizer, allowing active listening
     private void runRecognizerSetup() {
         TextView loadingVoice = (TextView)findViewById(R.id.caption_text);
-        loadingVoice.setAlpha(255);
+        loadingVoice.setAlpha(1.0f);
         // Recognizer initialization is a time-consuming and it involves IO,
         // so we execute it in async task
         new AsyncTask<Void, Void, Exception>() {
@@ -646,7 +700,7 @@ public class FdActivity extends Activity implements
                 .setAcousticModel(new File(assetsDir, "en-us-ptm"))
                 .setDictionary(new File(assetsDir, "cmudict-en-us.dict"))
                 //.setRawLogDir(assetsDir) // To disable logging of raw audio comment out this call (takes a lot of space on the device)
-                .setKeywordThreshold(1e-45f) // Threshold to tune for keyphrase to balance between false alarms and misses
+                .setKeywordThreshold(1e-40f) // Threshold to tune for keyphrase to balance between false alarms and misses
                 .setBoolean("-allphone_ci", true)  // Use context-independent phonetic search, context-dependent is too slow for mobile
                 .getRecognizer();
         recognizer.addListener(this);
@@ -728,7 +782,11 @@ public class FdActivity extends Activity implements
         ((TextView) findViewById(R.id.caption_text)).setText(error.getMessage());
     }
 
-    void doCommand (String result) {
+    public float testCase(){
+        return kitty.getScale();
+    }
+
+    public void doCommand (String result) {
         if (recognizer.getSearchName().equals(KWS_SEARCH)){
             // No point in displaying keyword command
             if(!result.equals("okay robo cat")){
@@ -762,6 +820,14 @@ public class FdActivity extends Activity implements
                 //Make the cat cry
                 kitty.cryingAt();
             }
+            else if(result.contains("red")){
+                if(myPreview.surfaceReady == true){
+                    myCamera.takePicture(null,null,mPicture);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Color tracking not activated", Toast.LENGTH_LONG).show();
+                }
+            }
             else if (result.contains("stupid cat")){
                 //Make cat disgusted
                 kitty.distgustedAt();
@@ -773,22 +839,9 @@ public class FdActivity extends Activity implements
             else if (result.contains("walk")||result.contains("walking") || result.contains("come")) {
                 virtualCat.stepForward();
             }
-            //if (result.contains("right") || result.contains("write")) {
-            // does this work? we'll see
             else if (result.contains("right")) {
                 //Make the cat head move right
                 virtualCat.turnHeadRight();
-            }
-            else if (result.contains("green")) {
-                trackingGreen = true;
-                trackingRed = false;
-            }
-            else if (result.contains("red")) {
-                trackingGreen = false;
-                trackingRed = true;
-            }
-            else if (result.contains("blue")) {
-                trackingGreen = trackingRed = false;
             }
             else if (result.contains("up")) {
                 virtualCat.turnHeadUp();
@@ -806,6 +859,19 @@ public class FdActivity extends Activity implements
             else if (result.contains("love")) {
                 kitty.loveMeCat();
             }
+            else if (result.contains("color") && result.contains("tracking")){
+
+            }
+            else if (result.contains("face") && result.contains("tracking")){
+                Intent intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
+                startActivity(intent);
+            }
+            else if (result.contains("stay")){
+
+            }
+            else if (result.contains("shake")){
+                //TODO this would be a good command to get started with talking to the servos
+            }
             else if (result.contains("find") && result.contains("me")){
                 Intent intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
                 startActivity(intent);
@@ -822,6 +888,7 @@ public class FdActivity extends Activity implements
     }
 
 
+
     private class FaceTrackerFactory implements MultiProcessor.Factory<Face> {
         @Override
         public Tracker<Face> create(Face face) {
@@ -829,7 +896,8 @@ public class FdActivity extends Activity implements
         }
     }
 
-    private class MotionFaceTracker extends Tracker<Face> {
+    //TODO: Change Back to private when finished with unit testing
+    public class MotionFaceTracker extends Tracker<Face> {
         PointF trackPosition;
 
         MotionFaceTracker() {
@@ -850,27 +918,133 @@ public class FdActivity extends Activity implements
             super.onUpdate(detectionResults, face);
 
             //use happiness rating
-            float happiness = face.getIsSmilingProbability();
-            if (happiness>0.75f){
-                kitty.detectedSmile();
-            }else if (happiness<0.1f){
-                kitty.detectedFrown();
-            }
+            emotionalReaction(face.getIsSmilingProbability());
             //end use happiness rating
 
-            float x = -1*face.getPosition().x + face.getWidth() / 2;
+            float x = -1 * face.getPosition().x + face.getWidth() / 2;
             float y = face.getPosition().y + face.getHeight() / 2 - 512;
             //middle not quite 512, works for now
             //TODO: 512 is set for the preview size above, take the hardcoded number out
 
-            trackPosition=new PointF(x, y);
+            trackPosition = new PointF(x, y);
 
             //if distance from center is < half a face size
             // done so that "good enough" scales for faces at multiple distances
-            if( Math.sqrt(Math.pow(x, 2.0)+Math.pow(y, 2.0))>Math.pow(face.getWidth()/2, 2)+Math.pow(face.getHeight()/2, 2)){
+            if (Math.sqrt(Math.pow(x, 2.0) + Math.pow(y, 2.0)) > Math.pow(face.getWidth() / 2, 2) + Math.pow(face.getHeight() / 2, 2)) {
                 virtualCat.lookToward(trackPosition);
             }
         }
     }
+    //TODO: Put helper back in MotionFaceTracker after unit testing
+    public boolean emotionalReaction(float smileProb){
+        if (smileProb>0.75f){
+            kitty.detectedSmile();
+            return true;
+        }else if (smileProb<0.1f){
+            kitty.detectedFrown();
+            return false;
+        }
+        return false;
+    }
+
+    // *********************** ColorTracking Utility Functions Below **********************
+    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width less than or equal to the requested height and width.
+            while ((halfHeight / inSampleSize) >= reqHeight
+                    && (halfWidth / inSampleSize) >= reqWidth) {
+                inSampleSize *= 2;
+            }
+            if(halfHeight / inSampleSize > reqHeight || halfWidth / inSampleSize > reqWidth){
+                inSampleSize *=2;
+            }
+        }
+
+        return inSampleSize;
+    }
+
+    private Camera.PictureCallback mPicture = new Camera.PictureCallback() {
+
+        @Override
+        public void onPictureTaken(byte[] data, Camera camera) {
+
+            if(!sizeChecked) {
+                options.inJustDecodeBounds = true;
+                BitmapFactory.decodeByteArray(data, 0, data.length, options);
+                options.inSampleSize = calculateInSampleSize(options, 160, 90);
+                options.inJustDecodeBounds = false;
+                sizeChecked = true;
+            }
+
+            Bitmap imageBitmap = BitmapFactory.decodeByteArray(data , 0, data.length, options);
+            new ColorFinder(new ColorFinder.CallbackInterface() {
+                @Override
+                public void onCompleted(String color) {
+                    colorArea.setText(color);
+                    Display display = getWindowManager().getDefaultDisplay();
+                    Point size = new Point();
+                    display.getSize(size);
+                    int width = size.x;
+                    int height = size.y;
+                    int x = width/2;
+                    int y = height/2;
+                    PointF trackPosition;
+                    switch (color){
+                        case "TL":
+                            x = width/6;
+                            y = height/6;
+                            break;
+                        case "TM":
+                            x = width/2;
+                            y = height/6;
+                            break;
+                        case "TR":
+                            x = (width/6)*5;
+                            y = height/6;
+                            break;
+                        case "ML":
+                            x = width/6;
+                            y = height/2;
+                            break;
+                        case "MM":
+                            x = width/2;
+                            y = height/2;
+                            break;
+                        case "MR":
+                            x = (width/6)*5;
+                            y = height/2;
+                            break;
+                        case "BL":
+                            x = width/6;
+                            y = (height/6)*5;
+                            break;
+                        case "BM":
+                            x = width/2;
+                            y = (height/6)*5;
+                            break;
+                        case "BR":
+                            x = (width/6)*5;
+                            y = (height/6)*5;
+                            break;
+                    }
+                    trackPosition = new PointF(x, y);
+                    virtualCat.lookToward(trackPosition);
+                }
+            }).findDominantColor(imageBitmap, true);
+            myCamera.startPreview();
+            myCamera.takePicture(null, null, mPicture);
+        }
+    };
+    // *********** End ColorTracking Utility Functions **************
 }
 

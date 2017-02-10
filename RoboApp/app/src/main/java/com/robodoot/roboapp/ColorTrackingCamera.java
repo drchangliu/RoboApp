@@ -12,6 +12,7 @@ import java.io.IOException;
 public class ColorTrackingCamera extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder mHolder;
     private Camera mCamera;
+    public boolean surfaceReady = false;
 
     public ColorTrackingCamera(Context context, Camera camera) {
         super(context);
@@ -30,6 +31,7 @@ public class ColorTrackingCamera extends SurfaceView implements SurfaceHolder.Ca
         try {
             mCamera.setPreviewDisplay(holder);
             mCamera.startPreview();
+            surfaceReady = true;
         } catch (IOException e) {
             Log.d("CAM_ERROR", "Error setting camera preview: " + e.getMessage());
         }

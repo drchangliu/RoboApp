@@ -31,25 +31,24 @@ public class ColorTrackingActivity extends AppCompatActivity {
     static boolean Blue = false;
     static int colorDistance = 75;
     Button captureButtonGreen;
+    FrameLayout preview = null;
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
 
-    /*@Override
+    @Override
     protected void onPause() {
         super.onPause();
+        preview.removeAllViews();
+        myPreview = null;
         myCamera.release();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        preview.removeAllViews();
+        myPreview = null;
         myCamera.release();
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        myCamera = getCameraInstance();
-    }*/
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -100,8 +99,10 @@ public class ColorTrackingActivity extends AppCompatActivity {
             // Create our Preview view and set it as the content of our activity.
             myPreview = new ColorTrackingCamera(this, myCamera);
             myCamera.setDisplayOrientation(90);
-            FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+            preview = (FrameLayout) findViewById(R.id.camera_preview);
             preview.addView(myPreview);
+            myCamera.startPreview();
+
 
             Button captureButtonRed = (Button) findViewById(R.id.button_capture_red);
             captureButtonRed.setOnClickListener(
@@ -249,7 +250,7 @@ public class ColorTrackingActivity extends AppCompatActivity {
                 public void onCompleted(String color) {
                     captureButtonGreen.setText(color);
                 }
-            }).findDominantColor(imageBitmap);
+            }).findDominantColor(imageBitmap, false);
             myCamera.startPreview();
             myCamera.takePicture(null, null, mPicture);
         }
