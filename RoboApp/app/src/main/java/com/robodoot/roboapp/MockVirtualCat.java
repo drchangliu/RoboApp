@@ -4,13 +4,9 @@ import android.graphics.PointF;
 import android.os.Handler;
 import android.util.Log;
 
-import com.robodoot.dr.RoboApp.PololuHandler;
-
 // -- OPENCVRMV
 // import org.opencv.core.Point;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A concrete implementation of the VirtualCat interface. It is a dummy implementation that just

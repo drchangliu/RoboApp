@@ -12,12 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 import com.robodoot.dr.facetracktest.R;
-import com.robodoot.dr.RoboApp.FdActivity;
 
 public class MainActivity extends FragmentActivity implements
         NavigationDrawerCallbacks, HomeFragment.OnFragmentInteractionListener,

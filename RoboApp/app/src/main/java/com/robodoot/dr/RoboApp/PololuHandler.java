@@ -12,11 +12,8 @@ import com.robodoot.roboapp.Util;
 
 import org.pololu.maestro.*;
 
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
-import java.util.ArrayList;
-import java.util.Vector;
 
 /**
  * A low-level (compared to PololuVirtualCat) class for interacting with the Pololu. Uses a

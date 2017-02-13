@@ -1,10 +1,5 @@
 package com.robodoot.dr.RoboApp;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.BatteryManager;
-import android.content.BroadcastReceiver;
 import android.util.Log;
 import android.widget.ImageView;
 import com.robodoot.dr.facetracktest.R;
