@@ -56,11 +56,12 @@ import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Vector;
 
 
 /**
- * Behavior mode activity. This is the fragment_camerapreview activity of the app.
+ * Behavior mode activity. This is the fragment_camera preview activity of the app.
  * uses built in hardware functions to use the Android accelerometer data (SensorEventListener)
  */
 
@@ -71,10 +72,10 @@ import java.util.Vector;
 
 public class FdActivity extends Activity implements
     GestureDetector.OnGestureListener, SensorEventListener, RecognitionListener {
-    // FUNCTION AND VARIABLE DEFINTIONS
+    // FUNCTION AND VARIABLE DEFINITIONS
     private Logger mFaceRectLogger;
     private Logger mSpeechTextLogger;
-    boolean initialized = false;
+    private boolean initialized = false;
 
     //new camera variables start
     private CameraSource mCameraSource = null;
@@ -99,14 +100,8 @@ public class FdActivity extends Activity implements
 
     /* End pocketsphinx variable declarations */
 
-    private ImageButton btnSpeak;
-    private Button btnMenu;
     private final int REQ_CODE_SPEECH_INPUT=100;
     private ArrayList<String> result;
-    private static final String good = "good";
-    private static final String bad = "bad";
-    private static final String cry = "cry";
-    private static final String disgust = "stupid cat";
 
     private GestureDetector gDetector;
     public enum CHAR {U, D, L, R}
@@ -118,14 +113,13 @@ public class FdActivity extends Activity implements
 
     private CatEmotion kitty;
     public enum Directions {UP, DOWN, LEFT, RIGHT, CENTER}
-    private ImageView[] arrows;
+
     private RelativeLayout frame;
     private Bitmap bmp;
     private Directions dir;
 
 
     private int IDcount;
-    private ArrayList<ArrayList<Integer>> SimilarID;
 
     private int refreshRecognizer;
 
@@ -142,7 +136,6 @@ public class FdActivity extends Activity implements
     private double xCenter = -1;
     double yCenter = -1;
 
-    private boolean debugging = false;
     private boolean trackingGreen = false;
     private boolean trackingRed = false;
 
@@ -153,11 +146,11 @@ public class FdActivity extends Activity implements
     private TextView debug1;
     TextView debug2;
     private TextView debug3;
-    TextView tempTextView;
+    private TextView tempTextView;
 
     private String tempText;
 
-    // private variables for accelerometer declatation
+    // private variables for accelerometer declaration
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
     private long lastUpdate = 0;
@@ -168,18 +161,17 @@ public class FdActivity extends Activity implements
     // Function to open menu activity
     public void openMenu(){
         Intent intent = new Intent(this, MainActivity.class);
-        // sending accelerometer data to the fragment_camerapreview activity
+        // sending accelerometer data to the fragment_camera preview activity
         intent.putExtra("accData", accData);
         startActivity(intent);
     }
 
-    private String timestamp;
     private String imageCaptureDirectory;
 
     public FdActivity() {
         mDetectorName = new String[2];
         mDetectorName[JAVA_DETECTOR] = "Java";
-        SimilarID = new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<Integer>> similarID = new ArrayList<ArrayList<Integer>>();
         virtualCat = new PololuVirtualCat();
 
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -224,7 +216,7 @@ public class FdActivity extends Activity implements
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         // Menu button on click action
-        btnMenu = (Button) findViewById(R.id.btnMenu);
+        Button btnMenu = (Button) findViewById(R.id.btnMenu);
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
@@ -232,7 +224,7 @@ public class FdActivity extends Activity implements
             }
         });
 
-        arrows = new ImageView[4];
+        ImageView[] arrows = new ImageView[4];
         arrows[0]=(ImageView)findViewById(R.id.arrow_up);
         arrows[1]=(ImageView)findViewById(R.id.arrow_right);
         arrows[2]=(ImageView)findViewById(R.id.arrow_down);
@@ -307,12 +299,13 @@ public class FdActivity extends Activity implements
         else if(requestCode==PERMISSIONS_REQUEST_MULTIPLE){
             for(int i = 0; i<permissions.length; ++i){
                 if(grantResults.length>i && grantResults[i] == PackageManager.PERMISSION_GRANTED){
-                    if (permissions[i].equals(Manifest.permission.CAMERA)) {
-                        createCameraSource();
-                    } else if(permissions[i].equals(Manifest.permission.RECORD_AUDIO)){
-                        voicePermission++;
-                    } else if(permissions[i].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)){
-                        voicePermission++;
+                    switch(permissions[i]){
+                        case(Manifest.permission.CAMERA):
+                            createCameraSource();
+                        case(Manifest.permission.RECORD_AUDIO):
+                            voicePermission++;
+                        case(Manifest.permission.WRITE_EXTERNAL_STORAGE):
+                            voicePermission++;
                     }
                 }
             }
@@ -421,7 +414,7 @@ public class FdActivity extends Activity implements
         virtualCat.onResume(getIntent(), this);
 
 
-        super.onResume();;
+        super.onResume();
         if (!initialized) {
             initialized = true;
             virtualCat.resetHead();
@@ -439,7 +432,7 @@ public class FdActivity extends Activity implements
 
         entry.clear();
 
-        timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
+        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss", Locale.US).format(new java.util.Date());
         imageCaptureDirectory = Environment.getExternalStorageDirectory().getPath() + "/RoboApp/" + timestamp;
         frameNumber = 0;
 
@@ -480,6 +473,7 @@ public class FdActivity extends Activity implements
     {
         tempTextView = field;
         tempText = message;
+        boolean debugging = false;
         if(!debugging)return;
 
         runOnUiThread(new Runnable() {
@@ -687,6 +681,7 @@ public class FdActivity extends Activity implements
             recognizer.stop();
             MediaPlayer meow = MediaPlayer.create(getApplicationContext(), R.raw.meow);
             meow.start();
+            //noinspection StatementWithEmptyBody
             while(meow.isPlaying());
             meow.release();
             Handler handler = new Handler();
@@ -722,7 +717,7 @@ public class FdActivity extends Activity implements
         return kitty.getScale();
     }
 
-    public void doCommand (String result) {
+    private void doCommand(String result) {
         if (recognizer.getSearchName().equals(KWS_SEARCH)){
             // No point in displaying keyword command
             if(!result.equals("okay robo cat")){
@@ -799,14 +794,14 @@ public class FdActivity extends Activity implements
                 kitty.loveMeCat();
             }
             else if (result.contains("color") && result.contains("tracking")){
-
+                // TODO Implement this
             }
             else if (result.contains("face") && result.contains("tracking")){
                 Intent intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
                 startActivity(intent);
             }
             else if (result.contains("stay")){
-
+                //TODO implement this
             }
             else if (result.contains("find") && result.contains("me")){
                 Intent intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
