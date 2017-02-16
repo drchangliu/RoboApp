@@ -59,6 +59,7 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.Vector;
 
+import com.google.android.gms.analytics.HitBuilders;
 
 /**
  * Behavior mode activity. This is the fragment_camera preview activity of the app.
@@ -93,9 +94,13 @@ public class FdActivity extends Activity implements
     // Keyword we are using to start command listening
     private static final String START_LISTENING_STRING = "okay robo cat";
     // Used when getting permission to listen
-    private static final int PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
-    private static final int PERMISSIONS_REQUEST_CAMERA = 2;
-    private static final int PERMISSIONS_REQUEST_MULTIPLE=3;
+
+    private static final int PERMISSIONS_REQUEST_CAMERA = 1;
+    private static final int PERMISSIONS_REQUEST_RECORD_AUDIO = 2;
+    private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 3;
+    private static final int PERMISSIONS_REQUEST_INTERNET=4;//don't have to explicitly ask for some reaseon
+    private static final int PERMISSIONS_REQUEST_ACCESS_NETWORK_STATE=5;//don't have to explicitly ask for some reaseon
+    private static final int PERMISSIONS_REQUEST_MULTIPLE=6;
     private static final String CAT_COMMANDS = "cat";
 
     /* End pocketsphinx variable declarations */
@@ -168,6 +173,9 @@ public class FdActivity extends Activity implements
 
     private String imageCaptureDirectory;
 
+    //TODO: Analytics Code
+    private com.google.android.gms.analytics.Tracker mTracker;
+
     public FdActivity() {
         mDetectorName = new String[2];
         mDetectorName[JAVA_DETECTOR] = "Java";
@@ -189,6 +197,10 @@ public class FdActivity extends Activity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fd);
 
+        //TODO: Analytics Code
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+
         ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -199,6 +211,8 @@ public class FdActivity extends Activity implements
                 }
             }
         });
+
+
 
         // initializing accelerometer variables and registering listener (listening for movement)
         senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -211,7 +225,6 @@ public class FdActivity extends Activity implements
         psswd.add(CHAR.L);  psswd.add(CHAR.R);  psswd.add(CHAR.L);  psswd.add(CHAR.R);
 
         gDetector = new GestureDetector(getApplicationContext(), this);
-        Log.i(TAG, "called onCreate");
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -270,6 +283,21 @@ public class FdActivity extends Activity implements
         }else if(permissionCheck == PackageManager.PERMISSION_GRANTED){
             voicePermissions++;
         }
+
+        permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.INTERNET);
+        if (permissionCheck == PackageManager.PERMISSION_DENIED) {
+            PermissionListTmp.add(Manifest.permission.INTERNET);
+        }else if(permissionCheck == PackageManager.PERMISSION_GRANTED){
+            //TODO: What do we do if we already have permission?
+        }
+
+        permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_NETWORK_STATE);
+        if (permissionCheck == PackageManager.PERMISSION_DENIED) {
+            PermissionListTmp.add(Manifest.permission.ACCESS_NETWORK_STATE);
+        }else if(permissionCheck == PackageManager.PERMISSION_GRANTED){
+            //TODO: What do we do if we already have permission?
+        }
+
         // If external storage & record audio are enabled
         if (voicePermissions == 2){
             runRecognizerSetup();
@@ -296,6 +324,7 @@ public class FdActivity extends Activity implements
                 finish();
             }
         }
+
         else if(requestCode==PERMISSIONS_REQUEST_MULTIPLE){
             for(int i = 0; i<permissions.length; ++i){
                 if(grantResults.length>i && grantResults[i] == PackageManager.PERMISSION_GRANTED){
@@ -392,10 +421,6 @@ public class FdActivity extends Activity implements
 
     @Override
     public void onPause() {
-        // Log.d("Pause", "onPause() called");
-        // for (ArrayList<String> it : accData){
-        //     Log.d("Accelerometer", " " + it);
-        // }
         super.onPause();
         // Stop the recognizer
         if (recognizer != null) {
@@ -411,8 +436,11 @@ public class FdActivity extends Activity implements
 
     @Override
     public void onResume() {
-        virtualCat.onResume(getIntent(), this);
+        //TODO: Analytics Code
+        mTracker.setScreenName("Image~" + "Behavior Mode");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
+        virtualCat.onResume(getIntent(), this);
 
         super.onResume();
         if (!initialized) {
@@ -822,13 +850,13 @@ public class FdActivity extends Activity implements
 
     private class FaceTrackerFactory implements MultiProcessor.Factory<Face> {
         @Override
-        public Tracker<Face> create(Face face) {
+        public com.google.android.gms.vision.Tracker<Face> create(Face face) {
             return new MotionFaceTracker();
         }
     }
 
     //TODO: Change Back to private when finished with unit testing
-    public class MotionFaceTracker extends Tracker<Face> {
+    public class MotionFaceTracker extends com.google.android.gms.vision.Tracker<Face> {
         PointF trackPosition;
 
         MotionFaceTracker() {

@@ -81,7 +81,7 @@ public class ConsoleFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_camerapreview, container, false);
         TextView tv = (TextView)view.findViewById(R.id.place);
-        tv.setText("Score: ");
+        //tv.setText("Score: ");
 
         return view;
     }
