@@ -53,12 +53,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.robodoot.dr.RoboApp.FdActivity" />
         </activity>
+
         <activity
-            android:name="com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:parentActivityName="com.robodoot.roboapp.MainActivity"
+            android:name="com.robodoot.dr.RoboApp.FaceTrackerActivity"
+            android:parentActivityName="com.robodoot.dr.RoboApp.FdActivity" >
             android:label="Face Tracker"
-            android:theme="@style/AppTheme"
             android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="com.robodoot.dr.RoboApp.FaceTrackerActivity" />

@@ -1,2 +1,2 @@
-include ':app', ':usbSerialForAndroid', ':appFaceTracker', ':BatteryInfo'
+include ':app', ':usbSerialForAndroid'
 project(':usbSerialForAndroid').projectDir = new File('libraries/usbSerialForAndroid')

@@ -3,7 +3,6 @@ package com.robodoot.dr.RoboApp;
 import android.util.Log;
 import android.widget.ImageView;
 import com.robodoot.dr.facetracktest.R;
-import com.roboapp.batteryinformation.BatteryActivity;
 // -- OPENCVRMV
 // import org.opencv.ml.EM;
 
@@ -34,7 +33,6 @@ public class CatEmotion {
     int battScale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);*/
 
     private boolean default_display = true;
-   BatteryActivity batt = new BatteryActivity();
 
    /* float batteryPct = level / (float)battScale;
 
@@ -48,41 +46,9 @@ public class CatEmotion {
         state = EMOTION.HAPPY;
         context = c;
         scale = 0;
-       final int percentage = batt.getPercentage();
 
         tm = new Timer("tm");
         //faceAnimator.setAutoAnimate(true);
-        calc = new TimerTask() {
-            @Override
-            public void run() {
-              if(percentage > 50) {
-                  if (scale > 0) {
-                      scale -= 2;
-                  } else if (scale < 0) {
-                      scale++;
-                  }
-                  reCalcFace();
-                  return;
-              }else if(percentage <=50 && percentage > 25){
-                  if(scale > -33){
-                      scale -= 2;
-                  } else if(scale < -33){
-                      scale++;
-                  }
-                  reCalcFace();
-                  return;
-              }else if(percentage <= 25){
-                  if(scale > -66){
-                      scale -= 2;
-                  }else if(scale < -66){
-                      scale++;
-                  }
-                  reCalcFace();
-                  return;
-              }
-            }
-        };
-        tm.schedule(calc, 100, 300);
 
     }
     //************************************
@@ -116,8 +82,6 @@ public class CatEmotion {
         if(scale>120)scale=120;
         if(scale < -180)scale= -180;
 
-       final int percentage = batt.getPercentage();
-
         context.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -143,175 +107,6 @@ public class CatEmotion {
                     }
                     else{
                         state = EMOTION.HEARTS;
-                    }
-                }
-
-                if(percentage > 50) {
-                    switch (state) {
-                        case HEARTS:
-                            pic.setImageResource(R.drawable.face_hearts);
-                            break;
-                        case HAPPIER:
-                            pic.setImageResource(R.drawable.face_happier);
-                            break;
-                        case HAPPY_TONGUE:
-                            pic.setImageResource(R.drawable.face_happytongue);
-                            break;
-                        case HAPPY:
-                            pic.setImageResource(R.drawable.face_happy);
-                            break;
-                        case ANNOYED:
-                            pic.setImageResource(R.drawable.face_annoyed);
-                            break;
-                        case SAD:
-                            pic.setImageResource(R.drawable.face_sad);
-                            break;
-                        case SADDER:
-                            pic.setImageResource(R.drawable.face_sadder);
-                            break;
-                        case CONCERNED:
-                            pic.setImageResource(R.drawable.face_concerned);
-                            break;
-                        case CRYING:
-                            Log.w("Crying", "yeah buddy");
-                            pic.setImageResource(R.drawable.face_crying);
-                            break;
-                        case DISGUSTED:
-                            pic.setImageResource(R.drawable.face_disgusted);
-                            break;
-                        case HEARTS_TONGUE:
-                            pic.setImageResource(R.drawable.face_heartstongue);
-                            break;
-                        case KAWAII_EYES_CLOSED:
-                            pic.setImageResource(R.drawable.face_kawaiieyesclosed);
-                            break;
-                        case KAWAII_EYES_OPEN:
-                            pic.setImageResource(R.drawable.face_kawaiieyesopen);
-                            break;
-                        case LOOK_LEFT:
-                            pic.setImageResource(R.drawable.face_lookleft);
-                            break;
-                        case LOOK_RIGHT:
-                            pic.setImageResource(R.drawable.face_lookright);
-                            break;
-                        case YAWNING:
-                            pic.setImageResource(R.drawable.face_yawning);
-                            break;
-                        default:
-                            pic.setImageResource(R.drawable.face_happy);
-                            break;
-                    }
-                }
-                if(percentage > 25 && percentage <= 50) {
-                    switch (state) {
-                        case HEARTS:
-                            pic.setImageResource(R.drawable.face_hearts_sleepy);
-                            break;
-                        case HAPPIER:
-                            pic.setImageResource(R.drawable.face_happier_sleepy);
-                            break;
-                        case HAPPY_TONGUE:
-                            pic.setImageResource(R.drawable.face_happytongue_sleepy);
-                            break;
-                        case HAPPY:
-                            pic.setImageResource(R.drawable.face_happy_sleepy);
-                            break;
-                        case ANNOYED:
-                            pic.setImageResource(R.drawable.face_annoyed_sleepy);
-                            break;
-                        case SAD:
-                            pic.setImageResource(R.drawable.face_sad_sleepy);
-                            break;
-                        case SADDER:
-                            pic.setImageResource(R.drawable.face_sadder_sleepy);
-                            break;
-                        case CONCERNED:
-                            pic.setImageResource(R.drawable.face_concerned_sleepy);
-                            break;
-                        case CRYING:
-                            Log.w("Crying", "yeah buddy");
-                            pic.setImageResource(R.drawable.face_crying_sleepy);
-                            break;
-                        case DISGUSTED:
-                            pic.setImageResource(R.drawable.face_disgusted_sleepy);
-                            break;
-                        case HEARTS_TONGUE:
-                            pic.setImageResource(R.drawable.face_heartstongue_sleepy);
-                            break;
-                        case KAWAII_EYES_CLOSED:
-                            pic.setImageResource(R.drawable.face_kawaiieyesclosed_sleepy);
-                            break;
-                        case KAWAII_EYES_OPEN:
-                            pic.setImageResource(R.drawable.face_kawaiieyesopen_sleepy);
-                            break;
-                        case LOOK_LEFT:
-                            pic.setImageResource(R.drawable.face_lookleft_sleepy);
-                            break;
-                        case LOOK_RIGHT:
-                            pic.setImageResource(R.drawable.face_lookright_sleepy);
-                            break;
-                        case YAWNING:
-                            pic.setImageResource(R.drawable.face_yawning_sleepy);
-                            break;
-                        default:
-                            pic.setImageResource(R.drawable.face_happy_sleepy);
-                            break;
-                    }
-                }
-                if(percentage <= 25) {
-                    switch (state) {
-                        case HEARTS:
-                            pic.setImageResource(R.drawable.face_hearts_tired);
-                            break;
-                        case HAPPIER:
-                            pic.setImageResource(R.drawable.face_happier_tired);
-                            break;
-                        case HAPPY_TONGUE:
-                            pic.setImageResource(R.drawable.face_happytongue_tired);
-                            break;
-                        case HAPPY:
-                            pic.setImageResource(R.drawable.face_happy_tired);
-                            break;
-                        case ANNOYED:
-                            pic.setImageResource(R.drawable.face_annoyed_tired);
-                            break;
-                        case SAD:
-                            pic.setImageResource(R.drawable.face_sad_tired);
-                            break;
-                        case SADDER:
-                            pic.setImageResource(R.drawable.face_sadder_tired);
-                            break;
-                        case CONCERNED:
-                            pic.setImageResource(R.drawable.face_concerned_tired);
-                            break;
-                        case CRYING:
-                            Log.w("Crying", "yeah buddy");
-                            pic.setImageResource(R.drawable.face_crying_tired);
-                            break;
-                        case DISGUSTED:
-                            pic.setImageResource(R.drawable.face_disgusted_tired);
-                            break;
-                        case HEARTS_TONGUE:
-                            pic.setImageResource(R.drawable.face_heartstongue);
-                            break;
-                        case KAWAII_EYES_CLOSED:
-                            pic.setImageResource(R.drawable.face_kawaiieyesclosed_tired);
-                            break;
-                        case KAWAII_EYES_OPEN:
-                            pic.setImageResource(R.drawable.face_kawaiieyesopen_tired);
-                            break;
-                        case LOOK_LEFT:
-                            pic.setImageResource(R.drawable.face_lookleft_tired);
-                            break;
-                        case LOOK_RIGHT:
-                            pic.setImageResource(R.drawable.face_lookright_tired);
-                            break;
-                        case YAWNING:
-                            pic.setImageResource(R.drawable.face_yawning_tired);
-                            break;
-                        default:
-                            pic.setImageResource(R.drawable.face_happy_tired);
-                            break;
                     }
                 }
 

@@ -77,6 +77,7 @@ public class MainActivity extends FragmentActivity implements
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         switch(position) {
             case 0:
+                //TODO: Console Broken
                 fragment = new ConsoleFragment();
                 //Toast.makeText(this, "Console", Toast.LENGTH_SHORT).show();
                 //TODO: Analytics Code
@@ -100,7 +101,7 @@ public class MainActivity extends FragmentActivity implements
                         .setCategory("Action")
                         .setAction("Open View Face Tracking Mode")
                         .build());
-                intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
+                intent = new Intent("com.robodoot.dr.RoboApp.FaceTrackerActivity");
                 break;
             case 3:
                 log_console("Readme Displayed");
