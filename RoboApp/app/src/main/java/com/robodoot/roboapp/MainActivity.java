@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.robodoot.dr.RoboApp.AnalyticsApplication;
 import com.robodoot.dr.facetracktest.R;
 
 public class MainActivity extends FragmentActivity implements
@@ -32,9 +34,14 @@ public class MainActivity extends FragmentActivity implements
     public static final int LOG_SIZE = 100;
     public static String[] logEntries = new String[LOG_SIZE]; // This value may need to be changed so all entries fit on screen
 
+    //TODO: Analytics Code
+    private com.google.android.gms.analytics.Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //TODO: Analytics Code
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -55,6 +62,10 @@ public class MainActivity extends FragmentActivity implements
     @Override
     public void onResume() {
         super.onResume();
+
+        //TODO: Analytics Code
+        mTracker.setScreenName("Image~" + "Behavior Mode");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override
@@ -68,20 +79,45 @@ public class MainActivity extends FragmentActivity implements
             case 0:
                 fragment = new ConsoleFragment();
                 //Toast.makeText(this, "Console", Toast.LENGTH_SHORT).show();
+                //TODO: Analytics Code
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Action")
+                        .setAction("Open Console")
+                        .build());
                 break;
             case 1:
                 this.finish();
+                //TODO: Analytics Code
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Action")
+                        .setAction("Return to Behavior Mode")
+                        .build());
                 break;
             case 2:
                 log_console("Face Tracking");
+                //TODO: Analytics Code
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Action")
+                        .setAction("Open View Face Tracking Mode")
+                        .build());
                 intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
                 break;
             case 3:
                 log_console("Readme Displayed");
+                //TODO: Analytics Code
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Action")
+                        .setAction("View Readme")
+                        .build());
                 fragment = new ReadmeFragment();
                 break;
             case 4:
                 log_console("Accelerometer Data Displayed");
+                //TODO: Analytics Code
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Action")
+                        .setAction("Open Acellerometer Log")
+                        .build());
                 fragment = new AccelerometerFragment();
                 break;
             default:
@@ -150,7 +186,6 @@ public class MainActivity extends FragmentActivity implements
                 Bundle bndle = new Bundle();
                 bndle.putString("txt", stredittext);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                Log.d("TAG", "Creating New Component Test: " + stredittext);
                 CompTestFragment cn = new CompTestFragment();
                 cn.setArguments(bndle);
                 transaction.replace(R.id.container, cn);
