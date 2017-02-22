@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "805873765798",
+    "project_id": "firebase-roboapp"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:805873765798:android:405e6531160b5418",
+        "android_client_info": {
+          "package_name": "com.robodoot.dr.facetracktest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwYlUQRKVhZDWiyi-DF32MjIEb-yAlkQ8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-92111606-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
