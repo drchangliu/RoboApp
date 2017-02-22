@@ -1,0 +1,2203 @@
+commit 82b2c3ed499fefb987199b2395da001b2a271ea3
+Author: Zach Taylor <zach.t013@gmail.com>
+Date:   Thu Sep 29 00:00:34 2016 -0400
+
+    Notes for new ultrasonic component
+    
+    File contains links to various websites with information about
+    implementation of ultrasonic devices for distance tracking
+
+ proj_doc/environment_mapping/sonic_sensor.docx | Bin 0 -> 13677 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 23c61c9ddef1b57777faac44b95760b6da642341
+Author: Luke Shays <ls233813@ohio.edu>
+Date:   Wed Sep 28 23:37:09 2016 -0400
+
+    Added links to color tracking folder
+
+ .../Color Detection Using Android Camera - Stack Overflow.url           | 2 ++
+ ...blob-detection at master \302\267 opencv-opencv \302\267 GitHub.url" | 2 ++
+ 2 files changed, 4 insertions(+)
+
+commit d4fd169eda89b6ec54f35836d7c671c068f5b393
+Author: Luke Shays <ls233813@ohio.edu>
+Date:   Wed Sep 28 23:34:24 2016 -0400
+
+    Added color tracking links and notes
+
+ proj_doc/color_tracking/notes.txt | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit 940d88c2b81516515cbe9d8ce04f14c30c15bb87
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Wed Sep 28 21:17:09 2016 -0400
+
+    Added documentation of voice recognition commands
+
+ proj_doc/voice_recognition/commands.docx | Bin 0 -> 15072 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 84edfba769ed0c094802e4503bffa39021f864a9
+Author: Quintin Fettes <qf731413@ohio.edu>
+Date:   Tue Sep 27 20:53:56 2016 -0400
+
+    Updated our readme in ./ to explain the structure of the git repo. Now, people seeing this repo for the first time will likely be much less confused than we were the first time we saw it.
+
+ README.md | 55 ++++++++++++++++++++++++++++++++-----------------------
+ 1 file changed, 32 insertions(+), 23 deletions(-)
+
+commit 489b5389a6eeca65c38ae977205ab1261f6fd332
+Author: Quintin Fettes <qf731413@ohio.edu>
+Date:   Tue Sep 27 20:48:14 2016 -0400
+
+    added a readme for the proj_doc folder
+
+ proj_doc/README.md | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+commit b70c9a21d3b06060a64b66104ddb1764ebe26eae
+Author: Quintin Fettes <qf731413@ohio.edu>
+Date:   Tue Sep 27 20:43:48 2016 -0400
+
+    NOTE: GOALS OF THE TEAM AND INDIVIDUALS WILL ALWAYS BE FOUND IN THE MOST RECENT MEETING MINUTES. Added relevant documents to proj_docs.
+
+ proj_doc/meeting_reports/minutes_9-26-16.docx | Bin 0 -> 14199 bytes
+ proj_doc/meeting_reports/minutes_9-27-16.docx | Bin 0 -> 15724 bytes
+ proj_doc/meeting_reports/minutes_9-6-16.docx  | Bin 0 -> 12321 bytes
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 4a11a4820f7fb00bc19afcbf346045df8af7002b
+Author: Quintin Fettes <qf731413@ohio.edu>
+Date:   Tue Sep 27 20:30:13 2016 -0400
+
+    Further reorganization. Now Homework, requirement documents, meeting reports, etc... can all be found in ./proj_doc
+
+ homework/hw4/GUI_mockup.png                        | Bin 78944 -> 0 bytes
+ homework/hw4/HW4 Doc.docx                          | Bin 283409 -> 0 bytes
+ legacy_files/New Text Document.txt                 |   2 -
+ legacy_files/README.txt                            |   2 +
+ meeting_reports/client_questions_9-5-16.md         |  40 --------------------
+ meeting_reports/inital_requirements_9-5-16.md      |  42 ---------------------
+ proj_doc/homework/hw4/GUI_mockup.png               | Bin 0 -> 78944 bytes
+ proj_doc/homework/hw4/HW4 Doc.docx                 | Bin 0 -> 283409 bytes
+ .../meeting_reports/client_questions_9-5-16.md     |  40 ++++++++++++++++++++
+ .../meeting_reports/inital_requirements_9-5-16.md  |  42 +++++++++++++++++++++
+ 10 files changed, 84 insertions(+), 84 deletions(-)
+
+commit b7ec49d7aa4602ccc43f6f4cf064233dcc77cad2
+Author: Quintin Fettes <qf731413@ohio.edu>
+Date:   Tue Sep 27 20:24:18 2016 -0400
+
+    This was a general reorganization/improvement of the repository. All files that were in the repo as part of the coursework for the previous team, which were of little or unknown use to us are in the ./legacy_files directory with a readme file explaining their nature. All files pertaining to meetings/goals/requirements of the current project are now found in the ./meeting_reports directory. Several junk files were removed.
+
+ .idea/.name                                        |    1 -
+ .idea/RoboApp.iml                                  |   23 -
+ .idea/compiler.xml                                 |   22 -
+ .idea/copyright/profiles_settings.xml              |    3 -
+ .idea/encodings.xml                                |    6 -
+ .idea/misc.xml                                     |   14 -
+ .idea/modules.xml                                  |    8 -
+ .idea/vcs.xml                                      |    6 -
+ .idea/workspace.xml                                |  269 -
+ Initial_Report.pdf                                 |  Bin 47779 -> 0 bytes
+ Robocat_Forward_gait/ROBOCATlegcotrolV0_2_DEMO3.m  |  419 --
+ Robocat_Forward_gait/left_angles.m                 |   47 -
+ Robocat_Forward_gait/right_angles.m                |   43 -
+ client_questions.md                                |   40 -
+ inital_requirements.md                             |   42 -
+ legacy_files/Initial_Report.pdf                    |  Bin 0 -> 47779 bytes
+ legacy_files/New Text Document.txt                 |    2 +
+ .../ROBOCATlegcotrolV0_2_DEMO3.m                   |  419 ++
+ legacy_files/Robocat_Forward_gait/left_angles.m    |   47 +
+ legacy_files/Robocat_Forward_gait/right_angles.m   |   43 +
+ legacy_files/opencv_camera_capture_C++/.gitignore  |    6 +
+ legacy_files/opencv_camera_capture_C++/main.cc     |  138 +
+ .../opencv_camera_capture_C++/mainsimple.cc        |   56 +
+ legacy_files/qualtricsLink.txt                     |    1 +
+ legacy_files/semester_1/Concept Map.pptx           |  Bin 0 -> 39610 bytes
+ ...irement-Dr. RoboDoot and the NP HardCoders.docx |  Bin 0 -> 213774 bytes
+ legacy_files/semester_1/RoboApp Demo 1.pptx        |  Bin 0 -> 2392428 bytes
+ legacy_files/semester_1/RoboApp Demo2.pptx         |  Bin 0 -> 191027 bytes
+ legacy_files/semester_1/mockup/homepage.png        |  Bin 0 -> 20149 bytes
+ legacy_files/semester_1/mockup/mockup1.fw.png      |  Bin 0 -> 98029 bytes
+ .../mockup/resources/Fonts/Roboto/Roboto-Black.ttf |  Bin 0 -> 127948 bytes
+ .../resources/Fonts/Roboto/Roboto-BlackItalic.ttf  |  Bin 0 -> 134716 bytes
+ .../mockup/resources/Fonts/Roboto/Roboto-Bold.ttf  |  Bin 0 -> 127744 bytes
+ .../resources/Fonts/Roboto/Roboto-BoldItalic.ttf   |  Bin 0 -> 134556 bytes
+ .../resources/Fonts/Roboto/Roboto-Italic.ttf       |  Bin 0 -> 132440 bytes
+ .../mockup/resources/Fonts/Roboto/Roboto-Light.ttf |  Bin 0 -> 126792 bytes
+ .../resources/Fonts/Roboto/Roboto-LightItalic.ttf  |  Bin 0 -> 133172 bytes
+ .../resources/Fonts/Roboto/Roboto-Medium.ttf       |  Bin 0 -> 127488 bytes
+ .../resources/Fonts/Roboto/Roboto-MediumItalic.ttf |  Bin 0 -> 134312 bytes
+ .../resources/Fonts/Roboto/Roboto-Regular.ttf      |  Bin 0 -> 126072 bytes
+ .../mockup/resources/Fonts/Roboto/Roboto-Thin.ttf  |  Bin 0 -> 127584 bytes
+ .../resources/Fonts/Roboto/Roboto-ThinItalic.ttf   |  Bin 0 -> 132860 bytes
+ .../Fonts/Roboto/RobotoCondensed-Bold.ttf          |  Bin 0 -> 127340 bytes
+ .../Fonts/Roboto/RobotoCondensed-BoldItalic.ttf    |  Bin 0 -> 135504 bytes
+ .../Fonts/Roboto/RobotoCondensed-Italic.ttf        |  Bin 0 -> 133908 bytes
+ .../Fonts/Roboto/RobotoCondensed-Light.ttf         |  Bin 0 -> 126168 bytes
+ .../Fonts/Roboto/RobotoCondensed-LightItalic.ttf   |  Bin 0 -> 134544 bytes
+ .../Fonts/Roboto/RobotoCondensed-Regular.ttf       |  Bin 0 -> 125332 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-B.ttf     |  Bin 0 -> 333612 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-BI.ttf    |  Bin 0 -> 356980 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-C.ttf     |  Bin 0 -> 350444 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-L.ttf     |  Bin 0 -> 415552 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-LI.ttf    |  Bin 0 -> 409608 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-M.ttf     |  Bin 0 -> 341324 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-MI.ttf    |  Bin 0 -> 366992 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-R.ttf     |  Bin 0 -> 353824 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-RI.ttf    |  Bin 0 -> 386440 bytes
+ .../mockup/resources/Fonts/Ubuntu/UbuntuMono-B.ttf |  Bin 0 -> 191400 bytes
+ .../resources/Fonts/Ubuntu/UbuntuMono-BI.ttf       |  Bin 0 -> 216208 bytes
+ .../mockup/resources/Fonts/Ubuntu/UbuntuMono-R.ttf |  Bin 0 -> 205748 bytes
+ .../resources/Fonts/Ubuntu/UbuntuMono-RI.ttf       |  Bin 0 -> 210216 bytes
+ .../cat/drawable-hdpi/ic_cat_black_18dp.png        |  Bin 0 -> 516 bytes
+ .../cat/drawable-hdpi/ic_cat_black_24dp.png        |  Bin 0 -> 626 bytes
+ .../cat/drawable-hdpi/ic_cat_black_36dp.png        |  Bin 0 -> 937 bytes
+ .../cat/drawable-hdpi/ic_cat_black_48dp.png        |  Bin 0 -> 1210 bytes
+ .../cat/drawable-hdpi/ic_cat_grey600_18dp.png      |  Bin 0 -> 777 bytes
+ .../cat/drawable-hdpi/ic_cat_grey600_24dp.png      |  Bin 0 -> 940 bytes
+ .../cat/drawable-hdpi/ic_cat_grey600_36dp.png      |  Bin 0 -> 1429 bytes
+ .../cat/drawable-hdpi/ic_cat_grey600_48dp.png      |  Bin 0 -> 2008 bytes
+ .../cat/drawable-hdpi/ic_cat_white_18dp.png        |  Bin 0 -> 561 bytes
+ .../cat/drawable-hdpi/ic_cat_white_24dp.png        |  Bin 0 -> 663 bytes
+ .../cat/drawable-hdpi/ic_cat_white_36dp.png        |  Bin 0 -> 1012 bytes
+ .../cat/drawable-hdpi/ic_cat_white_48dp.png        |  Bin 0 -> 1337 bytes
+ .../cat/drawable-mdpi/ic_cat_black_18dp.png        |  Bin 0 -> 346 bytes
+ .../cat/drawable-mdpi/ic_cat_black_24dp.png        |  Bin 0 -> 460 bytes
+ .../cat/drawable-mdpi/ic_cat_black_36dp.png        |  Bin 0 -> 626 bytes
+ .../cat/drawable-mdpi/ic_cat_black_48dp.png        |  Bin 0 -> 789 bytes
+ .../cat/drawable-mdpi/ic_cat_grey600_18dp.png      |  Bin 0 -> 454 bytes
+ .../cat/drawable-mdpi/ic_cat_grey600_24dp.png      |  Bin 0 -> 620 bytes
+ .../cat/drawable-mdpi/ic_cat_grey600_36dp.png      |  Bin 0 -> 940 bytes
+ .../cat/drawable-mdpi/ic_cat_grey600_48dp.png      |  Bin 0 -> 1283 bytes
+ .../cat/drawable-mdpi/ic_cat_white_18dp.png        |  Bin 0 -> 351 bytes
+ .../cat/drawable-mdpi/ic_cat_white_24dp.png        |  Bin 0 -> 467 bytes
+ .../cat/drawable-mdpi/ic_cat_white_36dp.png        |  Bin 0 -> 663 bytes
+ .../cat/drawable-mdpi/ic_cat_white_48dp.png        |  Bin 0 -> 844 bytes
+ .../cat/drawable-xhdpi/ic_cat_black_18dp.png       |  Bin 0 -> 626 bytes
+ .../cat/drawable-xhdpi/ic_cat_black_24dp.png       |  Bin 0 -> 789 bytes
+ .../cat/drawable-xhdpi/ic_cat_black_36dp.png       |  Bin 0 -> 1210 bytes
+ .../cat/drawable-xhdpi/ic_cat_black_48dp.png       |  Bin 0 -> 1593 bytes
+ .../cat/drawable-xhdpi/ic_cat_grey600_18dp.png     |  Bin 0 -> 940 bytes
+ .../cat/drawable-xhdpi/ic_cat_grey600_24dp.png     |  Bin 0 -> 1283 bytes
+ .../cat/drawable-xhdpi/ic_cat_grey600_36dp.png     |  Bin 0 -> 2008 bytes
+ .../cat/drawable-xhdpi/ic_cat_grey600_48dp.png     |  Bin 0 -> 2686 bytes
+ .../cat/drawable-xhdpi/ic_cat_white_18dp.png       |  Bin 0 -> 663 bytes
+ .../cat/drawable-xhdpi/ic_cat_white_24dp.png       |  Bin 0 -> 844 bytes
+ .../cat/drawable-xhdpi/ic_cat_white_36dp.png       |  Bin 0 -> 1337 bytes
+ .../cat/drawable-xhdpi/ic_cat_white_48dp.png       |  Bin 0 -> 1764 bytes
+ .../cat/drawable-xxhdpi/ic_cat_black_18dp.png      |  Bin 0 -> 937 bytes
+ .../cat/drawable-xxhdpi/ic_cat_black_24dp.png      |  Bin 0 -> 1210 bytes
+ .../cat/drawable-xxhdpi/ic_cat_black_36dp.png      |  Bin 0 -> 1878 bytes
+ .../cat/drawable-xxhdpi/ic_cat_black_48dp.png      |  Bin 0 -> 2488 bytes
+ .../cat/drawable-xxhdpi/ic_cat_grey600_18dp.png    |  Bin 0 -> 1429 bytes
+ .../cat/drawable-xxhdpi/ic_cat_grey600_24dp.png    |  Bin 0 -> 2008 bytes
+ .../cat/drawable-xxhdpi/ic_cat_grey600_36dp.png    |  Bin 0 -> 3037 bytes
+ .../cat/drawable-xxhdpi/ic_cat_grey600_48dp.png    |  Bin 0 -> 4028 bytes
+ .../cat/drawable-xxhdpi/ic_cat_white_18dp.png      |  Bin 0 -> 1012 bytes
+ .../cat/drawable-xxhdpi/ic_cat_white_24dp.png      |  Bin 0 -> 1337 bytes
+ .../cat/drawable-xxhdpi/ic_cat_white_36dp.png      |  Bin 0 -> 2135 bytes
+ .../cat/drawable-xxhdpi/ic_cat_white_48dp.png      |  Bin 0 -> 2897 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_black_18dp.png     |  Bin 0 -> 1210 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_black_24dp.png     |  Bin 0 -> 1593 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_black_36dp.png     |  Bin 0 -> 2488 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_black_48dp.png     |  Bin 0 -> 3407 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_grey600_18dp.png   |  Bin 0 -> 2008 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_grey600_24dp.png   |  Bin 0 -> 2686 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_grey600_36dp.png   |  Bin 0 -> 4028 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_grey600_48dp.png   |  Bin 0 -> 5501 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_white_18dp.png     |  Bin 0 -> 1337 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_white_24dp.png     |  Bin 0 -> 1764 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_white_36dp.png     |  Bin 0 -> 2897 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_white_48dp.png     |  Bin 0 -> 4035 bytes
+ .../resources/other_icons/cat/drawable/cat.xml     |    8 +
+ .../mockup/resources/other_icons/cat/readme.txt    |    5 +
+ .../drawable-hdpi/ic_cube_outline_black_18dp.png   |  Bin 0 -> 473 bytes
+ .../drawable-hdpi/ic_cube_outline_black_24dp.png   |  Bin 0 -> 605 bytes
+ .../drawable-hdpi/ic_cube_outline_black_36dp.png   |  Bin 0 -> 752 bytes
+ .../drawable-hdpi/ic_cube_outline_black_48dp.png   |  Bin 0 -> 853 bytes
+ .../drawable-hdpi/ic_cube_outline_grey600_18dp.png |  Bin 0 -> 747 bytes
+ .../drawable-hdpi/ic_cube_outline_grey600_24dp.png |  Bin 0 -> 937 bytes
+ .../drawable-hdpi/ic_cube_outline_grey600_36dp.png |  Bin 0 -> 1355 bytes
+ .../drawable-hdpi/ic_cube_outline_grey600_48dp.png |  Bin 0 -> 1571 bytes
+ .../drawable-hdpi/ic_cube_outline_white_18dp.png   |  Bin 0 -> 487 bytes
+ .../drawable-hdpi/ic_cube_outline_white_24dp.png   |  Bin 0 -> 670 bytes
+ .../drawable-hdpi/ic_cube_outline_white_36dp.png   |  Bin 0 -> 825 bytes
+ .../drawable-hdpi/ic_cube_outline_white_48dp.png   |  Bin 0 -> 908 bytes
+ .../drawable-mdpi/ic_cube_outline_black_18dp.png   |  Bin 0 -> 351 bytes
+ .../drawable-mdpi/ic_cube_outline_black_24dp.png   |  Bin 0 -> 350 bytes
+ .../drawable-mdpi/ic_cube_outline_black_36dp.png   |  Bin 0 -> 605 bytes
+ .../drawable-mdpi/ic_cube_outline_black_48dp.png   |  Bin 0 -> 587 bytes
+ .../drawable-mdpi/ic_cube_outline_grey600_18dp.png |  Bin 0 -> 524 bytes
+ .../drawable-mdpi/ic_cube_outline_grey600_24dp.png |  Bin 0 -> 622 bytes
+ .../drawable-mdpi/ic_cube_outline_grey600_36dp.png |  Bin 0 -> 937 bytes
+ .../drawable-mdpi/ic_cube_outline_grey600_48dp.png |  Bin 0 -> 1140 bytes
+ .../drawable-mdpi/ic_cube_outline_white_18dp.png   |  Bin 0 -> 371 bytes
+ .../drawable-mdpi/ic_cube_outline_white_24dp.png   |  Bin 0 -> 358 bytes
+ .../drawable-mdpi/ic_cube_outline_white_36dp.png   |  Bin 0 -> 670 bytes
+ .../drawable-mdpi/ic_cube_outline_white_48dp.png   |  Bin 0 -> 631 bytes
+ .../drawable-xhdpi/ic_cube_outline_black_18dp.png  |  Bin 0 -> 605 bytes
+ .../drawable-xhdpi/ic_cube_outline_black_24dp.png  |  Bin 0 -> 587 bytes
+ .../drawable-xhdpi/ic_cube_outline_black_36dp.png  |  Bin 0 -> 853 bytes
+ .../drawable-xhdpi/ic_cube_outline_black_48dp.png  |  Bin 0 -> 1102 bytes
+ .../ic_cube_outline_grey600_18dp.png               |  Bin 0 -> 937 bytes
+ .../ic_cube_outline_grey600_24dp.png               |  Bin 0 -> 1140 bytes
+ .../ic_cube_outline_grey600_36dp.png               |  Bin 0 -> 1571 bytes
+ .../ic_cube_outline_grey600_48dp.png               |  Bin 0 -> 2022 bytes
+ .../drawable-xhdpi/ic_cube_outline_white_18dp.png  |  Bin 0 -> 670 bytes
+ .../drawable-xhdpi/ic_cube_outline_white_24dp.png  |  Bin 0 -> 631 bytes
+ .../drawable-xhdpi/ic_cube_outline_white_36dp.png  |  Bin 0 -> 908 bytes
+ .../drawable-xhdpi/ic_cube_outline_white_48dp.png  |  Bin 0 -> 1153 bytes
+ .../drawable-xxhdpi/ic_cube_outline_black_18dp.png |  Bin 0 -> 752 bytes
+ .../drawable-xxhdpi/ic_cube_outline_black_24dp.png |  Bin 0 -> 853 bytes
+ .../drawable-xxhdpi/ic_cube_outline_black_36dp.png |  Bin 0 -> 1580 bytes
+ .../drawable-xxhdpi/ic_cube_outline_black_48dp.png |  Bin 0 -> 1746 bytes
+ .../ic_cube_outline_grey600_18dp.png               |  Bin 0 -> 1355 bytes
+ .../ic_cube_outline_grey600_24dp.png               |  Bin 0 -> 1571 bytes
+ .../ic_cube_outline_grey600_36dp.png               |  Bin 0 -> 2520 bytes
+ .../ic_cube_outline_grey600_48dp.png               |  Bin 0 -> 3148 bytes
+ .../drawable-xxhdpi/ic_cube_outline_white_18dp.png |  Bin 0 -> 825 bytes
+ .../drawable-xxhdpi/ic_cube_outline_white_24dp.png |  Bin 0 -> 908 bytes
+ .../drawable-xxhdpi/ic_cube_outline_white_36dp.png |  Bin 0 -> 1830 bytes
+ .../drawable-xxhdpi/ic_cube_outline_white_48dp.png |  Bin 0 -> 2036 bytes
+ .../ic_cube_outline_black_18dp.png                 |  Bin 0 -> 853 bytes
+ .../ic_cube_outline_black_24dp.png                 |  Bin 0 -> 1102 bytes
+ .../ic_cube_outline_black_36dp.png                 |  Bin 0 -> 1746 bytes
+ .../ic_cube_outline_black_48dp.png                 |  Bin 0 -> 2467 bytes
+ .../ic_cube_outline_grey600_18dp.png               |  Bin 0 -> 1571 bytes
+ .../ic_cube_outline_grey600_24dp.png               |  Bin 0 -> 2022 bytes
+ .../ic_cube_outline_grey600_36dp.png               |  Bin 0 -> 3148 bytes
+ .../ic_cube_outline_grey600_48dp.png               |  Bin 0 -> 4278 bytes
+ .../ic_cube_outline_white_18dp.png                 |  Bin 0 -> 908 bytes
+ .../ic_cube_outline_white_24dp.png                 |  Bin 0 -> 1153 bytes
+ .../ic_cube_outline_white_36dp.png                 |  Bin 0 -> 2036 bytes
+ .../ic_cube_outline_white_48dp.png                 |  Bin 0 -> 3252 bytes
+ .../cube_outline/drawable/cube_outline.xml         |    8 +
+ .../android/drawable-hdpi/ic_face_black_24dp.png   |  Bin 0 -> 511 bytes
+ .../android/drawable-mdpi/ic_face_black_24dp.png   |  Bin 0 -> 349 bytes
+ .../android/drawable-xhdpi/ic_face_black_24dp.png  |  Bin 0 -> 680 bytes
+ .../android/drawable-xxhdpi/ic_face_black_24dp.png |  Bin 0 -> 990 bytes
+ .../drawable-xxxhdpi/ic_face_black_24dp.png        |  Bin 0 -> 1297 bytes
+ .../face/ios/ic_face.imageset/Contents.json        |   23 +
+ .../face/ios/ic_face.imageset/ic_face.png          |  Bin 0 -> 349 bytes
+ .../face/ios/ic_face.imageset/ic_face_2x.png       |  Bin 0 -> 680 bytes
+ .../face/ios/ic_face.imageset/ic_face_3x.png       |  Bin 0 -> 1134 bytes
+ .../other_icons/face/web/ic_face_black_24dp_1x.png |  Bin 0 -> 349 bytes
+ .../other_icons/face/web/ic_face_black_24dp_2x.png |  Bin 0 -> 680 bytes
+ ...ial_template_ic_product_icon_192px_dark_dark.ai | 5824 +++++++++++++++++++
+ ...al_template_ic_product_icon_192px_dark_light.ai | 5980 ++++++++++++++++++++
+ ...al_template_ic_product_icon_192px_light_dark.ai | 5653 ++++++++++++++++++
+ ...l_template_ic_product_icon_192px_light_light.ai | 5725 +++++++++++++++++++
+ legacy_files/semester_1/scrum-dev-log.rtf          |  127 +
+ meeting_reports/client_questions_9-5-16.md         |   40 +
+ meeting_reports/inital_requirements_9-5-16.md      |   42 +
+ opencv_camera_capture_C++/.gitignore               |    6 -
+ opencv_camera_capture_C++/main.cc                  |  138 -
+ opencv_camera_capture_C++/mainsimple.cc            |   56 -
+ qualtricsLink.txt                                  |    1 -
+ semester_1/Concept Map.pptx                        |  Bin 39610 -> 0 bytes
+ ...irement-Dr. RoboDoot and the NP HardCoders.docx |  Bin 213774 -> 0 bytes
+ semester_1/RoboApp Demo 1.pptx                     |  Bin 2392428 -> 0 bytes
+ semester_1/RoboApp Demo2.pptx                      |  Bin 191027 -> 0 bytes
+ semester_1/mockup/homepage.png                     |  Bin 20149 -> 0 bytes
+ semester_1/mockup/mockup1.fw.png                   |  Bin 98029 -> 0 bytes
+ .../mockup/resources/Fonts/Roboto/Roboto-Black.ttf |  Bin 127948 -> 0 bytes
+ .../resources/Fonts/Roboto/Roboto-BlackItalic.ttf  |  Bin 134716 -> 0 bytes
+ .../mockup/resources/Fonts/Roboto/Roboto-Bold.ttf  |  Bin 127744 -> 0 bytes
+ .../resources/Fonts/Roboto/Roboto-BoldItalic.ttf   |  Bin 134556 -> 0 bytes
+ .../resources/Fonts/Roboto/Roboto-Italic.ttf       |  Bin 132440 -> 0 bytes
+ .../mockup/resources/Fonts/Roboto/Roboto-Light.ttf |  Bin 126792 -> 0 bytes
+ .../resources/Fonts/Roboto/Roboto-LightItalic.ttf  |  Bin 133172 -> 0 bytes
+ .../resources/Fonts/Roboto/Roboto-Medium.ttf       |  Bin 127488 -> 0 bytes
+ .../resources/Fonts/Roboto/Roboto-MediumItalic.ttf |  Bin 134312 -> 0 bytes
+ .../resources/Fonts/Roboto/Roboto-Regular.ttf      |  Bin 126072 -> 0 bytes
+ .../mockup/resources/Fonts/Roboto/Roboto-Thin.ttf  |  Bin 127584 -> 0 bytes
+ .../resources/Fonts/Roboto/Roboto-ThinItalic.ttf   |  Bin 132860 -> 0 bytes
+ .../Fonts/Roboto/RobotoCondensed-Bold.ttf          |  Bin 127340 -> 0 bytes
+ .../Fonts/Roboto/RobotoCondensed-BoldItalic.ttf    |  Bin 135504 -> 0 bytes
+ .../Fonts/Roboto/RobotoCondensed-Italic.ttf        |  Bin 133908 -> 0 bytes
+ .../Fonts/Roboto/RobotoCondensed-Light.ttf         |  Bin 126168 -> 0 bytes
+ .../Fonts/Roboto/RobotoCondensed-LightItalic.ttf   |  Bin 134544 -> 0 bytes
+ .../Fonts/Roboto/RobotoCondensed-Regular.ttf       |  Bin 125332 -> 0 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-B.ttf     |  Bin 333612 -> 0 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-BI.ttf    |  Bin 356980 -> 0 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-C.ttf     |  Bin 350444 -> 0 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-L.ttf     |  Bin 415552 -> 0 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-LI.ttf    |  Bin 409608 -> 0 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-M.ttf     |  Bin 341324 -> 0 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-MI.ttf    |  Bin 366992 -> 0 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-R.ttf     |  Bin 353824 -> 0 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-RI.ttf    |  Bin 386440 -> 0 bytes
+ .../mockup/resources/Fonts/Ubuntu/UbuntuMono-B.ttf |  Bin 191400 -> 0 bytes
+ .../resources/Fonts/Ubuntu/UbuntuMono-BI.ttf       |  Bin 216208 -> 0 bytes
+ .../mockup/resources/Fonts/Ubuntu/UbuntuMono-R.ttf |  Bin 205748 -> 0 bytes
+ .../resources/Fonts/Ubuntu/UbuntuMono-RI.ttf       |  Bin 210216 -> 0 bytes
+ .../cat/drawable-hdpi/ic_cat_black_18dp.png        |  Bin 516 -> 0 bytes
+ .../cat/drawable-hdpi/ic_cat_black_24dp.png        |  Bin 626 -> 0 bytes
+ .../cat/drawable-hdpi/ic_cat_black_36dp.png        |  Bin 937 -> 0 bytes
+ .../cat/drawable-hdpi/ic_cat_black_48dp.png        |  Bin 1210 -> 0 bytes
+ .../cat/drawable-hdpi/ic_cat_grey600_18dp.png      |  Bin 777 -> 0 bytes
+ .../cat/drawable-hdpi/ic_cat_grey600_24dp.png      |  Bin 940 -> 0 bytes
+ .../cat/drawable-hdpi/ic_cat_grey600_36dp.png      |  Bin 1429 -> 0 bytes
+ .../cat/drawable-hdpi/ic_cat_grey600_48dp.png      |  Bin 2008 -> 0 bytes
+ .../cat/drawable-hdpi/ic_cat_white_18dp.png        |  Bin 561 -> 0 bytes
+ .../cat/drawable-hdpi/ic_cat_white_24dp.png        |  Bin 663 -> 0 bytes
+ .../cat/drawable-hdpi/ic_cat_white_36dp.png        |  Bin 1012 -> 0 bytes
+ .../cat/drawable-hdpi/ic_cat_white_48dp.png        |  Bin 1337 -> 0 bytes
+ .../cat/drawable-mdpi/ic_cat_black_18dp.png        |  Bin 346 -> 0 bytes
+ .../cat/drawable-mdpi/ic_cat_black_24dp.png        |  Bin 460 -> 0 bytes
+ .../cat/drawable-mdpi/ic_cat_black_36dp.png        |  Bin 626 -> 0 bytes
+ .../cat/drawable-mdpi/ic_cat_black_48dp.png        |  Bin 789 -> 0 bytes
+ .../cat/drawable-mdpi/ic_cat_grey600_18dp.png      |  Bin 454 -> 0 bytes
+ .../cat/drawable-mdpi/ic_cat_grey600_24dp.png      |  Bin 620 -> 0 bytes
+ .../cat/drawable-mdpi/ic_cat_grey600_36dp.png      |  Bin 940 -> 0 bytes
+ .../cat/drawable-mdpi/ic_cat_grey600_48dp.png      |  Bin 1283 -> 0 bytes
+ .../cat/drawable-mdpi/ic_cat_white_18dp.png        |  Bin 351 -> 0 bytes
+ .../cat/drawable-mdpi/ic_cat_white_24dp.png        |  Bin 467 -> 0 bytes
+ .../cat/drawable-mdpi/ic_cat_white_36dp.png        |  Bin 663 -> 0 bytes
+ .../cat/drawable-mdpi/ic_cat_white_48dp.png        |  Bin 844 -> 0 bytes
+ .../cat/drawable-xhdpi/ic_cat_black_18dp.png       |  Bin 626 -> 0 bytes
+ .../cat/drawable-xhdpi/ic_cat_black_24dp.png       |  Bin 789 -> 0 bytes
+ .../cat/drawable-xhdpi/ic_cat_black_36dp.png       |  Bin 1210 -> 0 bytes
+ .../cat/drawable-xhdpi/ic_cat_black_48dp.png       |  Bin 1593 -> 0 bytes
+ .../cat/drawable-xhdpi/ic_cat_grey600_18dp.png     |  Bin 940 -> 0 bytes
+ .../cat/drawable-xhdpi/ic_cat_grey600_24dp.png     |  Bin 1283 -> 0 bytes
+ .../cat/drawable-xhdpi/ic_cat_grey600_36dp.png     |  Bin 2008 -> 0 bytes
+ .../cat/drawable-xhdpi/ic_cat_grey600_48dp.png     |  Bin 2686 -> 0 bytes
+ .../cat/drawable-xhdpi/ic_cat_white_18dp.png       |  Bin 663 -> 0 bytes
+ .../cat/drawable-xhdpi/ic_cat_white_24dp.png       |  Bin 844 -> 0 bytes
+ .../cat/drawable-xhdpi/ic_cat_white_36dp.png       |  Bin 1337 -> 0 bytes
+ .../cat/drawable-xhdpi/ic_cat_white_48dp.png       |  Bin 1764 -> 0 bytes
+ .../cat/drawable-xxhdpi/ic_cat_black_18dp.png      |  Bin 937 -> 0 bytes
+ .../cat/drawable-xxhdpi/ic_cat_black_24dp.png      |  Bin 1210 -> 0 bytes
+ .../cat/drawable-xxhdpi/ic_cat_black_36dp.png      |  Bin 1878 -> 0 bytes
+ .../cat/drawable-xxhdpi/ic_cat_black_48dp.png      |  Bin 2488 -> 0 bytes
+ .../cat/drawable-xxhdpi/ic_cat_grey600_18dp.png    |  Bin 1429 -> 0 bytes
+ .../cat/drawable-xxhdpi/ic_cat_grey600_24dp.png    |  Bin 2008 -> 0 bytes
+ .../cat/drawable-xxhdpi/ic_cat_grey600_36dp.png    |  Bin 3037 -> 0 bytes
+ .../cat/drawable-xxhdpi/ic_cat_grey600_48dp.png    |  Bin 4028 -> 0 bytes
+ .../cat/drawable-xxhdpi/ic_cat_white_18dp.png      |  Bin 1012 -> 0 bytes
+ .../cat/drawable-xxhdpi/ic_cat_white_24dp.png      |  Bin 1337 -> 0 bytes
+ .../cat/drawable-xxhdpi/ic_cat_white_36dp.png      |  Bin 2135 -> 0 bytes
+ .../cat/drawable-xxhdpi/ic_cat_white_48dp.png      |  Bin 2897 -> 0 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_black_18dp.png     |  Bin 1210 -> 0 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_black_24dp.png     |  Bin 1593 -> 0 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_black_36dp.png     |  Bin 2488 -> 0 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_black_48dp.png     |  Bin 3407 -> 0 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_grey600_18dp.png   |  Bin 2008 -> 0 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_grey600_24dp.png   |  Bin 2686 -> 0 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_grey600_36dp.png   |  Bin 4028 -> 0 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_grey600_48dp.png   |  Bin 5501 -> 0 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_white_18dp.png     |  Bin 1337 -> 0 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_white_24dp.png     |  Bin 1764 -> 0 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_white_36dp.png     |  Bin 2897 -> 0 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_white_48dp.png     |  Bin 4035 -> 0 bytes
+ .../resources/other_icons/cat/drawable/cat.xml     |    8 -
+ .../mockup/resources/other_icons/cat/readme.txt    |    5 -
+ .../drawable-hdpi/ic_cube_outline_black_18dp.png   |  Bin 473 -> 0 bytes
+ .../drawable-hdpi/ic_cube_outline_black_24dp.png   |  Bin 605 -> 0 bytes
+ .../drawable-hdpi/ic_cube_outline_black_36dp.png   |  Bin 752 -> 0 bytes
+ .../drawable-hdpi/ic_cube_outline_black_48dp.png   |  Bin 853 -> 0 bytes
+ .../drawable-hdpi/ic_cube_outline_grey600_18dp.png |  Bin 747 -> 0 bytes
+ .../drawable-hdpi/ic_cube_outline_grey600_24dp.png |  Bin 937 -> 0 bytes
+ .../drawable-hdpi/ic_cube_outline_grey600_36dp.png |  Bin 1355 -> 0 bytes
+ .../drawable-hdpi/ic_cube_outline_grey600_48dp.png |  Bin 1571 -> 0 bytes
+ .../drawable-hdpi/ic_cube_outline_white_18dp.png   |  Bin 487 -> 0 bytes
+ .../drawable-hdpi/ic_cube_outline_white_24dp.png   |  Bin 670 -> 0 bytes
+ .../drawable-hdpi/ic_cube_outline_white_36dp.png   |  Bin 825 -> 0 bytes
+ .../drawable-hdpi/ic_cube_outline_white_48dp.png   |  Bin 908 -> 0 bytes
+ .../drawable-mdpi/ic_cube_outline_black_18dp.png   |  Bin 351 -> 0 bytes
+ .../drawable-mdpi/ic_cube_outline_black_24dp.png   |  Bin 350 -> 0 bytes
+ .../drawable-mdpi/ic_cube_outline_black_36dp.png   |  Bin 605 -> 0 bytes
+ .../drawable-mdpi/ic_cube_outline_black_48dp.png   |  Bin 587 -> 0 bytes
+ .../drawable-mdpi/ic_cube_outline_grey600_18dp.png |  Bin 524 -> 0 bytes
+ .../drawable-mdpi/ic_cube_outline_grey600_24dp.png |  Bin 622 -> 0 bytes
+ .../drawable-mdpi/ic_cube_outline_grey600_36dp.png |  Bin 937 -> 0 bytes
+ .../drawable-mdpi/ic_cube_outline_grey600_48dp.png |  Bin 1140 -> 0 bytes
+ .../drawable-mdpi/ic_cube_outline_white_18dp.png   |  Bin 371 -> 0 bytes
+ .../drawable-mdpi/ic_cube_outline_white_24dp.png   |  Bin 358 -> 0 bytes
+ .../drawable-mdpi/ic_cube_outline_white_36dp.png   |  Bin 670 -> 0 bytes
+ .../drawable-mdpi/ic_cube_outline_white_48dp.png   |  Bin 631 -> 0 bytes
+ .../drawable-xhdpi/ic_cube_outline_black_18dp.png  |  Bin 605 -> 0 bytes
+ .../drawable-xhdpi/ic_cube_outline_black_24dp.png  |  Bin 587 -> 0 bytes
+ .../drawable-xhdpi/ic_cube_outline_black_36dp.png  |  Bin 853 -> 0 bytes
+ .../drawable-xhdpi/ic_cube_outline_black_48dp.png  |  Bin 1102 -> 0 bytes
+ .../ic_cube_outline_grey600_18dp.png               |  Bin 937 -> 0 bytes
+ .../ic_cube_outline_grey600_24dp.png               |  Bin 1140 -> 0 bytes
+ .../ic_cube_outline_grey600_36dp.png               |  Bin 1571 -> 0 bytes
+ .../ic_cube_outline_grey600_48dp.png               |  Bin 2022 -> 0 bytes
+ .../drawable-xhdpi/ic_cube_outline_white_18dp.png  |  Bin 670 -> 0 bytes
+ .../drawable-xhdpi/ic_cube_outline_white_24dp.png  |  Bin 631 -> 0 bytes
+ .../drawable-xhdpi/ic_cube_outline_white_36dp.png  |  Bin 908 -> 0 bytes
+ .../drawable-xhdpi/ic_cube_outline_white_48dp.png  |  Bin 1153 -> 0 bytes
+ .../drawable-xxhdpi/ic_cube_outline_black_18dp.png |  Bin 752 -> 0 bytes
+ .../drawable-xxhdpi/ic_cube_outline_black_24dp.png |  Bin 853 -> 0 bytes
+ .../drawable-xxhdpi/ic_cube_outline_black_36dp.png |  Bin 1580 -> 0 bytes
+ .../drawable-xxhdpi/ic_cube_outline_black_48dp.png |  Bin 1746 -> 0 bytes
+ .../ic_cube_outline_grey600_18dp.png               |  Bin 1355 -> 0 bytes
+ .../ic_cube_outline_grey600_24dp.png               |  Bin 1571 -> 0 bytes
+ .../ic_cube_outline_grey600_36dp.png               |  Bin 2520 -> 0 bytes
+ .../ic_cube_outline_grey600_48dp.png               |  Bin 3148 -> 0 bytes
+ .../drawable-xxhdpi/ic_cube_outline_white_18dp.png |  Bin 825 -> 0 bytes
+ .../drawable-xxhdpi/ic_cube_outline_white_24dp.png |  Bin 908 -> 0 bytes
+ .../drawable-xxhdpi/ic_cube_outline_white_36dp.png |  Bin 1830 -> 0 bytes
+ .../drawable-xxhdpi/ic_cube_outline_white_48dp.png |  Bin 2036 -> 0 bytes
+ .../ic_cube_outline_black_18dp.png                 |  Bin 853 -> 0 bytes
+ .../ic_cube_outline_black_24dp.png                 |  Bin 1102 -> 0 bytes
+ .../ic_cube_outline_black_36dp.png                 |  Bin 1746 -> 0 bytes
+ .../ic_cube_outline_black_48dp.png                 |  Bin 2467 -> 0 bytes
+ .../ic_cube_outline_grey600_18dp.png               |  Bin 1571 -> 0 bytes
+ .../ic_cube_outline_grey600_24dp.png               |  Bin 2022 -> 0 bytes
+ .../ic_cube_outline_grey600_36dp.png               |  Bin 3148 -> 0 bytes
+ .../ic_cube_outline_grey600_48dp.png               |  Bin 4278 -> 0 bytes
+ .../ic_cube_outline_white_18dp.png                 |  Bin 908 -> 0 bytes
+ .../ic_cube_outline_white_24dp.png                 |  Bin 1153 -> 0 bytes
+ .../ic_cube_outline_white_36dp.png                 |  Bin 2036 -> 0 bytes
+ .../ic_cube_outline_white_48dp.png                 |  Bin 3252 -> 0 bytes
+ .../cube_outline/drawable/cube_outline.xml         |    8 -
+ .../android/drawable-hdpi/ic_face_black_24dp.png   |  Bin 511 -> 0 bytes
+ .../android/drawable-mdpi/ic_face_black_24dp.png   |  Bin 349 -> 0 bytes
+ .../android/drawable-xhdpi/ic_face_black_24dp.png  |  Bin 680 -> 0 bytes
+ .../android/drawable-xxhdpi/ic_face_black_24dp.png |  Bin 990 -> 0 bytes
+ .../drawable-xxxhdpi/ic_face_black_24dp.png        |  Bin 1297 -> 0 bytes
+ .../face/ios/ic_face.imageset/Contents.json        |   23 -
+ .../face/ios/ic_face.imageset/ic_face.png          |  Bin 349 -> 0 bytes
+ .../face/ios/ic_face.imageset/ic_face_2x.png       |  Bin 680 -> 0 bytes
+ .../face/ios/ic_face.imageset/ic_face_3x.png       |  Bin 1134 -> 0 bytes
+ .../other_icons/face/web/ic_face_black_24dp_1x.png |  Bin 349 -> 0 bytes
+ .../other_icons/face/web/ic_face_black_24dp_2x.png |  Bin 680 -> 0 bytes
+ ...ial_template_ic_product_icon_192px_dark_dark.ai | 5824 -------------------
+ ...al_template_ic_product_icon_192px_dark_light.ai | 5980 --------------------
+ ...al_template_ic_product_icon_192px_light_dark.ai | 5653 ------------------
+ ...l_template_ic_product_icon_192px_light_light.ai | 5725 -------------------
+ semester_1/scrum-dev-log.rtf                       |  127 -
+ 382 files changed, 24147 insertions(+), 24497 deletions(-)
+
+commit a75b545095b74821931956baca42aec0301524f8
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Tue Sep 27 15:45:02 2016 -0400
+
+    The cat now knows how to love
+
+ .idea/encodings.xml                                |   6 +
+ .idea/misc.xml                                     |   2 +-
+ .idea/workspace.xml                                | 269 +++++++++++++++++++++
+ FaceTrackTest/.idea/gradle.xml                     |   9 +-
+ FaceTrackTest/.idea/misc.xml                       |  43 ++--
+ FaceTrackTest/.idea/vcs.xml                        |   6 -
+ FaceTrackTest/app/app.iml                          |  25 +-
+ .../java/com/robodoot/dr/RoboApp/CatEmotion.java   |  11 +-
+ .../java/com/robodoot/dr/RoboApp/FdActivity.java   |   5 +-
+ .../org/opencv/engine/OpenCVEngineInterface.java   |   2 +-
+ .../org/opencv/engine/OpenCVEngineInterface.java   |   2 +-
+ .../blame/res/androidTest/debug/multi/values.json  |   6 +-
+ .../androidTest/debug/org/opencv/R$attr.class      | Bin 401 -> 0 bytes
+ .../androidTest/debug/org/opencv/R$id.class        | Bin 414 -> 0 bytes
+ .../androidTest/debug/org/opencv/R$styleable.class | Bin 580 -> 0 bytes
+ .../classes/androidTest/debug/org/opencv/R.class   | Bin 393 -> 0 bytes
+ .../debug/org/opencv/test/BuildConfig.class        | Bin 693 -> 0 bytes
+ .../androidTest/debug/org/opencv/test/R$attr.class | Bin 416 -> 0 bytes
+ .../androidTest/debug/org/opencv/test/R$id.class   | Bin 429 -> 0 bytes
+ .../debug/org/opencv/test/R$styleable.class        | Bin 595 -> 0 bytes
+ .../androidTest/debug/org/opencv/test/R.class      | Bin 418 -> 0 bytes
+ .../androidTest/debug/tag.txt                      |   1 -
+ .../incremental/compileDebugAidl/dependency.store  | Bin 285 -> 299 bytes
+ .../compileReleaseAidl/dependency.store            | Bin 287 -> 301 bytes
+ .../compile-file-map.properties                    |   2 +-
+ .../mergeDebugAndroidTestResources/merger.xml      |   4 +-
+ .../incremental/mergeDebugAssets/merger.xml        |   2 +-
+ .../incremental/mergeDebugJniLibFolders/merger.xml |   2 +-
+ .../incremental/mergeDebugShaders/merger.xml       |   2 +-
+ .../incremental/mergeReleaseAssets/merger.xml      |   2 +-
+ .../mergeReleaseJniLibFolders/merger.xml           |   2 +-
+ .../incremental/mergeReleaseShaders/merger.xml     |   2 +-
+ .../compile-file-map.properties                    |   2 +-
+ .../incremental/packageDebugResources/merger.xml   |   4 +-
+ .../compile-file-map.properties                    |   2 +-
+ .../incremental/packageReleaseResources/merger.xml |   4 +-
+ .../res/resources-debug-androidTest.ap_            | Bin 1882 -> 1882 bytes
+ .../build/outputs/aar/openCVLibrary300-debug.aar   | Bin 212005 -> 212005 bytes
+ .../build/outputs/aar/openCVLibrary300-release.aar | Bin 211926 -> 211926 bytes
+ .../openCVLibrary300/openCVLibrary300.iml          |   1 -
+ 40 files changed, 349 insertions(+), 69 deletions(-)
+
+commit b6b800614b18b815faf409d07d111b353f9f82f1
+Author: Quintin Fettes <qf731413@ohio.edu>
+Date:   Thu Sep 22 00:46:34 2016 -0400
+
+    Bug fix to allow the FaceTrackTest to build and run on android devices. Note, after installation on device, the user must find the appin the application manager and manually enable the requested permissions
+
+ .../.idea/copyright/profiles_settings.xml          |    4 +-
+ FaceTrackTest/.idea/gradle.xml                     |    5 +-
+ FaceTrackTest/.idea/misc.xml                       |   63 +-
+ FaceTrackTest/app/app.iml                          |   46 +-
+ FaceTrackTest/app/src/androidTest/androidTest.iml  |   11 +
+ FaceTrackTest/app/src/main/AndroidManifest.xml     |    1 +
+ .../com/robodoot/dr/facetracktest/BuildConfig.java |    8 +
+ .../com/robodoot/dr/facetracktest/Manifest.java    |    7 +
+ .../main/gen/com/robodoot/dr/facetracktest/R.java  |    7 +
+ FaceTrackTest/app/src/main/main1.iml               |   20 +
+ FaceTrackTest/build.gradle                         |    2 +-
+ .../gradle/wrapper/gradle-wrapper.properties       |   12 +-
+ .../samples/15-puzzle/15-puzzle.iml                |   19 +
+ .../org/opencv/samples/puzzle15/BuildConfig.java   |    8 +
+ .../gen/org/opencv/samples/puzzle15/Manifest.java  |    7 +
+ .../gen/org/opencv/samples/puzzle15/R.java         |    7 +
+ .../camera-calibration/camera-calibration.iml      |   19 +
+ .../samples/cameracalibration/BuildConfig.java     |    8 +
+ .../opencv/samples/cameracalibration/Manifest.java |    7 +
+ .../org/opencv/samples/cameracalibration/R.java    |    7 +
+ .../color-blob-detection/color-blob-detection.iml  |   19 +
+ .../samples/colorblobdetect/BuildConfig.java       |    8 +
+ .../opencv/samples/colorblobdetect/Manifest.java   |    7 +
+ .../gen/org/opencv/samples/colorblobdetect/R.java  |    7 +
+ .../samples/face-detection/face-detection.iml      |   19 +
+ .../org/opencv/samples/facedetect/BuildConfig.java |    8 +
+ .../org/opencv/samples/facedetect/Manifest.java    |    7 +
+ .../gen/org/opencv/samples/facedetect/R.java       |    7 +
+ .../samples/imagemanipulations/BuildConfig.java    |    8 +
+ .../samples/imagemanipulations/Manifest.java       |    7 +
+ .../org/opencv/samples/imagemanipulations/R.java   |    7 +
+ .../image-manipulations/image-manipulations.iml    |   19 +
+ .../org/opencv/samples/tutorial1/BuildConfig.java  |    8 +
+ .../gen/org/opencv/samples/tutorial1/Manifest.java |    7 +
+ .../gen/org/opencv/samples/tutorial1/R.java        |    7 +
+ .../tutorial-1-camerapreview.iml                   |   19 +
+ .../org/opencv/samples/tutorial2/BuildConfig.java  |    8 +
+ .../gen/org/opencv/samples/tutorial2/Manifest.java |    7 +
+ .../gen/org/opencv/samples/tutorial2/R.java        |    7 +
+ .../tutorial-2-mixedprocessing.iml                 |   19 +
+ .../org/opencv/samples/tutorial3/BuildConfig.java  |    8 +
+ .../gen/org/opencv/samples/tutorial3/Manifest.java |    7 +
+ .../gen/org/opencv/samples/tutorial3/R.java        |    7 +
+ .../tutorial-3-cameracontrol.iml                   |   19 +
+ .../sdk/java/gen/org/opencv/BuildConfig.java       |    8 +
+ .../sdk/java/gen/org/opencv/Manifest.java          |    7 +
+ .../sdk/java/gen/org/opencv/R.java                 |    7 +
+ .../org/opencv/engine/OpenCVEngineInterface.java   |  217 ++
+ .../libraries/OpenCV-android-sdk/sdk/java/sdk.iml  |   17 +
+ .../org/opencv/engine/OpenCVEngineInterface.java   |  221 ++
+ .../org/opencv/engine/OpenCVEngineInterface.java   |  221 ++
+ .../debug/org/opencv/test/BuildConfig.java         |   13 +
+ .../buildConfig/debug/org/opencv/BuildConfig.java  |   13 +
+ .../release/org/opencv/BuildConfig.java            |   13 +
+ .../source/r/androidTest/debug/org/opencv/R.java   |   24 +
+ .../r/androidTest/debug/org/opencv/test/R.java     |   99 +
+ .../generated/source/r/debug/org/opencv/R.java     |   99 +
+ .../generated/source/r/release/org/opencv/R.java   |   99 +
+ .../blame/res/androidTest/debug/multi/values.json  |   10 +
+ .../bundles/debug/AndroidManifest.xml              |   26 +
+ .../build/intermediates/bundles/debug/R.txt        |    8 +
+ .../build/intermediates/bundles/debug/classes.jar  |  Bin 0 -> 227398 bytes
+ .../bundles/debug/res/values/values.xml            |    8 +
+ .../bundles/release/AndroidManifest.xml            |   26 +
+ .../build/intermediates/bundles/release/R.txt      |    8 +
+ .../intermediates/bundles/release/classes.jar      |  Bin 0 -> 227323 bytes
+ .../bundles/release/res/values/values.xml          |    8 +
+ .../androidTest/debug/org/opencv/R$attr.class      |  Bin 0 -> 401 bytes
+ .../androidTest/debug/org/opencv/R$id.class        |  Bin 0 -> 414 bytes
+ .../androidTest/debug/org/opencv/R$styleable.class |  Bin 0 -> 580 bytes
+ .../classes/androidTest/debug/org/opencv/R.class   |  Bin 0 -> 393 bytes
+ .../debug/org/opencv/test/BuildConfig.class        |  Bin 0 -> 693 bytes
+ .../androidTest/debug/org/opencv/test/R$attr.class |  Bin 0 -> 416 bytes
+ .../androidTest/debug/org/opencv/test/R$id.class   |  Bin 0 -> 429 bytes
+ .../debug/org/opencv/test/R$styleable.class        |  Bin 0 -> 595 bytes
+ .../androidTest/debug/org/opencv/test/R.class      |  Bin 0 -> 418 bytes
+ .../classes/debug/org/opencv/BuildConfig.class     |  Bin 0 -> 689 bytes
+ .../classes/debug/org/opencv/R$attr.class          |  Bin 0 -> 453 bytes
+ .../classes/debug/org/opencv/R$id.class            |  Bin 0 -> 477 bytes
+ .../classes/debug/org/opencv/R$styleable.class     |  Bin 0 -> 574 bytes
+ .../intermediates/classes/debug/org/opencv/R.class |  Bin 0 -> 393 bytes
+ .../org/opencv/android/AsyncServiceHelper$1.class  |  Bin 0 -> 2262 bytes
+ .../org/opencv/android/AsyncServiceHelper$2.class  |  Bin 0 -> 1933 bytes
+ .../opencv/android/AsyncServiceHelper$3$1.class    |  Bin 0 -> 2824 bytes
+ .../opencv/android/AsyncServiceHelper$3$2.class    |  Bin 0 -> 2781 bytes
+ .../org/opencv/android/AsyncServiceHelper$3.class  |  Bin 0 -> 4621 bytes
+ .../org/opencv/android/AsyncServiceHelper.class    |  Bin 0 -> 5354 bytes
+ .../org/opencv/android/BaseLoaderCallback$1.class  |  Bin 0 -> 917 bytes
+ .../org/opencv/android/BaseLoaderCallback$2.class  |  Bin 0 -> 917 bytes
+ .../org/opencv/android/BaseLoaderCallback$3.class  |  Bin 0 -> 917 bytes
+ .../org/opencv/android/BaseLoaderCallback$4.class  |  Bin 0 -> 1143 bytes
+ .../org/opencv/android/BaseLoaderCallback$5.class  |  Bin 0 -> 1142 bytes
+ .../org/opencv/android/BaseLoaderCallback$6.class  |  Bin 0 -> 1148 bytes
+ .../org/opencv/android/BaseLoaderCallback$7.class  |  Bin 0 -> 1142 bytes
+ .../org/opencv/android/BaseLoaderCallback.class    |  Bin 0 -> 3799 bytes
+ .../opencv/android/CameraBridgeViewBase$1.class    |  Bin 0 -> 1038 bytes
+ .../CameraBridgeViewBase$CvCameraViewFrame.class   |  Bin 0 -> 310 bytes
+ ...CameraBridgeViewBase$CvCameraViewListener.class |  Bin 0 -> 405 bytes
+ ...ameraBridgeViewBase$CvCameraViewListener2.class |  Bin 0 -> 536 bytes
+ ...ridgeViewBase$CvCameraViewListenerAdapter.class |  Bin 0 -> 2253 bytes
+ .../CameraBridgeViewBase$ListItemAccessor.class    |  Bin 0 -> 315 bytes
+ .../org/opencv/android/CameraBridgeViewBase.class  |  Bin 0 -> 12324 bytes
+ .../debug/org/opencv/android/FpsMeter.class        |  Bin 0 -> 2416 bytes
+ .../opencv/android/InstallCallbackInterface.class  |  Bin 0 -> 365 bytes
+ .../org/opencv/android/JavaCameraView$1.class      |  Bin 0 -> 228 bytes
+ .../android/JavaCameraView$CameraWorker.class      |  Bin 0 -> 2291 bytes
+ .../android/JavaCameraView$JavaCameraFrame.class   |  Bin 0 -> 1412 bytes
+ .../JavaCameraView$JavaCameraSizeAccessor.class    |  Bin 0 -> 995 bytes
+ .../debug/org/opencv/android/JavaCameraView.class  |  Bin 0 -> 10520 bytes
+ .../opencv/android/LoaderCallbackInterface.class   |  Bin 0 -> 475 bytes
+ .../debug/org/opencv/android/OpenCVLoader.class    |  Bin 0 -> 1444 bytes
+ .../debug/org/opencv/android/StaticHelper.class    |  Bin 0 -> 2882 bytes
+ .../classes/debug/org/opencv/android/Utils.class   |  Bin 0 -> 4309 bytes
+ .../classes/debug/org/opencv/calib3d/Calib3d.class |  Bin 0 -> 40435 bytes
+ .../debug/org/opencv/calib3d/StereoBM.class        |  Bin 0 -> 3517 bytes
+ .../debug/org/opencv/calib3d/StereoMatcher.class   |  Bin 0 -> 2692 bytes
+ .../debug/org/opencv/calib3d/StereoSGBM.class      |  Bin 0 -> 2528 bytes
+ .../classes/debug/org/opencv/core/Algorithm.class  |  Bin 0 -> 964 bytes
+ .../org/opencv/core/Core$MinMaxLocResult.class     |  Bin 0 -> 594 bytes
+ .../classes/debug/org/opencv/core/Core.class       |  Bin 0 -> 37234 bytes
+ .../debug/org/opencv/core/CvException.class        |  Bin 0 -> 695 bytes
+ .../classes/debug/org/opencv/core/CvType.class     |  Bin 0 -> 3918 bytes
+ .../classes/debug/org/opencv/core/DMatch.class     |  Bin 0 -> 1362 bytes
+ .../classes/debug/org/opencv/core/KeyPoint.class   |  Bin 0 -> 1869 bytes
+ .../classes/debug/org/opencv/core/Mat.class        |  Bin 0 -> 17576 bytes
+ .../classes/debug/org/opencv/core/MatOfByte.class  |  Bin 0 -> 3069 bytes
+ .../debug/org/opencv/core/MatOfDMatch.class        |  Bin 0 -> 3220 bytes
+ .../debug/org/opencv/core/MatOfDouble.class        |  Bin 0 -> 3095 bytes
+ .../classes/debug/org/opencv/core/MatOfFloat.class |  Bin 0 -> 3080 bytes
+ .../debug/org/opencv/core/MatOfFloat4.class        |  Bin 0 -> 3084 bytes
+ .../debug/org/opencv/core/MatOfFloat6.class        |  Bin 0 -> 3090 bytes
+ .../classes/debug/org/opencv/core/MatOfInt.class   |  Bin 0 -> 3076 bytes
+ .../classes/debug/org/opencv/core/MatOfInt4.class  |  Bin 0 -> 3075 bytes
+ .../debug/org/opencv/core/MatOfKeyPoint.class      |  Bin 0 -> 3271 bytes
+ .../classes/debug/org/opencv/core/MatOfPoint.class |  Bin 0 -> 2903 bytes
+ .../debug/org/opencv/core/MatOfPoint2f.class       |  Bin 0 -> 2911 bytes
+ .../debug/org/opencv/core/MatOfPoint3.class        |  Bin 0 -> 2957 bytes
+ .../debug/org/opencv/core/MatOfPoint3f.class       |  Bin 0 -> 2961 bytes
+ .../classes/debug/org/opencv/core/MatOfRect.class  |  Bin 0 -> 2972 bytes
+ .../classes/debug/org/opencv/core/Point.class      |  Bin 0 -> 2181 bytes
+ .../classes/debug/org/opencv/core/Point3.class     |  Bin 0 -> 2526 bytes
+ .../classes/debug/org/opencv/core/Range.class      |  Bin 0 -> 2538 bytes
+ .../classes/debug/org/opencv/core/Rect.class       |  Bin 0 -> 3461 bytes
+ .../debug/org/opencv/core/RotatedRect.class        |  Bin 0 -> 3800 bytes
+ .../classes/debug/org/opencv/core/Scalar.class     |  Bin 0 -> 3035 bytes
+ .../classes/debug/org/opencv/core/Size.class       |  Bin 0 -> 2107 bytes
+ .../debug/org/opencv/core/TermCriteria.class       |  Bin 0 -> 2208 bytes
+ .../engine/OpenCVEngineInterface$Stub$Proxy.class  |  Bin 0 -> 2647 bytes
+ .../opencv/engine/OpenCVEngineInterface$Stub.class |  Bin 0 -> 2611 bytes
+ .../org/opencv/engine/OpenCVEngineInterface.class  |  Bin 0 -> 521 bytes
+ .../opencv/features2d/DescriptorExtractor.class    |  Bin 0 -> 3644 bytes
+ .../org/opencv/features2d/DescriptorMatcher.class  |  Bin 0 -> 7935 bytes
+ .../org/opencv/features2d/FeatureDetector.class    |  Bin 0 -> 4786 bytes
+ .../debug/org/opencv/features2d/Features2d.class   |  Bin 0 -> 4994 bytes
+ .../debug/org/opencv/imgcodecs/Imgcodecs.class     |  Bin 0 -> 4938 bytes
+ .../classes/debug/org/opencv/imgproc/CLAHE.class   |  Bin 0 -> 1663 bytes
+ .../classes/debug/org/opencv/imgproc/Imgproc.class |  Bin 0 -> 71037 bytes
+ .../org/opencv/imgproc/LineSegmentDetector.class   |  Bin 0 -> 1935 bytes
+ .../debug/org/opencv/imgproc/Subdiv2D.class        |  Bin 0 -> 6047 bytes
+ .../classes/debug/org/opencv/ml/ANN_MLP.class      |  Bin 0 -> 4782 bytes
+ .../classes/debug/org/opencv/ml/Boost.class        |  Bin 0 -> 1636 bytes
+ .../classes/debug/org/opencv/ml/DTrees.class       |  Bin 0 -> 3478 bytes
+ .../classes/debug/org/opencv/ml/EM.class           |  Bin 0 -> 4254 bytes
+ .../classes/debug/org/opencv/ml/KNearest.class     |  Bin 0 -> 2465 bytes
+ .../debug/org/opencv/ml/LogisticRegression.class   |  Bin 0 -> 3449 bytes
+ .../classes/debug/org/opencv/ml/Ml.class           |  Bin 0 -> 502 bytes
+ .../org/opencv/ml/NormalBayesClassifier.class      |  Bin 0 -> 1306 bytes
+ .../classes/debug/org/opencv/ml/RTrees.class       |  Bin 0 -> 2055 bytes
+ .../classes/debug/org/opencv/ml/SVM.class          |  Bin 0 -> 4469 bytes
+ .../classes/debug/org/opencv/ml/StatModel.class    |  Bin 0 -> 1900 bytes
+ .../classes/debug/org/opencv/ml/TrainData.class    |  Bin 0 -> 6233 bytes
+ .../opencv/objdetect/BaseCascadeClassifier.class   |  Bin 0 -> 544 bytes
+ .../org/opencv/objdetect/CascadeClassifier.class   |  Bin 0 -> 4450 bytes
+ .../debug/org/opencv/objdetect/HOGDescriptor.class |  Bin 0 -> 8610 bytes
+ .../debug/org/opencv/objdetect/Objdetect.class     |  Bin 0 -> 1215 bytes
+ .../debug/org/opencv/photo/AlignExposures.class    |  Bin 0 -> 1283 bytes
+ .../classes/debug/org/opencv/photo/AlignMTB.class  |  Bin 0 -> 3340 bytes
+ .../debug/org/opencv/photo/CalibrateCRF.class      |  Bin 0 -> 1154 bytes
+ .../debug/org/opencv/photo/CalibrateDebevec.class  |  Bin 0 -> 1403 bytes
+ .../org/opencv/photo/CalibrateRobertson.class      |  Bin 0 -> 1359 bytes
+ .../debug/org/opencv/photo/MergeDebevec.class      |  Bin 0 -> 1577 bytes
+ .../debug/org/opencv/photo/MergeExposures.class    |  Bin 0 -> 1229 bytes
+ .../debug/org/opencv/photo/MergeMertens.class      |  Bin 0 -> 2459 bytes
+ .../debug/org/opencv/photo/MergeRobertson.class    |  Bin 0 -> 1583 bytes
+ .../classes/debug/org/opencv/photo/Photo.class     |  Bin 0 -> 13664 bytes
+ .../classes/debug/org/opencv/photo/Tonemap.class   |  Bin 0 -> 1045 bytes
+ .../debug/org/opencv/photo/TonemapDrago.class      |  Bin 0 -> 1071 bytes
+ .../debug/org/opencv/photo/TonemapDurand.class     |  Bin 0 -> 1648 bytes
+ .../debug/org/opencv/photo/TonemapMantiuk.class    |  Bin 0 -> 1082 bytes
+ .../debug/org/opencv/photo/TonemapReinhard.class   |  Bin 0 -> 1423 bytes
+ .../debug/org/opencv/utils/Converters.class        |  Bin 0 -> 22687 bytes
+ .../org/opencv/video/BackgroundSubtractor.class    |  Bin 0 -> 1203 bytes
+ .../org/opencv/video/BackgroundSubtractorKNN.class |  Bin 0 -> 2610 bytes
+ .../opencv/video/BackgroundSubtractorMOG2.class    |  Bin 0 -> 4046 bytes
+ .../debug/org/opencv/video/DenseOpticalFlow.class  |  Bin 0 -> 937 bytes
+ .../org/opencv/video/DualTVL1OpticalFlow.class     |  Bin 0 -> 538 bytes
+ .../debug/org/opencv/video/KalmanFilter.class      |  Bin 0 -> 4650 bytes
+ .../classes/debug/org/opencv/video/Video.class     |  Bin 0 -> 7953 bytes
+ .../debug/org/opencv/videoio/VideoCapture.class    |  Bin 0 -> 2514 bytes
+ .../classes/debug/org/opencv/videoio/Videoio.class |  Bin 0 -> 13128 bytes
+ .../classes/release/org/opencv/BuildConfig.class   |  Bin 0 -> 554 bytes
+ .../classes/release/org/opencv/R$attr.class        |  Bin 0 -> 453 bytes
+ .../classes/release/org/opencv/R$id.class          |  Bin 0 -> 477 bytes
+ .../classes/release/org/opencv/R$styleable.class   |  Bin 0 -> 574 bytes
+ .../classes/release/org/opencv/R.class             |  Bin 0 -> 393 bytes
+ .../org/opencv/android/AsyncServiceHelper$1.class  |  Bin 0 -> 2262 bytes
+ .../org/opencv/android/AsyncServiceHelper$2.class  |  Bin 0 -> 1933 bytes
+ .../opencv/android/AsyncServiceHelper$3$1.class    |  Bin 0 -> 2824 bytes
+ .../opencv/android/AsyncServiceHelper$3$2.class    |  Bin 0 -> 2781 bytes
+ .../org/opencv/android/AsyncServiceHelper$3.class  |  Bin 0 -> 4621 bytes
+ .../org/opencv/android/AsyncServiceHelper.class    |  Bin 0 -> 5354 bytes
+ .../org/opencv/android/BaseLoaderCallback$1.class  |  Bin 0 -> 917 bytes
+ .../org/opencv/android/BaseLoaderCallback$2.class  |  Bin 0 -> 917 bytes
+ .../org/opencv/android/BaseLoaderCallback$3.class  |  Bin 0 -> 917 bytes
+ .../org/opencv/android/BaseLoaderCallback$4.class  |  Bin 0 -> 1143 bytes
+ .../org/opencv/android/BaseLoaderCallback$5.class  |  Bin 0 -> 1142 bytes
+ .../org/opencv/android/BaseLoaderCallback$6.class  |  Bin 0 -> 1148 bytes
+ .../org/opencv/android/BaseLoaderCallback$7.class  |  Bin 0 -> 1142 bytes
+ .../org/opencv/android/BaseLoaderCallback.class    |  Bin 0 -> 3799 bytes
+ .../opencv/android/CameraBridgeViewBase$1.class    |  Bin 0 -> 1038 bytes
+ .../CameraBridgeViewBase$CvCameraViewFrame.class   |  Bin 0 -> 310 bytes
+ ...CameraBridgeViewBase$CvCameraViewListener.class |  Bin 0 -> 405 bytes
+ ...ameraBridgeViewBase$CvCameraViewListener2.class |  Bin 0 -> 536 bytes
+ ...ridgeViewBase$CvCameraViewListenerAdapter.class |  Bin 0 -> 2253 bytes
+ .../CameraBridgeViewBase$ListItemAccessor.class    |  Bin 0 -> 315 bytes
+ .../org/opencv/android/CameraBridgeViewBase.class  |  Bin 0 -> 12324 bytes
+ .../release/org/opencv/android/FpsMeter.class      |  Bin 0 -> 2416 bytes
+ .../opencv/android/InstallCallbackInterface.class  |  Bin 0 -> 365 bytes
+ .../org/opencv/android/JavaCameraView$1.class      |  Bin 0 -> 228 bytes
+ .../android/JavaCameraView$CameraWorker.class      |  Bin 0 -> 2291 bytes
+ .../android/JavaCameraView$JavaCameraFrame.class   |  Bin 0 -> 1412 bytes
+ .../JavaCameraView$JavaCameraSizeAccessor.class    |  Bin 0 -> 995 bytes
+ .../org/opencv/android/JavaCameraView.class        |  Bin 0 -> 10520 bytes
+ .../opencv/android/LoaderCallbackInterface.class   |  Bin 0 -> 475 bytes
+ .../release/org/opencv/android/OpenCVLoader.class  |  Bin 0 -> 1444 bytes
+ .../release/org/opencv/android/StaticHelper.class  |  Bin 0 -> 2882 bytes
+ .../classes/release/org/opencv/android/Utils.class |  Bin 0 -> 4309 bytes
+ .../release/org/opencv/calib3d/Calib3d.class       |  Bin 0 -> 40435 bytes
+ .../release/org/opencv/calib3d/StereoBM.class      |  Bin 0 -> 3517 bytes
+ .../release/org/opencv/calib3d/StereoMatcher.class |  Bin 0 -> 2692 bytes
+ .../release/org/opencv/calib3d/StereoSGBM.class    |  Bin 0 -> 2528 bytes
+ .../release/org/opencv/core/Algorithm.class        |  Bin 0 -> 964 bytes
+ .../org/opencv/core/Core$MinMaxLocResult.class     |  Bin 0 -> 594 bytes
+ .../classes/release/org/opencv/core/Core.class     |  Bin 0 -> 37234 bytes
+ .../release/org/opencv/core/CvException.class      |  Bin 0 -> 695 bytes
+ .../classes/release/org/opencv/core/CvType.class   |  Bin 0 -> 3918 bytes
+ .../classes/release/org/opencv/core/DMatch.class   |  Bin 0 -> 1362 bytes
+ .../classes/release/org/opencv/core/KeyPoint.class |  Bin 0 -> 1869 bytes
+ .../classes/release/org/opencv/core/Mat.class      |  Bin 0 -> 17576 bytes
+ .../release/org/opencv/core/MatOfByte.class        |  Bin 0 -> 3069 bytes
+ .../release/org/opencv/core/MatOfDMatch.class      |  Bin 0 -> 3220 bytes
+ .../release/org/opencv/core/MatOfDouble.class      |  Bin 0 -> 3095 bytes
+ .../release/org/opencv/core/MatOfFloat.class       |  Bin 0 -> 3080 bytes
+ .../release/org/opencv/core/MatOfFloat4.class      |  Bin 0 -> 3084 bytes
+ .../release/org/opencv/core/MatOfFloat6.class      |  Bin 0 -> 3090 bytes
+ .../classes/release/org/opencv/core/MatOfInt.class |  Bin 0 -> 3076 bytes
+ .../release/org/opencv/core/MatOfInt4.class        |  Bin 0 -> 3075 bytes
+ .../release/org/opencv/core/MatOfKeyPoint.class    |  Bin 0 -> 3271 bytes
+ .../release/org/opencv/core/MatOfPoint.class       |  Bin 0 -> 2903 bytes
+ .../release/org/opencv/core/MatOfPoint2f.class     |  Bin 0 -> 2911 bytes
+ .../release/org/opencv/core/MatOfPoint3.class      |  Bin 0 -> 2957 bytes
+ .../release/org/opencv/core/MatOfPoint3f.class     |  Bin 0 -> 2961 bytes
+ .../release/org/opencv/core/MatOfRect.class        |  Bin 0 -> 2972 bytes
+ .../classes/release/org/opencv/core/Point.class    |  Bin 0 -> 2181 bytes
+ .../classes/release/org/opencv/core/Point3.class   |  Bin 0 -> 2526 bytes
+ .../classes/release/org/opencv/core/Range.class    |  Bin 0 -> 2538 bytes
+ .../classes/release/org/opencv/core/Rect.class     |  Bin 0 -> 3461 bytes
+ .../release/org/opencv/core/RotatedRect.class      |  Bin 0 -> 3800 bytes
+ .../classes/release/org/opencv/core/Scalar.class   |  Bin 0 -> 3035 bytes
+ .../classes/release/org/opencv/core/Size.class     |  Bin 0 -> 2107 bytes
+ .../release/org/opencv/core/TermCriteria.class     |  Bin 0 -> 2208 bytes
+ .../engine/OpenCVEngineInterface$Stub$Proxy.class  |  Bin 0 -> 2647 bytes
+ .../opencv/engine/OpenCVEngineInterface$Stub.class |  Bin 0 -> 2611 bytes
+ .../org/opencv/engine/OpenCVEngineInterface.class  |  Bin 0 -> 521 bytes
+ .../opencv/features2d/DescriptorExtractor.class    |  Bin 0 -> 3644 bytes
+ .../org/opencv/features2d/DescriptorMatcher.class  |  Bin 0 -> 7935 bytes
+ .../org/opencv/features2d/FeatureDetector.class    |  Bin 0 -> 4786 bytes
+ .../release/org/opencv/features2d/Features2d.class |  Bin 0 -> 4994 bytes
+ .../release/org/opencv/imgcodecs/Imgcodecs.class   |  Bin 0 -> 4938 bytes
+ .../classes/release/org/opencv/imgproc/CLAHE.class |  Bin 0 -> 1663 bytes
+ .../release/org/opencv/imgproc/Imgproc.class       |  Bin 0 -> 71037 bytes
+ .../org/opencv/imgproc/LineSegmentDetector.class   |  Bin 0 -> 1935 bytes
+ .../release/org/opencv/imgproc/Subdiv2D.class      |  Bin 0 -> 6047 bytes
+ .../classes/release/org/opencv/ml/ANN_MLP.class    |  Bin 0 -> 4782 bytes
+ .../classes/release/org/opencv/ml/Boost.class      |  Bin 0 -> 1636 bytes
+ .../classes/release/org/opencv/ml/DTrees.class     |  Bin 0 -> 3478 bytes
+ .../classes/release/org/opencv/ml/EM.class         |  Bin 0 -> 4254 bytes
+ .../classes/release/org/opencv/ml/KNearest.class   |  Bin 0 -> 2465 bytes
+ .../release/org/opencv/ml/LogisticRegression.class |  Bin 0 -> 3449 bytes
+ .../classes/release/org/opencv/ml/Ml.class         |  Bin 0 -> 502 bytes
+ .../org/opencv/ml/NormalBayesClassifier.class      |  Bin 0 -> 1306 bytes
+ .../classes/release/org/opencv/ml/RTrees.class     |  Bin 0 -> 2055 bytes
+ .../classes/release/org/opencv/ml/SVM.class        |  Bin 0 -> 4469 bytes
+ .../classes/release/org/opencv/ml/StatModel.class  |  Bin 0 -> 1900 bytes
+ .../classes/release/org/opencv/ml/TrainData.class  |  Bin 0 -> 6233 bytes
+ .../opencv/objdetect/BaseCascadeClassifier.class   |  Bin 0 -> 544 bytes
+ .../org/opencv/objdetect/CascadeClassifier.class   |  Bin 0 -> 4450 bytes
+ .../org/opencv/objdetect/HOGDescriptor.class       |  Bin 0 -> 8610 bytes
+ .../release/org/opencv/objdetect/Objdetect.class   |  Bin 0 -> 1215 bytes
+ .../release/org/opencv/photo/AlignExposures.class  |  Bin 0 -> 1283 bytes
+ .../release/org/opencv/photo/AlignMTB.class        |  Bin 0 -> 3340 bytes
+ .../release/org/opencv/photo/CalibrateCRF.class    |  Bin 0 -> 1154 bytes
+ .../org/opencv/photo/CalibrateDebevec.class        |  Bin 0 -> 1403 bytes
+ .../org/opencv/photo/CalibrateRobertson.class      |  Bin 0 -> 1359 bytes
+ .../release/org/opencv/photo/MergeDebevec.class    |  Bin 0 -> 1577 bytes
+ .../release/org/opencv/photo/MergeExposures.class  |  Bin 0 -> 1229 bytes
+ .../release/org/opencv/photo/MergeMertens.class    |  Bin 0 -> 2459 bytes
+ .../release/org/opencv/photo/MergeRobertson.class  |  Bin 0 -> 1583 bytes
+ .../classes/release/org/opencv/photo/Photo.class   |  Bin 0 -> 13664 bytes
+ .../classes/release/org/opencv/photo/Tonemap.class |  Bin 0 -> 1045 bytes
+ .../release/org/opencv/photo/TonemapDrago.class    |  Bin 0 -> 1071 bytes
+ .../release/org/opencv/photo/TonemapDurand.class   |  Bin 0 -> 1648 bytes
+ .../release/org/opencv/photo/TonemapMantiuk.class  |  Bin 0 -> 1082 bytes
+ .../release/org/opencv/photo/TonemapReinhard.class |  Bin 0 -> 1423 bytes
+ .../release/org/opencv/utils/Converters.class      |  Bin 0 -> 22687 bytes
+ .../org/opencv/video/BackgroundSubtractor.class    |  Bin 0 -> 1203 bytes
+ .../org/opencv/video/BackgroundSubtractorKNN.class |  Bin 0 -> 2610 bytes
+ .../opencv/video/BackgroundSubtractorMOG2.class    |  Bin 0 -> 4046 bytes
+ .../org/opencv/video/DenseOpticalFlow.class        |  Bin 0 -> 937 bytes
+ .../org/opencv/video/DualTVL1OpticalFlow.class     |  Bin 0 -> 538 bytes
+ .../release/org/opencv/video/KalmanFilter.class    |  Bin 0 -> 4650 bytes
+ .../classes/release/org/opencv/video/Video.class   |  Bin 0 -> 7953 bytes
+ .../release/org/opencv/videoio/VideoCapture.class  |  Bin 0 -> 2514 bytes
+ .../release/org/opencv/videoio/Videoio.class       |  Bin 0 -> 13128 bytes
+ .../androidTest/debug/tag.txt                      |    1 +
+ .../incremental-safeguard/debug/tag.txt            |    1 +
+ .../incremental-safeguard/release/tag.txt          |    1 +
+ .../incremental/compileDebugAidl/dependency.store  |  Bin 0 -> 285 bytes
+ .../compileDebugAndroidTestAidl/dependency.store   |  Bin 0 -> 5 bytes
+ .../compileReleaseAidl/dependency.store            |  Bin 0 -> 287 bytes
+ .../compile-file-map.properties                    |    1 +
+ .../merged.dir/values/values.xml                   |    8 +
+ .../mergeDebugAndroidTestResources/merger.xml      |   10 +
+ .../incremental/mergeDebugAssets/merger.xml        |    2 +
+ .../incremental/mergeDebugJniLibFolders/merger.xml |    2 +
+ .../incremental/mergeDebugShaders/merger.xml       |    2 +
+ .../incremental/mergeReleaseAssets/merger.xml      |    2 +
+ .../mergeReleaseJniLibFolders/merger.xml           |    2 +
+ .../incremental/mergeReleaseShaders/merger.xml     |    2 +
+ .../compile-file-map.properties                    |    1 +
+ .../merged.dir/values/values.xml                   |    8 +
+ .../incremental/packageDebugResources/merger.xml   |   13 +
+ .../compile-file-map.properties                    |    1 +
+ .../merged.dir/values/values.xml                   |    8 +
+ .../incremental/packageReleaseResources/merger.xml |   13 +
+ .../manifest/androidTest/debug/AndroidManifest.xml |   35 +
+ .../manifests/aapt/debug/AndroidManifest.xml       |   26 +
+ .../manifests/aapt/release/AndroidManifest.xml     |   26 +
+ .../res/merged/androidTest/debug/values/values.xml |    8 +
+ .../res/resources-debug-androidTest.ap_            |  Bin 0 -> 1882 bytes
+ .../intermediates/symbols/androidTest/debug/R.txt  |    8 +
+ .../build/outputs/aar/openCVLibrary300-debug.aar   |  Bin 0 -> 212005 bytes
+ .../build/outputs/aar/openCVLibrary300-release.aar |  Bin 0 -> 211926 bytes
+ .../openCVLibrary300/openCVLibrary300.iml          |   34 +-
+ .../src/main/gen/org/opencv/BuildConfig.java       |    8 +
+ .../src/main/gen/org/opencv/Manifest.java          |    7 +
+ .../src/main/gen/org/opencv/R.java                 |    7 +
+ FaceTrackTest/openCVLibrary300/src/main/main.iml   |   17 +
+ .../projectFilesBackup/.idea/workspace.xml         | 3306 ++++++++++++++++++++
+ 359 files changed, 5154 insertions(+), 72 deletions(-)
+
+commit 3a0451ce35f8289f01783dd2167f2e81dba51fbc
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Thu Sep 15 08:07:31 2016 -0400
+
+    Homework 4 submission
+
+ GUI_mockup.png              | Bin 78944 -> 0 bytes
+ homework/hw4/GUI_mockup.png | Bin 0 -> 78944 bytes
+ homework/hw4/HW4 Doc.docx   | Bin 0 -> 283409 bytes
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 6c2a2c334571bab9a401e6aa16dd4415329f16f9
+Author: Seattle <sr640712@ohio.edu>
+Date:   Tue Sep 13 18:52:23 2016 -0400
+
+    adding GUI mockup
+
+ GUI_mockup.png | Bin 0 -> 78944 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 99660c02138cfe32aba0052b2a58076d2006fea7
+Author: Seattle <sr640712@ohio.edu>
+Date:   Mon Sep 12 19:28:23 2016 -0400
+
+    forgotten file commit
+
+ .idea/.name                           |  1 +
+ .idea/RoboApp.iml                     | 23 +++++++++++++++++++++++
+ .idea/compiler.xml                    | 22 ++++++++++++++++++++++
+ .idea/copyright/profiles_settings.xml |  3 +++
+ .idea/misc.xml                        | 14 ++++++++++++++
+ .idea/modules.xml                     |  8 ++++++++
+ .idea/vcs.xml                         |  6 ++++++
+ 7 files changed, 77 insertions(+)
+
+commit 39b67a3b1282ea6aded241ce8ea56b3bfd73f571
+Author: Seattle <sr640712@ohio.edu>
+Date:   Mon Sep 12 19:03:21 2016 -0400
+
+    last years code
+    
+    Adding last years code to our new repository to create a starting point
+
+ BUILD                                              |     2 +
+ FaceTrackTest/.gitignore                           |     7 +
+ FaceTrackTest/.idea/.name                          |     1 +
+ FaceTrackTest/.idea/compiler.xml                   |    22 +
+ .../.idea/copyright/profiles_settings.xml          |     3 +
+ FaceTrackTest/.idea/encodings.xml                  |     6 +
+ FaceTrackTest/.idea/gradle.xml                     |    20 +
+ FaceTrackTest/.idea/misc.xml                       |    64 +
+ FaceTrackTest/.idea/modules.xml                    |    11 +
+ FaceTrackTest/.idea/runConfigurations.xml          |    12 +
+ FaceTrackTest/.idea/vcs.xml                        |     6 +
+ FaceTrackTest/FaceTrackTest.iml                    |    19 +
+ FaceTrackTest/Screenshots/Circle_Test.png          |   Bin 0 -> 72782 bytes
+ FaceTrackTest/app/.gitignore                       |     1 +
+ FaceTrackTest/app/app.iml                          |   111 +
+ FaceTrackTest/app/build.gradle                     |    36 +
+ .../app/libs/artoolkitplus-android-arm.jar         |   Bin 0 -> 317399 bytes
+ FaceTrackTest/app/libs/artoolkitplus.jar           |   Bin 0 -> 24110 bytes
+ FaceTrackTest/app/libs/ffmpeg-android-arm.jar      |   Bin 0 -> 10562971 bytes
+ FaceTrackTest/app/libs/ffmpeg.jar                  |   Bin 0 -> 235624 bytes
+ FaceTrackTest/app/libs/flandmark-android-arm.jar   |   Bin 0 -> 35255 bytes
+ FaceTrackTest/app/libs/flandmark.jar               |   Bin 0 -> 11809 bytes
+ FaceTrackTest/app/libs/flycapture.jar              |   Bin 0 -> 141159 bytes
+ FaceTrackTest/app/libs/javacpp.jar                 |   Bin 0 -> 252324 bytes
+ FaceTrackTest/app/libs/javacv.jar                  |   Bin 0 -> 366327 bytes
+ FaceTrackTest/app/libs/libdc1394.jar               |   Bin 0 -> 30394 bytes
+ FaceTrackTest/app/libs/libfreenect.jar             |   Bin 0 -> 21976 bytes
+ FaceTrackTest/app/libs/opencv-android-arm.jar      |   Bin 0 -> 8358114 bytes
+ FaceTrackTest/app/libs/opencv.jar                  |   Bin 0 -> 616138 bytes
+ .../app/libs/usb-serial-for-android-v010.jar       |   Bin 0 -> 20014 bytes
+ FaceTrackTest/app/libs/videoinput.jar              |   Bin 0 -> 15433 bytes
+ FaceTrackTest/app/proguard-rules.pro               |    17 +
+ .../com/robodoot/dr/RoboApp/ApplicationTest.java   |    13 +
+ FaceTrackTest/app/src/main/AndroidManifest.xml     |    65 +
+ .../app/src/main/assets/FaceCases/1-0.jpg          |   Bin 0 -> 20701 bytes
+ .../app/src/main/assets/FaceCases/1-1.jpg          |   Bin 0 -> 34078 bytes
+ .../app/src/main/assets/FaceCases/1-2.jpg          |   Bin 0 -> 26714 bytes
+ .../app/src/main/assets/FaceCases/1-3.jpg          |   Bin 0 -> 34705 bytes
+ .../app/src/main/assets/FaceCases/1-4.jpg          |   Bin 0 -> 19475 bytes
+ .../app/src/main/assets/FaceCases/10-0.jpg         |   Bin 0 -> 6431 bytes
+ .../app/src/main/assets/FaceCases/10-1.jpg         |   Bin 0 -> 31409 bytes
+ .../app/src/main/assets/FaceCases/10-2.jpg         |   Bin 0 -> 45335 bytes
+ .../app/src/main/assets/FaceCases/10-3.jpg         |   Bin 0 -> 36639 bytes
+ .../app/src/main/assets/FaceCases/10-4.jpg         |   Bin 0 -> 32133 bytes
+ .../app/src/main/assets/FaceCases/11-0.jpg         |   Bin 0 -> 44306 bytes
+ .../app/src/main/assets/FaceCases/11-1.jpg         |   Bin 0 -> 19664 bytes
+ .../app/src/main/assets/FaceCases/11-2.jpg         |   Bin 0 -> 24206 bytes
+ .../app/src/main/assets/FaceCases/11-3.jpg         |   Bin 0 -> 27651 bytes
+ .../app/src/main/assets/FaceCases/11-4.jpg         |   Bin 0 -> 11564 bytes
+ .../app/src/main/assets/FaceCases/12-0.jpg         |   Bin 0 -> 21538 bytes
+ .../app/src/main/assets/FaceCases/12-1.jpg         |   Bin 0 -> 33068 bytes
+ .../app/src/main/assets/FaceCases/12-2.jpg         |   Bin 0 -> 33374 bytes
+ .../app/src/main/assets/FaceCases/12-3.jpg         |   Bin 0 -> 30997 bytes
+ .../app/src/main/assets/FaceCases/12-4.jpg         |   Bin 0 -> 40125 bytes
+ .../app/src/main/assets/FaceCases/13-0.jpg         |   Bin 0 -> 35011 bytes
+ .../app/src/main/assets/FaceCases/13-1.jpg         |   Bin 0 -> 47287 bytes
+ .../app/src/main/assets/FaceCases/13-2.jpg         |   Bin 0 -> 16132 bytes
+ .../app/src/main/assets/FaceCases/13-3.jpg         |   Bin 0 -> 17601 bytes
+ .../app/src/main/assets/FaceCases/13-4.jpg         |   Bin 0 -> 36425 bytes
+ .../app/src/main/assets/FaceCases/14-0.jpg         |   Bin 0 -> 9176 bytes
+ .../app/src/main/assets/FaceCases/14-1.jpg         |   Bin 0 -> 22159 bytes
+ .../app/src/main/assets/FaceCases/14-2.jpg         |   Bin 0 -> 30196 bytes
+ .../app/src/main/assets/FaceCases/14-3.jpg         |   Bin 0 -> 23821 bytes
+ .../app/src/main/assets/FaceCases/14-4.jpg         |   Bin 0 -> 17232 bytes
+ .../app/src/main/assets/FaceCases/15-0.jpg         |   Bin 0 -> 56626 bytes
+ .../app/src/main/assets/FaceCases/15-1.jpg         |   Bin 0 -> 28406 bytes
+ .../app/src/main/assets/FaceCases/15-2.jpg         |   Bin 0 -> 19346 bytes
+ .../app/src/main/assets/FaceCases/15-3.jpg         |   Bin 0 -> 40736 bytes
+ .../app/src/main/assets/FaceCases/15-4.jpg         |   Bin 0 -> 31154 bytes
+ .../app/src/main/assets/FaceCases/16-0.jpg         |   Bin 0 -> 76178 bytes
+ .../app/src/main/assets/FaceCases/16-1.jpg         |   Bin 0 -> 20151 bytes
+ .../app/src/main/assets/FaceCases/16-2.jpg         |   Bin 0 -> 47196 bytes
+ .../app/src/main/assets/FaceCases/16-3.jpg         |   Bin 0 -> 125954 bytes
+ .../app/src/main/assets/FaceCases/16-4.jpg         |   Bin 0 -> 9015 bytes
+ .../app/src/main/assets/FaceCases/17-0.jpg         |   Bin 0 -> 13798 bytes
+ .../app/src/main/assets/FaceCases/17-1.jpg         |   Bin 0 -> 34840 bytes
+ .../app/src/main/assets/FaceCases/17-2.jpg         |   Bin 0 -> 43031 bytes
+ .../app/src/main/assets/FaceCases/17-3.jpg         |   Bin 0 -> 17431 bytes
+ .../app/src/main/assets/FaceCases/17-4.jpg         |   Bin 0 -> 32577 bytes
+ .../app/src/main/assets/FaceCases/18-0.jpg         |   Bin 0 -> 25034 bytes
+ .../app/src/main/assets/FaceCases/18-1.jpg         |   Bin 0 -> 18791 bytes
+ .../app/src/main/assets/FaceCases/18-2.jpg         |   Bin 0 -> 39746 bytes
+ .../app/src/main/assets/FaceCases/18-3.jpg         |   Bin 0 -> 34228 bytes
+ .../app/src/main/assets/FaceCases/18-4.jpg         |   Bin 0 -> 6002 bytes
+ .../app/src/main/assets/FaceCases/19-0.jpg         |   Bin 0 -> 20979 bytes
+ .../app/src/main/assets/FaceCases/19-1.jpg         |   Bin 0 -> 19398 bytes
+ .../app/src/main/assets/FaceCases/19-2.jpg         |   Bin 0 -> 32415 bytes
+ .../app/src/main/assets/FaceCases/19-3.jpg         |   Bin 0 -> 13272 bytes
+ .../app/src/main/assets/FaceCases/19-4.jpg         |   Bin 0 -> 24877 bytes
+ .../app/src/main/assets/FaceCases/2-0.jpg          |   Bin 0 -> 24837 bytes
+ .../app/src/main/assets/FaceCases/2-1.jpg          |   Bin 0 -> 25800 bytes
+ .../app/src/main/assets/FaceCases/2-2.jpg          |   Bin 0 -> 24076 bytes
+ .../app/src/main/assets/FaceCases/2-3.jpg          |   Bin 0 -> 31051 bytes
+ .../app/src/main/assets/FaceCases/2-4.jpg          |   Bin 0 -> 20051 bytes
+ .../app/src/main/assets/FaceCases/20-0.jpg         |   Bin 0 -> 30714 bytes
+ .../app/src/main/assets/FaceCases/20-1.jpg         |   Bin 0 -> 17383 bytes
+ .../app/src/main/assets/FaceCases/20-2.jpg         |   Bin 0 -> 21269 bytes
+ .../app/src/main/assets/FaceCases/20-3.jpg         |   Bin 0 -> 12485 bytes
+ .../app/src/main/assets/FaceCases/20-4.jpg         |   Bin 0 -> 43330 bytes
+ .../app/src/main/assets/FaceCases/3-0.jpg          |   Bin 0 -> 24790 bytes
+ .../app/src/main/assets/FaceCases/3-1.jpg          |   Bin 0 -> 35612 bytes
+ .../app/src/main/assets/FaceCases/3-2.jpg          |   Bin 0 -> 33373 bytes
+ .../app/src/main/assets/FaceCases/3-3.jpg          |   Bin 0 -> 13925 bytes
+ .../app/src/main/assets/FaceCases/3-4.jpg          |   Bin 0 -> 38906 bytes
+ .../app/src/main/assets/FaceCases/4-0.jpg          |   Bin 0 -> 28569 bytes
+ .../app/src/main/assets/FaceCases/4-1.jpg          |   Bin 0 -> 20999 bytes
+ .../app/src/main/assets/FaceCases/4-2.jpg          |   Bin 0 -> 19569 bytes
+ .../app/src/main/assets/FaceCases/4-3.jpg          |   Bin 0 -> 16985 bytes
+ .../app/src/main/assets/FaceCases/4-4.jpg          |   Bin 0 -> 28183 bytes
+ .../app/src/main/assets/FaceCases/5-0.jpg          |   Bin 0 -> 33712 bytes
+ .../app/src/main/assets/FaceCases/5-1.jpg          |   Bin 0 -> 20410 bytes
+ .../app/src/main/assets/FaceCases/5-2.jpg          |   Bin 0 -> 44762 bytes
+ .../app/src/main/assets/FaceCases/5-3.jpg          |   Bin 0 -> 31485 bytes
+ .../app/src/main/assets/FaceCases/5-4.jpg          |   Bin 0 -> 5337 bytes
+ .../app/src/main/assets/FaceCases/6-0.jpg          |   Bin 0 -> 12022 bytes
+ .../app/src/main/assets/FaceCases/6-1.jpg          |   Bin 0 -> 28053 bytes
+ .../app/src/main/assets/FaceCases/6-2.jpg          |   Bin 0 -> 37915 bytes
+ .../app/src/main/assets/FaceCases/6-3.jpg          |   Bin 0 -> 27032 bytes
+ .../app/src/main/assets/FaceCases/6-4.jpg          |   Bin 0 -> 37025 bytes
+ .../app/src/main/assets/FaceCases/7-0.jpg          |   Bin 0 -> 34064 bytes
+ .../app/src/main/assets/FaceCases/7-1.jpg          |   Bin 0 -> 34822 bytes
+ .../app/src/main/assets/FaceCases/7-2.jpg          |   Bin 0 -> 42265 bytes
+ .../app/src/main/assets/FaceCases/7-3.jpg          |   Bin 0 -> 50931 bytes
+ .../app/src/main/assets/FaceCases/7-4.jpg          |   Bin 0 -> 30141 bytes
+ .../app/src/main/assets/FaceCases/8-0.jpg          |   Bin 0 -> 153452 bytes
+ .../app/src/main/assets/FaceCases/8-1.jpg          |   Bin 0 -> 22692 bytes
+ .../app/src/main/assets/FaceCases/8-2.jpg          |   Bin 0 -> 15419 bytes
+ .../app/src/main/assets/FaceCases/8-3.jpg          |   Bin 0 -> 36616 bytes
+ .../app/src/main/assets/FaceCases/8-4.jpg          |   Bin 0 -> 7638 bytes
+ .../app/src/main/assets/FaceCases/9-0.jpg          |   Bin 0 -> 45984 bytes
+ .../app/src/main/assets/FaceCases/9-1.jpg          |   Bin 0 -> 15223 bytes
+ .../app/src/main/assets/FaceCases/9-2.jpg          |   Bin 0 -> 44620 bytes
+ .../app/src/main/assets/FaceCases/9-3.jpg          |   Bin 0 -> 20480 bytes
+ .../app/src/main/assets/FaceCases/9-4.jpg          |   Bin 0 -> 41402 bytes
+ .../main/java/com/felhr/deviceids/CH34xIds.java    |    40 +
+ .../main/java/com/felhr/deviceids/CP210xIds.java   |   168 +
+ .../main/java/com/felhr/deviceids/FTDISioIds.java  |   585 +
+ .../main/java/com/felhr/deviceids/PL2303Ids.java   |    92 +
+ .../main/java/com/felhr/deviceids/XdcVcpIds.java   |    41 +
+ .../com/felhr/usbserial/BLED112SerialDevice.java   |   283 +
+ .../java/com/felhr/usbserial/CDCSerialDevice.java  |   342 +
+ .../com/felhr/usbserial/CH34xSerialDevice.java     |   690 +
+ .../com/felhr/usbserial/CP2102SerialDevice.java    |   560 +
+ .../java/com/felhr/usbserial/FTDISerialDevice.java |   621 +
+ .../com/felhr/usbserial/PL2303SerialDevice.java    |   372 +
+ .../java/com/felhr/usbserial/SerialBuffer.java     |   164 +
+ .../com/felhr/usbserial/SerialInputStream.java     |    60 +
+ .../com/felhr/usbserial/SerialOutputStream.java    |    26 +
+ .../com/felhr/usbserial/UsbSerialDebugger.java     |    71 +
+ .../java/com/felhr/usbserial/UsbSerialDevice.java  |   447 +
+ .../com/felhr/usbserial/UsbSerialInterface.java    |    99 +
+ .../com/felhr/usbserial/XdcVcpSerialDevice.java    |   369 +
+ .../app/src/main/java/com/felhr/utils/HexData.java |    58 +
+ .../main/java/com/robodoot/dr/RoboApp/CatEars.java |    40 +
+ .../java/com/robodoot/dr/RoboApp/CatEmotion.java   |   422 +
+ .../robodoot/dr/RoboApp/ColorTrackingActivity.java |   330 +
+ .../java/com/robodoot/dr/RoboApp/FdActivity.java   |  1295 +
+ .../main/java/com/robodoot/dr/RoboApp/Logger.java  |   130 +
+ .../com/robodoot/dr/RoboApp/PololuHandler.java     |   305 +
+ .../main/java/com/robodoot/dr/RoboApp/Readme.java  |    23 +
+ .../java/com/robodoot/roboapp/BatteryView.java     |   218 +
+ .../java/com/robodoot/roboapp/CatCameraView.java   |    55 +
+ .../java/com/robodoot/roboapp/ColorValues.java     |    31 +
+ .../main/java/com/robodoot/roboapp/CompTest.java   |    21 +
+ .../com/robodoot/roboapp/CompTestDataSource.java   |    43 +
+ .../com/robodoot/roboapp/CompTestFragment.java     |   153 +
+ .../com/robodoot/roboapp/CompTestOpenHelper.java   |    45 +
+ .../java/com/robodoot/roboapp/ConsoleFragment.java |   154 +
+ .../robodoot/roboapp/CreateCompTestActivity.java   |    39 +
+ .../main/java/com/robodoot/roboapp/Direction.java  |    71 +
+ .../java/com/robodoot/roboapp/HomeFragment.java    |   109 +
+ .../main/java/com/robodoot/roboapp/ImageUtil.java  |    90 +
+ .../java/com/robodoot/roboapp/MainActivity.java    |   195 +
+ .../java/com/robodoot/roboapp/MockVirtualCat.java  |    97 +
+ .../robodoot/roboapp/NavigationDrawerAdapter.java  |    90 +
+ .../roboapp/NavigationDrawerCallbacks.java         |     5 +
+ .../robodoot/roboapp/NavigationDrawerFragment.java |   327 +
+ .../java/com/robodoot/roboapp/NavigationItem.java  |    33 +
+ .../src/main/java/com/robodoot/roboapp/Person.java |    97 +
+ .../com/robodoot/roboapp/PololuVirtualCat.java     |   126 +
+ .../java/com/robodoot/roboapp/ReadmeFragment.java  |   109 +
+ .../src/main/java/com/robodoot/roboapp/Util.java   |    39 +
+ .../main/java/com/robodoot/roboapp/VirtualCat.java |    58 +
+ .../main/java/org/pololu/maestro/MaestroSSC.java   |   146 +
+ .../java/org/pololu/maestro/MaestroUSBDevice.java  |   147 +
+ .../src/main/res/drawable-hdpi/ic_menu_check.png   |   Bin 0 -> 212 bytes
+ .../src/main/res/drawable-mdpi/ic_menu_check.png   |   Bin 0 -> 163 bytes
+ .../src/main/res/drawable-xhdpi/ic_menu_check.png  |   Bin 0 -> 232 bytes
+ .../src/main/res/drawable-xxhdpi/ic_menu_check.png |   Bin 0 -> 329 bytes
+ .../main/res/drawable/add_button_not_pressed.xml   |     5 +
+ .../src/main/res/drawable/add_button_pressed.xml   |     5 +
+ .../src/main/res/drawable/add_button_states.xml    |    10 +
+ .../app/src/main/res/drawable/angryface.jpg        |   Bin 0 -> 50782 bytes
+ FaceTrackTest/app/src/main/res/drawable/avatar.png |   Bin 0 -> 11332 bytes
+ .../app/src/main/res/drawable/battery_outline.png  |   Bin 0 -> 2178 bytes
+ .../app/src/main/res/drawable/curved_arrow.png     |   Bin 0 -> 31628 bytes
+ FaceTrackTest/app/src/main/res/drawable/down.png   |   Bin 0 -> 2984 bytes
+ FaceTrackTest/app/src/main/res/drawable/enter.jpg  |   Bin 0 -> 58453 bytes
+ .../app/src/main/res/drawable/face_angry.png       |   Bin 0 -> 208559 bytes
+ .../app/src/main/res/drawable/face_annoyed.png     |   Bin 0 -> 202068 bytes
+ .../app/src/main/res/drawable/face_concerned.png   |   Bin 0 -> 205817 bytes
+ .../app/src/main/res/drawable/face_crying.png      |   Bin 0 -> 211960 bytes
+ .../app/src/main/res/drawable/face_disgusted.png   |   Bin 0 -> 204041 bytes
+ .../app/src/main/res/drawable/face_happier.png     |   Bin 0 -> 203736 bytes
+ .../app/src/main/res/drawable/face_happy.png       |   Bin 0 -> 208071 bytes
+ .../app/src/main/res/drawable/face_happytongue.png |   Bin 0 -> 207909 bytes
+ .../app/src/main/res/drawable/face_hearts.png      |   Bin 0 -> 212548 bytes
+ .../src/main/res/drawable/face_heartstongue.png    |   Bin 0 -> 156978 bytes
+ .../main/res/drawable/face_kawaiieyesclosed.png    |   Bin 0 -> 210344 bytes
+ .../src/main/res/drawable/face_kawaiieyesopen.png  |   Bin 0 -> 209653 bytes
+ .../app/src/main/res/drawable/face_lookleft.png    |   Bin 0 -> 206297 bytes
+ .../app/src/main/res/drawable/face_lookright.png   |   Bin 0 -> 207023 bytes
+ .../app/src/main/res/drawable/face_sad.png         |   Bin 0 -> 206760 bytes
+ .../app/src/main/res/drawable/face_sadder.png      |   Bin 0 -> 209176 bytes
+ .../app/src/main/res/drawable/face_yawning.png     |   Bin 0 -> 204354 bytes
+ .../src/main/res/drawable/ic_add_black_24dp.xml    |     9 +
+ FaceTrackTest/app/src/main/res/drawable/left.png   |   Bin 0 -> 2135 bytes
+ .../app/src/main/res/drawable/lesssmile.jpg        |   Bin 0 -> 50801 bytes
+ FaceTrackTest/app/src/main/res/drawable/mic.png    |   Bin 0 -> 3063 bytes
+ FaceTrackTest/app/src/main/res/drawable/na.png     |   Bin 0 -> 642 bytes
+ .../app/src/main/res/drawable/neutral.jpg          |   Bin 0 -> 48797 bytes
+ FaceTrackTest/app/src/main/res/drawable/right.png  |   Bin 0 -> 2441 bytes
+ .../app/src/main/res/drawable/roboapplogo.png      |   Bin 0 -> 6773 bytes
+ .../app/src/main/res/drawable/row_selector.xml     |     5 +
+ .../app/src/main/res/drawable/sadface.jpg          |   Bin 0 -> 57392 bytes
+ FaceTrackTest/app/src/main/res/drawable/smile.jpg  |   Bin 0 -> 54111 bytes
+ .../app/src/main/res/drawable/superanger.jpg       |   Bin 0 -> 55714 bytes
+ .../app/src/main/res/drawable/supersmile.jpg       |   Bin 0 -> 54575 bytes
+ FaceTrackTest/app/src/main/res/drawable/up.png     |   Bin 0 -> 2985 bytes
+ .../app/src/main/res/drawable/wallpaper.png        |   Bin 0 -> 4178 bytes
+ .../main/res/layout/activity_color_tracking.xml    |   204 +
+ .../main/res/layout/activity_create_comp_test.xml  |    20 +
+ .../app/src/main/res/layout/activity_fd.xml        |   123 +
+ .../app/src/main/res/layout/activity_main.xml      |    27 +
+ .../app/src/main/res/layout/activity_my.xml        |    35 +
+ .../app/src/main/res/layout/activity_readme.xml    |    21 +
+ .../app/src/main/res/layout/activity_readme2.xml   |    21 +
+ .../src/main/res/layout/content_color_tracking.xml |    23 +
+ .../app/src/main/res/layout/content_readme.xml     |    15 +
+ .../app/src/main/res/layout/content_readme2.xml    |    15 +
+ .../app/src/main/res/layout/drawer_row.xml         |     9 +
+ .../app/src/main/res/layout/fragment_comptest.xml  |    42 +
+ .../app/src/main/res/layout/fragment_console.xml   |    59 +
+ .../app/src/main/res/layout/fragment_home.xml      |    15 +
+ .../main/res/layout/fragment_navigation_drawer.xml |    40 +
+ .../app/src/main/res/layout/fragment_readme.xml    |    93 +
+ .../app/src/main/res/layout/toolbar_default.xml    |     4 +
+ FaceTrackTest/app/src/main/res/menu/main.xml       |     3 +
+ .../src/main/res/menu/menu_create_comp_test.xml    |     7 +
+ FaceTrackTest/app/src/main/res/menu/menu_fd.xml    |    11 +
+ FaceTrackTest/app/src/main/res/menu/menu_main.xml  |     7 +
+ FaceTrackTest/app/src/main/res/menu/menu_my.xml    |     6 +
+ .../app/src/main/res/mipmap-hdpi/ic_launcher.png   |   Bin 0 -> 3418 bytes
+ .../app/src/main/res/mipmap-hdpi/logo.png          |   Bin 0 -> 8965 bytes
+ .../app/src/main/res/mipmap-mdpi/ic_launcher.png   |   Bin 0 -> 2206 bytes
+ .../app/src/main/res/mipmap-mdpi/logo.png          |   Bin 0 -> 4448 bytes
+ .../app/src/main/res/mipmap-xhdpi/ic_launcher.png  |   Bin 0 -> 4842 bytes
+ .../app/src/main/res/mipmap-xhdpi/logo.png         |   Bin 0 -> 14355 bytes
+ .../app/src/main/res/mipmap-xxhdpi/ic_launcher.png |   Bin 0 -> 7718 bytes
+ .../app/src/main/res/mipmap-xxhdpi/logo.png        |   Bin 0 -> 191493 bytes
+ .../main/res/raw/haarcascade_lefteye_2splits.xml   | 12213 +++
+ .../app/src/main/res/raw/haarcascade_smile.xml     |  6729 ++
+ .../src/main/res/raw/lbpcascade_frontalcatface.xml |  3336 +
+ .../src/main/res/raw/lbpcascade_frontalface.xml    |  1505 +
+ .../app/src/main/res/values-v21/styles.xml         |    28 +
+ .../app/src/main/res/values-w820dp/dimens.xml      |     6 +
+ FaceTrackTest/app/src/main/res/values/attrs.xml    |     6 +
+ FaceTrackTest/app/src/main/res/values/colors.xml   |    24 +
+ FaceTrackTest/app/src/main/res/values/dimens.xml   |     9 +
+ FaceTrackTest/app/src/main/res/values/strings.xml  |    24 +
+ FaceTrackTest/app/src/main/res/values/styles.xml   |    36 +
+ .../app/src/main/res/xml/device_filter.xml         |    22 +
+ FaceTrackTest/build.gradle                         |    20 +
+ FaceTrackTest/gradle.properties                    |    18 +
+ FaceTrackTest/gradle/wrapper/gradle-wrapper.jar    |   Bin 0 -> 49896 bytes
+ .../gradle/wrapper/gradle-wrapper.properties       |     6 +
+ FaceTrackTest/gradlew                              |   164 +
+ FaceTrackTest/gradlew.bat                          |    90 +
+ FaceTrackTest/import-summary.txt                   |   201 +
+ FaceTrackTest/libraries/OpenCV-android-sdk/LICENSE |    41 +
+ .../libraries/OpenCV-android-sdk/README.android    |     1 +
+ .../libraries/OpenCV-android-sdk/apk/readme.txt    |    23 +
+ .../samples/15-puzzle/.classpath                   |     8 +
+ .../OpenCV-android-sdk/samples/15-puzzle/.project  |    33 +
+ .../15-puzzle/.settings/org.eclipse.jdt.core.prefs |     4 +
+ .../samples/15-puzzle/AndroidManifest.xml          |    35 +
+ .../samples/15-puzzle/project.properties           |    15 +
+ .../samples/15-puzzle/res/drawable/icon.png        |   Bin 0 -> 1997 bytes
+ .../samples/15-puzzle/res/values/strings.xml       |     6 +
+ .../opencv/samples/puzzle15/Puzzle15Activity.java  |   144 +
+ .../opencv/samples/puzzle15/Puzzle15Processor.java |   195 +
+ .../samples/camera-calibration/.classpath          |     9 +
+ .../samples/camera-calibration/.project            |    33 +
+ .../.settings/org.eclipse.jdt.core.prefs           |     4 +
+ .../samples/camera-calibration/AndroidManifest.xml |    38 +
+ .../samples/camera-calibration/project.properties  |    15 +
+ .../camera-calibration/res/drawable/icon.png       |   Bin 0 -> 2104 bytes
+ .../res/layout/camera_calibration_surface_view.xml |    12 +
+ .../camera-calibration/res/menu/calibration.xml    |    22 +
+ .../camera-calibration/res/values/strings.xml      |    18 +
+ .../cameracalibration/CalibrationResult.java       |    69 +
+ .../CameraCalibrationActivity.java                 |   222 +
+ .../cameracalibration/CameraCalibrator.java        |   170 +
+ .../cameracalibration/OnCameraFrameRender.java     |   102 +
+ .../samples/color-blob-detection/.classpath        |     8 +
+ .../samples/color-blob-detection/.project          |    33 +
+ .../.settings/org.eclipse.jdt.core.prefs           |     4 +
+ .../color-blob-detection/AndroidManifest.xml       |    38 +
+ .../color-blob-detection/project.properties        |    15 +
+ .../color-blob-detection/res/drawable/icon.png     |   Bin 0 -> 1997 bytes
+ .../layout/color_blob_detection_surface_view.xml   |    11 +
+ .../color-blob-detection/res/values/strings.xml    |     4 +
+ .../ColorBlobDetectionActivity.java                |   196 +
+ .../samples/colorblobdetect/ColorBlobDetector.java |   108 +
+ .../samples/face-detection/.classpath              |     8 +
+ .../samples/face-detection/.cproject               |    75 +
+ .../samples/face-detection/.project                |   101 +
+ .../.settings/org.eclipse.jdt.core.prefs           |     4 +
+ .../samples/face-detection/AndroidManifest.xml     |    38 +
+ .../samples/face-detection/jni/Android.mk          |    16 +
+ .../samples/face-detection/jni/Application.mk      |     4 +
+ .../jni/DetectionBasedTracker_jni.cpp              |   251 +
+ .../face-detection/jni/DetectionBasedTracker_jni.h |    61 +
+ .../samples/face-detection/project.properties      |    15 +
+ .../samples/face-detection/res/drawable/icon.png   |   Bin 0 -> 1997 bytes
+ .../res/layout/face_detect_surface_view.xml        |    11 +
+ .../res/raw/lbpcascade_frontalface.xml             |  1505 +
+ .../samples/face-detection/res/values/strings.xml  |     4 +
+ .../samples/facedetect/DetectionBasedTracker.java  |    41 +
+ .../org/opencv/samples/facedetect/FdActivity.java  |   250 +
+ .../samples/image-manipulations/.classpath         |     8 +
+ .../samples/image-manipulations/.project           |    33 +
+ .../.settings/org.eclipse.jdt.core.prefs           |     4 +
+ .../image-manipulations/AndroidManifest.xml        |    38 +
+ .../samples/image-manipulations/project.properties |    15 +
+ .../image-manipulations/res/drawable/icon.png      |   Bin 0 -> 1997 bytes
+ .../layout/image_manipulations_surface_view.xml    |    11 +
+ .../image-manipulations/res/values/strings.xml     |     4 +
+ .../ImageManipulationsActivity.java                |   319 +
+ .../samples/tutorial-1-camerapreview/.classpath    |     8 +
+ .../samples/tutorial-1-camerapreview/.project      |    33 +
+ .../.settings/org.eclipse.jdt.core.prefs           |     4 +
+ .../tutorial-1-camerapreview/AndroidManifest.xml   |    38 +
+ .../tutorial-1-camerapreview/project.properties    |    15 +
+ .../tutorial-1-camerapreview/res/drawable/icon.png |   Bin 0 -> 1997 bytes
+ .../res/layout/tutorial1_surface_view.xml          |    15 +
+ .../res/values/strings.xml                         |     4 +
+ .../samples/tutorial1/Tutorial1Activity.java       |   100 +
+ .../samples/tutorial-2-mixedprocessing/.classpath  |     8 +
+ .../samples/tutorial-2-mixedprocessing/.cproject   |    74 +
+ .../samples/tutorial-2-mixedprocessing/.project    |   101 +
+ .../.settings/org.eclipse.jdt.core.prefs           |     4 +
+ .../tutorial-2-mixedprocessing/AndroidManifest.xml |    38 +
+ .../tutorial-2-mixedprocessing/jni/Android.mk      |    11 +
+ .../tutorial-2-mixedprocessing/jni/Application.mk  |     4 +
+ .../tutorial-2-mixedprocessing/jni/jni_part.cpp    |    27 +
+ .../tutorial-2-mixedprocessing/project.properties  |    15 +
+ .../res/drawable/icon.png                          |   Bin 0 -> 1997 bytes
+ .../res/layout/tutorial2_surface_view.xml          |    11 +
+ .../res/values/strings.xml                         |     4 +
+ .../samples/tutorial2/Tutorial2Activity.java       |   172 +
+ .../samples/tutorial-3-cameracontrol/.classpath    |     8 +
+ .../samples/tutorial-3-cameracontrol/.project      |    33 +
+ .../.settings/org.eclipse.jdt.core.prefs           |     4 +
+ .../tutorial-3-cameracontrol/AndroidManifest.xml   |    39 +
+ .../tutorial-3-cameracontrol/project.properties    |    15 +
+ .../tutorial-3-cameracontrol/res/drawable/icon.png |   Bin 0 -> 1997 bytes
+ .../res/layout/tutorial3_surface_view.xml          |    12 +
+ .../res/values/strings.xml                         |     4 +
+ .../samples/tutorial3/Tutorial3Activity.java       |   184 +
+ .../opencv/samples/tutorial3/Tutorial3View.java    |    87 +
+ .../sdk/etc/haarcascades/haarcascade_eye.xml       | 12213 +++
+ .../haarcascade_eye_tree_eyeglasses.xml            | 22619 +++++
+ .../haarcascades/haarcascade_frontalcatface.xml    | 13319 +++
+ .../haarcascade_frontalcatface_extended.xml        | 12750 +++
+ .../haarcascades/haarcascade_frontalface_alt.xml   | 24350 +++++
+ .../haarcascades/haarcascade_frontalface_alt2.xml  | 20719 ++++
+ .../haarcascade_frontalface_alt_tree.xml           | 96484 +++++++++++++++++++
+ .../haarcascade_frontalface_default.xml            | 33314 +++++++
+ .../sdk/etc/haarcascades/haarcascade_fullbody.xml  | 17030 ++++
+ .../haarcascades/haarcascade_lefteye_2splits.xml   |  7390 ++
+ .../haarcascade_licence_plate_rus_16stages.xml     |  1404 +
+ .../sdk/etc/haarcascades/haarcascade_lowerbody.xml | 14056 +++
+ .../etc/haarcascades/haarcascade_profileface.xml   | 29690 ++++++
+ .../haarcascades/haarcascade_righteye_2splits.xml  |  7407 ++
+ .../haarcascade_russian_plate_number.xml           |  2656 +
+ .../sdk/etc/haarcascades/haarcascade_smile.xml     |  6729 ++
+ .../sdk/etc/haarcascades/haarcascade_upperbody.xml | 28134 ++++++
+ .../etc/lbpcascades/lbpcascade_frontalcatface.xml  |  3336 +
+ .../sdk/etc/lbpcascades/lbpcascade_frontalface.xml |  1505 +
+ .../sdk/etc/lbpcascades/lbpcascade_profileface.xml |  1275 +
+ .../sdk/etc/lbpcascades/lbpcascade_silverware.xml  |  1279 +
+ .../OpenCV-android-sdk/sdk/java/.classpath         |     7 +
+ .../libraries/OpenCV-android-sdk/sdk/java/.project |    33 +
+ .../sdk/java/.settings/org.eclipse.jdt.core.prefs  |     6 +
+ .../sdk/java/AndroidManifest.xml                   |     8 +
+ .../sdk/java/javadoc/allclasses-frame.html         |   223 +
+ .../sdk/java/javadoc/allclasses-noframe.html       |   223 +
+ .../sdk/java/javadoc/constant-values.html          |  7022 ++
+ .../sdk/java/javadoc/help-doc.html                 |   211 +
+ .../sdk/java/javadoc/index-all.html                |  8124 ++
+ .../OpenCV-android-sdk/sdk/java/javadoc/index.html |    73 +
+ .../org/opencv/android/BaseLoaderCallback.html     |   306 +
+ .../CameraBridgeViewBase.CvCameraViewFrame.html    |   233 +
+ .../CameraBridgeViewBase.CvCameraViewListener.html |   255 +
+ ...CameraBridgeViewBase.CvCameraViewListener2.html |   255 +
+ .../CameraBridgeViewBase.ListItemAccessor.html     |   227 +
+ .../org/opencv/android/CameraBridgeViewBase.html   |   739 +
+ .../java/javadoc/org/opencv/android/FpsMeter.html  |   311 +
+ .../opencv/android/InstallCallbackInterface.html   |   330 +
+ .../JavaCameraView.JavaCameraSizeAccessor.html     |   279 +
+ .../javadoc/org/opencv/android/JavaCameraView.html |   378 +
+ .../opencv/android/LoaderCallbackInterface.html    |   352 +
+ .../javadoc/org/opencv/android/OpenCVLoader.html   |   541 +
+ .../sdk/java/javadoc/org/opencv/android/Utils.html |   430 +
+ .../javadoc/org/opencv/android/package-frame.html  |    65 +
+ .../org/opencv/android/package-summary.html        |   212 +
+ .../javadoc/org/opencv/android/package-tree.html   |   165 +
+ .../java/javadoc/org/opencv/calib3d/Calib3d.html   |  3561 +
+ .../java/javadoc/org/opencv/calib3d/StereoBM.html  |   623 +
+ .../javadoc/org/opencv/calib3d/StereoMatcher.html  |   514 +
+ .../javadoc/org/opencv/calib3d/StereoSGBM.html     |   531 +
+ .../javadoc/org/opencv/calib3d/package-frame.html  |    38 +
+ .../org/opencv/calib3d/package-summary.html        |   165 +
+ .../javadoc/org/opencv/calib3d/package-tree.html   |   153 +
+ .../java/javadoc/org/opencv/core/Algorithm.html    |   256 +
+ .../org/opencv/core/Core.MinMaxLocResult.html      |   313 +
+ .../sdk/java/javadoc/org/opencv/core/Core.html     |  6884 ++
+ .../java/javadoc/org/opencv/core/CvException.html  |   268 +
+ .../sdk/java/javadoc/org/opencv/core/CvType.html   |  1144 +
+ .../sdk/java/javadoc/org/opencv/core/DMatch.html   |   411 +
+ .../sdk/java/javadoc/org/opencv/core/KeyPoint.html |   502 +
+ .../sdk/java/javadoc/org/opencv/core/Mat.html      |  2046 +
+ .../java/javadoc/org/opencv/core/MatOfByte.html    |   399 +
+ .../java/javadoc/org/opencv/core/MatOfDMatch.html  |   399 +
+ .../java/javadoc/org/opencv/core/MatOfDouble.html  |   399 +
+ .../java/javadoc/org/opencv/core/MatOfFloat.html   |   399 +
+ .../java/javadoc/org/opencv/core/MatOfFloat4.html  |   399 +
+ .../java/javadoc/org/opencv/core/MatOfFloat6.html  |   399 +
+ .../sdk/java/javadoc/org/opencv/core/MatOfInt.html |   399 +
+ .../java/javadoc/org/opencv/core/MatOfInt4.html    |   399 +
+ .../javadoc/org/opencv/core/MatOfKeyPoint.html     |   399 +
+ .../java/javadoc/org/opencv/core/MatOfPoint.html   |   399 +
+ .../java/javadoc/org/opencv/core/MatOfPoint2f.html |   399 +
+ .../java/javadoc/org/opencv/core/MatOfPoint3.html  |   399 +
+ .../java/javadoc/org/opencv/core/MatOfPoint3f.html |   399 +
+ .../java/javadoc/org/opencv/core/MatOfRect.html    |   399 +
+ .../sdk/java/javadoc/org/opencv/core/Point.html    |   458 +
+ .../sdk/java/javadoc/org/opencv/core/Point3.html   |   492 +
+ .../sdk/java/javadoc/org/opencv/core/Range.html    |   515 +
+ .../sdk/java/javadoc/org/opencv/core/Rect.html     |   587 +
+ .../java/javadoc/org/opencv/core/RotatedRect.html  |   478 +
+ .../sdk/java/javadoc/org/opencv/core/Scalar.html   |   537 +
+ .../sdk/java/javadoc/org/opencv/core/Size.html     |   453 +
+ .../java/javadoc/org/opencv/core/TermCriteria.html |   506 +
+ .../javadoc/org/opencv/core/package-frame.html     |    99 +
+ .../javadoc/org/opencv/core/package-summary.html   |   280 +
+ .../java/javadoc/org/opencv/core/package-tree.html |   158 +
+ .../javadoc/org/opencv/engine/package-frame.html   |    21 +
+ .../javadoc/org/opencv/engine/package-summary.html |   139 +
+ .../javadoc/org/opencv/engine/package-tree.html    |   142 +
+ .../org/opencv/features2d/DescriptorExtractor.html |   626 +
+ .../org/opencv/features2d/DescriptorMatcher.html   |   834 +
+ .../org/opencv/features2d/FeatureDetector.html     |  1242 +
+ .../javadoc/org/opencv/features2d/Features2d.html  |   483 +
+ .../org/opencv/features2d/package-frame.html       |    38 +
+ .../org/opencv/features2d/package-summary.html     |   165 +
+ .../org/opencv/features2d/package-tree.html        |   149 +
+ .../javadoc/org/opencv/imgcodecs/Imgcodecs.html    |  1254 +
+ .../org/opencv/imgcodecs/package-frame.html        |    32 +
+ .../org/opencv/imgcodecs/package-summary.html      |   153 +
+ .../javadoc/org/opencv/imgcodecs/package-tree.html |   149 +
+ .../sdk/java/javadoc/org/opencv/imgproc/CLAHE.html |   322 +
+ .../java/javadoc/org/opencv/imgproc/Imgproc.html   | 12126 +++
+ .../org/opencv/imgproc/LineSegmentDetector.html    |   323 +
+ .../java/javadoc/org/opencv/imgproc/Subdiv2D.html  |   876 +
+ .../javadoc/org/opencv/imgproc/package-frame.html  |    38 +
+ .../org/opencv/imgproc/package-summary.html        |   165 +
+ .../javadoc/org/opencv/imgproc/package-tree.html   |   151 +
+ .../sdk/java/javadoc/org/opencv/ml/ANN_MLP.html    |   870 +
+ .../sdk/java/javadoc/org/opencv/ml/Boost.html      |   467 +
+ .../sdk/java/javadoc/org/opencv/ml/DTrees.html     |   679 +
+ .../sdk/java/javadoc/org/opencv/ml/EM.html         |   741 +
+ .../sdk/java/javadoc/org/opencv/ml/KNearest.html   |   500 +
+ .../javadoc/org/opencv/ml/LogisticRegression.html  |   647 +
+ .../sdk/java/javadoc/org/opencv/ml/Ml.html         |   364 +
+ .../org/opencv/ml/NormalBayesClassifier.html       |   301 +
+ .../sdk/java/javadoc/org/opencv/ml/RTrees.html     |   405 +
+ .../sdk/java/javadoc/org/opencv/ml/SVM.html        |  1008 +
+ .../sdk/java/javadoc/org/opencv/ml/StatModel.html  |   440 +
+ .../sdk/java/javadoc/org/opencv/ml/TrainData.html  |   917 +
+ .../java/javadoc/org/opencv/ml/package-frame.html  |    54 +
+ .../javadoc/org/opencv/ml/package-summary.html     |   197 +
+ .../java/javadoc/org/opencv/ml/package-tree.html   |   155 +
+ .../opencv/objdetect/BaseCascadeClassifier.html    |   197 +
+ .../org/opencv/objdetect/CascadeClassifier.html    |   529 +
+ .../org/opencv/objdetect/HOGDescriptor.html        |  1006 +
+ .../javadoc/org/opencv/objdetect/Objdetect.html    |   367 +
+ .../org/opencv/objdetect/package-frame.html        |    38 +
+ .../org/opencv/objdetect/package-summary.html      |   165 +
+ .../javadoc/org/opencv/objdetect/package-tree.html |   151 +
+ .../javadoc/org/opencv/photo/AlignExposures.html   |   234 +
+ .../java/javadoc/org/opencv/photo/AlignMTB.html    |   437 +
+ .../javadoc/org/opencv/photo/CalibrateCRF.html     |   232 +
+ .../javadoc/org/opencv/photo/CalibrateDebevec.html |   330 +
+ .../org/opencv/photo/CalibrateRobertson.html       |   311 +
+ .../javadoc/org/opencv/photo/MergeDebevec.html     |   258 +
+ .../javadoc/org/opencv/photo/MergeExposures.html   |   234 +
+ .../javadoc/org/opencv/photo/MergeMertens.html     |   370 +
+ .../javadoc/org/opencv/photo/MergeRobertson.html   |   258 +
+ .../sdk/java/javadoc/org/opencv/photo/Photo.html   |  1602 +
+ .../sdk/java/javadoc/org/opencv/photo/Tonemap.html |   268 +
+ .../javadoc/org/opencv/photo/TonemapDrago.html     |   292 +
+ .../javadoc/org/opencv/photo/TonemapDurand.html    |   368 +
+ .../javadoc/org/opencv/photo/TonemapMantiuk.html   |   292 +
+ .../javadoc/org/opencv/photo/TonemapReinhard.html  |   330 +
+ .../javadoc/org/opencv/photo/package-frame.html    |    60 +
+ .../javadoc/org/opencv/photo/package-summary.html  |   209 +
+ .../javadoc/org/opencv/photo/package-tree.html     |   159 +
+ .../java/javadoc/org/opencv/utils/Converters.html  |  1144 +
+ .../javadoc/org/opencv/utils/package-frame.html    |    32 +
+ .../javadoc/org/opencv/utils/package-summary.html  |   153 +
+ .../javadoc/org/opencv/utils/package-tree.html     |   149 +
+ .../org/opencv/video/BackgroundSubtractor.html     |   272 +
+ .../org/opencv/video/BackgroundSubtractorKNN.html  |   482 +
+ .../org/opencv/video/BackgroundSubtractorMOG2.html |   672 +
+ .../javadoc/org/opencv/video/DenseOpticalFlow.html |   251 +
+ .../org/opencv/video/DualTVL1OpticalFlow.html      |   207 +
+ .../javadoc/org/opencv/video/KalmanFilter.html     |   702 +
+ .../sdk/java/javadoc/org/opencv/video/Video.html   |   818 +
+ .../javadoc/org/opencv/video/package-frame.html    |    44 +
+ .../javadoc/org/opencv/video/package-summary.html  |   177 +
+ .../javadoc/org/opencv/video/package-tree.html     |   155 +
+ .../javadoc/org/opencv/videoio/VideoCapture.html   |   451 +
+ .../java/javadoc/org/opencv/videoio/Videoio.html   |  5296 +
+ .../javadoc/org/opencv/videoio/package-frame.html  |    34 +
+ .../org/opencv/videoio/package-summary.html        |   157 +
+ .../javadoc/org/opencv/videoio/package-tree.html   |   149 +
+ .../sdk/java/javadoc/overview-frame.html           |    66 +
+ .../sdk/java/javadoc/overview-summary.html         |   195 +
+ .../sdk/java/javadoc/overview-tree.html            |   193 +
+ .../sdk/java/javadoc/package-list                  |    13 +
+ .../sdk/java/javadoc/resources/inherit.gif         |   Bin 0 -> 57 bytes
+ .../sdk/java/javadoc/serialized-form.html          |   162 +
+ .../sdk/java/javadoc/stylesheet.css                |    29 +
+ .../libraries/OpenCV-android-sdk/sdk/java/lint.xml |     9 +
+ .../OpenCV-android-sdk/sdk/java/project.properties |    15 +
+ .../sdk/java/res/values/attrs.xml                  |    11 +
+ .../src/org/opencv/android/AsyncServiceHelper.java |   391 +
+ .../src/org/opencv/android/BaseLoaderCallback.java |   141 +
+ .../org/opencv/android/CameraBridgeViewBase.java   |   495 +
+ .../sdk/java/src/org/opencv/android/FpsMeter.java  |    66 +
+ .../opencv/android/InstallCallbackInterface.java   |    34 +
+ .../src/org/opencv/android/JavaCameraView.java     |   352 +
+ .../opencv/android/LoaderCallbackInterface.java    |    40 +
+ .../java/src/org/opencv/android/OpenCVLoader.java  |    97 +
+ .../java/src/org/opencv/android/StaticHelper.java  |   104 +
+ .../sdk/java/src/org/opencv/android/Utils.java     |   139 +
+ .../sdk/java/src/org/opencv/calib3d/Calib3d.java   |  1312 +
+ .../sdk/java/src/org/opencv/calib3d/StereoBM.java  |   330 +
+ .../java/src/org/opencv/calib3d/StereoMatcher.java |   253 +
+ .../java/src/org/opencv/calib3d/StereoSGBM.java    |   228 +
+ .../sdk/java/src/org/opencv/core/Algorithm.java    |    78 +
+ .../sdk/java/src/org/opencv/core/Core.java         |  2544 +
+ .../sdk/java/src/org/opencv/core/CvException.java  |    15 +
+ .../sdk/java/src/org/opencv/core/CvType.java       |   136 +
+ .../sdk/java/src/org/opencv/core/DMatch.java       |    61 +
+ .../sdk/java/src/org/opencv/core/KeyPoint.java     |    83 +
+ .../sdk/java/src/org/opencv/core/Mat.java          |  1316 +
+ .../sdk/java/src/org/opencv/core/MatOfByte.java    |    79 +
+ .../sdk/java/src/org/opencv/core/MatOfDMatch.java  |    83 +
+ .../sdk/java/src/org/opencv/core/MatOfDouble.java  |    79 +
+ .../sdk/java/src/org/opencv/core/MatOfFloat.java   |    79 +
+ .../sdk/java/src/org/opencv/core/MatOfFloat4.java  |    79 +
+ .../sdk/java/src/org/opencv/core/MatOfFloat6.java  |    79 +
+ .../sdk/java/src/org/opencv/core/MatOfInt.java     |    80 +
+ .../sdk/java/src/org/opencv/core/MatOfInt4.java    |    80 +
+ .../java/src/org/opencv/core/MatOfKeyPoint.java    |    86 +
+ .../sdk/java/src/org/opencv/core/MatOfPoint.java   |    78 +
+ .../sdk/java/src/org/opencv/core/MatOfPoint2f.java |    78 +
+ .../sdk/java/src/org/opencv/core/MatOfPoint3.java  |    79 +
+ .../sdk/java/src/org/opencv/core/MatOfPoint3f.java |    79 +
+ .../sdk/java/src/org/opencv/core/MatOfRect.java    |    81 +
+ .../sdk/java/src/org/opencv/core/Point.java        |    68 +
+ .../sdk/java/src/org/opencv/core/Point3.java       |    79 +
+ .../sdk/java/src/org/opencv/core/Range.java        |    82 +
+ .../sdk/java/src/org/opencv/core/Rect.java         |   100 +
+ .../sdk/java/src/org/opencv/core/RotatedRect.java  |   113 +
+ .../sdk/java/src/org/opencv/core/Scalar.java       |    90 +
+ .../sdk/java/src/org/opencv/core/Size.java         |    69 +
+ .../sdk/java/src/org/opencv/core/TermCriteria.java |    92 +
+ .../org/opencv/engine/OpenCVEngineInterface.aidl   |    33 +
+ .../org/opencv/features2d/DescriptorExtractor.java |   195 +
+ .../org/opencv/features2d/DescriptorMatcher.java   |   394 +
+ .../src/org/opencv/features2d/FeatureDetector.java |   216 +
+ .../java/src/org/opencv/features2d/Features2d.java |   120 +
+ .../java/src/org/opencv/imgcodecs/Imgcodecs.java   |   193 +
+ .../sdk/java/src/org/opencv/imgproc/CLAHE.java     |   130 +
+ .../sdk/java/src/org/opencv/imgproc/Imgproc.java   |  3290 +
+ .../org/opencv/imgproc/LineSegmentDetector.java    |    99 +
+ .../sdk/java/src/org/opencv/imgproc/Subdiv2D.java  |   386 +
+ .../sdk/java/src/org/opencv/ml/ANN_MLP.java        |   449 +
+ .../sdk/java/src/org/opencv/ml/Boost.java          |   152 +
+ .../sdk/java/src/org/opencv/ml/DTrees.java         |   356 +
+ .../sdk/java/src/org/opencv/ml/EM.java             |   290 +
+ .../sdk/java/src/org/opencv/ml/KNearest.java       |   211 +
+ .../java/src/org/opencv/ml/LogisticRegression.java |   300 +
+ .../sdk/java/src/org/opencv/ml/Ml.java             |    23 +
+ .../src/org/opencv/ml/NormalBayesClassifier.java   |    70 +
+ .../sdk/java/src/org/opencv/ml/RTrees.java         |   163 +
+ .../sdk/java/src/org/opencv/ml/SVM.java            |   439 +
+ .../sdk/java/src/org/opencv/ml/StatModel.java      |   160 +
+ .../sdk/java/src/org/opencv/ml/TrainData.java      |   642 +
+ .../opencv/objdetect/BaseCascadeClassifier.java    |    26 +
+ .../org/opencv/objdetect/CascadeClassifier.java    |   263 +
+ .../src/org/opencv/objdetect/HOGDescriptor.java    |   591 +
+ .../java/src/org/opencv/objdetect/Objdetect.java   |    52 +
+ .../java/src/org/opencv/photo/AlignExposures.java  |    48 +
+ .../sdk/java/src/org/opencv/photo/AlignMTB.java    |   219 +
+ .../java/src/org/opencv/photo/CalibrateCRF.java    |    47 +
+ .../src/org/opencv/photo/CalibrateDebevec.java     |   128 +
+ .../src/org/opencv/photo/CalibrateRobertson.java   |   111 +
+ .../java/src/org/opencv/photo/MergeDebevec.java    |    63 +
+ .../java/src/org/opencv/photo/MergeExposures.java  |    47 +
+ .../java/src/org/opencv/photo/MergeMertens.java    |   165 +
+ .../java/src/org/opencv/photo/MergeRobertson.java  |    63 +
+ .../sdk/java/src/org/opencv/photo/Photo.java       |   742 +
+ .../sdk/java/src/org/opencv/photo/Tonemap.java     |    78 +
+ .../java/src/org/opencv/photo/TonemapDrago.java    |    94 +
+ .../java/src/org/opencv/photo/TonemapDurand.java   |   162 +
+ .../java/src/org/opencv/photo/TonemapMantiuk.java  |    94 +
+ .../java/src/org/opencv/photo/TonemapReinhard.java |   128 +
+ .../sdk/java/src/org/opencv/utils/Converters.java  |   736 +
+ .../src/org/opencv/video/BackgroundSubtractor.java |    71 +
+ .../org/opencv/video/BackgroundSubtractorKNN.java  |   264 +
+ .../org/opencv/video/BackgroundSubtractorMOG2.java |   434 +
+ .../src/org/opencv/video/DenseOpticalFlow.java     |    61 +
+ .../src/org/opencv/video/DualTVL1OpticalFlow.java  |    26 +
+ .../java/src/org/opencv/video/KalmanFilter.java    |   455 +
+ .../sdk/java/src/org/opencv/video/Video.java       |   289 +
+ .../java/src/org/opencv/videoio/VideoCapture.java  |   242 +
+ .../sdk/java/src/org/opencv/videoio/Videoio.java   |   297 +
+ .../sdk/native/jni/OpenCV-arm64-v8a.mk             |     2 +
+ .../sdk/native/jni/OpenCV-armeabi-v7a.mk           |     2 +
+ .../sdk/native/jni/OpenCV-armeabi.mk               |     2 +
+ .../sdk/native/jni/OpenCV-mips.mk                  |     2 +
+ .../sdk/native/jni/OpenCV-mips64.mk                |     2 +
+ .../sdk/native/jni/OpenCV-x86.mk                   |     2 +
+ .../sdk/native/jni/OpenCV-x86_64.mk                |     2 +
+ .../OpenCV-android-sdk/sdk/native/jni/OpenCV.mk    |   107 +
+ .../sdk/native/jni/OpenCVConfig-version.cmake      |    14 +
+ .../sdk/native/jni/OpenCVConfig.cmake              |   391 +
+ .../jni/OpenCVModules_arm64_v8a-release.cmake      |   292 +
+ .../sdk/native/jni/OpenCVModules_arm64_v8a.cmake   |   159 +
+ .../native/jni/OpenCVModules_armeabi-release.cmake |   292 +
+ .../sdk/native/jni/OpenCVModules_armeabi.cmake     |   159 +
+ .../jni/OpenCVModules_armeabi_v7a-release.cmake    |   292 +
+ .../sdk/native/jni/OpenCVModules_armeabi_v7a.cmake |   159 +
+ .../native/jni/OpenCVModules_mips-release.cmake    |   292 +
+ .../sdk/native/jni/OpenCVModules_mips.cmake        |   159 +
+ .../native/jni/OpenCVModules_mips64-release.cmake  |   292 +
+ .../sdk/native/jni/OpenCVModules_mips64.cmake      |   159 +
+ .../sdk/native/jni/OpenCVModules_x86-release.cmake |   292 +
+ .../sdk/native/jni/OpenCVModules_x86.cmake         |   159 +
+ .../native/jni/OpenCVModules_x86_64-release.cmake  |   292 +
+ .../sdk/native/jni/OpenCVModules_x86_64.cmake      |   159 +
+ .../sdk/native/jni/android.toolchain.cmake         |  1693 +
+ .../sdk/native/jni/include/opencv/cv.h             |    73 +
+ .../sdk/native/jni/include/opencv/cv.hpp           |    60 +
+ .../sdk/native/jni/include/opencv/cvaux.h          |    57 +
+ .../sdk/native/jni/include/opencv/cvaux.hpp        |    52 +
+ .../sdk/native/jni/include/opencv/cvwimage.h       |    46 +
+ .../sdk/native/jni/include/opencv/cxcore.h         |    52 +
+ .../sdk/native/jni/include/opencv/cxcore.hpp       |    53 +
+ .../sdk/native/jni/include/opencv/cxeigen.hpp      |    48 +
+ .../sdk/native/jni/include/opencv/cxmisc.h         |     8 +
+ .../sdk/native/jni/include/opencv/highgui.h        |    48 +
+ .../sdk/native/jni/include/opencv/ml.h             |    47 +
+ .../sdk/native/jni/include/opencv2/calib3d.hpp     |  1873 +
+ .../native/jni/include/opencv2/calib3d/calib3d.hpp |    48 +
+ .../native/jni/include/opencv2/calib3d/calib3d_c.h |   422 +
+ .../sdk/native/jni/include/opencv2/core.hpp        |  3111 +
+ .../sdk/native/jni/include/opencv2/core/affine.hpp |   522 +
+ .../sdk/native/jni/include/opencv2/core/base.hpp   |   745 +
+ .../native/jni/include/opencv2/core/bufferpool.hpp |    31 +
+ .../sdk/native/jni/include/opencv2/core/core.hpp   |    48 +
+ .../sdk/native/jni/include/opencv2/core/core_c.h   |  3152 +
+ .../sdk/native/jni/include/opencv2/core/cuda.hpp   |   845 +
+ .../native/jni/include/opencv2/core/cuda.inl.hpp   |   621 +
+ .../native/jni/include/opencv2/core/cuda/block.hpp |   211 +
+ .../opencv2/core/cuda/border_interpolate.hpp       |   722 +
+ .../native/jni/include/opencv2/core/cuda/color.hpp |   309 +
+ .../jni/include/opencv2/core/cuda/common.hpp       |   109 +
+ .../include/opencv2/core/cuda/datamov_utils.hpp    |   113 +
+ .../opencv2/core/cuda/detail/color_detail.hpp      |  1980 +
+ .../include/opencv2/core/cuda/detail/reduce.hpp    |   365 +
+ .../opencv2/core/cuda/detail/reduce_key_val.hpp    |   502 +
+ .../opencv2/core/cuda/detail/transform_detail.hpp  |   399 +
+ .../core/cuda/detail/type_traits_detail.hpp        |   191 +
+ .../core/cuda/detail/vec_distance_detail.hpp       |   121 +
+ .../jni/include/opencv2/core/cuda/dynamic_smem.hpp |    88 +
+ .../jni/include/opencv2/core/cuda/emulation.hpp    |   269 +
+ .../jni/include/opencv2/core/cuda/filters.hpp      |   286 +
+ .../jni/include/opencv2/core/cuda/funcattrib.hpp   |    79 +
+ .../jni/include/opencv2/core/cuda/functional.hpp   |   797 +
+ .../jni/include/opencv2/core/cuda/limits.hpp       |   128 +
+ .../jni/include/opencv2/core/cuda/reduce.hpp       |   205 +
+ .../include/opencv2/core/cuda/saturate_cast.hpp    |   292 +
+ .../native/jni/include/opencv2/core/cuda/scan.hpp  |   258 +
+ .../include/opencv2/core/cuda/simd_functions.hpp   |   869 +
+ .../jni/include/opencv2/core/cuda/transform.hpp    |    75 +
+ .../jni/include/opencv2/core/cuda/type_traits.hpp  |    90 +
+ .../jni/include/opencv2/core/cuda/utility.hpp      |   221 +
+ .../jni/include/opencv2/core/cuda/vec_distance.hpp |   232 +
+ .../jni/include/opencv2/core/cuda/vec_math.hpp     |   930 +
+ .../jni/include/opencv2/core/cuda/vec_traits.hpp   |   288 +
+ .../native/jni/include/opencv2/core/cuda/warp.hpp  |   139 +
+ .../jni/include/opencv2/core/cuda/warp_reduce.hpp  |    76 +
+ .../jni/include/opencv2/core/cuda/warp_shuffle.hpp |   153 +
+ .../include/opencv2/core/cuda_stream_accessor.hpp  |    87 +
+ .../native/jni/include/opencv2/core/cuda_types.hpp |   135 +
+ .../sdk/native/jni/include/opencv2/core/cvdef.h    |   231 +
+ .../sdk/native/jni/include/opencv2/core/cvstd.hpp  |  1059 +
+ .../native/jni/include/opencv2/core/cvstd.inl.hpp  |   267 +
+ .../native/jni/include/opencv2/core/directx.hpp    |   105 +
+ .../sdk/native/jni/include/opencv2/core/eigen.hpp  |   280 +
+ .../native/jni/include/opencv2/core/ippasync.hpp   |   195 +
+ .../sdk/native/jni/include/opencv2/core/mat.hpp    |  3398 +
+ .../native/jni/include/opencv2/core/mat.inl.hpp    |  3436 +
+ .../sdk/native/jni/include/opencv2/core/matx.hpp   |  1376 +
+ .../sdk/native/jni/include/opencv2/core/ocl.hpp    |   691 +
+ .../jni/include/opencv2/core/ocl_genbase.hpp       |    64 +
+ .../sdk/native/jni/include/opencv2/core/opengl.hpp |   684 +
+ .../native/jni/include/opencv2/core/operations.hpp |   530 +
+ .../sdk/native/jni/include/opencv2/core/optim.hpp  |   302 +
+ .../jni/include/opencv2/core/persistence.hpp       |  1195 +
+ .../jni/include/opencv2/core/private.cuda.hpp      |   172 +
+ .../native/jni/include/opencv2/core/private.hpp    |   296 +
+ .../native/jni/include/opencv2/core/ptr.inl.hpp    |   342 +
+ .../native/jni/include/opencv2/core/sse_utils.hpp  |   645 +
+ .../sdk/native/jni/include/opencv2/core/traits.hpp |   326 +
+ .../sdk/native/jni/include/opencv2/core/types.hpp  |  2228 +
+ .../sdk/native/jni/include/opencv2/core/types_c.h  |  1834 +
+ .../native/jni/include/opencv2/core/utility.hpp    |   889 +
+ .../native/jni/include/opencv2/core/version.hpp    |    71 +
+ .../sdk/native/jni/include/opencv2/core/wimage.hpp |   603 +
+ .../sdk/native/jni/include/opencv2/cvconfig.h      |   183 +
+ .../sdk/native/jni/include/opencv2/features2d.hpp  |  1299 +
+ .../jni/include/opencv2/features2d/features2d.hpp  |    48 +
+ .../sdk/native/jni/include/opencv2/flann.hpp       |   561 +
+ .../native/jni/include/opencv2/flann/all_indices.h |   155 +
+ .../native/jni/include/opencv2/flann/allocator.h   |   188 +
+ .../sdk/native/jni/include/opencv2/flann/any.h     |   323 +
+ .../jni/include/opencv2/flann/autotuned_index.h    |   587 +
+ .../jni/include/opencv2/flann/composite_index.h    |   194 +
+ .../sdk/native/jni/include/opencv2/flann/config.h  |    38 +
+ .../sdk/native/jni/include/opencv2/flann/defines.h |   177 +
+ .../sdk/native/jni/include/opencv2/flann/dist.h    |   905 +
+ .../sdk/native/jni/include/opencv2/flann/dummy.h   |    16 +
+ .../jni/include/opencv2/flann/dynamic_bitset.h     |   159 +
+ .../sdk/native/jni/include/opencv2/flann/flann.hpp |    48 +
+ .../jni/include/opencv2/flann/flann_base.hpp       |   290 +
+ .../sdk/native/jni/include/opencv2/flann/general.h |    50 +
+ .../jni/include/opencv2/flann/ground_truth.h       |    94 +
+ .../sdk/native/jni/include/opencv2/flann/hdf5.h    |   231 +
+ .../sdk/native/jni/include/opencv2/flann/heap.h    |   165 +
+ .../opencv2/flann/hierarchical_clustering_index.h  |   848 +
+ .../jni/include/opencv2/flann/index_testing.h      |   318 +
+ .../jni/include/opencv2/flann/kdtree_index.h       |   621 +
+ .../include/opencv2/flann/kdtree_single_index.h    |   634 +
+ .../jni/include/opencv2/flann/kmeans_index.h       |  1167 +
+ .../jni/include/opencv2/flann/linear_index.h       |   132 +
+ .../sdk/native/jni/include/opencv2/flann/logger.h  |   130 +
+ .../native/jni/include/opencv2/flann/lsh_index.h   |   392 +
+ .../native/jni/include/opencv2/flann/lsh_table.h   |   492 +
+ .../sdk/native/jni/include/opencv2/flann/matrix.h  |   116 +
+ .../native/jni/include/opencv2/flann/miniflann.hpp |   158 +
+ .../native/jni/include/opencv2/flann/nn_index.h    |   177 +
+ .../jni/include/opencv2/flann/object_factory.h     |    91 +
+ .../sdk/native/jni/include/opencv2/flann/params.h  |    99 +
+ .../sdk/native/jni/include/opencv2/flann/random.h  |   133 +
+ .../native/jni/include/opencv2/flann/result_set.h  |   543 +
+ .../native/jni/include/opencv2/flann/sampling.h    |    81 +
+ .../sdk/native/jni/include/opencv2/flann/saving.h  |   187 +
+ .../jni/include/opencv2/flann/simplex_downhill.h   |   186 +
+ .../sdk/native/jni/include/opencv2/flann/timer.h   |    94 +
+ .../sdk/native/jni/include/opencv2/hal.hpp         |    98 +
+ .../sdk/native/jni/include/opencv2/hal/defs.h      |   675 +
+ .../sdk/native/jni/include/opencv2/hal/intrin.hpp  |   292 +
+ .../native/jni/include/opencv2/hal/intrin_cpp.hpp  |   811 +
+ .../native/jni/include/opencv2/hal/intrin_neon.hpp |   826 +
+ .../native/jni/include/opencv2/hal/intrin_sse.hpp  |  1554 +
+ .../sdk/native/jni/include/opencv2/highgui.hpp     |   704 +
+ .../native/jni/include/opencv2/highgui/highgui.hpp |    48 +
+ .../native/jni/include/opencv2/highgui/highgui_c.h |   251 +
+ .../sdk/native/jni/include/opencv2/imgcodecs.hpp   |   250 +
+ .../jni/include/opencv2/imgcodecs/imgcodecs.hpp    |    48 +
+ .../jni/include/opencv2/imgcodecs/imgcodecs_c.h    |   137 +
+ .../sdk/native/jni/include/opencv2/imgcodecs/ios.h |    57 +
+ .../sdk/native/jni/include/opencv2/imgproc.hpp     |  4244 +
+ .../native/jni/include/opencv2/imgproc/imgproc.hpp |    48 +
+ .../native/jni/include/opencv2/imgproc/imgproc_c.h |  1210 +
+ .../native/jni/include/opencv2/imgproc/types_c.h   |   626 +
+ .../sdk/native/jni/include/opencv2/ml.hpp          |  1499 +
+ .../sdk/native/jni/include/opencv2/ml/ml.hpp       |    48 +
+ .../sdk/native/jni/include/opencv2/objdetect.hpp   |   466 +
+ .../opencv2/objdetect/detection_based_tracker.hpp  |   224 +
+ .../jni/include/opencv2/objdetect/objdetect.hpp    |    48 +
+ .../jni/include/opencv2/objdetect/objdetect_c.h    |   165 +
+ .../sdk/native/jni/include/opencv2/opencv.hpp      |    58 +
+ .../native/jni/include/opencv2/opencv_modules.hpp  |    27 +
+ .../sdk/native/jni/include/opencv2/photo.hpp       |   870 +
+ .../sdk/native/jni/include/opencv2/photo/cuda.hpp  |   132 +
+ .../sdk/native/jni/include/opencv2/photo/photo.hpp |    48 +
+ .../sdk/native/jni/include/opencv2/photo/photo_c.h |    74 +
+ .../sdk/native/jni/include/opencv2/shape.hpp       |    57 +
+ .../sdk/native/jni/include/opencv2/shape/emdL1.hpp |    72 +
+ .../native/jni/include/opencv2/shape/hist_cost.hpp |   111 +
+ .../sdk/native/jni/include/opencv2/shape/shape.hpp |    48 +
+ .../jni/include/opencv2/shape/shape_distance.hpp   |   224 +
+ .../include/opencv2/shape/shape_transformer.hpp    |   132 +
+ .../sdk/native/jni/include/opencv2/stitching.hpp   |   257 +
+ .../include/opencv2/stitching/detail/autocalib.hpp |    86 +
+ .../include/opencv2/stitching/detail/blenders.hpp  |   163 +
+ .../include/opencv2/stitching/detail/camera.hpp    |    78 +
+ .../stitching/detail/exposure_compensate.hpp       |   132 +
+ .../include/opencv2/stitching/detail/matchers.hpp  |   275 +
+ .../opencv2/stitching/detail/motion_estimators.hpp |   274 +
+ .../opencv2/stitching/detail/seam_finders.hpp      |   285 +
+ .../opencv2/stitching/detail/timelapsers.hpp       |    91 +
+ .../jni/include/opencv2/stitching/detail/util.hpp  |   171 +
+ .../include/opencv2/stitching/detail/util_inl.hpp  |   131 +
+ .../include/opencv2/stitching/detail/warpers.hpp   |   586 +
+ .../opencv2/stitching/detail/warpers_inl.hpp       |   774 +
+ .../jni/include/opencv2/stitching/warpers.hpp      |   183 +
+ .../sdk/native/jni/include/opencv2/superres.hpp    |   207 +
+ .../jni/include/opencv2/superres/optical_flow.hpp  |   203 +
+ .../sdk/native/jni/include/opencv2/video.hpp       |    63 +
+ .../jni/include/opencv2/video/background_segm.hpp  |   306 +
+ .../native/jni/include/opencv2/video/tracking.hpp  |   515 +
+ .../native/jni/include/opencv2/video/tracking_c.h  |   232 +
+ .../sdk/native/jni/include/opencv2/video/video.hpp |    48 +
+ .../sdk/native/jni/include/opencv2/videoio.hpp     |   648 +
+ .../native/jni/include/opencv2/videoio/cap_ios.h   |   174 +
+ .../native/jni/include/opencv2/videoio/videoio.hpp |    48 +
+ .../native/jni/include/opencv2/videoio/videoio_c.h |   405 +
+ .../sdk/native/jni/include/opencv2/videostab.hpp   |    81 +
+ .../jni/include/opencv2/videostab/deblurring.hpp   |   116 +
+ .../include/opencv2/videostab/fast_marching.hpp    |   121 +
+ .../opencv2/videostab/fast_marching_inl.hpp        |   165 +
+ .../jni/include/opencv2/videostab/frame_source.hpp |    94 +
+ .../include/opencv2/videostab/global_motion.hpp    |   299 +
+ .../jni/include/opencv2/videostab/inpainting.hpp   |   212 +
+ .../native/jni/include/opencv2/videostab/log.hpp   |    80 +
+ .../jni/include/opencv2/videostab/motion_core.hpp  |   129 +
+ .../opencv2/videostab/motion_stabilizing.hpp       |   174 +
+ .../jni/include/opencv2/videostab/optical_flow.hpp |   150 +
+ .../opencv2/videostab/outlier_rejection.hpp        |   101 +
+ .../jni/include/opencv2/videostab/ring_buffer.hpp  |    72 +
+ .../jni/include/opencv2/videostab/stabilizer.hpp   |   200 +
+ .../opencv2/videostab/wobble_suppression.hpp       |   140 +
+ .../usbSerialForAndroid/usbSerialForAndroid.iml    |    25 +
+ FaceTrackTest/openCVLibrary300/build.gradle        |    18 +
+ FaceTrackTest/openCVLibrary300/lint.xml            |     9 +
+ .../openCVLibrary300/openCVLibrary300.iml          |    83 +
+ .../openCVLibrary300/src/main/AndroidManifest.xml  |    18 +
+ .../org/opencv/engine/OpenCVEngineInterface.aidl   |    33 +
+ .../org/opencv/android/AsyncServiceHelper.java     |   391 +
+ .../org/opencv/android/BaseLoaderCallback.java     |   141 +
+ .../org/opencv/android/CameraBridgeViewBase.java   |   521 +
+ .../src/main/java/org/opencv/android/FpsMeter.java |    66 +
+ .../opencv/android/InstallCallbackInterface.java   |    34 +
+ .../java/org/opencv/android/JavaCameraView.java    |   374 +
+ .../opencv/android/LoaderCallbackInterface.java    |    40 +
+ .../main/java/org/opencv/android/OpenCVLoader.java |    97 +
+ .../main/java/org/opencv/android/StaticHelper.java |   104 +
+ .../src/main/java/org/opencv/android/Utils.java    |   139 +
+ .../src/main/java/org/opencv/calib3d/Calib3d.java  |  1312 +
+ .../src/main/java/org/opencv/calib3d/StereoBM.java |   330 +
+ .../java/org/opencv/calib3d/StereoMatcher.java     |   253 +
+ .../main/java/org/opencv/calib3d/StereoSGBM.java   |   228 +
+ .../src/main/java/org/opencv/core/Algorithm.java   |    76 +
+ .../src/main/java/org/opencv/core/Core.java        |  2544 +
+ .../src/main/java/org/opencv/core/CvException.java |    17 +
+ .../src/main/java/org/opencv/core/CvType.java      |   136 +
+ .../src/main/java/org/opencv/core/DMatch.java      |    61 +
+ .../src/main/java/org/opencv/core/KeyPoint.java    |    83 +
+ .../src/main/java/org/opencv/core/Mat.java         |  1339 +
+ .../src/main/java/org/opencv/core/MatOfByte.java   |    79 +
+ .../src/main/java/org/opencv/core/MatOfDMatch.java |    83 +
+ .../src/main/java/org/opencv/core/MatOfDouble.java |    79 +
+ .../src/main/java/org/opencv/core/MatOfFloat.java  |    79 +
+ .../src/main/java/org/opencv/core/MatOfFloat4.java |    79 +
+ .../src/main/java/org/opencv/core/MatOfFloat6.java |    79 +
+ .../src/main/java/org/opencv/core/MatOfInt.java    |    80 +
+ .../src/main/java/org/opencv/core/MatOfInt4.java   |    80 +
+ .../main/java/org/opencv/core/MatOfKeyPoint.java   |    86 +
+ .../src/main/java/org/opencv/core/MatOfPoint.java  |    78 +
+ .../main/java/org/opencv/core/MatOfPoint2f.java    |    78 +
+ .../src/main/java/org/opencv/core/MatOfPoint3.java |    79 +
+ .../main/java/org/opencv/core/MatOfPoint3f.java    |    79 +
+ .../src/main/java/org/opencv/core/MatOfRect.java   |    81 +
+ .../src/main/java/org/opencv/core/Point.java       |    68 +
+ .../src/main/java/org/opencv/core/Point3.java      |    79 +
+ .../src/main/java/org/opencv/core/Range.java       |    82 +
+ .../src/main/java/org/opencv/core/Rect.java        |   100 +
+ .../src/main/java/org/opencv/core/RotatedRect.java |   113 +
+ .../src/main/java/org/opencv/core/Scalar.java      |    89 +
+ .../src/main/java/org/opencv/core/Size.java        |    69 +
+ .../main/java/org/opencv/core/TermCriteria.java    |    92 +
+ .../org/opencv/features2d/DescriptorExtractor.java |   195 +
+ .../org/opencv/features2d/DescriptorMatcher.java   |   394 +
+ .../org/opencv/features2d/FeatureDetector.java     |   216 +
+ .../java/org/opencv/features2d/Features2d.java     |   120 +
+ .../main/java/org/opencv/imgcodecs/Imgcodecs.java  |   193 +
+ .../src/main/java/org/opencv/imgproc/CLAHE.java    |   130 +
+ .../src/main/java/org/opencv/imgproc/Imgproc.java  |  3291 +
+ .../org/opencv/imgproc/LineSegmentDetector.java    |    99 +
+ .../src/main/java/org/opencv/imgproc/Subdiv2D.java |   386 +
+ .../src/main/java/org/opencv/ml/ANN_MLP.java       |   449 +
+ .../src/main/java/org/opencv/ml/Boost.java         |   152 +
+ .../src/main/java/org/opencv/ml/DTrees.java        |   356 +
+ .../src/main/java/org/opencv/ml/EM.java            |   290 +
+ .../src/main/java/org/opencv/ml/KNearest.java      |   211 +
+ .../java/org/opencv/ml/LogisticRegression.java     |   300 +
+ .../src/main/java/org/opencv/ml/Ml.java            |    23 +
+ .../java/org/opencv/ml/NormalBayesClassifier.java  |    70 +
+ .../src/main/java/org/opencv/ml/RTrees.java        |   163 +
+ .../src/main/java/org/opencv/ml/SVM.java           |   439 +
+ .../src/main/java/org/opencv/ml/StatModel.java     |   160 +
+ .../src/main/java/org/opencv/ml/TrainData.java     |   642 +
+ .../opencv/objdetect/BaseCascadeClassifier.java    |    26 +
+ .../org/opencv/objdetect/CascadeClassifier.java    |   263 +
+ .../java/org/opencv/objdetect/HOGDescriptor.java   |   591 +
+ .../main/java/org/opencv/objdetect/Objdetect.java  |    52 +
+ .../main/java/org/opencv/photo/AlignExposures.java |    48 +
+ .../src/main/java/org/opencv/photo/AlignMTB.java   |   208 +
+ .../main/java/org/opencv/photo/CalibrateCRF.java   |    47 +
+ .../java/org/opencv/photo/CalibrateDebevec.java    |   128 +
+ .../java/org/opencv/photo/CalibrateRobertson.java  |   111 +
+ .../main/java/org/opencv/photo/MergeDebevec.java   |    63 +
+ .../main/java/org/opencv/photo/MergeExposures.java |    47 +
+ .../main/java/org/opencv/photo/MergeMertens.java   |   165 +
+ .../main/java/org/opencv/photo/MergeRobertson.java |    63 +
+ .../src/main/java/org/opencv/photo/Photo.java      |   742 +
+ .../src/main/java/org/opencv/photo/Tonemap.java    |    78 +
+ .../main/java/org/opencv/photo/TonemapDrago.java   |    94 +
+ .../main/java/org/opencv/photo/TonemapDurand.java  |   162 +
+ .../main/java/org/opencv/photo/TonemapMantiuk.java |    94 +
+ .../java/org/opencv/photo/TonemapReinhard.java     |   128 +
+ .../src/main/java/org/opencv/utils/Converters.java |   736 +
+ .../org/opencv/video/BackgroundSubtractor.java     |    68 +
+ .../org/opencv/video/BackgroundSubtractorKNN.java  |   264 +
+ .../org/opencv/video/BackgroundSubtractorMOG2.java |   434 +
+ .../java/org/opencv/video/DenseOpticalFlow.java    |    61 +
+ .../java/org/opencv/video/DualTVL1OpticalFlow.java |    26 +
+ .../main/java/org/opencv/video/KalmanFilter.java   |   455 +
+ .../src/main/java/org/opencv/video/Video.java      |   289 +
+ .../main/java/org/opencv/videoio/VideoCapture.java |   242 +
+ .../src/main/java/org/opencv/videoio/Videoio.java  |   297 +
+ .../openCVLibrary300/src/main/res/values/attrs.xml |    11 +
+ FaceTrackTest/settings.gradle                      |     3 +
+ INSTALL                                            |     8 +
+ Initial_Report.pdf                                 |   Bin 0 -> 47779 bytes
+ README.md                                          |    17 +-
+ Robocat_Forward_gait/ROBOCATlegcotrolV0_2_DEMO3.m  |   419 +
+ Robocat_Forward_gait/left_angles.m                 |    47 +
+ Robocat_Forward_gait/right_angles.m                |    43 +
+ doc/allclasses-frame.html                          |    34 +
+ doc/allclasses-noframe.html                        |    34 +
+ .../robodoot/dr/RoboApp/ColorTrackingActivity.html |   654 +
+ doc/com/robodoot/dr/RoboApp/FdActivity.CHAR.html   |   345 +
+ .../robodoot/dr/RoboApp/FdActivity.Directions.html |   357 +
+ doc/com/robodoot/dr/RoboApp/FdActivity.html        |  1594 +
+ .../robodoot/dr/RoboApp/PololuHandler.Motor.html   |   409 +
+ .../dr/RoboApp/PololuHandler.StepForwardTask.html  |   291 +
+ doc/com/robodoot/dr/RoboApp/PololuHandler.html     |   693 +
+ doc/com/robodoot/dr/RoboApp/package-frame.html     |    27 +
+ doc/com/robodoot/dr/RoboApp/package-summary.html   |   169 +
+ doc/com/robodoot/dr/RoboApp/package-tree.html      |   155 +
+ .../BatteryView.OnChargeChangedListener.html       |   208 +
+ doc/com/robodoot/roboapp/BatteryView.html          |   791 +
+ doc/com/robodoot/roboapp/CatCameraView.html        |   383 +
+ ...soleFragment.OnFragmentInteractionListener.html |   216 +
+ doc/com/robodoot/roboapp/ConsoleFragment.html      |   483 +
+ doc/com/robodoot/roboapp/ImageUtil.html            |   313 +
+ doc/com/robodoot/roboapp/MockVirtualCat.html       |   559 +
+ doc/com/robodoot/roboapp/PololuVirtualCat.html     |   572 +
+ doc/com/robodoot/roboapp/Util.html                 |   308 +
+ .../roboapp/VirtualCat.CatBatteryListener.html     |   212 +
+ doc/com/robodoot/roboapp/VirtualCat.html           |   489 +
+ doc/com/robodoot/roboapp/package-frame.html        |    32 +
+ doc/com/robodoot/roboapp/package-summary.html      |   204 +
+ doc/com/robodoot/roboapp/package-tree.html         |   162 +
+ doc/constant-values.html                           |   363 +
+ doc/deprecated-list.html                           |   113 +
+ doc/help-doc.html                                  |   214 +
+ doc/index-files/index-1.html                       |   132 +
+ doc/index-files/index-10.html                      |   118 +
+ doc/index-files/index-11.html                      |   118 +
+ doc/index-files/index-12.html                      |   136 +
+ doc/index-files/index-13.html                      |   226 +
+ doc/index-files/index-14.html                      |   145 +
+ doc/index-files/index-15.html                      |   204 +
+ doc/index-files/index-16.html                      |   151 +
+ doc/index-files/index-17.html                      |   142 +
+ doc/index-files/index-18.html                      |   186 +
+ doc/index-files/index-19.html                      |   172 +
+ doc/index-files/index-2.html                       |   142 +
+ doc/index-files/index-20.html                      |   134 +
+ doc/index-files/index-21.html                      |   153 +
+ doc/index-files/index-22.html                      |   118 +
+ doc/index-files/index-23.html                      |   120 +
+ doc/index-files/index-3.html                       |   166 +
+ doc/index-files/index-4.html                       |   128 +
+ doc/index-files/index-5.html                       |   122 +
+ doc/index-files/index-6.html                       |   148 +
+ doc/index-files/index-7.html                       |   136 +
+ doc/index-files/index-8.html                       |   122 +
+ doc/index-files/index-9.html                       |   140 +
+ doc/index.html                                     |    74 +
+ doc/overview-frame.html                            |    21 +
+ doc/overview-summary.html                          |   128 +
+ doc/overview-tree.html                             |   193 +
+ doc/package-list                                   |     2 +
+ doc/resources/background.gif                       |   Bin 0 -> 2313 bytes
+ doc/resources/tab.gif                              |   Bin 0 -> 291 bytes
+ doc/resources/titlebar.gif                         |   Bin 0 -> 10701 bytes
+ doc/resources/titlebar_end.gif                     |   Bin 0 -> 849 bytes
+ doc/stylesheet.css                                 |   474 +
+ opencv_camera_capture_C++/.gitignore               |     6 +
+ opencv_camera_capture_C++/main.cc                  |   138 +
+ opencv_camera_capture_C++/mainsimple.cc            |    56 +
+ qualtricsLink.txt                                  |     1 +
+ semester_1/Concept Map.pptx                        |   Bin 0 -> 39610 bytes
+ ...irement-Dr. RoboDoot and the NP HardCoders.docx |   Bin 0 -> 213774 bytes
+ semester_1/RoboApp Demo 1.pptx                     |   Bin 0 -> 2392428 bytes
+ semester_1/RoboApp Demo2.pptx                      |   Bin 0 -> 191027 bytes
+ semester_1/mockup/homepage.png                     |   Bin 0 -> 20149 bytes
+ semester_1/mockup/mockup1.fw.png                   |   Bin 0 -> 98029 bytes
+ .../mockup/resources/Fonts/Roboto/Roboto-Black.ttf |   Bin 0 -> 127948 bytes
+ .../resources/Fonts/Roboto/Roboto-BlackItalic.ttf  |   Bin 0 -> 134716 bytes
+ .../mockup/resources/Fonts/Roboto/Roboto-Bold.ttf  |   Bin 0 -> 127744 bytes
+ .../resources/Fonts/Roboto/Roboto-BoldItalic.ttf   |   Bin 0 -> 134556 bytes
+ .../resources/Fonts/Roboto/Roboto-Italic.ttf       |   Bin 0 -> 132440 bytes
+ .../mockup/resources/Fonts/Roboto/Roboto-Light.ttf |   Bin 0 -> 126792 bytes
+ .../resources/Fonts/Roboto/Roboto-LightItalic.ttf  |   Bin 0 -> 133172 bytes
+ .../resources/Fonts/Roboto/Roboto-Medium.ttf       |   Bin 0 -> 127488 bytes
+ .../resources/Fonts/Roboto/Roboto-MediumItalic.ttf |   Bin 0 -> 134312 bytes
+ .../resources/Fonts/Roboto/Roboto-Regular.ttf      |   Bin 0 -> 126072 bytes
+ .../mockup/resources/Fonts/Roboto/Roboto-Thin.ttf  |   Bin 0 -> 127584 bytes
+ .../resources/Fonts/Roboto/Roboto-ThinItalic.ttf   |   Bin 0 -> 132860 bytes
+ .../Fonts/Roboto/RobotoCondensed-Bold.ttf          |   Bin 0 -> 127340 bytes
+ .../Fonts/Roboto/RobotoCondensed-BoldItalic.ttf    |   Bin 0 -> 135504 bytes
+ .../Fonts/Roboto/RobotoCondensed-Italic.ttf        |   Bin 0 -> 133908 bytes
+ .../Fonts/Roboto/RobotoCondensed-Light.ttf         |   Bin 0 -> 126168 bytes
+ .../Fonts/Roboto/RobotoCondensed-LightItalic.ttf   |   Bin 0 -> 134544 bytes
+ .../Fonts/Roboto/RobotoCondensed-Regular.ttf       |   Bin 0 -> 125332 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-B.ttf     |   Bin 0 -> 333612 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-BI.ttf    |   Bin 0 -> 356980 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-C.ttf     |   Bin 0 -> 350444 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-L.ttf     |   Bin 0 -> 415552 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-LI.ttf    |   Bin 0 -> 409608 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-M.ttf     |   Bin 0 -> 341324 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-MI.ttf    |   Bin 0 -> 366992 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-R.ttf     |   Bin 0 -> 353824 bytes
+ .../mockup/resources/Fonts/Ubuntu/Ubuntu-RI.ttf    |   Bin 0 -> 386440 bytes
+ .../mockup/resources/Fonts/Ubuntu/UbuntuMono-B.ttf |   Bin 0 -> 191400 bytes
+ .../resources/Fonts/Ubuntu/UbuntuMono-BI.ttf       |   Bin 0 -> 216208 bytes
+ .../mockup/resources/Fonts/Ubuntu/UbuntuMono-R.ttf |   Bin 0 -> 205748 bytes
+ .../resources/Fonts/Ubuntu/UbuntuMono-RI.ttf       |   Bin 0 -> 210216 bytes
+ .../cat/drawable-hdpi/ic_cat_black_18dp.png        |   Bin 0 -> 516 bytes
+ .../cat/drawable-hdpi/ic_cat_black_24dp.png        |   Bin 0 -> 626 bytes
+ .../cat/drawable-hdpi/ic_cat_black_36dp.png        |   Bin 0 -> 937 bytes
+ .../cat/drawable-hdpi/ic_cat_black_48dp.png        |   Bin 0 -> 1210 bytes
+ .../cat/drawable-hdpi/ic_cat_grey600_18dp.png      |   Bin 0 -> 777 bytes
+ .../cat/drawable-hdpi/ic_cat_grey600_24dp.png      |   Bin 0 -> 940 bytes
+ .../cat/drawable-hdpi/ic_cat_grey600_36dp.png      |   Bin 0 -> 1429 bytes
+ .../cat/drawable-hdpi/ic_cat_grey600_48dp.png      |   Bin 0 -> 2008 bytes
+ .../cat/drawable-hdpi/ic_cat_white_18dp.png        |   Bin 0 -> 561 bytes
+ .../cat/drawable-hdpi/ic_cat_white_24dp.png        |   Bin 0 -> 663 bytes
+ .../cat/drawable-hdpi/ic_cat_white_36dp.png        |   Bin 0 -> 1012 bytes
+ .../cat/drawable-hdpi/ic_cat_white_48dp.png        |   Bin 0 -> 1337 bytes
+ .../cat/drawable-mdpi/ic_cat_black_18dp.png        |   Bin 0 -> 346 bytes
+ .../cat/drawable-mdpi/ic_cat_black_24dp.png        |   Bin 0 -> 460 bytes
+ .../cat/drawable-mdpi/ic_cat_black_36dp.png        |   Bin 0 -> 626 bytes
+ .../cat/drawable-mdpi/ic_cat_black_48dp.png        |   Bin 0 -> 789 bytes
+ .../cat/drawable-mdpi/ic_cat_grey600_18dp.png      |   Bin 0 -> 454 bytes
+ .../cat/drawable-mdpi/ic_cat_grey600_24dp.png      |   Bin 0 -> 620 bytes
+ .../cat/drawable-mdpi/ic_cat_grey600_36dp.png      |   Bin 0 -> 940 bytes
+ .../cat/drawable-mdpi/ic_cat_grey600_48dp.png      |   Bin 0 -> 1283 bytes
+ .../cat/drawable-mdpi/ic_cat_white_18dp.png        |   Bin 0 -> 351 bytes
+ .../cat/drawable-mdpi/ic_cat_white_24dp.png        |   Bin 0 -> 467 bytes
+ .../cat/drawable-mdpi/ic_cat_white_36dp.png        |   Bin 0 -> 663 bytes
+ .../cat/drawable-mdpi/ic_cat_white_48dp.png        |   Bin 0 -> 844 bytes
+ .../cat/drawable-xhdpi/ic_cat_black_18dp.png       |   Bin 0 -> 626 bytes
+ .../cat/drawable-xhdpi/ic_cat_black_24dp.png       |   Bin 0 -> 789 bytes
+ .../cat/drawable-xhdpi/ic_cat_black_36dp.png       |   Bin 0 -> 1210 bytes
+ .../cat/drawable-xhdpi/ic_cat_black_48dp.png       |   Bin 0 -> 1593 bytes
+ .../cat/drawable-xhdpi/ic_cat_grey600_18dp.png     |   Bin 0 -> 940 bytes
+ .../cat/drawable-xhdpi/ic_cat_grey600_24dp.png     |   Bin 0 -> 1283 bytes
+ .../cat/drawable-xhdpi/ic_cat_grey600_36dp.png     |   Bin 0 -> 2008 bytes
+ .../cat/drawable-xhdpi/ic_cat_grey600_48dp.png     |   Bin 0 -> 2686 bytes
+ .../cat/drawable-xhdpi/ic_cat_white_18dp.png       |   Bin 0 -> 663 bytes
+ .../cat/drawable-xhdpi/ic_cat_white_24dp.png       |   Bin 0 -> 844 bytes
+ .../cat/drawable-xhdpi/ic_cat_white_36dp.png       |   Bin 0 -> 1337 bytes
+ .../cat/drawable-xhdpi/ic_cat_white_48dp.png       |   Bin 0 -> 1764 bytes
+ .../cat/drawable-xxhdpi/ic_cat_black_18dp.png      |   Bin 0 -> 937 bytes
+ .../cat/drawable-xxhdpi/ic_cat_black_24dp.png      |   Bin 0 -> 1210 bytes
+ .../cat/drawable-xxhdpi/ic_cat_black_36dp.png      |   Bin 0 -> 1878 bytes
+ .../cat/drawable-xxhdpi/ic_cat_black_48dp.png      |   Bin 0 -> 2488 bytes
+ .../cat/drawable-xxhdpi/ic_cat_grey600_18dp.png    |   Bin 0 -> 1429 bytes
+ .../cat/drawable-xxhdpi/ic_cat_grey600_24dp.png    |   Bin 0 -> 2008 bytes
+ .../cat/drawable-xxhdpi/ic_cat_grey600_36dp.png    |   Bin 0 -> 3037 bytes
+ .../cat/drawable-xxhdpi/ic_cat_grey600_48dp.png    |   Bin 0 -> 4028 bytes
+ .../cat/drawable-xxhdpi/ic_cat_white_18dp.png      |   Bin 0 -> 1012 bytes
+ .../cat/drawable-xxhdpi/ic_cat_white_24dp.png      |   Bin 0 -> 1337 bytes
+ .../cat/drawable-xxhdpi/ic_cat_white_36dp.png      |   Bin 0 -> 2135 bytes
+ .../cat/drawable-xxhdpi/ic_cat_white_48dp.png      |   Bin 0 -> 2897 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_black_18dp.png     |   Bin 0 -> 1210 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_black_24dp.png     |   Bin 0 -> 1593 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_black_36dp.png     |   Bin 0 -> 2488 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_black_48dp.png     |   Bin 0 -> 3407 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_grey600_18dp.png   |   Bin 0 -> 2008 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_grey600_24dp.png   |   Bin 0 -> 2686 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_grey600_36dp.png   |   Bin 0 -> 4028 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_grey600_48dp.png   |   Bin 0 -> 5501 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_white_18dp.png     |   Bin 0 -> 1337 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_white_24dp.png     |   Bin 0 -> 1764 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_white_36dp.png     |   Bin 0 -> 2897 bytes
+ .../cat/drawable-xxxhdpi/ic_cat_white_48dp.png     |   Bin 0 -> 4035 bytes
+ .../resources/other_icons/cat/drawable/cat.xml     |     8 +
+ .../mockup/resources/other_icons/cat/readme.txt    |     5 +
+ .../drawable-hdpi/ic_cube_outline_black_18dp.png   |   Bin 0 -> 473 bytes
+ .../drawable-hdpi/ic_cube_outline_black_24dp.png   |   Bin 0 -> 605 bytes
+ .../drawable-hdpi/ic_cube_outline_black_36dp.png   |   Bin 0 -> 752 bytes
+ .../drawable-hdpi/ic_cube_outline_black_48dp.png   |   Bin 0 -> 853 bytes
+ .../drawable-hdpi/ic_cube_outline_grey600_18dp.png |   Bin 0 -> 747 bytes
+ .../drawable-hdpi/ic_cube_outline_grey600_24dp.png |   Bin 0 -> 937 bytes
+ .../drawable-hdpi/ic_cube_outline_grey600_36dp.png |   Bin 0 -> 1355 bytes
+ .../drawable-hdpi/ic_cube_outline_grey600_48dp.png |   Bin 0 -> 1571 bytes
+ .../drawable-hdpi/ic_cube_outline_white_18dp.png   |   Bin 0 -> 487 bytes
+ .../drawable-hdpi/ic_cube_outline_white_24dp.png   |   Bin 0 -> 670 bytes
+ .../drawable-hdpi/ic_cube_outline_white_36dp.png   |   Bin 0 -> 825 bytes
+ .../drawable-hdpi/ic_cube_outline_white_48dp.png   |   Bin 0 -> 908 bytes
+ .../drawable-mdpi/ic_cube_outline_black_18dp.png   |   Bin 0 -> 351 bytes
+ .../drawable-mdpi/ic_cube_outline_black_24dp.png   |   Bin 0 -> 350 bytes
+ .../drawable-mdpi/ic_cube_outline_black_36dp.png   |   Bin 0 -> 605 bytes
+ .../drawable-mdpi/ic_cube_outline_black_48dp.png   |   Bin 0 -> 587 bytes
+ .../drawable-mdpi/ic_cube_outline_grey600_18dp.png |   Bin 0 -> 524 bytes
+ .../drawable-mdpi/ic_cube_outline_grey600_24dp.png |   Bin 0 -> 622 bytes
+ .../drawable-mdpi/ic_cube_outline_grey600_36dp.png |   Bin 0 -> 937 bytes
+ .../drawable-mdpi/ic_cube_outline_grey600_48dp.png |   Bin 0 -> 1140 bytes
+ .../drawable-mdpi/ic_cube_outline_white_18dp.png   |   Bin 0 -> 371 bytes
+ .../drawable-mdpi/ic_cube_outline_white_24dp.png   |   Bin 0 -> 358 bytes
+ .../drawable-mdpi/ic_cube_outline_white_36dp.png   |   Bin 0 -> 670 bytes
+ .../drawable-mdpi/ic_cube_outline_white_48dp.png   |   Bin 0 -> 631 bytes
+ .../drawable-xhdpi/ic_cube_outline_black_18dp.png  |   Bin 0 -> 605 bytes
+ .../drawable-xhdpi/ic_cube_outline_black_24dp.png  |   Bin 0 -> 587 bytes
+ .../drawable-xhdpi/ic_cube_outline_black_36dp.png  |   Bin 0 -> 853 bytes
+ .../drawable-xhdpi/ic_cube_outline_black_48dp.png  |   Bin 0 -> 1102 bytes
+ .../ic_cube_outline_grey600_18dp.png               |   Bin 0 -> 937 bytes
+ .../ic_cube_outline_grey600_24dp.png               |   Bin 0 -> 1140 bytes
+ .../ic_cube_outline_grey600_36dp.png               |   Bin 0 -> 1571 bytes
+ .../ic_cube_outline_grey600_48dp.png               |   Bin 0 -> 2022 bytes
+ .../drawable-xhdpi/ic_cube_outline_white_18dp.png  |   Bin 0 -> 670 bytes
+ .../drawable-xhdpi/ic_cube_outline_white_24dp.png  |   Bin 0 -> 631 bytes
+ .../drawable-xhdpi/ic_cube_outline_white_36dp.png  |   Bin 0 -> 908 bytes
+ .../drawable-xhdpi/ic_cube_outline_white_48dp.png  |   Bin 0 -> 1153 bytes
+ .../drawable-xxhdpi/ic_cube_outline_black_18dp.png |   Bin 0 -> 752 bytes
+ .../drawable-xxhdpi/ic_cube_outline_black_24dp.png |   Bin 0 -> 853 bytes
+ .../drawable-xxhdpi/ic_cube_outline_black_36dp.png |   Bin 0 -> 1580 bytes
+ .../drawable-xxhdpi/ic_cube_outline_black_48dp.png |   Bin 0 -> 1746 bytes
+ .../ic_cube_outline_grey600_18dp.png               |   Bin 0 -> 1355 bytes
+ .../ic_cube_outline_grey600_24dp.png               |   Bin 0 -> 1571 bytes
+ .../ic_cube_outline_grey600_36dp.png               |   Bin 0 -> 2520 bytes
+ .../ic_cube_outline_grey600_48dp.png               |   Bin 0 -> 3148 bytes
+ .../drawable-xxhdpi/ic_cube_outline_white_18dp.png |   Bin 0 -> 825 bytes
+ .../drawable-xxhdpi/ic_cube_outline_white_24dp.png |   Bin 0 -> 908 bytes
+ .../drawable-xxhdpi/ic_cube_outline_white_36dp.png |   Bin 0 -> 1830 bytes
+ .../drawable-xxhdpi/ic_cube_outline_white_48dp.png |   Bin 0 -> 2036 bytes
+ .../ic_cube_outline_black_18dp.png                 |   Bin 0 -> 853 bytes
+ .../ic_cube_outline_black_24dp.png                 |   Bin 0 -> 1102 bytes
+ .../ic_cube_outline_black_36dp.png                 |   Bin 0 -> 1746 bytes
+ .../ic_cube_outline_black_48dp.png                 |   Bin 0 -> 2467 bytes
+ .../ic_cube_outline_grey600_18dp.png               |   Bin 0 -> 1571 bytes
+ .../ic_cube_outline_grey600_24dp.png               |   Bin 0 -> 2022 bytes
+ .../ic_cube_outline_grey600_36dp.png               |   Bin 0 -> 3148 bytes
+ .../ic_cube_outline_grey600_48dp.png               |   Bin 0 -> 4278 bytes
+ .../ic_cube_outline_white_18dp.png                 |   Bin 0 -> 908 bytes
+ .../ic_cube_outline_white_24dp.png                 |   Bin 0 -> 1153 bytes
+ .../ic_cube_outline_white_36dp.png                 |   Bin 0 -> 2036 bytes
+ .../ic_cube_outline_white_48dp.png                 |   Bin 0 -> 3252 bytes
+ .../cube_outline/drawable/cube_outline.xml         |     8 +
+ .../android/drawable-hdpi/ic_face_black_24dp.png   |   Bin 0 -> 511 bytes
+ .../android/drawable-mdpi/ic_face_black_24dp.png   |   Bin 0 -> 349 bytes
+ .../android/drawable-xhdpi/ic_face_black_24dp.png  |   Bin 0 -> 680 bytes
+ .../android/drawable-xxhdpi/ic_face_black_24dp.png |   Bin 0 -> 990 bytes
+ .../drawable-xxxhdpi/ic_face_black_24dp.png        |   Bin 0 -> 1297 bytes
+ .../face/ios/ic_face.imageset/Contents.json        |    23 +
+ .../face/ios/ic_face.imageset/ic_face.png          |   Bin 0 -> 349 bytes
+ .../face/ios/ic_face.imageset/ic_face_2x.png       |   Bin 0 -> 680 bytes
+ .../face/ios/ic_face.imageset/ic_face_3x.png       |   Bin 0 -> 1134 bytes
+ .../other_icons/face/web/ic_face_black_24dp_1x.png |   Bin 0 -> 349 bytes
+ .../other_icons/face/web/ic_face_black_24dp_2x.png |   Bin 0 -> 680 bytes
+ ...ial_template_ic_product_icon_192px_dark_dark.ai |  5824 ++
+ ...al_template_ic_product_icon_192px_dark_light.ai |  5980 ++
+ ...al_template_ic_product_icon_192px_light_dark.ai |  5653 ++
+ ...l_template_ic_product_icon_192px_light_light.ai |  5725 ++
+ semester_1/scrum-dev-log.rtf                       |   127 +
+ 1210 files changed, 669326 insertions(+), 1 deletion(-)
+
+commit 017d727717d407e3ca6f830906dd73576b7bb02e
+Author: Seattle <sr640712@ohio.edu>
+Date:   Thu Sep 8 07:33:39 2016 -0400
+
+    committing our questions for the client
+
+ README.md              | 14 +++++++-------
+ client_questions.md    | 40 ++++++++++++++++++++++++++++++++++++++++
+ inital_requirements.md |  2 +-
+ 3 files changed, 48 insertions(+), 8 deletions(-)
+
+commit b8457c44ae106ecd85815f048aa12d0e669b6928
+Author: Seattle <sr640712@ohio.edu>
+Date:   Thu Sep 8 07:14:41 2016 -0400
+
+    initial informal requirements
+
+ inital_requirements.md | 42 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 42 insertions(+)
+
+commit f362017e617a1bc15109ecf44c48b01b07458fea
+Author: Kurtis Davis <kd345312@ohio.edu>
+Date:   Tue Sep 6 17:14:17 2016 -0400
+
+    .gitignore
+
+ .gitignore | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+
+commit 112adbc612339d452957c98902accd9c6f673961
+Author: Kurtis <kd345312@ohio.edu>
+Date:   Tue Sep 6 09:22:00 2016 -0400
+
+    README.md
+
+ README.md | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+commit b770340249ba2ef34b0b47ea5ca8f0f2919149a6
+Author: Kurtis <kd345312@ohio.edu>
+Date:   Tue Sep 6 09:19:37 2016 -0400
+
+    README.md
+
+ README.md | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+commit 32e0fc67493395650617df5feae997b748e8f755
+Author: kd345312 <kd345312@ohio.edu>
+Date:   Tue Sep 6 09:15:13 2016 -0400
+
+    Initial commit
+
+ LICENSE   | 21 +++++++++++++++++++++
+ README.md |  1 +
+ 2 files changed, 22 insertions(+)

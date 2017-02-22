@@ -1,0 +1,130 @@
+commit 651d23b75c331c8982d528ea5810f7640e2c987d
+Author: Quintin Fettes <qf731413@ohio.edu>
+Date:   Thu Dec 8 01:04:02 2016 -0500
+
+    updated README
+
+ README.md | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+commit 3ecb751a0699f16cde3ecda498dbd70333e05032
+Author: Quintin Fettes <qf731413@ohio.edu>
+Date:   Thu Dec 8 00:59:08 2016 -0500
+
+    Added local code which improves performance of face tracking. Add measure of depth to help with stuttering around faces, increase fps of camera, increase resolution of video. Documented face tracking.
+
+ RoboApp/.idea/misc.xml                             |  2 +-
+ .../java/com/robodoot/dr/RoboApp/FdActivity.java   | 23 ++++++++++++----------
+ .../com/robodoot/roboapp/PololuVirtualCat.java     |  4 ++--
+ .../face/facetracker/FaceTrackerActivity.java      |  2 +-
+ 4 files changed, 17 insertions(+), 14 deletions(-)
+
+commit fd4b6898880ff2d1d39d1c87e29853166b7cc19e
+Author: Quintin Fettes <qf731413@ohio.edu>
+Date:   Wed Dec 7 23:52:13 2016 -0500
+
+    gradle fix
+
+ RoboApp/app/build.gradle                                          | 6 ------
+ RoboApp/app/src/main/java/com/robodoot/dr/RoboApp/FdActivity.java | 2 --
+ 2 files changed, 8 deletions(-)
+
+commit 88e97b2801e185b7cea93ca74af874506ccc8db6
+Merge: b392e11 900b7e8
+Author: Quintin Fettes <qf731413@ohio.edu>
+Date:   Wed Dec 7 23:48:57 2016 -0500
+
+    bug fix to handle multiple, concurrent permission requests simultaneously. prevents app crash.
+
+commit b392e114aed1e1e2361311bb66ad3a0a2e071609
+Author: Quintin Fettes <qf731413@ohio.edu>
+Date:   Wed Dec 7 23:42:52 2016 -0500
+
+    Bug fix to correctly handle concurrent permission requests at runtime. Prevents crash on first permission requests.
+
+ RoboApp/.idea/copyright/profiles_settings.xml      |   4 +-
+ RoboApp/.idea/gradle.xml                           |   3 +-
+ RoboApp/.idea/misc.xml                             |  18 +-
+ RoboApp/app/build.gradle                           |  18 +-
+ RoboApp/app/src/main/AndroidManifest.xml           |  19 +-
+ RoboApp/app/src/main/assets/sync/assets.lst        |  24 +-
+ .../src/main/assets/sync/cmudict-en-us.dict.md5    |   2 +-
+ RoboApp/app/src/main/assets/sync/commands.gram.md5 |   2 +-
+ RoboApp/app/src/main/assets/sync/en-phone.dmp.md5  |   2 +-
+ .../app/src/main/assets/sync/en-us-ptm/README.md5  |   2 +-
+ .../src/main/assets/sync/en-us-ptm/feat.params.md5 |   2 +-
+ .../app/src/main/assets/sync/en-us-ptm/mdef.md5    |   2 +-
+ .../app/src/main/assets/sync/en-us-ptm/means.md5   |   2 +-
+ .../src/main/assets/sync/en-us-ptm/noisedict.md5   |   2 +-
+ .../app/src/main/assets/sync/en-us-ptm/sendump.md5 |   2 +-
+ .../assets/sync/en-us-ptm/transition_matrices.md5  |   2 +-
+ .../src/main/assets/sync/en-us-ptm/variances.md5   |   2 +-
+ RoboApp/app/src/main/assets/sync/menu.gram.md5     |   2 +-
+ RoboApp/app/src/main/assets/sync/weather.dmp.md5   |   2 +-
+ .../java/com/robodoot/dr/RoboApp/FdActivity.java   | 784 ++-------------------
+ .../java/com/robodoot/roboapp/MockVirtualCat.java  |   4 +-
+ .../com/robodoot/roboapp/PololuVirtualCat.java     |  54 +-
+ .../main/java/com/robodoot/roboapp/VirtualCat.java |   3 +-
+ RoboApp/appFaceTracker/appFaceTracker.iml          |  51 +-
+ RoboApp/appFaceTracker/build.gradle                |  14 +-
+ 25 files changed, 150 insertions(+), 872 deletions(-)
+
+commit 4d16b17a74f54b338fcaa820d85baf53ba0d48d3
+Author: Quintin Fettes <qf731413@ohio.edu>
+Date:   Thu Nov 17 15:58:47 2016 -0500
+
+    improvements to face tracking
+
+ RoboApp/.idea/gradle.xml                           |   3 +-
+ .../java/com/robodoot/dr/RoboApp/FdActivity.java   |   2 +-
+ .../com/robodoot/roboapp/PololuVirtualCat.java     |   7 +-
+ RoboApp/appFaceTracker/appFaceTracker.iml          |   1 +
+ .../org/opencv/engine/OpenCVEngineInterface.java   |   2 +-
+ .../org/opencv/engine/OpenCVEngineInterface.java   |   2 +-
+ .../r/androidTest/debug/org/opencv/test/R.java     | 198 ++++++++++-----------
+ .../generated/source/r/debug/org/opencv/R.java     | 198 ++++++++++-----------
+ .../generated/source/r/release/org/opencv/R.java   | 198 ++++++++++-----------
+ .../blame/res/androidTest/debug/multi/values.json  |   6 +-
+ .../bundles/debug/AndroidManifest.xml              |  48 ++---
+ .../build/intermediates/bundles/debug/R.txt        |  16 +-
+ .../bundles/release/AndroidManifest.xml            |  48 ++---
+ .../build/intermediates/bundles/release/R.txt      |  16 +-
+ .../incremental/compileDebugAidl/dependency.store  | Bin 275 -> 247 bytes
+ .../compileReleaseAidl/dependency.store            | Bin 277 -> 249 bytes
+ .../compile-file-map.properties                    |   2 +-
+ .../mergeDebugAndroidTestResources/merger.xml      |   4 +-
+ .../incremental/mergeDebugAssets/merger.xml        |   2 +-
+ .../incremental/mergeDebugShaders/merger.xml       |   2 +-
+ .../incremental/mergeReleaseAssets/merger.xml      |   2 +-
+ .../mergeReleaseJniLibFolders/merger.xml           |   2 +-
+ .../incremental/mergeReleaseShaders/merger.xml     |   2 +-
+ .../compile-file-map.properties                    |   2 +-
+ .../incremental/packageDebugResources/merger.xml   |   4 +-
+ .../compile-file-map.properties                    |   2 +-
+ .../incremental/packageReleaseResources/merger.xml |   4 +-
+ .../manifest/androidTest/debug/AndroidManifest.xml |  66 +++----
+ .../manifests/aapt/debug/AndroidManifest.xml       |  48 ++---
+ .../manifests/aapt/release/AndroidManifest.xml     |  48 ++---
+ .../intermediates/symbols/androidTest/debug/R.txt  |  16 +-
+ .../build/outputs/aar/openCVLibrary300-debug.aar   | Bin 211993 -> 211999 bytes
+ .../build/outputs/aar/openCVLibrary300-release.aar | Bin 211915 -> 211921 bytes
+ RoboApp/openCVLibrary300/openCVLibrary300.iml      |  17 +-
+ 34 files changed, 488 insertions(+), 480 deletions(-)
+
+commit ca9ffd8151cb822db5f4185e3d18db611ec3a8fa
+Merge: b33d1ea 23bf538
+Author: Quintin Fettes <qf731413@ohio.edu>
+Date:   Mon Nov 14 15:05:07 2016 -0500
+
+    Merge branch 'master' of github.com:kd345312/RoboApp
+
+commit b33d1eae0335f571e0e8a04c58869ef3c4a592ff
+Author: Quintin Fettes <qf731413@ohio.edu>
+Date:   Mon Nov 14 15:04:36 2016 -0500
+
+    Improved accuracy of face tracking. Still has issues finding a point which is *good enough* when faces are very close to the camera. A calculation to determine a *good enough* threshold for distance from the center of the image will need to be made depending upon the distance of the face from the camera. Also, need specific function call to get height of camera preview; right now its assumed as 600 in fdactivity while updating faces.
+
+ .../main/java/com/robodoot/dr/RoboApp/FdActivity.java  | 12 +++++-------
+ .../java/com/robodoot/roboapp/PololuVirtualCat.java    | 18 ++++++++++--------
+ RoboApp/openCVLibrary300/openCVLibrary300.iml          | 16 ++++++++--------
+ 3 files changed, 23 insertions(+), 23 deletions(-)

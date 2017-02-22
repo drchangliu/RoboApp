@@ -1,0 +1,11 @@
+commit 82b2c3ed499fefb987199b2395da001b2a271ea3
+Author: Zach Taylor <zach.t013@gmail.com>
+Date:   Thu Sep 29 00:00:34 2016 -0400
+
+    Notes for new ultrasonic component
+    
+    File contains links to various websites with information about
+    implementation of ultrasonic devices for distance tracking
+
+ proj_doc/environment_mapping/sonic_sensor.docx | Bin 0 -> 13677 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)

@@ -1,0 +1,63 @@
+commit 7f9fdc07935cefc8e71d42c78f7f0aac392fd39d
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Mon Jan 23 16:27:03 2017 -0500
+
+    Bug fixes for voice, command to start is now "Okay Robo Cat"
+
+
+
+commit b049eaf5ad14c32d555a13c3319c9be1869502de
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Mon Jan 23 15:05:32 2017 -0500
+
+    Cat now stops listening when app is closed
+
+
+
+commit 36a6de26a485fbacf16f2805230a3f14b91796fe
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Mon Jan 23 14:37:02 2017 -0500
+
+    Changed gitignore file
+
+
+commit 561d9b4ed1c0acaf924feb95a9bd8a60536704d3
+
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Mon Jan 23 16:28:53 2017 -0500
+
+    Unnecessary log
+
+
+
+commit 25b09194ae8e0816e0f04b9e2ed14dc91d33da6d
+
+Merge: 7f9fdc0 6b79d6e
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Mon Jan 23 16:28:04 2017 -0500
+
+    Merge branch 'master' of https://github.com/kd345312/RoboApp
+
+
+
+commit 7f9fdc07935cefc8e71d42c78f7f0aac392fd39d
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Mon Jan 23 16:27:03 2017 -0500
+
+    Bug fixes for voice, command to start is now "Okay Robo Cat"
+
+
+
+commit b049eaf5ad14c32d555a13c3319c9be1869502de
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Mon Jan 23 15:05:32 2017 -0500
+
+    Cat now stops listening when app is closed
+
+
+
+commit 36a6de26a485fbacf16f2805230a3f14b91796fe
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Mon Jan 23 14:37:02 2017 -0500
+
+    Changed gitignore file

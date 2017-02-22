@@ -1,0 +1,34 @@
+commit fb987c5c68d50535c20b3739027cc9f6116a7759
+Author: Quintin Fettes <qf731413@ohio.edu>
+Date:   Mon Nov 7 21:40:16 2016 -0500
+
+    left and right motion of the head debugged. Up and down will be a simple fix tomorrow.
+
+ .../main/java/com/robodoot/dr/RoboApp/FdActivity.java    |  6 +++++-
+ .../main/java/com/robodoot/roboapp/PololuVirtualCat.java | 14 +++++++-------
+ RoboApp/openCVLibrary300/openCVLibrary300.iml            | 16 ++++++++--------
+ 3 files changed, 20 insertions(+), 16 deletions(-)
+
+commit 58ddc0fe9399b0125cdd0b9e1874f05e6b8f9f6a
+Merge: dd8e9fc 9b2fbd6
+Author: Quintin Fettes <qf731413@ohio.edu>
+Date:   Mon Nov 7 14:41:28 2016 -0500
+
+    Merge branch 'master' of github.com:kd345312/RoboApp
+
+commit dd8e9fceaa484611e50ed65b808a51f50117184d
+Author: Quintin Fettes <qf731413@ohio.edu>
+Date:   Mon Nov 7 14:41:01 2016 -0500
+
+    added functionality to passively track faces in fdActivity(the main activity). The app is accurately tracking faces; however, the inherited code to move the cats head is buggy, so it's not adjusting its head accurately. This was confirmed by checking the output xy coordinates of the code I add. Therefore, the next step is to debug the code which is responsible for positioning the head. At this point, facial tracking will be complete.
+
+ .../java/com/robodoot/dr/RoboApp/FdActivity.java   | 196 +++++++++++++--------
+ .../java/com/robodoot/roboapp/MainActivity.java    |   4 +-
+ .../java/com/robodoot/roboapp/MockVirtualCat.java  |   5 +
+ .../robodoot/roboapp/NavigationDrawerFragment.java |   1 +
+ .../com/robodoot/roboapp/PololuVirtualCat.java     |  22 +++
+ .../main/java/com/robodoot/roboapp/VirtualCat.java |   3 +
+ RoboApp/appFaceTracker/appFaceTracker.iml          |  16 +-
+ .../incremental/mergeDebugJniLibFolders/merger.xml |   2 +-
+ RoboApp/openCVLibrary300/openCVLibrary300.iml      |  16 +-
+ 9 files changed, 169 insertions(+), 96 deletions(-)

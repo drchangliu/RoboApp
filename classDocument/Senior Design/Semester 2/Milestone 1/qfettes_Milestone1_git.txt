@@ -1,0 +1,17 @@
+commit e0c4deefeccc6f55fcd616dd7c820a90c75b30e9
+Author: Quintin <qfettes@gmail.com>
+Date:   Sun Jan 22 14:59:23 2017 -0500
+
+    cleanup
+
+commit 91694f6db76f4a33a87cc78b276ec25e278bea33
+Author: Quintin <qfettes@gmail.com>
+Date:   Sun Jan 22 14:55:29 2017 -0500
+
+    Added code to make use of smiling in the detected face. If the detected face is likely to be smiling, the happiness of the cat increases and the gui changes accordings; if the face detected is likely to not be smiling, the happiness of the cat decreases and the gui changes accordingly.
+
+commit 9d6818c2e8bef0f221b82b7302f4ee385e1fbb8c
+Author: Quintin Fettes <qf731413@ohio.edu>
+Date:   Wed Jan 18 09:58:09 2017 -0500
+
+    fixed camera on-destroy method

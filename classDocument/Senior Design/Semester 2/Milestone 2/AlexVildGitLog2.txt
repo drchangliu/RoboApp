@@ -1,0 +1,48 @@
+commit 5716e9be39c593d8c1f778f49b309a140c53fc25
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Mon Feb 6 16:16:57 2017 -0500
+
+    Further modifications, updated readme
+
+commit 240817a0430207eff999a5f43b598e147fd9d129
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Mon Feb 6 16:06:29 2017 -0500
+
+    Fixed issue where no supported devices were available
+
+commit 3b787a4a96bd0bf986d9802d05b5ca395e6cc92b
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Mon Feb 6 15:50:17 2017 -0500
+
+    Update version no.
+
+commit 701fc42f5863d2fb2c371cc045a0867471f438fb
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Mon Feb 6 15:49:35 2017 -0500
+
+    Attempt to fix SSL vulnerability
+
+commit 0c7f551268a66d8cb344a958f579038f11d06101
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Sun Feb 5 14:43:01 2017 -0500
+
+    Tightened threshold for keyword search, removed unnecesarry files
+
+commit 4b4fe8aed9804cb2d6cf0c4d5cc634ae89b9419a
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Sun Feb 5 14:14:29 2017 -0500
+
+    Updated commands.gram to allow the cat to have more accurate results, updated readmes
+
+commit 8e509eca3aa36ebe0de50976ce215f3fa89a5f91
+Merge: 258e153 4b3315c
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Thu Jan 26 22:33:42 2017 -0500
+
+    Merge branch 'voicePatchMS1' of https://github.com/kd345312/RoboApp
+
+commit 4b3315c6ee8c9a902a6ab66fbb353f20ced05022
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Thu Jan 26 22:32:09 2017 -0500
+
+    Unit testing test
