@@ -78,7 +78,7 @@ public class MainActivity extends FragmentActivity implements
         switch(position) {
             case 0:
                 //TODO: Console Broken
-                fragment = new ConsoleFragment();
+                //fragment = new ConsoleFragment();
                 //Toast.makeText(this, "Console", Toast.LENGTH_SHORT).show();
                 //TODO: Analytics Code
                 mTracker.send(new HitBuilders.EventBuilder()

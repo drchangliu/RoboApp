@@ -1,0 +1,18 @@
+commit 23c61c9ddef1b57777faac44b95760b6da642341
+Author: Luke Shays <ls233813@ohio.edu>
+Date:   Wed Sep 28 23:37:09 2016 -0400
+
+    Added links to color tracking folder
+
+ .../Color Detection Using Android Camera - Stack Overflow.url           | 2 ++
+ ...blob-detection at master \302\267 opencv-opencv \302\267 GitHub.url" | 2 ++
+ 2 files changed, 4 insertions(+)
+
+commit d4fd169eda89b6ec54f35836d7c671c068f5b393
+Author: Luke Shays <ls233813@ohio.edu>
+Date:   Wed Sep 28 23:34:24 2016 -0400
+
+    Added color tracking links and notes
+
+ proj_doc/color_tracking/notes.txt | 5 +++++
+ 1 file changed, 5 insertions(+)

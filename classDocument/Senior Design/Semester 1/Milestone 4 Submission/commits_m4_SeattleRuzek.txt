@@ -1,0 +1,56 @@
+
+
+commit 2458f49587d50535c20b3739027cc9f61ebebe56
+Author: Seattle <sr640712@ohio.edu>
+Date:   Tue Nov 15 22:43:31 2016 -0400
+
+    Created a new menu button that will log the accelerometer data. Not functional yet, but it will be. 
+
+ .../main/java/com/robodoot/dr/RoboApp/FdActivity.java            | 16  +++—
+ .../main/res/layout/fragment_accelerometer.xml                   | 21  +++++
+ .../main/java/com/robodoot/roboapp/AccelerometerFragment.java    | 148 ++++++++++++++++
+ 3 files changed, 182 insertions(+), 3 deletions(-)
+
+commit 9812ab3f87b84611e50ed65b808a51f50117184d
+Author: Seattle <sr640712@ohio.edu>
+Date:   Mon Nov 21 13:41:01 2016 -0400
+
+    Added the functionality that will allow the accelerometer data to be sent to the new fragment and output to the screen. 
+
+ .../java/com/robodoot/dr/RoboApp/FdActivity.java                 | 184 +++++++++++++--------
+ .../java/com/robodoot/roboapp/MainActivity.java                  |  32 +++
+ 2 files changed, 135 insertions(+), 81 deletions(-)
+
+commit ed65b80887b84611e50ed65b808a51f584611e50
+Author: Seattle <sr640712@ohio.edu>
+Date:   Mon Nov 28 11:32:09 2016 -0400
+
+    Update Readme and accelerometer data. 
+
+ README.md                                                    |   7 ++--
+ .../java/com/robodoot/dr/RoboApp/FdActivity.java             |  18 ++++
+ .../app/src/main/res/layout/activity_fd.xml                  |   2 +-
+ 3 files changed, 23 insertions(+), 7 deletions(-)
+
+commit 2458f49587b84611e50ed65b808a51f50117184d
+Author: Seattle <sr640712@ohio.edu>
+Date:   Wed Dec 7 21:41:41 2016 -0400
+
+    Bug fixes and documentation and other good stuff. 
+
+ .../java/com/robodoot/dr/RoboApp/FdActivity.java                 | 42  ++++++—-
+ .../java/com/robodoot/roboapp/MainActivity.java                  | 14  +++-
+ .../main/res/layout/fragment_accelerometer.xml                   | 21  +++—
+ .../main/java/com/robodoot/roboapp/AccelerometerFragment.java    | 172 +++++++++----
+ 4 files changed, 182 insertions(+), 67 deletions(-)
+
+
+
+
+
+
+
+
+
+
+

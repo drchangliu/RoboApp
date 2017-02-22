@@ -1,0 +1,70 @@
+commit 258e153d528014f30045a71ecb46ef33e14551c1
+Author: Zach Taylor <zach.t013@gmail.com>
+Date:   Wed Jan 25 03:33:25 2017 -0500
+
+    Battery Information
+
+    The level of the battery now affects the background of the app but also
+    the resting mood of the cat
+
+ RoboApp/.idea/gradle.xml                           |    1 +
+ RoboApp/.idea/modules.xml                          |    1 +
+ RoboApp/.idea/vcs.xml                              |    6 +
+ RoboApp/BatteryInfo/.gitignore                     |    1 +
+ RoboApp/BatteryInfo/build.gradle                   |   28 +
+ RoboApp/BatteryInfo/proguard-rules.pro             |   17 +
+ RoboApp/BatteryInfo/src/main/AndroidManifest.xml   |   20 +
+ .../batteryinformation/BatteryActivity.java        |  142 +
+ .../src/main/res/drawable/progressbar_states.xml   |   32 +
+ .../src/main/res/layout/activity_main.xml          |   33 +
+ .../src/main/res/mipmap-hdpi/ic_launcher.png       |  Bin 0 -> 3418 bytes
+ .../src/main/res/mipmap-mdpi/ic_launcher.png       |  Bin 0 -> 2206 bytes
+ .../src/main/res/mipmap-xhdpi/ic_launcher.png      |  Bin 0 -> 4842 bytes
+ .../src/main/res/mipmap-xxhdpi/ic_launcher.png     |  Bin 0 -> 7718 bytes
+ .../src/main/res/mipmap-xxxhdpi/ic_launcher.png    |  Bin 0 -> 10486 bytes
+ .../src/main/res/values-w820dp/dimens.xml          |    6 +
+ RoboApp/BatteryInfo/src/main/res/values/colors.xml |    6 +
+ RoboApp/BatteryInfo/src/main/res/values/dimens.xml |    5 +
+ .../BatteryInfo/src/main/res/values/strings.xml    |    3 +
+ RoboApp/BatteryInfo/src/main/res/values/styles.xml |   11 +
+ RoboApp/app/build.gradle                           |    1 +
+ .../java/com/robodoot/dr/RoboApp/CatEmotion.java   |  281 +-
+ .../src/main/res/drawable/face_angry_sleepy.png    |  Bin 0 -> 679923 bytes
+ .../app/src/main/res/drawable/face_angry_tired.png |  Bin 0 -> 694204 bytes
+ .../src/main/res/drawable/face_annoyed_sleepy.png  |  Bin 0 -> 681911 bytes
+ .../src/main/res/drawable/face_annoyed_tired.png   |  Bin 0 -> 696660 bytes
+ .../main/res/drawable/face_concerned_sleepy.png    |  Bin 0 -> 680675 bytes
+ .../src/main/res/drawable/face_concerned_tired.png |  Bin 0 -> 695393 bytes
+ .../src/main/res/drawable/face_crying_sleepy.png   |  Bin 0 -> 685302 bytes
+ .../src/main/res/drawable/face_crying_tired.png    |  Bin 0 -> 700774 bytes
+ .../main/res/drawable/face_disgusted_sleepy.png    |  Bin 0 -> 678939 bytes
+ .../src/main/res/drawable/face_disgusted_tired.png |  Bin 0 -> 694495 bytes
+ .../src/main/res/drawable/face_happier_sleepy.png  |  Bin 0 -> 672435 bytes
+ .../src/main/res/drawable/face_happier_tired.png   |  Bin 0 -> 688080 bytes
+ .../src/main/res/drawable/face_happy_sleepy.png    |  Bin 0 -> 680837 bytes
+ .../app/src/main/res/drawable/face_happy_tired.png |  Bin 0 -> 696472 bytes
+ .../main/res/drawable/face_happytongue_sleepy.png  |  Bin 0 -> 679076 bytes
+ .../main/res/drawable/face_happytongue_tired.png   |  Bin 0 -> 694569 bytes
+ .../src/main/res/drawable/face_hearts_sleepy.png   |  Bin 0 -> 685428 bytes
+ .../src/main/res/drawable/face_hearts_tired.png    |  Bin 0 -> 701445 bytes
+ .../main/res/drawable/face_heartstongue_sleepy.png |  Bin 0 -> 636471 bytes
+ .../main/res/drawable/face_heartstounge_tired.png  |  Bin 0 -> 652462 bytes
+ .../res/drawable/face_kawaiieyesclosed_sleepy.png  |  Bin 0 -> 688957 bytes
+ .../res/drawable/face_kawaiieyesclosed_tired.png   |  Bin 0 -> 704902 bytes
+ .../res/drawable/face_kawaiieyesopen_sleepy.png    |  Bin 0 -> 686557 bytes
+ .../res/drawable/face_kawaiieyesopen_tired.png     |  Bin 0 -> 702488 bytes
+ .../src/main/res/drawable/face_lookleft_sleepy.png |  Bin 0 -> 679463 bytes
+ .../src/main/res/drawable/face_lookleft_tired.png  |  Bin 0 -> 695388 bytes
+ .../main/res/drawable/face_lookright_sleepy.png    |  Bin 0 -> 681833 bytes
+ .../src/main/res/drawable/face_lookright_tired.png |  Bin 0 -> 697807 bytes
+ .../app/src/main/res/drawable/face_sad_sleepy.png  |  Bin 0 -> 680967 bytes
+ .../app/src/main/res/drawable/face_sad_tired.png   |  Bin 0 -> 696948 bytes
+ .../src/main/res/drawable/face_sadder_sleepy.png   |  Bin 0 -> 681050 bytes
+ .../src/main/res/drawable/face_sadder_tired.png    |  Bin 0 -> 697061 bytes
+ .../src/main/res/drawable/face_yawning_sleepy.png  |  Bin 0 -> 678176 bytes
+ .../src/main/res/drawable/face_yawning_tired.png   |  Bin 0 -> 693946 bytes
+ RoboApp/appFaceTracker/appFaceTracker.iml          |   17 +-
+ RoboApp/hs_err_pid8436.log                         |  467 +
+ RoboApp/replay_pid8436.log                         | 9107 ++++++++++++++++++++
+ RoboApp/settings.gradle                            |    2 +-
+ 60 files changed, 10116 insertions(+), 71 deletions(-)

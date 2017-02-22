@@ -1,0 +1,13 @@
+commit f8f84fa24db849b6f6c044399a75c4ba97c34cb8
+Author: Luke Shays <ls233813@ohio.edu>
+Date:   Mon Nov 7 21:48:24 2016 -0500
+
+    New version of color tracking. Image capture from video feed still lacking.
+
+ ColorTracking/.idea/misc.xml                       |   2 +-
+ ColorTracking/app/build.gradle                     |   1 +
+ ColorTracking/app/src/main/AndroidManifest.xml     |  12 +-
+ .../lukeshays/com/colortracking/ColorFinder.java   | 213 ++++++++-------------
+ .../lukeshays/com/colortracking/MainActivity.java  | 147 ++++++++++++--
+ .../app/src/main/res/layout/activity_main.xml      |  48 ++++-
+ 6 files changed, 263 insertions(+), 160 deletions(-)

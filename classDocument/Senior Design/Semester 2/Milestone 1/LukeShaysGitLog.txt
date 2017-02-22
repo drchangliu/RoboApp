@@ -1,0 +1,58 @@
+commit 94b72699429d0d678359191471c9661cfa6b4e38
+Author: Luke Shays <ls233813@ohio.edu>
+Date:   Tue Jan 24 20:24:55 2017 -0500
+
+    Color Tracking option in menu now does the same thing as the colorTracking stand alone
+
+ RoboApp/.idea/.name                                |   1 +
+ RoboApp/.idea/compiler.xml                         |   0
+ RoboApp/.idea/copyright/profiles_settings.xml      |   0
+ RoboApp/.idea/encodings.xml                        |   0
+ RoboApp/.idea/gradle.xml                           |  12 +-
+ RoboApp/.idea/misc.xml                             |  16 ++
+ RoboApp/.idea/modules.xml                          |   0
+ RoboApp/.idea/runConfigurations.xml                |   0
+ RoboApp/RoboApp.iml                                |   2 +-
+ RoboApp/app/build.gradle                           |   0
+ RoboApp/app/src/main/AndroidManifest.xml           |  34 +--
+ RoboApp/app/src/main/assets/sync/assets.lst        |   0
+ .../src/main/assets/sync/cmudict-en-us.dict.md5    |   2 +-
+ RoboApp/app/src/main/assets/sync/commands.gram.md5 |   2 +-
+ RoboApp/app/src/main/assets/sync/en-phone.dmp.md5  |   0
+ .../app/src/main/assets/sync/en-us-ptm/README.md5  |   2 +-
+ .../src/main/assets/sync/en-us-ptm/feat.params.md5 |   2 +-
+ .../app/src/main/assets/sync/en-us-ptm/mdef.md5    |   0
+ .../app/src/main/assets/sync/en-us-ptm/means.md5   |   0
+ .../src/main/assets/sync/en-us-ptm/noisedict.md5   |   2 +-
+ .../app/src/main/assets/sync/en-us-ptm/sendump.md5 |   0
+ .../assets/sync/en-us-ptm/transition_matrices.md5  |   0
+ .../src/main/assets/sync/en-us-ptm/variances.md5   |   0
+ RoboApp/app/src/main/assets/sync/menu.gram.md5     |   2 +-
+ RoboApp/app/src/main/assets/sync/weather.dmp.md5   |   0
+ .../java/com/robodoot/roboapp/ColorFinder.java     | 111 +++++++++
+ .../robodoot/roboapp/ColorTrackingActivity.java    | 258 +++++++++++++++++++++
+ .../com/robodoot/roboapp/ColorTrackingCamera.java  |  70 ++++++
+ .../java/com/robodoot/roboapp/MainActivity.java    |  10 +-
+ .../main/res/layout/activity_color_tracking.xml    |  91 ++++++++
+ RoboApp/appFaceTracker/appFaceTracker.iml          |   2 +-
+ RoboApp/build.gradle                               |   0
+ .../usbSerialForAndroid/usbSerialForAndroid.iml    |   2 +-
+ cameraTest/.idea/misc.xml                          |   2 +-
+ .../lukeshays/com/cameratest/MainActivity.java     |  12 +-
+ 35 files changed, 600 insertions(+), 35 deletions(-)
+
+commit d27757c7906d86d588a20a47132a08907f876fe2
+Merge: f43ffd0 8b128f1
+Author: Luke Shays <ls233813@ohio.edu>
+Date:   Tue Jan 24 18:01:49 2017 -0500
+
+    Merge branch 'master' of https://github.com/kd345312/RoboApp
+
+commit f43ffd006b94c5a5bdd9334135e5fcd39f110308
+Author: Luke Shays <ls233813@ohio.edu>
+Date:   Tue Jan 24 17:48:22 2017 -0500
+
+    Updated colorTracking to work with Android 6.0+
+
+ .../lukeshays/com/cameratest/MainActivity.java     | 64 +++++++++++++++++++++-
+ 1 file changed, 63 insertions(+), 1 deletion(-)

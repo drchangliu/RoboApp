@@ -1,0 +1,27 @@
+commit 940d88c2b81516515cbe9d8ce04f14c30c15bb87
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Wed Sep 28 21:17:09 2016 -0400
+
+    Added documentation of voice recognition commands
+
+ proj_doc/voice_recognition/commands.docx | Bin 0 -> 15072 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit a75b545095b74821931956baca42aec0301524f8
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Tue Sep 27 15:45:02 2016 -0400
+
+    The cat now knows how to love
+
+ .idea/encodings.xml                                |   6 +
+ .idea/misc.xml                                     |   2 +-
+ .idea/workspace.xml                                | 269 +++++++++++++++++++++
+ FaceTrackTest/.idea/gradle.xml                     |   9 +-
+ FaceTrackTest/.idea/misc.xml                       |  43 ++--
+ FaceTrackTest/.idea/vcs.xml                        |   6 -
+ FaceTrackTest/app/app.iml                          |  25 +-
+ .../java/com/robodoot/dr/RoboApp/CatEmotion.java   |  11 +-
+ .../java/com/robodoot/dr/RoboApp/FdActivity.java   |   5 +-
+ .../org/opencv/engine/OpenCVEngineInterface.java   |   2 +-
+ .../org/opencv/engine/OpenCVEngineInterface.java   |   2 +-
+:

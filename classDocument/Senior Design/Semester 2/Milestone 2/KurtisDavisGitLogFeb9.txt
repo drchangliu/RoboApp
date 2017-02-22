@@ -1,0 +1,85 @@
+commit 1c56a019cd5e7eb3944fd00d9c43c96d122c5280
+Author: Kurtis Davis <kd345312@ohio.edu>
+Date:   Wed Feb 8 16:57:22 2017 -0500
+
+    added command for cat to move legs
+
+commit 6b79d6ed8ed617c7c9f5d83affd1a14f07a73c12
+Merge: bc6fdde b049eaf
+Author: Kurtis Davis <kd345312@ohio.edu>
+Date:   Mon Jan 23 15:16:20 2017 -0500
+
+    Merge branch 'master' of https://github.com/kd345312/RoboApp
+
+commit bc6fdde575f02b98d68d9e65d51cf08cb03ae916
+Author: Kurtis Davis <kd345312@ohio.edu>
+Date:   Mon Jan 23 15:16:09 2017 -0500
+
+    changed around emotions to make more sense
+
+commit 900b7e81c0f9f9efd98f20ae4003f5aa77970474
+Author: Kurtis Davis <kd345312@ohio.edu>
+Date:   Wed Dec 7 21:38:11 2016 -0500
+
+    a few minor removings of unimportant things
+
+commit 23bf538f6f8d031cf8de1955666453a8c6278411
+Author: Kurtis Davis <kd345312@ohio.edu>
+Date:   Mon Nov 7 22:31:36 2016 -0500
+
+    added command walk
+
+commit 4e99e1659c80c74b2c94d670d3690aff9a11f5eb
+Merge: b01d5ac daceb70
+Author: Kurtis Davis <kd345312@ohio.edu>
+Date:   Mon Oct 17 19:30:45 2016 -0400
+
+    fixed bug that allows faces to be displayed with commands
+
+commit b01d5ac47f93ae3a1d368ee18bb256885d954ad3
+Author: Kurtis Davis <kd345312@ohio.edu>
+Date:   Mon Oct 17 19:28:21 2016 -0400
+
+    fixed bug to add faces to the commands
+
+commit 8364a43cf6f07628b5f8030d1d49ce4476e5a62f
+Author: Kurtis Davis <kd345312@ohio.edu>
+Date:   Mon Oct 17 19:26:28 2016 -0400
+
+    fixed bug allowed the faces to show up with the new emotions
+
+commit a6a018c4e7d58d700bb2e0731486df16cb28cbab
+Author: Kurtis Davis <kd345312@ohio.edu>
+Date:   Mon Oct 17 16:44:26 2016 -0400
+
+    Added crying emotions for cat as well as disgusted emoiton
+
+commit c111d5bee72febe0c31640ca3d06d767a57a94f3
+Author: Kurtis Davis <kd345312@ohio.edu>
+Date:   Thu Sep 29 09:09:37 2016 -0400
+
+    Spelling error in README.md for root file
+
+commit 2cc7dc15a62baed43fd6617047820577ca7dbc5d
+Author: Kurtis Davis <kd345312@ohio.edu>
+Date:   Thu Sep 29 07:39:11 2016 -0400
+
+    added links for tutorials on making speech recognition app for android
+
+commit f362017e617a1bc15109ecf44c48b01b07458fea
+Author: Kurtis Davis <kd345312@ohio.edu>
+Date:   Tue Sep 6 17:14:17 2016 -0400
+
+    .gitignore
+
+commit 112adbc612339d452957c98902accd9c6f673961
+Author: Kurtis <kd345312@ohio.edu>
+Date:   Tue Sep 6 09:22:00 2016 -0400
+
+    README.md
+
+commit b770340249ba2ef34b0b47ea5ca8f0f2919149a6
+Author: Kurtis <kd345312@ohio.edu>
+Date:   Tue Sep 6 09:19:37 2016 -0400
+
+    README.md
