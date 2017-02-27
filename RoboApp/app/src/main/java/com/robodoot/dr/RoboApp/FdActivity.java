@@ -765,77 +765,157 @@ public class FdActivity extends Activity implements
                 return;
             }
             if (result.contains("home") || result.contains("straight")) {
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Straight")
+                        .build());
                 virtualCat.resetHead();
             }
             else if (result.contains("good")) {
                 //Make the cat happy.
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Good")
+                        .build());
                 kitty.smiledAt();
             }
             else if (result.contains("bad")) {
                 //Make the cat mad.
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Bad")
+                        .build());
                 kitty.frownedAt();
             }
             else if (result.contains("cry")){
                 //Make the cat cry
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Cry")
+                        .build());
                 kitty.cryingAt();
             }
             else if (result.contains("stupid cat")){
                 //Make cat disgusted
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Stupid")
+                        .build());
                 kitty.distgustedAt();
             }
             else if (result.contains("left")) {
                 //Make the cat head move left
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Left")
+                        .build());
                 virtualCat.turnHeadLeft();
             }
             else if (result.contains("walk")||result.contains("walking") || result.contains("come") || result.contains("come here")) {
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Walk")
+                        .build());
                 virtualCat.stepForward();
             }
             else if (result.contains("right")) {
                 //Make the cat head move right
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Right")
+                        .build());
                 virtualCat.turnHeadRight();
             }
             else if (result.contains("green")) {
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Green")
+                        .build());
                 trackingGreen = true;
                 trackingRed = false;
             }
             else if (result.contains("red")) {
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Red")
+                        .build());
                 trackingGreen = false;
                 trackingRed = true;
             }
             else if (result.contains("blue")) {
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Blue")
+                        .build());
                 trackingGreen = trackingRed = false;
             }
             else if (result.contains("up")) {
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Up")
+                        .build());
                 virtualCat.turnHeadUp();
             }
             else if (result.contains("down")) {
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Down")
+                        .build());
                 virtualCat.turnHeadDown();
             }
             else if (result.contains("menu")) {
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Menu")
+                        .build());
                 entry.clear();
                 //showVideoFeed();
                 Intent intent = new Intent(this, MainActivity.class);
 
                 startActivity(intent);
             }
-            else if (result.contains("I love you")) {
+            else if (result.contains("i love you")) {
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Love")
+                        .build());
                 kitty.loveMeCat();
             }
             else if (result.contains("color") && result.contains("tracking")){
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Color Track")
+                        .build());
                 // TODO Implement this
             }
             else if (result.contains("face") && result.contains("tracking")){
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Face Tracking")
+                        .build());
                 Intent intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
                 startActivity(intent);
             }
             else if (result.contains("stay")){
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Stay")
+                        .build());
                 //TODO implement this
             }
             else if (result.contains("find") && result.contains("me")){
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Find Me")
+                        .build());
                 Intent intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
                 startActivity(intent);
             }
             else {
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Not found")
+                        .build());
                 Context context = getApplicationContext();
                 CharSequence commandNotFound = "Command not found, given: " + result;
                 int duration = Toast.LENGTH_SHORT;
