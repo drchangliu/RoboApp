@@ -259,12 +259,7 @@ public class CatEmotion {
                 else yawn();
 
             }
-
-
         }
-
-
-
     }
 
 

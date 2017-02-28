@@ -896,10 +896,12 @@ public class FdActivity extends Activity implements
     }
     //TODO: Put helper back in MotionFaceTracker after unit testing
     public boolean emotionalReaction(float smileProb){
-        if (smileProb>0.75f){
+        if (smileProb>0.5f){
+            Log.e(TAG, "happy");
             kitty.detectedSmile();
             return true;
-        }else if (smileProb<0.1f){
+        }else if (smileProb<0.5f){
+            Log.e(TAG, "sad");
             kitty.detectedFrown();
             return false;
         }
