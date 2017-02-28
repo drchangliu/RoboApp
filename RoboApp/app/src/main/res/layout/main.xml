@@ -8,6 +8,12 @@
     android:layout_height="match_parent"
     android:keepScreenOn="true">
 
+  <TextView
+      android:text="TextView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/happiness" />
+
   <com.robodoot.dr.RoboApp.camera.CameraSourcePreview
       android:id="@+id/preview"
       android:layout_width="match_parent"

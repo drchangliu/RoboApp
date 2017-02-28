@@ -201,19 +201,6 @@ public class FdActivity extends Activity implements
         AnalyticsApplication application = (AnalyticsApplication) getApplication();
         mTracker = application.getDefaultTracker();
 
-        ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    Log.i(TAG, "CHECKED");
-                } else {
-                    Log.i(TAG, "UNCHECKED");
-                }
-            }
-        });
-
-
-
         // initializing accelerometer variables and registering listener (listening for movement)
         senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -977,11 +964,9 @@ public class FdActivity extends Activity implements
     //TODO: Put helper back in MotionFaceTracker after unit testing
     public boolean emotionalReaction(float smileProb){
         if (smileProb>0.5f){
-            Log.e(TAG, "happy");
             kitty.detectedSmile();
             return true;
         }else if (smileProb<0.5f){
-            Log.e(TAG, "sad");
             kitty.detectedFrown();
             return false;
         }

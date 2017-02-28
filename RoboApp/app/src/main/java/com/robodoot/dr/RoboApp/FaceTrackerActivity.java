@@ -22,12 +22,14 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -39,6 +41,8 @@ import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 import com.robodoot.dr.RoboApp.camera.CameraSourcePreview;
 import com.robodoot.dr.RoboApp.camera.GraphicOverlay;
+import com.robodoot.roboapp.PololuVirtualCat;
+import com.robodoot.roboapp.VirtualCat;
 
 import java.io.IOException;
 
@@ -57,6 +61,13 @@ public final class FaceTrackerActivity extends AppCompatActivity {
     private static final int RC_HANDLE_GMS = 9001;
     // permission request codes need to be < 256
     private static final int RC_HANDLE_CAMERA_PERM = 2;
+
+    VirtualCat virtualCat;
+    private CatEmotion kitty;
+
+    public FaceTrackerActivity(){
+        virtualCat = new PololuVirtualCat();
+    }
 
     //==============================================================================================
     // Activity Methods
@@ -156,6 +167,8 @@ public final class FaceTrackerActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        virtualCat.onResume(getIntent(), this);
 
         startCameraSource();
     }
@@ -281,6 +294,7 @@ public final class FaceTrackerActivity extends AppCompatActivity {
     private class GraphicFaceTracker extends Tracker<Face> {
         private GraphicOverlay mOverlay;
         private FaceGraphic mFaceGraphic;
+        PointF trackPosition;
 
         GraphicFaceTracker(GraphicOverlay overlay) {
             mOverlay = overlay;
@@ -302,6 +316,28 @@ public final class FaceTrackerActivity extends AppCompatActivity {
         public void onUpdate(FaceDetector.Detections<Face> detectionResults, Face face) {
             mOverlay.add(mFaceGraphic);
             mFaceGraphic.updateFace(face);
+
+            emotionalReaction(face.getIsSmilingProbability());
+            //end use happiness rating
+
+            float x = -1 * face.getPosition().x + face.getWidth() / 2;
+            float y = face.getPosition().y + face.getHeight() / 2 - 512;
+            //middle not quite 512, works for now
+            //TODO: 512 is set for the preview size above, take the hardcoded number out
+
+            trackPosition = new PointF(x, y);
+
+            //if distance from center is < half a face size
+            // done so that "good enough" scales for faces at multiple distances
+            if (Math.sqrt(Math.pow(x, 2.0) + Math.pow(y, 2.0)) > Math.pow(face.getWidth() / 2, 2) + Math.pow(face.getHeight() / 2, 2)) {
+                //Log.e(TAG, "moving");
+                //((TextView) findViewById(R.id.moving))
+                        //.setText("Moving to Look at Face");
+                virtualCat.lookToward(trackPosition);
+            }else{
+                //((TextView) findViewById(R.id.moving))
+                        //.setText("Stationary");
+            }
         }
 
         /**
@@ -322,5 +358,22 @@ public final class FaceTrackerActivity extends AppCompatActivity {
         public void onDone() {
             mOverlay.remove(mFaceGraphic);
         }
+    }
+
+    public boolean emotionalReaction(float smileProb){
+        if (smileProb>0.5f){
+            //Log.e(TAG, "happy");
+            //kitty.detectedSmile();
+            ((TextView) findViewById(R.id.happiness))
+                    .setText("Happy Face Detected");
+            return true;
+        }else if (smileProb<0.5f){
+            //Log.e(TAG, "sad");
+            //kitty.detectedFrown();
+            ((TextView) findViewById(R.id.happiness))
+                    .setText("Sad Face Detected");
+            return false;
+        }
+        return false;
     }
 }
