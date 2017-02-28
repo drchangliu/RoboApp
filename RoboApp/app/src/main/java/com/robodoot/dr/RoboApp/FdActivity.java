@@ -480,7 +480,7 @@ public class FdActivity extends Activity implements
         virtualCat.onResume(getIntent(), this);
 
 
-        super.onResume();;
+        super.onResume();
         if (!initialized) {
             initialized = true;
             virtualCat.resetHead();
@@ -930,7 +930,11 @@ public class FdActivity extends Activity implements
 
             //if distance from center is < half a face size
             // done so that "good enough" scales for faces at multiple distances
-            if (Math.sqrt(Math.pow(x, 2.0) + Math.pow(y, 2.0)) > Math.pow(face.getWidth() / 2, 2) + Math.pow(face.getHeight() / 2, 2)) {
+            double w = face.getWidth();
+            double h = face.getHeight();
+            double d1 = (Math.pow(x, 2.0) + Math.pow(y, 2.0));
+            double d2 =  Math.pow(face.getWidth() / 2, 2) + Math.pow(face.getHeight() / 2, 2);
+            if ((Math.pow(x, 2.0) + Math.pow(y, 2.0)) > Math.pow(face.getWidth() / 2, 2) + Math.pow(face.getHeight() / 2, 2)) {
                 virtualCat.lookToward(trackPosition);
             }
         }
@@ -1001,43 +1005,44 @@ public class FdActivity extends Activity implements
                     PointF trackPosition;
                     switch (color){
                         case "TL":
-                            x = width/6;
-                            y = height/6;
+                            x = -50; //width/6;
+                            y = -50; //height/6;
                             break;
                         case "TM":
-                            x = width/2;
-                            y = height/6;
+                            x = 0; //width/2;
+                            y = -50; //height/6;
                             break;
                         case "TR":
-                            x = (width/6)*5;
-                            y = height/6;
+                            x = 50; //(width/6)*5;
+                            y = -50; //height/6;
                             break;
                         case "ML":
-                            x = width/6;
-                            y = height/2;
+                            x = -50; //width/6;
+                            y = 0;//height/2;
                             break;
                         case "MM":
-                            x = width/2;
-                            y = height/2;
+                            x = 0;//width/2;
+                            y = 0;//height/2;
                             break;
                         case "MR":
-                            x = (width/6)*5;
-                            y = height/2;
+                            x = 50;//(width/6)*5;
+                            y = 0;//height/2;
                             break;
                         case "BL":
-                            x = width/6;
-                            y = (height/6)*5;
+                            x = -50;//width/6;
+                            y = 50;//(height/6)*5;
                             break;
                         case "BM":
-                            x = width/2;
-                            y = (height/6)*5;
+                            x = 0;//width/2;
+                            y = 50;//(height/6)*5;
                             break;
                         case "BR":
-                            x = (width/6)*5;
-                            y = (height/6)*5;
+                            x = 50;//(width/6)*5;
+                            y = 50;//(height/6)*5;
                             break;
                     }
                     trackPosition = new PointF(x, y);
+
                     virtualCat.lookToward(trackPosition);
                 }
             }).findDominantColor(imageBitmap, true);

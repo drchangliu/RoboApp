@@ -1,22 +1,16 @@
 package com.robodoot.roboapp;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.app.ListFragment;
-
-import com.robodoot.dr.facetracktest.R;
 import com.robodoot.dr.RoboApp.FdActivity;
+import com.robodoot.dr.facetracktest.R;
 
 import java.util.ArrayList;
 
@@ -142,7 +136,7 @@ public class AccelerometerFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(Uri uri);
     }
 
 }

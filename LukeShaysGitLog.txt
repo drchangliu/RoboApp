@@ -1,0 +1,15 @@
+commit ef6f2b0af942ccc132cbab36863374c81378a8c9
+Merge: 338526b 5716e9b
+Author: Luke Shays <ls233813@ohio.edu>
+Date:   Thu Feb 9 21:38:54 2017 -0500
+
+    Added rough colorTracking implementation to fdactivity
+
+commit 338526b541899af10319ae012716b642d74fafd7
+Author: Luke Shays <ls233813@ohio.edu>
+Date:   Wed Feb 8 11:53:17 2017 -0500
+
+    test
+
+ RoboApp/appFaceTracker/appFaceTracker.iml | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)

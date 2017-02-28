@@ -89,7 +89,7 @@ public class ColorFinder {
                     double testDistance = ColorTrackingActivity.colorDistance;
                     if(isCatFace){ testDistance = 70; }
 
-                    if(distance <= ColorTrackingActivity.colorDistance){
+                    if(distance <= testDistance){
                         selectedColorPixels++;
                     }
                 }
@@ -110,6 +110,6 @@ public class ColorFinder {
     }
 
     public interface CallbackInterface {
-        public void onCompleted(String dominantColor);
+        void onCompleted(String dominantColor);
     }
 }
