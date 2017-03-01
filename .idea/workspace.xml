@@ -27,21 +27,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FdActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FdActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RoboApp/app/src/main/java/com/robodoot/dr/RoboApp/FdActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-293">
-              <caret line="776" column="131" selection-start-line="776" selection-start-column="131" selection-end-line="776" selection-end-column="131" />
+            <state relative-caret-position="1680">
+              <caret line="804" column="34" selection-start-line="804" selection-start-column="34" selection-end-line="804" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PololuHandler.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PololuHandler.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RoboApp/app/src/main/java/com/robodoot/dr/RoboApp/PololuHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3638">
-              <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+            <state relative-caret-position="-1178">
+              <caret line="195" column="69" selection-start-line="195" selection-start-column="69" selection-end-line="195" selection-end-column="69" />
               <folding />
             </state>
           </provider>
@@ -52,7 +52,13 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
               <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#631#632#0" expanded="false" />
+                <element signature="e#670#671#0" expanded="false" />
+                <element signature="e#1222#1223#0" expanded="false" />
+                <element signature="e#1253#1254#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -72,6 +78,7 @@
       <list>
         <option value="$PROJECT_DIR$/RoboApp/app/src/main/java/com/robodoot/dr/RoboApp/CatEmotion.java" />
         <option value="$PROJECT_DIR$/RoboApp/app/src/main/java/com/robodoot/dr/RoboApp/FdActivity.java" />
+        <option value="$PROJECT_DIR$/RoboApp/app/src/main/java/com/robodoot/dr/RoboApp/PololuHandler.java" />
       </list>
     </option>
   </component>
@@ -106,9 +113,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane" />
-      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -203,7 +209,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -564,6 +571,36 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/RoboApp/app/src/main/java/com/robodoot/dr/RoboApp/FdActivity.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RoboApp/app/src/main/java/com/robodoot/dr/RoboApp/PololuHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RoboApp/app/src/main/java/com/robodoot/roboapp/PololuVirtualCat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#631#632#0" expanded="false" />
+            <element signature="e#670#671#0" expanded="false" />
+            <element signature="e#1222#1223#0" expanded="false" />
+            <element signature="e#1253#1254#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RoboApp/app/src/main/java/com/robodoot/dr/RoboApp/FdActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11055">
           <caret line="820" column="47" selection-start-line="820" selection-start-column="47" selection-end-line="820" selection-end-column="47" />
           <folding />
@@ -582,7 +619,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#631#632#0" expanded="false" />
+            <element signature="e#670#671#0" expanded="false" />
+            <element signature="e#1222#1223#0" expanded="false" />
+            <element signature="e#1253#1254#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -629,22 +672,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#631#632#0" expanded="false" />
+            <element signature="e#670#671#0" expanded="false" />
+            <element signature="e#1222#1223#0" expanded="false" />
+            <element signature="e#1253#1254#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RoboApp/app/src/main/java/com/robodoot/dr/RoboApp/FdActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1680">
+          <caret line="804" column="34" selection-start-line="804" selection-start-column="34" selection-end-line="804" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RoboApp/app/src/main/java/com/robodoot/dr/RoboApp/PololuHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3638">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RoboApp/app/src/main/java/com/robodoot/dr/RoboApp/FdActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-293">
-          <caret line="776" column="131" selection-start-line="776" selection-start-column="131" selection-end-line="776" selection-end-column="131" />
+        <state relative-caret-position="-1178">
+          <caret line="195" column="69" selection-start-line="195" selection-start-column="69" selection-end-line="195" selection-end-column="69" />
           <folding />
         </state>
       </provider>
