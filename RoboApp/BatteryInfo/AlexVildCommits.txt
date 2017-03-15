@@ -1,0 +1,5 @@
+commit 3e6ccf2648f34850bce788ab18d2ec37043d61d9
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Mon Feb 27 16:26:04 2017 -0500
+
+    Added analytics to speech recognition

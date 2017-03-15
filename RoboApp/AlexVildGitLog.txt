@@ -1,0 +1,29 @@
+commit 3e6ccf2648f34850bce788ab18d2ec37043d61d9
+
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Mon Feb 27 16:26:04 2017 -0500
+
+    
+Added analytics to speech recognition
+
+
+
+commit b7ac261efcc8cff275d53b2f7bc3fa1e597633a8
+
+Merge: 5716e9b f1ac1cb
+
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Mon Feb 27 15:58:26 2017 -0500
+
+    
+WIP on master: 5716e9b Further modifications, updated readme
+
+
+
+commit f1ac1cbdda21875b7cb65e4fe117964e6ab73a6a
+
+Author: AlexVild <ajv2324@gmail.com>
+Date:   Mon Feb 27 15:58:25 2017 -0500
+
+    
+index on master: 5716e9b Further modifications, updated readme
