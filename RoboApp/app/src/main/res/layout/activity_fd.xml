@@ -55,7 +55,6 @@
         android:text="Menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/debugText3"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:id="@+id/btnMenu"
@@ -75,9 +74,7 @@
         android:id="@+id/arrow_right"
         android:src="@drawable/right"
         android:visibility="invisible"
-        android:layout_alignTop="@+id/arrow_left"
-        android:layout_alignLeft="@+id/fragment"
-        android:layout_alignStart="@+id/fragment" />
+        android:layout_alignTop="@+id/arrow_left" />
 
 
 </RelativeLayout>
