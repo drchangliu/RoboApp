@@ -45,6 +45,7 @@ public class CatEmotion {
         Timer tm = new Timer("tm");
         //faceAnimator.setAutoAnimate(true);
         TimerTask calc = new TimerTask() {
+            @SuppressWarnings("ConstantConditions")
             @Override
             public void run() {
                 if (percentage > 50) {
@@ -111,11 +112,11 @@ public class CatEmotion {
         final int percentage = 100;
 
         context.runOnUiThread(new Runnable() {
+            @SuppressWarnings("ConstantConditions")
             @Override
             public void run() {
 
                 if (default_display) {
-                    String test = Float.toString(scale);
                     if (scale <= -166) {
                         state = EMOTION.CRYING;
                     } else if (scale <= -133) {
@@ -138,6 +139,7 @@ public class CatEmotion {
                     }
                 }
 
+                //noinspection ConstantConditions
                 if(percentage > 50) {
                     switch (state) {
                         case HEARTS:
@@ -194,6 +196,7 @@ public class CatEmotion {
                             break;
                     }
                 }
+                //noinspection ConstantConditions
                 if(percentage > 25 && percentage <= 50) {
                     switch (state) {
                         case HEARTS:
@@ -250,6 +253,7 @@ public class CatEmotion {
                             break;
                     }
                 }
+                //noinspection ConstantConditions
                 if(percentage <= 25) {
                     switch (state) {
                         case HEARTS:

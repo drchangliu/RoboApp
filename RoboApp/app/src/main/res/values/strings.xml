@@ -13,9 +13,6 @@
     <string name="title_activity_fd">RoboCat</string>
     <string name="title_activity_color_tracking">ColorTrackingActivity</string>
 
-    <string name="speech_prompt">Say Something</string>
-    <string name="speech_not_supported">Speech is not supported</string>
-
     <string name="title_activity_readme">Readme</string>
 
     <string name="hello_blank_fragment">\n\n\n\n\n\n\n\nPress here to navigate to an activity.</string>

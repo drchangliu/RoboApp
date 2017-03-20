@@ -478,6 +478,7 @@ public class FdActivity extends Activity implements
         tempTextView = field;
         tempText = message;
         boolean debugging = false;
+        //noinspection ConstantConditions
         if(!debugging)return;
 
         runOnUiThread(new Runnable() {
