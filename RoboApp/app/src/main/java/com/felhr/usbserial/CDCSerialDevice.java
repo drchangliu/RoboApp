@@ -43,7 +43,6 @@ public class CDCSerialDevice extends UsbSerialDevice
     private UsbInterface mInterface;
     private UsbEndpoint inEndpoint;
     private UsbEndpoint outEndpoint;
-    private UsbRequest requestIN;
 
     public CDCSerialDevice(UsbDevice device, UsbDeviceConnection connection)
     {
@@ -64,7 +63,7 @@ public class CDCSerialDevice extends UsbSerialDevice
         if(ret)
         {
             // Initialize UsbRequest
-            requestIN = new UsbRequest();
+            UsbRequest requestIN = new UsbRequest();
             requestIN.initialize(connection, inEndpoint);
 
             // Restart the working thread if it has been killed before and  get and claim interface

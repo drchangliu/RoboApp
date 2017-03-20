@@ -80,7 +80,6 @@ public class FTDISerialDevice extends UsbSerialDevice
     private UsbInterface mInterface;
     private UsbEndpoint inEndpoint;
     private UsbEndpoint outEndpoint;
-    private UsbRequest requestIN;
 
     public FTDIUtilities ftdiUtilities;
 
@@ -110,7 +109,7 @@ public class FTDISerialDevice extends UsbSerialDevice
         if(ret)
         {
             // Initialize UsbRequest
-            requestIN = new UsbRequest();
+            UsbRequest requestIN = new UsbRequest();
             requestIN.initialize(connection, inEndpoint);
 
             // Restart the working thread if it has been killed before and  get and claim interface

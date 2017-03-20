@@ -68,7 +68,6 @@ public class CP2102SerialDevice extends UsbSerialDevice
     private UsbInterface mInterface;
     private UsbEndpoint inEndpoint;
     private UsbEndpoint outEndpoint;
-    private UsbRequest requestIN;
 
     private FlowControlThread flowControlThread;
 
@@ -95,7 +94,7 @@ public class CP2102SerialDevice extends UsbSerialDevice
         if(ret)
         {
             // Initialize UsbRequest
-            requestIN = new UsbRequest();
+            UsbRequest requestIN = new UsbRequest();
             requestIN.initialize(connection, inEndpoint);
 
             // Restart the working thread if it has been killed before and  get and claim interface

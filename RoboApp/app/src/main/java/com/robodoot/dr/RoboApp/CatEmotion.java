@@ -15,8 +15,6 @@ public class CatEmotion {
     public enum EMOTION {HAPPY, HAPPY_TONGUE, HAPPIER, HEARTS, ANNOYED, SAD, SADDER, CONCERNED, CRYING, DISGUSTED, HEARTS_TONGUE, KAWAII_EYES_CLOSED, KAWAII_EYES_OPEN, LOOK_RIGHT, LOOK_LEFT, YAWNING}
     private EMOTION state;
     private float scale;
-    private Timer tm;
-    private TimerTask calc;
     public  ImageView pic;
     protected FdActivity context;
     private ArrayList<Opinion> opinions;
@@ -44,12 +42,12 @@ public class CatEmotion {
         scale = 0;
         final int percentage = 100;
 
-        tm = new Timer("tm");
+        Timer tm = new Timer("tm");
         //faceAnimator.setAutoAnimate(true);
-        calc = new TimerTask() {
+        TimerTask calc = new TimerTask() {
             @Override
             public void run() {
-                if(percentage > 50) {
+                if (percentage > 50) {
                     if (scale > 0) {
                         scale -= 2;
                     } else if (scale < 0) {
@@ -57,18 +55,18 @@ public class CatEmotion {
                     }
                     reCalcFace();
                     return;
-                }else if(percentage <=50 && percentage > 25){
-                    if(scale > -33){
+                } else if (percentage <= 50 && percentage > 25) {
+                    if (scale > -33) {
                         scale -= 2;
-                    } else if(scale < -33){
+                    } else if (scale < -33) {
                         scale++;
                     }
                     reCalcFace();
                     return;
-                }else if(percentage <= 25){
-                    if(scale > -66){
+                } else if (percentage <= 25) {
+                    if (scale > -66) {
                         scale -= 2;
-                    }else if(scale < -66){
+                    } else if (scale < -66) {
                         scale++;
                     }
                     reCalcFace();

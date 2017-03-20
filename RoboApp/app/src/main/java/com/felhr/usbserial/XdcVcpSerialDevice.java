@@ -52,7 +52,6 @@ public class XdcVcpSerialDevice extends UsbSerialDevice
     private UsbInterface mInterface;
     private UsbEndpoint inEndpoint;
     private UsbEndpoint outEndpoint;
-    private UsbRequest requestIN;
 
     public XdcVcpSerialDevice(UsbDevice device, UsbDeviceConnection connection)
     {
@@ -110,7 +109,7 @@ public class XdcVcpSerialDevice extends UsbSerialDevice
             return false;
 
         // Initialize UsbRequest
-        requestIN = new UsbRequest();
+        UsbRequest requestIN = new UsbRequest();
         requestIN.initialize(connection, inEndpoint);
 
         // Pass references to the threads

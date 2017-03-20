@@ -17,6 +17,19 @@ public class MockVirtualCat extends VirtualCat {
 
     // DEFAULT CONSTRUCTOR
     public MockVirtualCat() {
+        Runnable batteryUpdateRunnable = new Runnable() {
+            @Override
+            public void run() {
+                batteryLevel = (batteryLevel + 0.01f) % 1.0f;
+
+                for (CatBatteryListener listener : batteryListeners) {
+                    listener.UpdateBatteryLevel(batteryLevel);
+                }
+
+                // call me again in 100 ms
+                batteryUpdateHandler.postDelayed(this, 100);
+            }
+        };
         batteryUpdateHandler.postDelayed(batteryUpdateRunnable, 100);
     }
 
@@ -27,19 +40,6 @@ public class MockVirtualCat extends VirtualCat {
     // periodically raise battery update event
     private float batteryLevel = 0.0f;
     private Handler batteryUpdateHandler = new Handler();
-    private Runnable batteryUpdateRunnable = new Runnable() {
-        @Override
-        public void run() {
-            batteryLevel = (batteryLevel + 0.01f) % 1.0f;
-
-            for (CatBatteryListener listener : batteryListeners) {
-                listener.UpdateBatteryLevel(batteryLevel);
-            }
-
-            // call me again in 100 ms
-            batteryUpdateHandler.postDelayed(this, 100);
-        }
-    };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // SENDING DATA TO CAT

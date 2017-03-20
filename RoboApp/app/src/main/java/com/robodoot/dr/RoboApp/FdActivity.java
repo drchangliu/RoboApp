@@ -73,9 +73,6 @@ import com.google.android.gms.analytics.HitBuilders;
 
 public class FdActivity extends Activity implements
     GestureDetector.OnGestureListener, SensorEventListener, RecognitionListener {
-    // FUNCTION AND VARIABLE DEFINITIONS
-    private Logger mFaceRectLogger;
-    private Logger mSpeechTextLogger;
     private boolean initialized = false;
 
     //new camera variables start
@@ -130,8 +127,6 @@ public class FdActivity extends Activity implements
 
     private File mCascadeFile;
 
-    private String[] mDetectorName;
-
     private float mRelativeFaceSize = 0.1f;
     private int mAbsoluteFaceSize = 0;
 
@@ -140,9 +135,6 @@ public class FdActivity extends Activity implements
 
     private double xCenter = -1;
     double yCenter = -1;
-
-    private boolean trackingGreen = false;
-    private boolean trackingRed = false;
 
     //PololuHandler pololu;
     VirtualCat virtualCat;
@@ -159,7 +151,6 @@ public class FdActivity extends Activity implements
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
     private long lastUpdate = 0;
-    private float last_x, last_y, last_z;
     // array of arrays to store the accelerometer data in x, y, z format
     public static ArrayList<ArrayList<String>> accData = new ArrayList<ArrayList<String>>();
 
@@ -171,21 +162,19 @@ public class FdActivity extends Activity implements
         startActivity(intent);
     }
 
-    private String imageCaptureDirectory;
-
     //TODO: Analytics Code
     private com.google.android.gms.analytics.Tracker mTracker;
 
     public FdActivity() {
-        mDetectorName = new String[2];
+        String[] mDetectorName = new String[2];
         mDetectorName[JAVA_DETECTOR] = "Java";
         ArrayList<ArrayList<Integer>> similarID = new ArrayList<ArrayList<Integer>>();
         virtualCat = new PololuVirtualCat();
 
         Log.i(TAG, "Instantiated new " + this.getClass());
 
-        mFaceRectLogger = new Logger("face_rect_log");
-        mSpeechTextLogger = new Logger("speech_text_log");
+        Logger mFaceRectLogger = new Logger("face_rect_log");
+        Logger mSpeechTextLogger = new Logger("speech_text_log");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -393,9 +382,9 @@ public class FdActivity extends Activity implements
 
                 accData.add(accPoint);
 
-                last_x = x;
-                last_y = y;
-                last_z = z;
+                float last_x = x;
+                float last_y = y;
+                float last_z = z;
             }
         }
     }
@@ -448,7 +437,7 @@ public class FdActivity extends Activity implements
         entry.clear();
 
         String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss", Locale.US).format(new java.util.Date());
-        imageCaptureDirectory = Environment.getExternalStorageDirectory().getPath() + "/RoboApp/" + timestamp;
+        String imageCaptureDirectory = Environment.getExternalStorageDirectory().getPath() + "/RoboApp/" + timestamp;
         frameNumber = 0;
 
         //mFaceRectLogger.addRecordToLog("\n" + new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date()));
@@ -751,6 +740,8 @@ public class FdActivity extends Activity implements
                 notFoundToast.show();
                 return;
             }
+            boolean trackingGreen = false;
+            boolean trackingRed = false;
             if (result.contains("home") || result.contains("straight")) {
                 mTracker.send(new HitBuilders.EventBuilder()
                         .setCategory("Command")

@@ -28,7 +28,6 @@ public class MainActivity extends FragmentActivity implements
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
-    private Toolbar mToolbar;
 
     public static int log_count = 0;
     public static final int LOG_SIZE = 100;
@@ -45,7 +44,7 @@ public class MainActivity extends FragmentActivity implements
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.fragment_drawer);

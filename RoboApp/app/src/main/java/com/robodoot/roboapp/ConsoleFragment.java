@@ -25,13 +25,6 @@ public class ConsoleFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    private TextView tv  = null;
-
-
-
 
     private OnFragmentInteractionListener mListener;
 
@@ -70,8 +63,8 @@ public class ConsoleFragment extends Fragment {
 
 
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -114,7 +107,7 @@ public class ConsoleFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        tv = (TextView) getView().findViewById(R.id.place);
+        TextView tv = (TextView) getView().findViewById(R.id.place);
 
         tv.setText("-- Recent Logs --\n");
 
