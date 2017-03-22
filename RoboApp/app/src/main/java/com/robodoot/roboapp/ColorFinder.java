@@ -1,10 +1,10 @@
 package com.robodoot.roboapp;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v4.graphics.ColorUtils;
 import android.util.Pair;
+
 import java.util.Vector;
 
 public class ColorFinder {
@@ -61,33 +61,21 @@ public class ColorFinder {
             myColorVec.add(Pair.create(pixels9,"TL"));
 
             int maxSelectedColorPixels = 0;
+            double[] labComp = new double[3];
+            ColorUtils.colorToLAB(ColorTrackingActivity.ColorToTrack, labComp);
+            double testDistance = ColorTrackingActivity.colorDistance;
+
             for (Pair<int[], String> temp:myColorVec) {
                 int selectedColorPixels = 0;
                 for (int pixel:temp.first) {
 
-
-
                     if (pixel == 0)
                         continue;
 
-                    double[] labComp = new double[3];
                     double[] labPic = new double[3];
-
-                    if(ColorTrackingActivity.Red || isCatFace){
-                        ColorUtils.colorToLAB(Color.RED, labComp);
-                    }
-                    else if(ColorTrackingActivity.Green){
-                        ColorUtils.colorToLAB(Color.GREEN, labComp);
-                    }
-                    else if(ColorTrackingActivity.Blue){
-                        ColorUtils.colorToLAB(Color.BLUE, labComp);
-                    }
-
                     ColorUtils.colorToLAB(pixel, labPic);
 
                     double distance = ColorUtils.distanceEuclidean(labComp, labPic);
-                    double testDistance = ColorTrackingActivity.colorDistance;
-                    if(isCatFace){ testDistance = 70; }
 
                     if(distance <= testDistance){
                         selectedColorPixels++;

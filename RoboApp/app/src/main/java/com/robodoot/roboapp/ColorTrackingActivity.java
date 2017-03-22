@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -20,17 +21,20 @@ import android.widget.Toast;
 
 import com.robodoot.dr.facetracktest.R;
 
+import yuku.ambilwarna.AmbilWarnaDialog;
+
 public class ColorTrackingActivity extends AppCompatActivity {
 
     private Camera myCamera = null;
     private ColorTrackingCamera myPreview;
     private BitmapFactory.Options options=new BitmapFactory.Options();
     private boolean sizeChecked = false;
-    static boolean Red = true;
-    static boolean Green = false;
-    static boolean Blue = false;
-    static int colorDistance = 75;
-    Button captureButtonGreen;
+    private boolean isTracking = false;
+    static int ColorToTrack = Color.RED;
+    static int colorDistance = 70;
+    Button selectColorButton;
+    Button startStopButton;
+    TextView colorLocation;
     FrameLayout preview = null;
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
 
@@ -40,6 +44,19 @@ public class ColorTrackingActivity extends AppCompatActivity {
         preview.removeAllViews();
         myPreview = null;
         myCamera.release();
+        isTracking = false;
+        colorLocation.setText("...");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        myCamera = getCameraInstance();
+        myPreview = new ColorTrackingCamera(this, myCamera);
+        myCamera.setDisplayOrientation(90);
+        preview.addView(myPreview);
+        myCamera.startPreview();
+        colorLocation.setText("...");
     }
 
     @Override
@@ -48,6 +65,8 @@ public class ColorTrackingActivity extends AppCompatActivity {
         preview.removeAllViews();
         myPreview = null;
         myCamera.release();
+        isTracking = false;
+        colorLocation.setText("...");
     }
 
     @Override
@@ -103,60 +122,54 @@ public class ColorTrackingActivity extends AppCompatActivity {
             preview.addView(myPreview);
             myCamera.startPreview();
 
+            final AmbilWarnaDialog dialog = new AmbilWarnaDialog(this, ColorToTrack, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+                @Override
+                public void onOk(AmbilWarnaDialog dialog, int color) {
+                    // color is the color selected by the user.
+                    ColorToTrack = color;
+                }
 
-            Button captureButtonRed = (Button) findViewById(R.id.button_capture_red);
-            captureButtonRed.setOnClickListener(
+                @Override
+                public void onCancel(AmbilWarnaDialog dialog) {
+                    // cancel was selected by the user
+                }
+            });
+
+            colorLocation = (TextView) findViewById(R.id.color_location);
+
+            selectColorButton = (Button) findViewById(R.id.select_color);
+            selectColorButton.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Blue = false;
-                            Red = true;
-                            Green = false;
-                            // get an image from the camera
-                            if(!sizeChecked){
-                                myCamera.takePicture(null, null, mPicture);
-                            }
+                            dialog.show();
                         }
                     }
             );
 
-            captureButtonGreen = (Button) findViewById(R.id.button_capture_green);
-            captureButtonGreen.setOnClickListener(
+            Button startStopButton = (Button) findViewById(R.id.start_stop);
+            startStopButton.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Blue = false;
-                            Red = false;
-                            Green = true;
                             // get an image from the camera
-                            if(!sizeChecked){
-                                myCamera.takePicture(null, null, mPicture);
+                            if(!isTracking){
+                                isTracking = true;
+                                myCamera.takePicture(null, null, myPicture);
                             }
-                        }
-                    }
-            );
-
-            Button captureButtonBlue = (Button) findViewById(R.id.button_capture_blue);
-            captureButtonBlue.setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Blue = true;
-                            Red = false;
-                            Green = false;
-                            // get an image from the camera
-                            if(!sizeChecked){
-                                myCamera.takePicture(null, null, mPicture);
+                            else {
+                                isTracking = false;
+                                colorLocation.setText("...");
                             }
                         }
                     }
             );
 
             SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
-            seekBar.setProgress(75);
+            seekBar.setProgress(colorDistance);
             seekBar.setMax(150);
             final TextView seekBarValue = (TextView) findViewById(R.id.textView);
-            seekBarValue.setText("75");
+            seekBarValue.setText(String.valueOf(colorDistance));
 
             seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
@@ -224,28 +237,41 @@ public class ColorTrackingActivity extends AppCompatActivity {
         return c; // returns null if camera is unavailable
     }
 
-    private Camera.PictureCallback mPicture = new Camera.PictureCallback() {
+    private void captureImage(){
+        try{
+            myCamera.takePicture(null, null, myPicture);
+        }
+        catch (Exception ex){
+            captureImage();
+        }
+    }
+
+    private Camera.PictureCallback myPicture = new Camera.PictureCallback() {
 
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
-
-            if(!sizeChecked) {
-                options.inJustDecodeBounds = true;
-                BitmapFactory.decodeByteArray(data, 0, data.length, options);
-                options.inSampleSize = calculateInSampleSize(options, 160, 90);
-                options.inJustDecodeBounds = false;
-                sizeChecked = true;
-            }
-
-            Bitmap imageBitmap = BitmapFactory.decodeByteArray(data , 0, data.length, options);
-            new ColorFinder(new ColorFinder.CallbackInterface() {
-                @Override
-                public void onCompleted(String color) {
-                    captureButtonGreen.setText(color);
+            if(isTracking){
+                if(!sizeChecked) {
+                    options.inJustDecodeBounds = true;
+                    BitmapFactory.decodeByteArray(data, 0, data.length, options);
+                    options.inSampleSize = calculateInSampleSize(options, 160, 90);
+                    options.inJustDecodeBounds = false;
+                    sizeChecked = true;
                 }
-            }).findDominantColor(imageBitmap, false);
-            myCamera.startPreview();
-            myCamera.takePicture(null, null, mPicture);
+
+                Bitmap imageBitmap = BitmapFactory.decodeByteArray(data , 0, data.length, options);
+                new ColorFinder(new ColorFinder.CallbackInterface() {
+                    @Override
+                    public void onCompleted(String color) {
+                        colorLocation.setText(color);
+                    }
+                }).findDominantColor(imageBitmap, false);
+                myCamera.startPreview();
+                myCamera.takePicture(null, null, myPicture);
+            }
+            else{
+                colorLocation.setText("...");
+            }
         }
     };
 
