@@ -1,65 +1,69 @@
 package com.robodoot.dr.RoboApp;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.graphics.PointF;
+import android.hardware.Camera;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
+import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.MultiProcessor;
-import com.google.android.gms.vision.Tracker;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 import com.robodoot.dr.facetracktest.R;
+import com.robodoot.roboapp.ColorFinder;
+import com.robodoot.roboapp.ColorTrackingCamera;
 import com.robodoot.roboapp.Direction;
 import com.robodoot.roboapp.MainActivity;
 import com.robodoot.roboapp.PololuVirtualCat;
 import com.robodoot.roboapp.VirtualCat;
 
-// Psphx imports
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Vector;
+
 import edu.cmu.pocketsphinx.Assets;
 import edu.cmu.pocketsphinx.Hypothesis;
 import edu.cmu.pocketsphinx.RecognitionListener;
 import edu.cmu.pocketsphinx.SpeechRecognizer;
 import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Locale;
-import java.util.Vector;
-
-import com.google.android.gms.analytics.HitBuilders;
+// Psphx imports
 
 /**
  * Behavior mode activity. This is the fragment_camera preview activity of the app.
@@ -82,6 +86,20 @@ public class FdActivity extends Activity implements
     private CameraSource mCameraSource = null;
     //new facetracker variables end
 
+    // Start ColorTracking variables
+    private Camera myCamera = null;
+    // TODO: COLORTRACKING DISPLAY START
+    FrameLayout preview = null;
+    private ColorTrackingCamera myPreview;
+    // TODO: COLORTRACKING DISPLAY END
+    private BitmapFactory.Options options = new BitmapFactory.Options();
+    private boolean sizeChecked = false;
+    TextView colorArea = null;
+    Switch toggleColorTracking;
+    // End ColorTracking variables
+
+
+    FaceDetector detector = null;
     private int frameNumber;
 
     private boolean cameraIsChecked = false;
@@ -118,7 +136,6 @@ public class FdActivity extends Activity implements
 
     private CatEmotion kitty;
     public enum Directions {UP, DOWN, LEFT, RIGHT, CENTER}
-
     private RelativeLayout frame;
     private Bitmap bmp;
     private Directions dir;
@@ -294,8 +311,52 @@ public class FdActivity extends Activity implements
             PermissionList = PermissionListTmp.toArray(PermissionList);
             ActivityCompat.requestPermissions(this, PermissionList, PERMISSIONS_REQUEST_MULTIPLE);
         }
-
         //End New Face Tracker Code
+
+        // ColorTracking Button Stuff Below
+        colorArea = (TextView) findViewById(R.id.textView3);
+        colorArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myCamera.takePicture(null, null, mPicture);
+            }
+        });
+        // Switch should toggle between colortracking and facetracking
+        toggleColorTracking = (Switch) findViewById(R.id.switch1);
+        toggleColorTracking.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    // End facetracking
+                    if (mCameraSource != null) {
+                        mCameraSource.release();
+                    }
+                    detector = null;
+                    // Start colortracking
+                    myCamera = Camera.open(1);
+                    // TODO: COLORTRACKING DISPLAY START
+                    myPreview = new ColorTrackingCamera(getApplicationContext(), myCamera);
+                    preview = (FrameLayout) findViewById(R.id.camera_preview1);
+                    preview.addView(myPreview);
+                    // TODO: COLORTRACKING DISPLAY END
+                    myCamera.setDisplayOrientation(90);
+                    myCamera.startPreview();
+                }
+                else{
+                    //End colorTracking
+                    preview.removeAllViews();
+                    myPreview = null;
+                    if(myCamera != null){
+                        myCamera.release();
+                    }
+                    colorArea.setText("START TRACKING");
+                    // Start facetracking
+                    createCameraSource();
+                    startCameraSource();
+                }
+            }
+        });
+        // End ColorTracking Button stuff
+
     }
     //New Face Tracker Code
 
@@ -413,9 +474,6 @@ public class FdActivity extends Activity implements
         if (recognizer != null) {
             recognizer.cancel();
         }
-        /*if (mOpenCvCameraView != null)
-            mOpenCvCameraView.disableView();*/
-        //record(imageCaptureDirectory);
         frameNumber = 0;
         // for accelerometer, also need to stop listening on pause
         senSensorManager.unregisterListener(this);
@@ -443,7 +501,17 @@ public class FdActivity extends Activity implements
                 recognizer.startListening(CAT_COMMANDS, 10000);
         }
 
-        startCameraSource();
+        if(toggleColorTracking.isChecked()){
+            myCamera = Camera.open(1);
+            myPreview = new ColorTrackingCamera(getApplicationContext(), myCamera);
+            preview = (FrameLayout) findViewById(R.id.camera_preview1);
+            myCamera.setDisplayOrientation(90);
+            preview.addView(myPreview);
+            myCamera.startPreview();
+        }
+        else{
+            startCameraSource();
+        }
 
         entry.clear();
 
@@ -463,6 +531,9 @@ public class FdActivity extends Activity implements
         if (recognizer != null) {
             recognizer.cancel();
             recognizer.shutdown();
+        }
+        if(myCamera != null){
+            myCamera.release();
         }
         if (mCameraSource != null) {
             mCameraSource.release();
@@ -972,5 +1043,99 @@ public class FdActivity extends Activity implements
         }
         return false;
     }
+
+    // *********************** ColorTracking Utility Functions Below **********************
+    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width less than or equal to the requested height and width.
+            while ((height / inSampleSize) >= reqHeight || (width / inSampleSize) >= reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
+    }
+
+    private Camera.PictureCallback mPicture = new Camera.PictureCallback() {
+
+        @Override
+        public void onPictureTaken(byte[] data, Camera camera) {
+
+            if(!sizeChecked) {
+                options.inJustDecodeBounds = true;
+                BitmapFactory.decodeByteArray(data, 0, data.length, options);
+                options.inSampleSize = calculateInSampleSize(options, 160, 90);
+                options.inJustDecodeBounds = false;
+                sizeChecked = true;
+            }
+
+            Bitmap imageBitmap = BitmapFactory.decodeByteArray(data , 0, data.length, options);
+            new ColorFinder(new ColorFinder.CallbackInterface() {
+                @Override
+                public void onCompleted(String color) {
+                    colorArea.setText(color);
+                    Display display = getWindowManager().getDefaultDisplay();
+                    Point size = new Point();
+                    display.getSize(size);
+                    int width = size.x;
+                    int height = size.y;
+                    int x = width/2;
+                    int y = height/2;
+                    PointF trackPosition;
+                    switch (color){
+                        case "TL":
+                            x = -50; //width/6;
+                            y = -50; //height/6;
+                            break;
+                        case "TM":
+                            x = 0; //width/2;
+                            y = -50; //height/6;
+                            break;
+                        case "TR":
+                            x = 50; //(width/6)*5;
+                            y = -50; //height/6;
+                            break;
+                        case "ML":
+                            x = -50; //width/6;
+                            y = 0;//height/2;
+                            break;
+                        case "MM":
+                            x = 0;//width/2;
+                            y = 0;//height/2;
+                            break;
+                        case "MR":
+                            x = 50;//(width/6)*5;
+                            y = 0;//height/2;
+                            break;
+                        case "BL":
+                            x = -50;//width/6;
+                            y = 50;//(height/6)*5;
+                            break;
+                        case "BM":
+                            x = 0;//width/2;
+                            y = 50;//(height/6)*5;
+                            break;
+                        case "BR":
+                            x = 50;//(width/6)*5;
+                            y = 50;//(height/6)*5;
+                            break;
+                    }
+                    trackPosition = new PointF(x, y);
+
+                    virtualCat.lookToward(trackPosition);
+                }
+            }).findDominantColor(imageBitmap, true);
+            myCamera.startPreview();
+            myCamera.takePicture(null, null, mPicture);
+        }
+    };
+    // *********** End ColorTracking Utility Functions **************
 }
 

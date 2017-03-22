@@ -119,11 +119,13 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
     }
 
+
     public List<NavigationItem> getMenu() {
         List<NavigationItem> items = new ArrayList<NavigationItem>();
         items.add(new NavigationItem("Console", getResources().getDrawable(R.drawable.ic_menu_check)));
         items.add(new NavigationItem("Behavior Mode", getResources().getDrawable(R.drawable.ic_menu_check)));
         items.add(new NavigationItem("Face Tracking", getResources().getDrawable(R.drawable.ic_menu_check)));
+        items.add(new NavigationItem("Color Tracking", getResources().getDrawable(R.drawable.ic_menu_check)));
         items.add(new NavigationItem("About", getResources().getDrawable(R.drawable.ic_menu_check)));
         items.add(new NavigationItem("Accelerometer Data", getResources().getDrawable(R.drawable.ic_menu_check)));
         return items;
