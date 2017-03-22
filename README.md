@@ -54,9 +54,8 @@ Color Tracking and Face Tracking: located in `./RoboApp/app/src/main/java/robodo
 
 `./proj_doc` contains all non-code documents relating to our software development cycle. See README in that directory
 
-`./FaceTracker` is a seperate app, composed of started and custom code, written to track multiple faces in a video feed. Also incorporated into the main RoboApp and is able to be used. Currently, it detects whether each eye is open and uses facial markers to determine happiness.
+`./arduino_code` contains all code used for the Arduino MEGA 2560 board used to implement the ultrasonic sensor
 
-`./BatteryInformation` is another standalone app used to detect the level of battery charge on the Android device, it is already incorporated into the main RoboApp.
 
 ##Privacy Policy
 We require access to these permissions within the application:
