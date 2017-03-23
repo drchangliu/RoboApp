@@ -19,6 +19,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -35,12 +36,15 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
+import com.robodoot.dr.RoboApp.camera.CameraSourcePreview;
+import com.robodoot.dr.RoboApp.camera.GraphicOverlay;
 import com.robodoot.dr.facetracktest.R;
 import com.robodoot.roboapp.ColorFinder;
 import com.robodoot.roboapp.ColorTrackingCamera;
@@ -84,6 +88,8 @@ public class FdActivity extends Activity implements
 
     //new camera variables start
     private CameraSource mCameraSource = null;
+    private CameraSourcePreview FTPreview;
+    private GraphicOverlay FTGraphicOverlay;
     //new facetracker variables end
 
     // Start ColorTracking variables
@@ -96,6 +102,7 @@ public class FdActivity extends Activity implements
     private boolean sizeChecked = false;
     TextView colorArea = null;
     Switch toggleColorTracking;
+    ToggleButton toggleFTview;
     // End ColorTracking variables
 
 
@@ -213,6 +220,26 @@ public class FdActivity extends Activity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fd);
+        FTPreview = (CameraSourcePreview) findViewById(R.id.FTpreview);
+        FTGraphicOverlay = (GraphicOverlay) findViewById(R.id.FTFaceOverlay);
+        toggleFTview = (ToggleButton) findViewById(R.id.FTtoggle);
+        FTPreview.setVisibility(View.INVISIBLE);
+
+
+        toggleFTview.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    FTPreview.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    FTPreview.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
 
         //TODO: Analytics Code
         AnalyticsApplication application = (AnalyticsApplication) getApplication();
@@ -272,6 +299,7 @@ public class FdActivity extends Activity implements
             PermissionListTmp.add(Manifest.permission.CAMERA);
         }else if(permissionCheck == PackageManager.PERMISSION_GRANTED){
             createCameraSource();
+            startCameraSource();
         }
         // Get permissions for RoboCat
         int voicePermissions = 0;
@@ -358,114 +386,6 @@ public class FdActivity extends Activity implements
         // End ColorTracking Button stuff
 
     }
-    //New Face Tracker Code
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        int voicePermission = 0;
-        if (requestCode == PERMISSIONS_REQUEST_CAMERA) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                createCameraSource();
-            } else {
-                finish();
-            }
-        }
-
-        else if(requestCode==PERMISSIONS_REQUEST_MULTIPLE){
-            for(int i = 0; i<permissions.length; ++i){
-                if(grantResults.length>i && grantResults[i] == PackageManager.PERMISSION_GRANTED){
-                    switch(permissions[i]){
-                        case(Manifest.permission.CAMERA):
-                            createCameraSource();
-                        case(Manifest.permission.RECORD_AUDIO):
-                            voicePermission++;
-                        case(Manifest.permission.WRITE_EXTERNAL_STORAGE):
-                            voicePermission++;
-                    }
-                }
-            }
-            if(voicePermission == 2){
-                runRecognizerSetup();
-            }
-        }
-    }
-
-    private void createCameraSource() {
-
-        Context context = getApplicationContext();
-        FaceDetector detector = new FaceDetector.Builder(context)
-                .setProminentFaceOnly(true) //track only biggest, most centered face
-                .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS) //look for smile and eye positions
-                .build();
-
-        detector.setProcessor(
-                new MultiProcessor.Builder<>(new FaceTrackerFactory())
-                        .build());
-
-        //TODO: this works for a high res front camera with high framerate, adjust camera
-        //to work with any size/ framerate
-        mCameraSource = new CameraSource.Builder(context, detector)
-                .setRequestedPreviewSize(1024, 768)
-                .setFacing(CameraSource.CAMERA_FACING_FRONT)
-                .setRequestedFps(30.0f)
-                .build();
-    }
-
-    private void startCameraSource() {
-        if (mCameraSource != null) {
-            try {
-                mCameraSource.start();
-            } catch (IOException e) {
-                Log.e(TAG, "Unable to start camera source.", e);
-                mCameraSource.release();
-                mCameraSource = null;
-            } catch(SecurityException e){
-                Log.e(TAG, "No Permission granted.", e);
-            }
-        }
-    }
-    //End New Face Tracker Code
-
-    // for logging accelerometer data
-    @Override
-    public void onSensorChanged(SensorEvent sensorEvent){
-            Sensor mySensor = sensorEvent.sensor;
-            if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER){
-            float x = sensorEvent.values[0];
-            float y = sensorEvent.values[1];
-            float z = sensorEvent.values[2];
-
-            long curTime = System.currentTimeMillis();
-            if ((curTime - lastUpdate) > 100){
-                long diffTime = (curTime - lastUpdate);
-                lastUpdate = curTime;
-
-                String xs = Float.toString(sensorEvent.values[0]);
-                String ys = Float.toString(sensorEvent.values[1]);
-                String zs = Float.toString(sensorEvent.values[2]);
-
-                 ArrayList<String> accPoint = new ArrayList<String>();
-
-                accPoint.add(xs);
-                accPoint.add(ys);
-                accPoint.add(zs);
-
-                accData.add(accPoint);
-
-                last_x = x;
-                last_y = y;
-                last_z = z;
-            }
-        }
-    }
-
-    // for logging accelerometer data
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy){
-
-    }
 
     @Override
     public void onPause() {
@@ -477,6 +397,7 @@ public class FdActivity extends Activity implements
         frameNumber = 0;
         // for accelerometer, also need to stop listening on pause
         senSensorManager.unregisterListener(this);
+        FTPreview.stop();
     }
 
     @Override
@@ -539,6 +460,81 @@ public class FdActivity extends Activity implements
             mCameraSource.release();
         }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        int voicePermission = 0;
+        if (requestCode == PERMISSIONS_REQUEST_CAMERA) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                createCameraSource();
+            } else {
+                finish();
+            }
+        }
+
+        else if(requestCode==PERMISSIONS_REQUEST_MULTIPLE){
+            for(int i = 0; i<permissions.length; ++i){
+                if(grantResults.length>i && grantResults[i] == PackageManager.PERMISSION_GRANTED){
+                    switch(permissions[i]){
+                        case(Manifest.permission.CAMERA):
+                            createCameraSource();
+                        case(Manifest.permission.RECORD_AUDIO):
+                            voicePermission++;
+                        case(Manifest.permission.WRITE_EXTERNAL_STORAGE):
+                            voicePermission++;
+                    }
+                }
+            }
+            if(voicePermission == 2){
+                runRecognizerSetup();
+            }
+        }
+    }
+
+
+
+    // for logging accelerometer data
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent){
+            Sensor mySensor = sensorEvent.sensor;
+            if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER){
+            float x = sensorEvent.values[0];
+            float y = sensorEvent.values[1];
+            float z = sensorEvent.values[2];
+
+            long curTime = System.currentTimeMillis();
+            if ((curTime - lastUpdate) > 100){
+                long diffTime = (curTime - lastUpdate);
+                lastUpdate = curTime;
+
+                String xs = Float.toString(sensorEvent.values[0]);
+                String ys = Float.toString(sensorEvent.values[1]);
+                String zs = Float.toString(sensorEvent.values[2]);
+
+                 ArrayList<String> accPoint = new ArrayList<String>();
+
+                accPoint.add(xs);
+                accPoint.add(ys);
+                accPoint.add(zs);
+
+                accData.add(accPoint);
+
+                last_x = x;
+                last_y = y;
+                last_z = z;
+            }
+        }
+    }
+
+    // for logging accelerometer data
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy){
+
+    }
+
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // MISC
@@ -946,28 +942,12 @@ public class FdActivity extends Activity implements
                         .build());
                 // TODO Implement this
             }
-            else if (result.contains("face") && result.contains("tracking")){
-                mTracker.send(new HitBuilders.EventBuilder()
-                        .setCategory("Command")
-                        .setAction("Face Tracking")
-                        .build());
-                Intent intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
-                startActivity(intent);
-            }
             else if (result.contains("stay")){
                 mTracker.send(new HitBuilders.EventBuilder()
                         .setCategory("Command")
                         .setAction("Stay")
                         .build());
                 //TODO implement this
-            }
-            else if (result.contains("find") && result.contains("me")){
-                mTracker.send(new HitBuilders.EventBuilder()
-                        .setCategory("Command")
-                        .setAction("Find Me")
-                        .build());
-                Intent intent = new Intent("com.google.android.gms.samples.vision.face.facetracker.FaceTrackerActivity");
-                startActivity(intent);
             }
             else {
                 mTracker.send(new HitBuilders.EventBuilder()
@@ -984,27 +964,67 @@ public class FdActivity extends Activity implements
         }
     }
 
+    //BEGIN: Face Tracking Methods and Class
+    private void createCameraSource() {
 
+        Context context = getApplicationContext();
+        FaceDetector detector = new FaceDetector.Builder(context)
+                .setProminentFaceOnly(true) //track only biggest, most centered face
+                .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS) //look for smile and eye positions
+                .build();
+
+        detector.setProcessor(
+                new MultiProcessor.Builder<>(new FaceTrackerFactory())
+                        .build());
+
+        //TODO: this works for a high res front camera with high framerate, adjust camera
+        //to work with any size/ framerate
+        mCameraSource = new CameraSource.Builder(context, detector)
+                .setRequestedPreviewSize(1024, 768)
+                .setFacing(CameraSource.CAMERA_FACING_FRONT)
+                .setRequestedFps(30.0f)
+                .build();
+    }
+
+    private void startCameraSource() {
+        if (mCameraSource != null) {
+            try {
+                FTPreview.start(mCameraSource, FTGraphicOverlay);
+            } catch (IOException e) {
+                Log.e(TAG, "Unable to start camera source.", e);
+                mCameraSource.release();
+                mCameraSource = null;
+            } catch (SecurityException e) {
+                Log.e(TAG, "No Permission granted.", e);
+            }
+        }
+
+        //Snackbar.make(FTGraphicOverlay, R.string.permission_camera_rationale,
+        //      Snackbar.LENGTH_INDEFINITE)
+        //    .show();
+    }
 
     private class FaceTrackerFactory implements MultiProcessor.Factory<Face> {
         @Override
         public com.google.android.gms.vision.Tracker<Face> create(Face face) {
-            return new MotionFaceTracker();
+            return new MotionFaceTracker(FTGraphicOverlay);
         }
     }
 
     //TODO: Change Back to private when finished with unit testing
     public class MotionFaceTracker extends com.google.android.gms.vision.Tracker<Face> {
+        private GraphicOverlay mOverlay;
+        private FaceGraphic mFaceGraphic;
         PointF trackPosition;
 
-        MotionFaceTracker() {
-            super();
+        MotionFaceTracker(GraphicOverlay overlay) {
+            mOverlay = overlay;
+            mFaceGraphic = new FaceGraphic(overlay);
         }
 
         @Override
         public void onNewItem(int faceId, Face item) {
-            super.onNewItem(faceId, item);
-            //openMenu();
+            mFaceGraphic.setId(faceId);
         }
 
         /**
@@ -1012,7 +1032,8 @@ public class FdActivity extends Activity implements
          */
         @Override
         public void onUpdate(FaceDetector.Detections<Face> detectionResults, Face face) {
-            super.onUpdate(detectionResults, face);
+            mOverlay.add(mFaceGraphic);
+            mFaceGraphic.updateFace(face);
 
             //use happiness rating
             emotionalReaction(face.getIsSmilingProbability());
@@ -1031,6 +1052,25 @@ public class FdActivity extends Activity implements
                 virtualCat.lookToward(trackPosition);
             }
         }
+
+        /**
+         * Hide the graphic when the corresponding face was not detected.  This can happen for
+         * intermediate frames temporarily (e.g., if the face was momentarily blocked from
+         * view).
+         */
+        @Override
+        public void onMissing(FaceDetector.Detections<Face> detectionResults) {
+            mOverlay.remove(mFaceGraphic);
+        }
+
+        /**
+         * Called when the face is assumed to be gone for good. Remove the graphic annotation from
+         * the overlay.
+         */
+        @Override
+        public void onDone() {
+            mOverlay.remove(mFaceGraphic);
+        }
     }
     //TODO: Put helper back in MotionFaceTracker after unit testing
     public boolean emotionalReaction(float smileProb){
@@ -1043,6 +1083,7 @@ public class FdActivity extends Activity implements
         }
         return false;
     }
+    //END:Face Tracking Methods and Class
 
     // *********************** ColorTracking Utility Functions Below **********************
     public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
