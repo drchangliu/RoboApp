@@ -37,41 +37,36 @@
         android:layout_weight="1">
     </FrameLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="bottom">
 
         <Button
-            android:background="#FF0000"
-            android:id="@+id/button_capture_red"
-            android:text="Capture"
+            android:id="@+id/select_color"
+            android:text="Select Color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginLeft="30dp"
+            />
+
+        <TextView
+            android:id="@+id/color_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="..."
+            android:layout_centerInParent="true"
+            android:textSize="30dp"
             />
 
         <Button
-            android:background="#00FF00"
-            android:id="@+id/button_capture_green"
-            android:text="Capture"
+            android:id="@+id/start_stop"
+            android:text="Start/Stop"
             android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
             />
 
-        <Button
-            android:background="#0000FF"
-            android:id="@+id/button_capture_blue"
-            android:text="Capture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginLeft="30dp"
-            />
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

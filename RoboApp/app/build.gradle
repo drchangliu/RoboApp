@@ -24,6 +24,7 @@ android {
 }
 
 dependencies {
+    compile 'com.github.yukuku:ambilwarna:2.0.1'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/usb-serial-for-android-v010.jar')
     compile files('libs/pocketsphinx-android-5prealpha-nolib.jar')
