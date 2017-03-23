@@ -223,7 +223,6 @@ public class CatEmotion {
                             pic.setImageResource(R.drawable.face_concerned_sleepy);
                             break;
                         case CRYING:
-                            Log.w("Crying", "yeah buddy");
                             pic.setImageResource(R.drawable.face_crying_sleepy);
                             break;
                         case DISGUSTED:
@@ -279,7 +278,6 @@ public class CatEmotion {
                             pic.setImageResource(R.drawable.face_concerned_tired);
                             break;
                         case CRYING:
-                            Log.w("Crying", "yeah buddy");
                             pic.setImageResource(R.drawable.face_crying_tired);
                             break;
                         case DISGUSTED:

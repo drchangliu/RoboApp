@@ -27,12 +27,10 @@ public class PololuVirtualCat extends VirtualCat {
     }
 
     public void UpdateObjectPosition(int relX, int relY) {
-        Log.i(TAG, "UpdateObjectPosition: not implemented");
     }
 
     public void onResume(Intent intent, Activity parent) {
         p.onResume(intent, parent);
-        Log.w(TAG, "IN ONRESUME");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -111,6 +109,5 @@ public class PololuVirtualCat extends VirtualCat {
 
     public void resetHead() {
         p.home();
-        Log.i(TAG, "RESETTING HEAD");
     }
 }
