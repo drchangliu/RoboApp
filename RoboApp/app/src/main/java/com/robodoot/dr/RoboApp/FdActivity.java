@@ -79,6 +79,7 @@ import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
     //TODO: OnResume also not implemented for passive face tracking
     //TODO: OnDestroy methods needed for both.
 
+    //TODO: literally the 2 view elements in the xml are the problem
 public class FdActivity extends Activity implements
     GestureDetector.OnGestureListener, SensorEventListener, RecognitionListener {
     // FUNCTION AND VARIABLE DEFINITIONS
@@ -358,6 +359,7 @@ public class FdActivity extends Activity implements
                     if (mCameraSource != null) {
                         mCameraSource.release();
                     }
+
                     detector = null;
                     // Start colortracking
 
@@ -369,7 +371,6 @@ public class FdActivity extends Activity implements
                     preview.addView(myPreview);
                     // TODO: COLORTRACKING DISPLAY END
                     myCamera.startPreview();
-                    FTPreview.removeAllViews();
                 }
                 else{
                     //End colorTracking
@@ -494,7 +495,6 @@ public class FdActivity extends Activity implements
             }
         }
     }
-
 
 
     // for logging accelerometer data

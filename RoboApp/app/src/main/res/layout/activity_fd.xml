@@ -77,13 +77,6 @@
         android:layout_alignTop="@+id/arrow_left" />
 
     <!-- ColorTracking Camera Preview Goes Here -->
-    <FrameLayout
-        android:id="@+id/camera_preview1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_weight="1">
-
-    </FrameLayout>
     <!-- ColorTracking Switch Goes Here -->
     <Switch
         android:layout_width="wrap_content"
@@ -133,6 +126,17 @@
         android:id="@+id/FTtoggle"
         android:textOff="Rufus Vision OFF"
         android:textOn="Rufus Vision ON" />
+
+    <FrameLayout
+        android:id="@+id/camera_preview1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+    </FrameLayout>
 
 
 </RelativeLayout>
