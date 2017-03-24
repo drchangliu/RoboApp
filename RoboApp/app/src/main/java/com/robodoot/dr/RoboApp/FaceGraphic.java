@@ -28,7 +28,7 @@ import com.robodoot.dr.RoboApp.camera.GraphicOverlay;
  */
 class FaceGraphic extends GraphicOverlay.Graphic {
     private static final float FACE_POSITION_RADIUS = 10.0f;
-    private static final float ID_TEXT_SIZE = 40.0f;
+    private static final float ID_TEXT_SIZE = 20.0f;
     private static final float ID_Y_OFFSET = 50.0f;
     private static final float ID_X_OFFSET = -50.0f;
     private static final float BOX_STROKE_WIDTH = 5.0f;
@@ -100,9 +100,9 @@ class FaceGraphic extends GraphicOverlay.Graphic {
         float y = translateY(face.getPosition().y + face.getHeight() / 2);
         canvas.drawCircle(x, y, FACE_POSITION_RADIUS, mFacePositionPaint);
         canvas.drawText("id: " + mFaceId, x + ID_X_OFFSET, y + ID_Y_OFFSET, mIdPaint);
-        canvas.drawText("happiness: " + String.format("%.2f", face.getIsSmilingProbability()), x - ID_X_OFFSET, y - ID_Y_OFFSET, mIdPaint);
-        canvas.drawText("right eye: " + String.format("%.2f", face.getIsRightEyeOpenProbability()), x + ID_X_OFFSET * 2, y + ID_Y_OFFSET * 2, mIdPaint);
-        canvas.drawText("left eye: " + String.format("%.2f", face.getIsLeftEyeOpenProbability()), x - ID_X_OFFSET*2, y - ID_Y_OFFSET*2, mIdPaint);
+        canvas.drawText("happiness: " + String.format("%.2f", face.getIsSmilingProbability()), x+ID_X_OFFSET*1.75f , y - 2.75f*ID_Y_OFFSET, mIdPaint);
+        canvas.drawText("right eye: " + String.format("%.2f", face.getIsRightEyeOpenProbability()), x + ID_X_OFFSET * 1.75f, y + ID_Y_OFFSET * 2.5f, mIdPaint);
+        canvas.drawText("left eye: " + String.format("%.2f", face.getIsLeftEyeOpenProbability()), x + ID_X_OFFSET*1.75f, y - ID_Y_OFFSET*2.25f, mIdPaint);
 
         // Draws a bounding box around the face.
         float xOffset = scaleX(face.getWidth() / 2.0f);

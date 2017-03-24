@@ -94,20 +94,12 @@ public class MainActivity extends FragmentActivity implements
                         .build());
                 break;
             case 2:
-                log_console("Face Tracking");
+                log_console("Color Tracking Settings Displayed");
                 //TODO: Analytics Code
-                mTracker.send(new HitBuilders.EventBuilder()
-                        .setCategory("Action")
-                        .setAction("Open View Face Tracking Mode")
-                        .build());
-                intent = new Intent("com.robodoot.dr.RoboApp.FaceTrackerActivity");
-                break;
-            case 3:
-                log_console("Color Tracking Activity Started");
                 Intent myIntent = new Intent(this, ColorTrackingActivity.class);
                 this.startActivity(myIntent);
                 break;
-            case 4:
+            case 3:
                 log_console("Readme Displayed");
                 //TODO: Analytics Code
                 mTracker.send(new HitBuilders.EventBuilder()
@@ -116,7 +108,7 @@ public class MainActivity extends FragmentActivity implements
                         .build());
                 fragment = new ReadmeFragment();
                 break;
-            case 5:
+            case 4:
                 log_console("Accelerometer Data Displayed");
                 //TODO: Analytics Code
                 mTracker.send(new HitBuilders.EventBuilder()
