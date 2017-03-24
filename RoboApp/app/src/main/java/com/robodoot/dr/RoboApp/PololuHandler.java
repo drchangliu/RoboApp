@@ -296,8 +296,8 @@ public class PololuHandler {
 
     }
 
-    public void stand(){
-
-    }
+    /*public void stand(){
+        
+    }*/
 
 }
