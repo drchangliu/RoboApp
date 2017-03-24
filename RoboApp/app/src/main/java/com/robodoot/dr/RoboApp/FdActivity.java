@@ -19,7 +19,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -27,6 +26,7 @@ import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -360,14 +360,16 @@ public class FdActivity extends Activity implements
                     }
                     detector = null;
                     // Start colortracking
+
                     myCamera = Camera.open(1);
+                    myCamera.setDisplayOrientation(90);
                     // TODO: COLORTRACKING DISPLAY START
                     myPreview = new ColorTrackingCamera(getApplicationContext(), myCamera);
                     preview = (FrameLayout) findViewById(R.id.camera_preview1);
                     preview.addView(myPreview);
                     // TODO: COLORTRACKING DISPLAY END
-                    myCamera.setDisplayOrientation(90);
                     myCamera.startPreview();
+                    FTPreview.removeAllViews();
                 }
                 else{
                     //End colorTracking
@@ -1178,5 +1180,13 @@ public class FdActivity extends Activity implements
         }
     };
     // *********** End ColorTracking Utility Functions **************
+
+    public static void sendViewToBack(final View child) {
+        final ViewGroup parent = (ViewGroup)child.getParent();
+        if (null != parent) {
+            parent.removeView(child);
+            parent.addView(child, 0);
+        }
+    }
 }
 

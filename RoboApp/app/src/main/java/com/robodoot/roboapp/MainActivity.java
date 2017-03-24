@@ -94,6 +94,12 @@ public class MainActivity extends FragmentActivity implements
                         .build());
                 break;
             case 2:
+                log_console("Color Tracking Settings Displayed");
+                //TODO: Analytics Code
+                Intent myIntent = new Intent(this, ColorTrackingActivity.class);
+                this.startActivity(myIntent);
+                break;
+            case 3:
                 log_console("Readme Displayed");
                 //TODO: Analytics Code
                 mTracker.send(new HitBuilders.EventBuilder()
@@ -102,7 +108,7 @@ public class MainActivity extends FragmentActivity implements
                         .build());
                 fragment = new ReadmeFragment();
                 break;
-            case 3:
+            case 4:
                 log_console("Accelerometer Data Displayed");
                 //TODO: Analytics Code
                 mTracker.send(new HitBuilders.EventBuilder()
