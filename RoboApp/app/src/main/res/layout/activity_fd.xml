@@ -129,8 +129,8 @@
 
     <FrameLayout
         android:id="@+id/camera_preview1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
         android:layout_weight="1"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
