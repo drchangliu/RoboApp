@@ -52,7 +52,7 @@ public class ColorTrackingActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         myCamera = getCameraInstance();
-        myPreview = new ColorTrackingCamera(this, myCamera);
+        myPreview = new ColorTrackingCamera(this, myCamera, null);
         myCamera.setDisplayOrientation(90);
         preview.addView(myPreview);
         myCamera.startPreview();
@@ -116,7 +116,7 @@ public class ColorTrackingActivity extends AppCompatActivity {
 
         if(myCamera != null){
             // Create our Preview view and set it as the content of our activity.
-            myPreview = new ColorTrackingCamera(this, myCamera);
+            myPreview = new ColorTrackingCamera(this, myCamera, null);
             myCamera.setDisplayOrientation(90);
             preview = (FrameLayout) findViewById(R.id.camera_preview);
             preview.addView(myPreview);
