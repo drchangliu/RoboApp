@@ -1013,12 +1013,18 @@ public class FdActivity extends Activity implements
             mOverlay.add(mFaceGraphic);
             mFaceGraphic.updateFace(face);
 
+            //Log.i(TAG, "OnUpdate Face");
+
+
             //use happiness rating
             emotionalReaction(face.getIsSmilingProbability());
             //end use happiness rating
 
-            float x = -1 * face.getPosition().x + face.getWidth() / 2;
-            float y = face.getPosition().y + face.getHeight() / 2 - 512;
+            float x = -1 * face.getPosition().x + face.getWidth() / 2.0f;
+            float y = face.getPosition().y + face.getHeight() / 2.0f - (mCameraSource.getPreviewSize().getHeight())/2.0f;
+            Log.i(TAG, "FaceLocationX: " + Float.toString(x) + ", FACELocationY: " + Float.toString(y));
+            Log.i(TAG, "FaceWidthX: " + Float.toString(face.getHeight()/50.0f) + ", FaceWidthY: " + Float.toString(face.getWidth()/50.0f));
+
             //middle not quite 512, works for now
             //TODO: 512 is set for the preview size above, take the hardcoded number out
 
@@ -1026,7 +1032,8 @@ public class FdActivity extends Activity implements
 
             //if distance from center is < half a face size
             // done so that "good enough" scales for faces at multiple distances
-            if (Math.sqrt(Math.pow(x, 2.0) + Math.pow(y, 2.0)) > Math.pow(face.getWidth() / 2, 2) + Math.pow(face.getHeight() / 2, 2)) {
+            if (Math.sqrt(Math.pow(x, 2.0) + Math.pow(y, 2.0)) > Math.pow(face.getWidth() / 50.0f, 2) + Math.pow(face.getHeight() / 50.0f, 2)) {
+                //Log.i(TAG, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%Moving Head%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
                 virtualCat.lookToward(trackPosition);
             }
         }
