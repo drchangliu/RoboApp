@@ -44,7 +44,7 @@ The majority of the code base takes place in the FdActivity.java file, located a
 
 Additional help for parts of the application can be found in the `./doc` and `./proj_doc` directories.
 
-##Organization of Repo
+## Organization of Repo
 `./doc` contains legacy documentation that was used when OpenCV was still part of the application. It also includes documentation for using the PocketSphinx voice recognizer to do active listening.
 
 `./RoboApp` is the actual Roboapp and contains all code. **This is the application that is meant to be run on the phone and uploaded to the google store.**.
