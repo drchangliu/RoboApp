@@ -842,14 +842,6 @@ public class FdActivity extends Activity implements
                         .build());
                 kitty.frownedAt();
             }
-            else if (result.contains("cry")){
-                //Make the cat cry
-                mTracker.send(new HitBuilders.EventBuilder()
-                        .setCategory("Command")
-                        .setAction("Cry")
-                        .build());
-                kitty.cryingAt();
-            }
             else if (result.contains("stupid cat")){
                 //Make cat disgusted
                 mTracker.send(new HitBuilders.EventBuilder()
