@@ -874,6 +874,13 @@ public class FdActivity extends Activity implements
                         .build());
                 virtualCat.stepForward();
             }
+            else if (result.contains("stand")){
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Stand")
+                        .build());
+                virtualCat.stand();
+            }
             else if (result.contains("right")) {
                 //Make the cat head move right
                 mTracker.send(new HitBuilders.EventBuilder()

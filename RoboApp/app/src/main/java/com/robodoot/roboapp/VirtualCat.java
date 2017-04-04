@@ -44,7 +44,7 @@ public abstract class VirtualCat {
 
     public abstract void stepRight();
 
-    //public abstract void stand();
+    public abstract void stand();
 
     public abstract void turnHeadLeft();
 

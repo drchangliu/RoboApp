@@ -500,10 +500,8 @@ public class CP2102SerialDevice extends UsbSerialDevice
         if(setControlCommand(CP210x_SET_LINE_CTL, CP210x_LINE_CTL_DEFAULT,null) < 0)
             return false;
         setFlowControl(UsbSerialInterface.FLOW_CONTROL_OFF);
-        if(setControlCommand(CP210x_SET_MHS, CP210x_MHS_DEFAULT, null) < 0)
-            return false;
+        return setControlCommand(CP210x_SET_MHS, CP210x_MHS_DEFAULT, null) >= 0;
 
-        return true;
     }
 
     private void createFlowControlThread()

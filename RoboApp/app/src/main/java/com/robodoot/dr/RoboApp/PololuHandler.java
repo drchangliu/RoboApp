@@ -96,7 +96,7 @@ public class PololuHandler {
         if(isConnected) return;
         isConnected = false;
         if (action.equals("android.hardware.usb.action.USB_DEVICE_ATTACHED")) {
-            UsbDevice device = (UsbDevice) intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+            UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
             if (UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(action)) {
                 UsbManager usbManager = (UsbManager) parent.getSystemService(Context.USB_SERVICE);
                 maestro.setDevice(usbManager, device);
@@ -166,31 +166,31 @@ public class PololuHandler {
     private class StepForwardTask extends AsyncTask<Void, Void, Void> {
         protected Void doInBackground(Void... v) {
             isWalking = true;
-            int[] a0 = {170, 12, 31, 3, 1, 100, 42, 104, 50, 104, 62};
+            int[] a0 = {170, 12, 31, 3, 1, 104, 42, 104, 50, 104, 62};
             maestro.explicitSend(getBytes(a0));
-            int[] a1 = {170, 12, 31, 3, 1, 100, 42, 104, 50, 104, 62};
+            int[] a1 = {170, 12, 31, 3, 16, 104, 44, 104, 47, 104, 32};
             maestro.explicitSend(getBytes(a1));
-            int[] a2 = {170, 12, 31, 3, 1, 100, 42, 104, 50, 104, 62};
+            int[] a2 = {170, 12, 31, 3, 1, 104, 42, 104, 46, 104, 62};
             maestro.explicitSend(getBytes(a2));
-            int[] a3 = {170, 12, 31, 3, 1, 100, 42, 104, 50, 104, 62};
+            int[] a3 = {170, 12, 31, 3, 16, 104, 44, 104, 48, 104, 32};
             maestro.explicitSend(getBytes(a3));
-            int[] a4 = {170, 12, 31, 3, 1, 100, 42, 104, 50, 104, 62};
+            int[] a4 = {170, 12, 31, 3, 1, 104, 42, 104, 41, 104, 62};
             maestro.explicitSend(getBytes(a4));
-            int[] a5 = {170, 12, 31, 3, 1, 100, 42, 104, 50, 104, 62};
+            int[] a5 = {170, 12, 31, 3, 16, 104, 44, 104, 50, 104, 32};
             maestro.explicitSend(getBytes(a5));
-            int[] a6 = {170, 12, 31, 3, 1, 100, 42, 104, 50, 104, 62};
+            int[] a6 = {170, 12, 31, 3, 1, 104, 42, 104, 32, 104, 62};
             maestro.explicitSend(getBytes(a6));
-            int[] a7 = {170, 12, 31, 3, 1, 100, 42, 104, 50, 104, 62};
+            int[] a7 = {170, 12, 31, 3, 16, 104, 44, 104, 53, 104, 32};
             maestro.explicitSend(getBytes(a7));
-            int[] a8 = {170, 12, 31, 3, 1, 100, 42, 104, 50, 104, 62};
+            int[] a8 = {170, 12, 31, 3, 1, 104, 42, 104, 24, 104, 62};
             maestro.explicitSend(getBytes(a8));
-            int[] a9 = {170, 12, 31, 3, 1, 100, 42, 104, 50, 104, 62};
+            int[] a9 = {170, 12, 31, 3, 16, 104, 44, 104, 57, 104, 32};
             maestro.explicitSend(getBytes(a9));
-            int[] a10 = {170, 12, 31, 3, 1, 100, 42, 104, 50, 104, 62};
+            int[] a10 = {170, 12, 31, 3, 1, 104, 42, 104, 19, 104, 62};
             maestro.explicitSend(getBytes(a10));
-            int[] a11 = {170, 12, 31, 3, 1, 100, 42, 104, 50, 104, 62};
+            int[] a11 = {170, 12, 31, 3, 16, 104, 44, 104, 59, 104, 32};
             maestro.explicitSend(getBytes(a11));
-            int[] a12 = {170, 12, 31, 3, 1, 100, 42, 104, 50, 104, 62};
+            int[] a12 = {170, 12, 31, 3, 1, 104, 42, 104, 19, 104, 62};
             maestro.explicitSend(getBytes(a12));
             int[] a13 = {170, 12, 31, 3, 16, 104, 44, 104, 59, 104, 32};
             maestro.explicitSend(getBytes(a13));
@@ -285,6 +285,15 @@ public class PololuHandler {
         }
     }
 
+    private class standTask extends AsyncTask<Void, Void, Void> {
+        protected Void doInBackground(Void... v) {
+            int[] a55 = {170, 12, 31, 3, 1, 104, 42, 104, 50, 104, 62};
+            maestro.explicitSend(getBytes(a55));
+            int[] a56 = {170, 12, 31, 3, 16, 104, 44, 104, 47, 104, 32};
+            maestro.explicitSend(getBytes(a56));
+            return null;
+        }
+    }
 
     public void stepForward() {
         if (isWalking) {
@@ -296,8 +305,9 @@ public class PololuHandler {
 
     }
 
-    /*public void stand(){
-        
-    }*/
+    public void stand(){
+        Log.i("TAG", "stand");
+        new standTask().execute();
+    }
 
 }

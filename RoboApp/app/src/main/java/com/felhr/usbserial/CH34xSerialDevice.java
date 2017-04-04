@@ -513,13 +513,9 @@ public class CH34xSerialDevice extends UsbSerialDevice
             return false;
         }
 
-        if((buffer[0] & 0x01) == 0x00) //CTS ON
-        {
-            return true;
-        }else // CTS OFF
-        {
-            return false;
-        }
+        //CTS ON
+// CTS OFF
+        return (buffer[0] & 0x01) == 0x00;
     }
 
     private boolean checkDSR()
@@ -533,13 +529,9 @@ public class CH34xSerialDevice extends UsbSerialDevice
             return false;
         }
 
-        if((buffer[0] & 0x02) == 0x00) //DSR ON
-        {
-            return true;
-        }else // DSR OFF
-        {
-            return false;
-        }
+        //DSR ON
+// DSR OFF
+        return (buffer[0] & 0x02) == 0x00;
     }
 
     private int writeHandshakeByte()
