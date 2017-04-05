@@ -26,14 +26,12 @@ import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -79,6 +77,7 @@ import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
     //TODO: OnResume also not implemented for passive face tracking
     //TODO: OnDestroy methods needed for both.
 
+    //TODO: literally the 2 view elements in the xml are the problem
 public class FdActivity extends Activity implements
     GestureDetector.OnGestureListener, SensorEventListener, RecognitionListener {
     // FUNCTION AND VARIABLE DEFINITIONS
@@ -100,9 +99,9 @@ public class FdActivity extends Activity implements
     // TODO: COLORTRACKING DISPLAY END
     private BitmapFactory.Options options = new BitmapFactory.Options();
     private boolean sizeChecked = false;
-    TextView colorArea = null;
-    Switch toggleColorTracking;
+    ToggleButton toggleColorTracking;
     ToggleButton toggleFTview;
+    Camera.PreviewCallback previewCallback;
     // End ColorTracking variables
 
 
@@ -165,9 +164,6 @@ public class FdActivity extends Activity implements
     private double xCenter = -1;
     double yCenter = -1;
 
-    private boolean trackingGreen = false;
-    private boolean trackingRed = false;
-
     //PololuHandler pololu;
     VirtualCat virtualCat;
     //PololuVirtualCat virtualCat;
@@ -224,18 +220,31 @@ public class FdActivity extends Activity implements
         FTGraphicOverlay = (GraphicOverlay) findViewById(R.id.FTFaceOverlay);
         toggleFTview = (ToggleButton) findViewById(R.id.FTtoggle);
         FTPreview.setVisibility(View.INVISIBLE);
+        preview = (FrameLayout) findViewById(R.id.camera_preview1);
+        preview.setVisibility(View.INVISIBLE);
 
+
+        previewCallback = new Camera.PreviewCallback() {
+            @Override
+            public void onPreviewFrame(byte[] data, Camera camera) {
+                // camera is "loaded" and first preview is sent to the screen
+                // do whatever you want to do
+                myCamera.takePicture(null,null,mPicture);
+            }
+        };
 
         toggleFTview.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked)
                 {
-                    FTPreview.setVisibility(View.VISIBLE);
+                    if(toggleColorTracking.isChecked()) preview.setVisibility(View.VISIBLE);
+                    else FTPreview.setVisibility(View.VISIBLE);
                 }
                 else
                 {
                     FTPreview.setVisibility(View.INVISIBLE);
+                    preview.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -342,15 +351,8 @@ public class FdActivity extends Activity implements
         //End New Face Tracker Code
 
         // ColorTracking Button Stuff Below
-        colorArea = (TextView) findViewById(R.id.textView3);
-        colorArea.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myCamera.takePicture(null, null, mPicture);
-            }
-        });
         // Switch should toggle between colortracking and facetracking
-        toggleColorTracking = (Switch) findViewById(R.id.switch1);
+        toggleColorTracking = (ToggleButton) findViewById(R.id.switch1);
         toggleColorTracking.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
@@ -359,17 +361,14 @@ public class FdActivity extends Activity implements
                         mCameraSource.release();
                     }
                     detector = null;
+                    FTPreview.setVisibility(View.INVISIBLE);
                     // Start colortracking
-
+                    if(toggleFTview.isChecked()) preview.setVisibility(View.VISIBLE);
                     myCamera = Camera.open(1);
                     myCamera.setDisplayOrientation(90);
-                    // TODO: COLORTRACKING DISPLAY START
-                    myPreview = new ColorTrackingCamera(getApplicationContext(), myCamera);
-                    preview = (FrameLayout) findViewById(R.id.camera_preview1);
+                    myPreview = new ColorTrackingCamera(getApplicationContext(), myCamera, previewCallback);
                     preview.addView(myPreview);
-                    // TODO: COLORTRACKING DISPLAY END
                     myCamera.startPreview();
-                    FTPreview.removeAllViews();
                 }
                 else{
                     //End colorTracking
@@ -378,8 +377,9 @@ public class FdActivity extends Activity implements
                     if(myCamera != null){
                         myCamera.release();
                     }
-                    colorArea.setText("START TRACKING");
+                    preview.setVisibility(View.INVISIBLE);
                     // Start facetracking
+                    if(toggleFTview.isChecked()) FTPreview.setVisibility(View.VISIBLE);
                     createCameraSource();
                     startCameraSource();
                 }
@@ -426,7 +426,7 @@ public class FdActivity extends Activity implements
 
         if(toggleColorTracking.isChecked()){
             myCamera = Camera.open(1);
-            myPreview = new ColorTrackingCamera(getApplicationContext(), myCamera);
+            myPreview = new ColorTrackingCamera(getApplicationContext(), myCamera, previewCallback);
             preview = (FrameLayout) findViewById(R.id.camera_preview1);
             myCamera.setDisplayOrientation(90);
             preview.addView(myPreview);
@@ -494,7 +494,6 @@ public class FdActivity extends Activity implements
             }
         }
     }
-
 
 
     // for logging accelerometer data
@@ -843,14 +842,6 @@ public class FdActivity extends Activity implements
                         .build());
                 kitty.frownedAt();
             }
-            else if (result.contains("cry")){
-                //Make the cat cry
-                mTracker.send(new HitBuilders.EventBuilder()
-                        .setCategory("Command")
-                        .setAction("Cry")
-                        .build());
-                kitty.cryingAt();
-            }
             else if (result.contains("stupid cat")){
                 //Make cat disgusted
                 mTracker.send(new HitBuilders.EventBuilder()
@@ -888,29 +879,6 @@ public class FdActivity extends Activity implements
                         .setAction("Right")
                         .build());
                 virtualCat.turnHeadRight();
-            }
-            else if (result.contains("green")) {
-                mTracker.send(new HitBuilders.EventBuilder()
-                        .setCategory("Command")
-                        .setAction("Green")
-                        .build());
-                trackingGreen = true;
-                trackingRed = false;
-            }
-            else if (result.contains("red")) {
-                mTracker.send(new HitBuilders.EventBuilder()
-                        .setCategory("Command")
-                        .setAction("Red")
-                        .build());
-                trackingGreen = false;
-                trackingRed = true;
-            }
-            else if (result.contains("blue")) {
-                mTracker.send(new HitBuilders.EventBuilder()
-                        .setCategory("Command")
-                        .setAction("Blue")
-                        .build());
-                trackingGreen = trackingRed = false;
             }
             else if (result.contains("up")) {
                 mTracker.send(new HitBuilders.EventBuilder()
@@ -1044,12 +1012,18 @@ public class FdActivity extends Activity implements
             mOverlay.add(mFaceGraphic);
             mFaceGraphic.updateFace(face);
 
+            //Log.i(TAG, "OnUpdate Face");
+
+
             //use happiness rating
             emotionalReaction(face.getIsSmilingProbability());
             //end use happiness rating
 
-            float x = -1 * face.getPosition().x + face.getWidth() / 2;
-            float y = face.getPosition().y + face.getHeight() / 2 - 512;
+            float x = -1 * face.getPosition().x + face.getWidth() / 2.0f;
+            float y = face.getPosition().y + face.getHeight() / 2.0f - (mCameraSource.getPreviewSize().getHeight())/2.0f;
+            Log.i(TAG, "FaceLocationX: " + Float.toString(x) + ", FACELocationY: " + Float.toString(y));
+            Log.i(TAG, "FaceWidthX: " + Float.toString(face.getHeight()/50.0f) + ", FaceWidthY: " + Float.toString(face.getWidth()/50.0f));
+
             //middle not quite 512, works for now
             //TODO: 512 is set for the preview size above, take the hardcoded number out
 
@@ -1057,7 +1031,8 @@ public class FdActivity extends Activity implements
 
             //if distance from center is < half a face size
             // done so that "good enough" scales for faces at multiple distances
-            if (Math.sqrt(Math.pow(x, 2.0) + Math.pow(y, 2.0)) > Math.pow(face.getWidth() / 2, 2) + Math.pow(face.getHeight() / 2, 2)) {
+            if (Math.sqrt(Math.pow(x, 2.0) + Math.pow(y, 2.0)) > Math.pow(face.getWidth() / 50.0f, 2) + Math.pow(face.getHeight() / 50.0f, 2)) {
+                //Log.i(TAG, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%Moving Head%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
                 virtualCat.lookToward(trackPosition);
             }
         }
@@ -1130,7 +1105,6 @@ public class FdActivity extends Activity implements
             new ColorFinder(new ColorFinder.CallbackInterface() {
                 @Override
                 public void onCompleted(String color) {
-                    colorArea.setText(color);
                     Display display = getWindowManager().getDefaultDisplay();
                     Point size = new Point();
                     display.getSize(size);
@@ -1187,13 +1161,5 @@ public class FdActivity extends Activity implements
         }
     };
     // *********** End ColorTracking Utility Functions **************
-
-    public static void sendViewToBack(final View child) {
-        final ViewGroup parent = (ViewGroup)child.getParent();
-        if (null != parent) {
-            parent.removeView(child);
-            parent.addView(child, 0);
-        }
-    }
 }
 

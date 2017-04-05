@@ -73,8 +73,8 @@ public class ColorFinder {
                         continue;
 
                     double[] labPic = new double[3];
-                    ColorUtils.colorToLAB(pixel, labPic);
 
+                    ColorUtils.colorToLAB(pixel, labPic);
                     double distance = ColorUtils.distanceEuclidean(labComp, labPic);
 
                     if(distance <= testDistance){

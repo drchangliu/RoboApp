@@ -12,12 +12,13 @@ import java.io.IOException;
 public class ColorTrackingCamera extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder mHolder;
     private Camera mCamera;
+    private Camera.PreviewCallback previewCallback;
     public boolean surfaceReady = false;
 
-    public ColorTrackingCamera(Context context, Camera camera) {
+    public ColorTrackingCamera(Context context, Camera camera, Camera.PreviewCallback prevCallback) {
         super(context);
         mCamera = camera;
-
+        previewCallback = prevCallback;
         // Install a SurfaceHolder.Callback so we get notified when the
         // underlying surface is created and destroyed.
         mHolder = getHolder();
@@ -30,6 +31,7 @@ public class ColorTrackingCamera extends SurfaceView implements SurfaceHolder.Ca
         // The Surface has been created, now tell the camera where to draw the preview.
         try {
             mCamera.setPreviewDisplay(holder);
+            mCamera.setOneShotPreviewCallback(previewCallback);
             mCamera.startPreview();
             surfaceReady = true;
         } catch (IOException e) {
@@ -63,6 +65,7 @@ public class ColorTrackingCamera extends SurfaceView implements SurfaceHolder.Ca
         // start preview with new settings
         try {
             mCamera.setPreviewDisplay(mHolder);
+            mCamera.setOneShotPreviewCallback(previewCallback);
             mCamera.startPreview();
 
         } catch (Exception e){
