@@ -68,6 +68,12 @@ public class MockVirtualCat extends VirtualCat {
     public void stepRight() {
         Log.i(TAG, "mock cat stepping right.");
     }
+
+    @Override
+    public void stand() {
+        // TODO: This had to be added for my app to compile?
+    }
+
     @Override
     public void turnHeadDown() {
         Log.i(TAG, "mock cat turning head down.");

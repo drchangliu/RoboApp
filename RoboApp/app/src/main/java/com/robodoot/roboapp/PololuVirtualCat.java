@@ -3,7 +3,6 @@ package com.robodoot.roboapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PointF;
-import android.util.Log;
 
 import com.robodoot.dr.RoboApp.PololuHandler;
 
@@ -54,6 +53,11 @@ public class PololuVirtualCat extends VirtualCat {
     @Override
     public void stepRight() {
         //p.stepRight();
+    }
+
+    @Override
+    public void stand() {
+        // TODO: This had to be added for my app to compile?
     }
 
     @Override

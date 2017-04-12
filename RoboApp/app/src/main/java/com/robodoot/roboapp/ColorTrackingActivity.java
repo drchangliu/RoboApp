@@ -2,6 +2,7 @@ package com.robodoot.roboapp;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -37,6 +38,7 @@ public class ColorTrackingActivity extends AppCompatActivity {
     TextView colorLocation;
     FrameLayout preview = null;
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
+    SharedPreferences settings;
 
     @Override
     protected void onPause() {
@@ -99,6 +101,12 @@ public class ColorTrackingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_tracking);
 
+        // Get settings from previous session
+        settings = getPreferences(MODE_PRIVATE);
+        boolean silent = settings.getBoolean("silentMode", false);
+        ColorToTrack = settings.getInt("ColorToTrack", Color.RED);
+        colorDistance = settings.getInt("colorDistance", 70);
+
         int numCams = Camera.getNumberOfCameras();
 
         // Here, thisActivity is the current activity
@@ -127,6 +135,11 @@ public class ColorTrackingActivity extends AppCompatActivity {
                 public void onOk(AmbilWarnaDialog dialog, int color) {
                     // color is the color selected by the user.
                     ColorToTrack = color;
+                    // Save color picked to settings
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putInt("ColorToTrack", ColorToTrack);
+                    // Commit the edits!
+                    editor.commit();
                 }
 
                 @Override
@@ -177,6 +190,11 @@ public class ColorTrackingActivity extends AppCompatActivity {
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                     seekBarValue.setText(String.valueOf(progress));
                     colorDistance = progress;
+                    // Save distance picked to settings
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putInt("colorDistance", colorDistance);
+                    // Commit the edits!
+                    editor.commit();
                 }
 
                 @Override
