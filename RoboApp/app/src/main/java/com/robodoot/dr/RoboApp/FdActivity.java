@@ -917,7 +917,28 @@ public class FdActivity extends Activity implements
                         .setCategory("Command")
                         .setAction("Color Track")
                         .build());
-                // TODO Implement this
+                toggleColorTracking.setChecked(true);
+            }
+            else if (result.contains("face") && result.contains("tracking")){
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Face Track")
+                        .build());
+                toggleColorTracking.setChecked(false);
+            }
+            else if (result.contains("activate") && result.contains("rufus") && result.contains("vision")){
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Activate rufus vision")
+                        .build());
+                toggleFTview.setChecked(true);
+            }
+            else if (result.contains("deactivate") && result.contains("rufus") && result.contains("vision")){
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Activate rufus vision")
+                        .build());
+                toggleFTview.setChecked(true);
             }
             else if (result.contains("stay")){
                 mTracker.send(new HitBuilders.EventBuilder()

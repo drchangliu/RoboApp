@@ -37,8 +37,12 @@ grammar commands;
           console   |
           open  |
           close |
-          about |
           find  |
+          help  |
+          activate  |
+          deactivate   |
+          rufus     |
+          vision    |
           cry   ;
 
 public <digits> = <digit>+;
