@@ -167,7 +167,6 @@ public class CatEmotion {
                             pic.setImageResource(R.drawable.face_concerned);
                             break;
                         case CRYING:
-                            Log.w("Crying", "yeah buddy");
                             pic.setImageResource(R.drawable.face_crying);
                             break;
                         case DISGUSTED:
