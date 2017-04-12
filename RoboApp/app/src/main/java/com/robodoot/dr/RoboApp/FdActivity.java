@@ -936,9 +936,9 @@ public class FdActivity extends Activity implements
             else if (result.contains("deactivate") && result.contains("rufus") && result.contains("vision")){
                 mTracker.send(new HitBuilders.EventBuilder()
                         .setCategory("Command")
-                        .setAction("Activate rufus vision")
+                        .setAction("Deactivate rufus vision")
                         .build());
-                toggleFTview.setChecked(true);
+                toggleFTview.setChecked(false);
             }
             else if (result.contains("stay")){
                 mTracker.send(new HitBuilders.EventBuilder()
