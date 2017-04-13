@@ -41,6 +41,7 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
+import com.google.android.gms.vision.face.Landmark;
 import com.robodoot.dr.RoboApp.camera.CameraSourcePreview;
 import com.robodoot.dr.RoboApp.camera.GraphicOverlay;
 import com.robodoot.dr.facetracktest.R;
@@ -64,6 +65,9 @@ import edu.cmu.pocketsphinx.Hypothesis;
 import edu.cmu.pocketsphinx.RecognitionListener;
 import edu.cmu.pocketsphinx.SpeechRecognizer;
 import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
+
+import static com.google.android.gms.vision.face.Landmark.LEFT_EYE;
+import static com.google.android.gms.vision.face.Landmark.RIGHT_EYE;
 
 // Psphx imports
 
@@ -91,6 +95,9 @@ public class FdActivity extends Activity implements
     private GraphicOverlay FTGraphicOverlay;
     //new facetracker variables end
 
+    //distance approximation variables start
+    private double AverageHumanEyeSeperation = 6.3; //centimeters
+    //distance approximation variables end
     // Start ColorTracking variables
     private Camera myCamera = null;
     // TODO: COLORTRACKING DISPLAY START
@@ -1002,6 +1009,8 @@ public class FdActivity extends Activity implements
         //    .show();
     }
 
+
+
     private class FaceTrackerFactory implements MultiProcessor.Factory<Face> {
         @Override
         public com.google.android.gms.vision.Tracker<Face> create(Face face) {
@@ -1014,10 +1023,25 @@ public class FdActivity extends Activity implements
         private GraphicOverlay mOverlay;
         private FaceGraphic mFaceGraphic;
         PointF trackPosition;
+        List<Landmark> facialFeatures;
+        PointF rightEye;
+        PointF leftEye;
+        double eyeSeperationPixels;
+        double pixelsPerCentimeter;
+        PointF centerOfImage;
+
+        double xOffsetFace;
+        double yOffsetFace;
+        double DistanceToFace;
+
+        double thetax;
+        double thetay;
 
         MotionFaceTracker(GraphicOverlay overlay) {
             mOverlay = overlay;
             mFaceGraphic = new FaceGraphic(overlay);
+            centerOfImage=new PointF(mCameraSource.getPreviewSize().getHeight()/2.0f, mCameraSource.getPreviewSize().getWidth()/2.0f);
+
         }
 
         @Override
@@ -1033,29 +1057,28 @@ public class FdActivity extends Activity implements
             mOverlay.add(mFaceGraphic);
             mFaceGraphic.updateFace(face);
 
-            //Log.i(TAG, "OnUpdate Face");
-
-
-            //use happiness rating
-            emotionalReaction(face.getIsSmilingProbability());
-            //end use happiness rating
-
-            float x = -1 * face.getPosition().x + face.getWidth() / 2.0f;
-            float y = face.getPosition().y + face.getHeight() / 2.0f - (mCameraSource.getPreviewSize().getHeight())/2.0f;
-            Log.i(TAG, "FaceLocationX: " + Float.toString(x) + ", FACELocationY: " + Float.toString(y));
-            Log.i(TAG, "FaceWidthX: " + Float.toString(face.getHeight()/50.0f) + ", FaceWidthY: " + Float.toString(face.getWidth()/50.0f));
-
-            //middle not quite 512, works for now
-            //TODO: 512 is set for the preview size above, take the hardcoded number out
-
-            trackPosition = new PointF(x, y);
+            eyeSeperationPixels=getEyeSeperation(face);
+            DistanceToFace = approximateDistanceViaPixels(eyeSeperationPixels);
+            float x = face.getPosition().x + face.getWidth() / 2.0f;
+            float y = face.getPosition().y + face.getHeight() / 2.0f;
+            xOffsetFace= ((centerOfImage.x-x)/eyeSeperationPixels)*AverageHumanEyeSeperation;
+            yOffsetFace = ((centerOfImage.y-y)/eyeSeperationPixels)*AverageHumanEyeSeperation;
+            thetax=Math.asin(xOffsetFace/(float)DistanceToFace);
+            thetay=Math.asin(yOffsetFace/(float) DistanceToFace);
+            thetax=convertRadsToServoYaw(thetax);
+            thetay=convertRadsToServoPitch(thetay);
+            trackPosition = new PointF((float)thetax, (float)thetay);
+            //Log.i(TAG, "CenterX: " + Double.toString(centerOfImage.x) + ", CenterY: " + Double.toString(centerOfImage.y));
 
             //if distance from center is < half a face size
             // done so that "good enough" scales for faces at multiple distances
-            if (Math.sqrt(Math.pow(x, 2.0) + Math.pow(y, 2.0)) > Math.pow(face.getWidth() / 50.0f, 2) + Math.pow(face.getHeight() / 50.0f, 2)) {
-                //Log.i(TAG, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%Moving Head%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            if(thetax>1.5||thetay>1.5) {
                 virtualCat.lookToward(trackPosition);
             }
+
+            //use happiness rating
+            //emotionalReaction(face.getIsSmilingProbability());
+            //end use happiness rating
         }
 
         /**
@@ -1076,17 +1099,37 @@ public class FdActivity extends Activity implements
         public void onDone() {
             mOverlay.remove(mFaceGraphic);
         }
-    }
-    //TODO: Put helper back in MotionFaceTracker after unit testing
-    public boolean emotionalReaction(float smileProb){
-        if (smileProb>0.5f){
-            kitty.detectedSmile();
-            return true;
-        }else if (smileProb<0.5f){
-            kitty.detectedFrown();
-            return false;
+
+        private double getEyeSeperation(Face face){
+            facialFeatures = face.getLandmarks();
+            for(int i = 0; i<facialFeatures.size(); ++i){
+                if (facialFeatures.get(i).getType()==RIGHT_EYE){
+                    rightEye=facialFeatures.get(i).getPosition();
+                }
+                if (facialFeatures.get(i).getType()==LEFT_EYE){
+                    leftEye=facialFeatures.get(i).getPosition();
+                }
+            }
+
+            return Math.sqrt(Math.pow(rightEye.x-leftEye.x, 2.0) + Math.pow(rightEye.y-leftEye.y, 2.0));
         }
-        return false;
+
+        private double approximateDistanceViaPixels(double eyeWidth){
+            return -0.4028*eyeWidth+89.705;
+        }
+
+        private double computeDis(PointF p1, PointF p2){
+            return Math.sqrt(Math.pow(p1.x-p2.x, 2.0) + Math.pow(p1.y-p2.y, 2.0));
+        }
+
+        private double convertRadsToServoYaw(double rads){
+            return Math.toDegrees(rads)*17.5;
+        }
+
+        private double convertRadsToServoPitch(double rads){
+            return Math.toDegrees(rads)*16.667;
+        }
+
     }
     //END:Face Tracking Methods and Class
 
