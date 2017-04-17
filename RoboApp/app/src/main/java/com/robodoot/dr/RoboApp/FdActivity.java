@@ -207,13 +207,7 @@ public class FdActivity extends Activity implements
     //TODO: Analytics Code
     private com.google.android.gms.analytics.Tracker mTracker;
 
-    //TODO: Remove
-    ToneGenerator toneG;
-
     public FdActivity() {
-        //TODO: Remove
-        toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
-
         mDetectorName = new String[2];
         mDetectorName[JAVA_DETECTOR] = "Java";
         ArrayList<ArrayList<Integer>> similarID = new ArrayList<ArrayList<Integer>>();
@@ -1202,7 +1196,7 @@ public class FdActivity extends Activity implements
             if(!sizeChecked) {
                 options.inJustDecodeBounds = true;
                 BitmapFactory.decodeByteArray(data, 0, data.length, options);
-                options.inSampleSize = calculateInSampleSize(options, 160, 90);
+                options.inSampleSize = calculateInSampleSize(options, 40, 30);
                 options.inJustDecodeBounds = false;
                 sizeChecked = true;
             }
