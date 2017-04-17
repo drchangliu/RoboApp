@@ -424,6 +424,15 @@ public class FdActivity extends Activity implements
         mTracker.setScreenName("Image~" + "Behavior Mode");
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
+
+        // Restart recognizer
+        if(recognizer != null){
+            if (recognizer.getSearchName().equals(KWS_SEARCH))
+                recognizer.startListening(KWS_SEARCH);
+            else
+                recognizer.startListening(CAT_COMMANDS, 10000);
+        }
+
         virtualCat.onResume(getIntent(), this);
 
         super.onResume();
@@ -431,16 +440,6 @@ public class FdActivity extends Activity implements
             initialized = true;
             virtualCat.resetHead();
         }
-
-
-
-        // Restart recognizer
-        /*if(recognizer != null){
-            if (recognizer.getSearchName().equals(KWS_SEARCH))
-                recognizer.startListening(KWS_SEARCH);
-            else
-                recognizer.startListening(CAT_COMMANDS, 10000);
-        }*/
 
         //TODO: remove this
         //toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200);
