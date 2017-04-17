@@ -24,6 +24,7 @@ import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -39,6 +40,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.common.api.BooleanResult;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.face.Face;
@@ -986,7 +988,7 @@ public class FdActivity extends Activity implements
 
         Context context = getApplicationContext();
         FaceDetector detector = new FaceDetector.Builder(context)
-                .setProminentFaceOnly(true) //track only biggest, most centered face
+                .setProminentFaceOnly(false) //track only biggest, most centered face
                 .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS) //look for smile and eye positions
                 .build();
 
@@ -1049,6 +1051,10 @@ public class FdActivity extends Activity implements
         double thetax;
         double thetay;
 
+        SparseArray<Face> allDetectedFaces;
+        Boolean happiestFace = false;
+        Face tmpFace;
+
         MotionFaceTracker(GraphicOverlay overlay) {
             mOverlay = overlay;
             mFaceGraphic = new FaceGraphic(overlay);
@@ -1068,26 +1074,32 @@ public class FdActivity extends Activity implements
             mOverlay.add(mFaceGraphic);
             mFaceGraphic.updateFace(face);
 
-            eyeSeperationPixels=getEyeSeperation(face);
-            DistanceToFace = approximateDistanceViaPixels(eyeSeperationPixels);
-            float x = face.getPosition().x + face.getWidth() / 2.0f;
-            float y = face.getPosition().y + face.getHeight() / 2.0f;
-            xOffsetFace= ((centerOfImage.x-x)/eyeSeperationPixels)*AverageHumanEyeSeperation;
-            yOffsetFace = ((y-centerOfImage.y)/eyeSeperationPixels)*AverageHumanEyeSeperation;
-            thetax=Math.asin(xOffsetFace/(float)DistanceToFace);
-            thetay=Math.asin(yOffsetFace/(float) DistanceToFace);
-            thetax= Math.toDegrees(thetax);
-            thetay= Math.toDegrees(thetay);
-            trackPosition = new PointF((float)thetax, (float)thetay);
-            //Log.i(TAG, "CenterX: " + Double.toString(centerOfImage.x) + ", CenterY: " + Double.toString(centerOfImage.y));
-
-            // if both rotation in x and y are less than 2.5 degrees, its "good enough"
-            if(Math.abs(thetax)>2.5||Math.abs(thetay)>2.5) {
-                virtualCat.lookToward(trackPosition);
+            allDetectedFaces=detectionResults.getDetectedItems();
+            happiestFace=true;
+            for(int i = 0, nsize = allDetectedFaces.size(); i < nsize; i++) {
+                int tmpFaceID = allDetectedFaces.keyAt(i);
+                tmpFace = allDetectedFaces.valueAt(i);
+                if(tmpFaceID!=face.getId()){
+                    if(tmpFace.getIsSmilingProbability()>face.getIsSmilingProbability()){
+                        happiestFace=false;
+                    }
+                }
             }
 
-            //use happiness rating
-            emotionalReaction(face.getIsSmilingProbability());
+            if(happiestFace) {
+                trackPosition = trackFace(face);
+
+                // if both rotation in x and y are less than 2.5 degrees, its "good enough"
+                if (Math.abs(thetax) > 2.5 || Math.abs(thetay) > 2.5) {
+                    virtualCat.lookToward(trackPosition);
+                }
+
+                //use happiness rating
+                emotionalReaction(face.getIsSmilingProbability());
+            }
+            happiestFace=false;
+
+
         }
 
         /**
@@ -1129,6 +1141,24 @@ public class FdActivity extends Activity implements
             double multiplier = 1024.0/((double)mCameraSource.getPreviewSize().getWidth());
             //Log.i(TAG, "eyeSeperationADJUSTED: " + Double.toString(eyeWidth*multiplier));
             return -0.4028*eyeWidth*multiplier+89.705;
+        }
+
+        private PointF trackFace(Face face){
+            PointF result;
+
+            eyeSeperationPixels=getEyeSeperation(face);
+            DistanceToFace = approximateDistanceViaPixels(eyeSeperationPixels);
+            float x = face.getPosition().x + face.getWidth() / 2.0f;
+            float y = face.getPosition().y + face.getHeight() / 2.0f;
+            xOffsetFace= ((centerOfImage.x-x)/eyeSeperationPixels)*AverageHumanEyeSeperation;
+            yOffsetFace = ((y-centerOfImage.y)/eyeSeperationPixels)*AverageHumanEyeSeperation;
+            thetax=Math.asin(xOffsetFace/(float)DistanceToFace);
+            thetay=Math.asin(yOffsetFace/(float) DistanceToFace);
+            thetax= Math.toDegrees(thetax);
+            thetay= Math.toDegrees(thetay);
+            result = new PointF((float)thetax, (float)thetay);
+
+            return result;
         }
 
         private double computeDis(PointF p1, PointF p2){
