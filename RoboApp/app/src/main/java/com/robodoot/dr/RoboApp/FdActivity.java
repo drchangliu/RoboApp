@@ -1146,16 +1146,17 @@ public class FdActivity extends Activity implements
                     leftEye=facialFeatures.get(i).getPosition();
                 }
             }
-
+            Log.i(TAG, "EyeDistance: " + Double.toString(Math.sqrt(Math.pow(rightEye.x-leftEye.x, 2.0) + Math.pow(rightEye.y-leftEye.y, 2.0))));
             return Math.sqrt(Math.pow(rightEye.x-leftEye.x, 2.0) + Math.pow(rightEye.y-leftEye.y, 2.0));
         }
 
         private double approximateDistanceViaPixels(double eyeWidth){
             //note eyeWidth is based on a camera of 1024, 768
             //divide actual resolution by assumed to preserve meaning of function
-            double multiplier = 1024.0/((double)mCameraSource.getPreviewSize().getWidth());
+            //double multiplier = 1024.0/((double)mCameraSource.getPreviewSize().getWidth());
             //Log.i(TAG, "eyeSeperationADJUSTED: " + Double.toString(eyeWidth*multiplier));
-            return -0.4028*eyeWidth*multiplier+89.705;
+            //return -0.4028*eyeWidth*multiplier+89.705;
+            return 5532.1*Math.pow(eyeWidth, -0.917);
         }
 
         private PointF trackFace(Face face){

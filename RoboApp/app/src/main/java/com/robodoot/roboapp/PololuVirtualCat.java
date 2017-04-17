@@ -86,8 +86,6 @@ public class PololuVirtualCat extends VirtualCat {
 
 
     public void lookToward(PointF relfPos) {
-        relfPos.x = Util.clamp(relfPos.x, -50.0f, 50.0f);
-        relfPos.y = Util.clamp(relfPos.y, -50.0f, 50.0f);
 
         int yaw = (int)(relfPos.x);
         p.addToYaw(yaw);
