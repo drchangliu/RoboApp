@@ -14,7 +14,9 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.ToneGenerator;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -203,7 +205,13 @@ public class FdActivity extends Activity implements
     //TODO: Analytics Code
     private com.google.android.gms.analytics.Tracker mTracker;
 
+    //TODO: Remove
+    ToneGenerator toneG;
+
     public FdActivity() {
+        //TODO: Remove
+        toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
+
         mDetectorName = new String[2];
         mDetectorName[JAVA_DETECTOR] = "Java";
         ArrayList<ArrayList<Integer>> similarID = new ArrayList<ArrayList<Integer>>();
@@ -229,7 +237,6 @@ public class FdActivity extends Activity implements
         FTPreview.setVisibility(View.INVISIBLE);
         preview = (FrameLayout) findViewById(R.id.camera_preview1);
         preview.setVisibility(View.INVISIBLE);
-
 
         previewCallback = new Camera.PreviewCallback() {
             @Override
@@ -423,13 +430,18 @@ public class FdActivity extends Activity implements
             virtualCat.resetHead();
         }
 
+
+
         // Restart recognizer
-        if(recognizer != null){
+        /*if(recognizer != null){
             if (recognizer.getSearchName().equals(KWS_SEARCH))
                 recognizer.startListening(KWS_SEARCH);
             else
                 recognizer.startListening(CAT_COMMANDS, 10000);
-        }
+        }*/
+
+        //TODO: remove this
+        //toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200);
 
         if(toggleColorTracking.isChecked()){
             myCamera = Camera.open(1);
@@ -984,8 +996,10 @@ public class FdActivity extends Activity implements
 
         //TODO: this works for a high res front camera with high framerate, adjust camera
         //to work with any size/ framerate
+
+        //less than 1 megapixel is 1024, 768
         mCameraSource = new CameraSource.Builder(context, detector)
-                .setRequestedPreviewSize(1024, 768)
+                .setRequestedPreviewSize(3264, 2448)
                 .setFacing(CameraSource.CAMERA_FACING_FRONT)
                 .setRequestedFps(30.0f)
                 .build();
@@ -1008,8 +1022,6 @@ public class FdActivity extends Activity implements
         //      Snackbar.LENGTH_INDEFINITE)
         //    .show();
     }
-
-
 
     private class FaceTrackerFactory implements MultiProcessor.Factory<Face> {
         @Override
@@ -1041,7 +1053,6 @@ public class FdActivity extends Activity implements
             mOverlay = overlay;
             mFaceGraphic = new FaceGraphic(overlay);
             centerOfImage=new PointF(mCameraSource.getPreviewSize().getHeight()/2.0f, mCameraSource.getPreviewSize().getWidth()/2.0f);
-
         }
 
         @Override
@@ -1062,23 +1073,21 @@ public class FdActivity extends Activity implements
             float x = face.getPosition().x + face.getWidth() / 2.0f;
             float y = face.getPosition().y + face.getHeight() / 2.0f;
             xOffsetFace= ((centerOfImage.x-x)/eyeSeperationPixels)*AverageHumanEyeSeperation;
-            yOffsetFace = ((centerOfImage.y-y)/eyeSeperationPixels)*AverageHumanEyeSeperation;
+            yOffsetFace = ((y-centerOfImage.y)/eyeSeperationPixels)*AverageHumanEyeSeperation;
             thetax=Math.asin(xOffsetFace/(float)DistanceToFace);
             thetay=Math.asin(yOffsetFace/(float) DistanceToFace);
-            thetax=convertRadsToServoYaw(thetax);
-            thetay=convertRadsToServoPitch(thetay);
+            thetax= Math.toDegrees(thetax);
+            thetay= Math.toDegrees(thetay);
             trackPosition = new PointF((float)thetax, (float)thetay);
             //Log.i(TAG, "CenterX: " + Double.toString(centerOfImage.x) + ", CenterY: " + Double.toString(centerOfImage.y));
 
-            //if distance from center is < half a face size
-            // done so that "good enough" scales for faces at multiple distances
-            if(thetax>1.5||thetay>1.5) {
+            // if both rotation in x and y are less than 2.5 degrees, its "good enough"
+            if(Math.abs(thetax)>2.5||Math.abs(thetay)>2.5) {
                 virtualCat.lookToward(trackPosition);
             }
 
             //use happiness rating
-            //emotionalReaction(face.getIsSmilingProbability());
-            //end use happiness rating
+            emotionalReaction(face.getIsSmilingProbability());
         }
 
         /**
@@ -1115,19 +1124,23 @@ public class FdActivity extends Activity implements
         }
 
         private double approximateDistanceViaPixels(double eyeWidth){
-            return -0.4028*eyeWidth+89.705;
+            //note eyeWidth is based on a camera of 1024, 768
+            //divide actual resolution by assumed to preserve meaning of function
+            double multiplier = 1024.0/((double)mCameraSource.getPreviewSize().getWidth());
+            //Log.i(TAG, "eyeSeperationADJUSTED: " + Double.toString(eyeWidth*multiplier));
+            return -0.4028*eyeWidth*multiplier+89.705;
         }
 
         private double computeDis(PointF p1, PointF p2){
             return Math.sqrt(Math.pow(p1.x-p2.x, 2.0) + Math.pow(p1.y-p2.y, 2.0));
         }
 
-        private double convertRadsToServoYaw(double rads){
-            return Math.toDegrees(rads)*17.5;
-        }
-
-        private double convertRadsToServoPitch(double rads){
-            return Math.toDegrees(rads)*16.667;
+        private void emotionalReaction(double smileProb){
+            if(smileProb>=0.25){
+                kitty.detectedSmile();
+            }else{
+                kitty.detectedFrown();
+            }
         }
 
     }
