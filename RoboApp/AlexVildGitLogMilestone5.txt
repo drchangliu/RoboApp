@@ -1,0 +1,66 @@
+commit f01392ab5558f06a29efe4db205670351ca48480
+
+Author: AlexVild <ajv2324@gmail.com>
+
+Date:   Wed Apr 12 17:46:10 2017 -0400
+
+    
+Small fix
+
+
+
+commit 35eeda75f8d650d484b64c9535bbe4320e856736
+
+Author: AlexVild <ajv2324@gmail.com>
+
+Date:   Wed Apr 12 17:40:45 2017 -0400
+
+    
+ADded additional voice commands to help with navigation
+
+
+
+commit 6b2f4ce9b9e15572a0e4ac72c2263259da316d85
+
+Merge: 451a09c 0d1ec6e
+
+Author: AlexVild <ajv2324@gmail.com>
+
+Date:   Wed Apr 12 17:11:40 2017 -0400
+
+    
+WIP on master: 451a09c Edited readme in app to be more helpful
+
+
+
+commit 0d1ec6e4f263cfe40066ab7192ac0ba3134f236f
+
+Author: AlexVild <ajv2324@gmail.com>
+
+Date:   Wed Apr 12 17:11:39 2017 -0400
+
+    
+index on master: 451a09c Edited readme in app to be more helpful
+
+
+
+commit 451a09c9ad5b07b9283a9c9fdaf45100e400da18
+
+Author: AlexVild <ajv2324@gmail.com>
+
+Date:   Tue Apr 4 16:45:58 2017 -0400
+
+    
+Edited readme in app to be more helpful
+
+
+
+commit d6c539d5b1defe62c61a43418817d5029d4b8566
+
+Merge: 1a91396 66a7e33
+
+Author: AlexVild <ajv2324@gmail.com>
+
+Date:   Tue Apr 4 15:11:34 2017 -0400
+
+    Static analysis changes

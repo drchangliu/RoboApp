@@ -50,6 +50,7 @@ import com.robodoot.dr.RoboApp.camera.CameraSourcePreview;
 import com.robodoot.dr.RoboApp.camera.GraphicOverlay;
 import com.robodoot.dr.facetracktest.R;
 import com.robodoot.roboapp.ColorFinder;
+import com.robodoot.roboapp.ColorTrackingActivity;
 import com.robodoot.roboapp.ColorTrackingCamera;
 import com.robodoot.roboapp.Direction;
 import com.robodoot.roboapp.MainActivity;
@@ -939,6 +940,27 @@ public class FdActivity extends Activity implements
                         .setAction("Face Track")
                         .build());
                 toggleColorTracking.setChecked(false);
+            }
+            else if (result.contains("red")){
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Red")
+                        .build());
+                ColorTrackingActivity.changeColor("red");
+            }
+            else if (result.contains("yellow")){
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Yellow")
+                        .build());
+                ColorTrackingActivity.changeColor("yellow");
+            }
+            else if (result.contains("blue")){
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("Blue")
+                        .build());
+                ColorTrackingActivity.changeColor("blue");
             }
             else if (result.contains("activate") && result.contains("rufus") && result.contains("vision")){
                 mTracker.send(new HitBuilders.EventBuilder()

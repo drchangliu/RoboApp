@@ -251,6 +251,16 @@ public class ColorTrackingActivity extends AppCompatActivity {
         return c; // returns null if camera is unavailable
     }
 
+    public static void changeColor(String c){
+        if(c.equals("red")){
+            ColorToTrack = Color.RED;
+        } else if (c.equals("blue")){
+            ColorToTrack = Color.BLUE;
+        } else if (c.equals("yellow")){
+            ColorToTrack = Color.YELLOW;
+        }
+    }
+
     private void captureImage(){
         try{
             myCamera.takePicture(null, null, myPicture);
