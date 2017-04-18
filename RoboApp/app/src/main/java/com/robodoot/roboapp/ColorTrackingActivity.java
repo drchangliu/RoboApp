@@ -104,6 +104,7 @@ public class ColorTrackingActivity extends AppCompatActivity {
         // Get settings from previous session
         settings = getPreferences(MODE_PRIVATE);
         boolean silent = settings.getBoolean("silentMode", false);
+
         ColorToTrack = settings.getInt("ColorToTrack", Color.RED);
         colorDistance = settings.getInt("colorDistance", 70);
 
