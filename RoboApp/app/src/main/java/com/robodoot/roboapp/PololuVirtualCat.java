@@ -57,7 +57,7 @@ public class PololuVirtualCat extends VirtualCat {
 
     @Override
     public void stand() {
-        // TODO: This had to be added for my app to compile?
+        p.stand();
     }
 
     @Override
