@@ -883,7 +883,7 @@ public class FdActivity extends Activity implements
             else if (result.contains("stand")){
                 mTracker.send(new HitBuilders.EventBuilder()
                         .setCategory("Command")
-                        .setAction("Attention")
+                        .setAction("Stand")
                         .build());
                 virtualCat.stand();
             }
