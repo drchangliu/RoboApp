@@ -38,7 +38,8 @@ public class ColorTrackingActivity extends AppCompatActivity {
     TextView colorLocation;
     FrameLayout preview = null;
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
-    SharedPreferences settings;
+    static boolean colorFlag = true;
+   public SharedPreferences settings;
 
     @Override
     protected void onPause() {
@@ -105,7 +106,9 @@ public class ColorTrackingActivity extends AppCompatActivity {
         settings = getPreferences(MODE_PRIVATE);
         boolean silent = settings.getBoolean("silentMode", false);
 
-        ColorToTrack = settings.getInt("ColorToTrack", Color.RED);
+        if(colorFlag){
+            ColorToTrack = settings.getInt("ColorToTrack", Color.RED);
+        }
         colorDistance = settings.getInt("colorDistance", 70);
 
         int numCams = Camera.getNumberOfCameras();
@@ -255,10 +258,13 @@ public class ColorTrackingActivity extends AppCompatActivity {
     public static void changeColor(String c){
         if(c.equals("red")){
             ColorToTrack = Color.RED;
+            colorFlag = false;
         } else if (c.equals("blue")){
             ColorToTrack = Color.BLUE;
+            colorFlag = false;
         } else if (c.equals("yellow")){
             ColorToTrack = Color.YELLOW;
+            colorFlag = false;
         }
     }
 
