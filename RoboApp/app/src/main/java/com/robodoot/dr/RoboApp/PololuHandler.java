@@ -306,7 +306,6 @@ public class PololuHandler {
     }
 
     public void stand(){
-        Log.i("TAG", "stand");
         new standTask().execute();
     }
 
