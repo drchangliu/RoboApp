@@ -1273,6 +1273,10 @@ public class FdActivity extends Activity implements
                             x = 50;//(width/6)*5;
                             y = 50;//(height/6)*5;
                             break;
+                        default:
+                            x = 0;
+                            y = 0;
+                            break;
                     }
                     trackPosition = new PointF(x, y);
 

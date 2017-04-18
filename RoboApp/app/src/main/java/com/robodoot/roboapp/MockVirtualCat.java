@@ -71,7 +71,7 @@ public class MockVirtualCat extends VirtualCat {
 
     @Override
     public void stand() {
-        // TODO: This had to be added for my app to compile?
+        Log.i(TAG, "mock cat standing");
     }
 
     @Override

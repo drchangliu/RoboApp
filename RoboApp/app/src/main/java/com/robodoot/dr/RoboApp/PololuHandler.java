@@ -289,8 +289,6 @@ public class PololuHandler {
         protected Void doInBackground(Void... v) {
             int[] a55 = {170, 12, 31, 3, 1, 104, 42, 104, 50, 104, 62};
             maestro.explicitSend(getBytes(a55));
-            int[] a56 = {170, 12, 31, 3, 16, 104, 44, 104, 47, 104, 32};
-            maestro.explicitSend(getBytes(a56));
             return null;
         }
     }
@@ -306,7 +304,6 @@ public class PololuHandler {
     }
 
     public void stand(){
-        Log.i("TAG", "stand");
         new standTask().execute();
     }
 
