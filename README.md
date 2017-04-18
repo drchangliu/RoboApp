@@ -29,7 +29,7 @@ RoboCat can respond to voice commands through the [PocketSphinx API](https://git
 
 Also currently available in the app are activities which allow terminal contact with the pololu, for log purposes, and to manually send values to the servos (The servos are what allow the bobcat to maneuver through the environment).
 
-Color Tracking is currently under dvevelopment and will be available soon. The menu can be accessed but is not functional.
+Robocat is also able to switch from face tracking mode to color tracking mode, by a simple button press on the main UI. The color to track and sensitivity can be changed by going to robocat's menu and selecting color tracking settings. Robocat creates a 3x3 grid and examines each subsection to determine which area has the most of the specified color, and then turns its "head" towards that area.
 
 ## Installation and Running the Application
 To build and run this application, you should do the following:
@@ -55,6 +55,8 @@ Color Tracking and Face Tracking: located in `./RoboApp/app/src/main/java/robodo
 `./proj_doc` contains all non-code documents relating to our software development cycle. See README in that directory
 
 `./FaceTracker` is a seperate app, composed of started and custom code, written to track multiple faces in a video feed. Also incorporated into the main RoboApp and is able to be used. Currently, it detects whether each eye is open and uses facial markers to determine happiness.
+
+`./cameraTest` is a seperate app used to test color tracking. Any major changes to color tracking code can be safely tested here.
 
 `./BatteryInformation` is another standalone app used to detect the level of battery charge on the Android device, it is already incorporated into the main RoboApp.
 
