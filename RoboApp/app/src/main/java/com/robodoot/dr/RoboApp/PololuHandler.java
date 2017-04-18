@@ -69,10 +69,6 @@ public class PololuHandler {
 
     public PololuHandler() {
         maestro = new MaestroSSC();
-        maestro.setAcceleration(NECK_PITCH_SERVO, 1000);
-        maestro.setAcceleration(NECK_YAW_SERVO, 1000);
-        maestro.setSpeed(NECK_PITCH_SERVO, 10000);
-        maestro.setSpeed(NECK_YAW_SERVO, 10000);
         yaw = NECK_YAW_SERVO_HOME;
     }
 

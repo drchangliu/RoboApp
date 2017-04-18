@@ -1095,7 +1095,7 @@ public class FdActivity extends Activity implements
                 int tmpFaceID = allDetectedFaces.keyAt(i);
                 tmpFace = allDetectedFaces.valueAt(i);
                 if(tmpFaceID!=face.getId()){
-                    if(tmpFace.getIsSmilingProbability()>face.getIsSmilingProbability()){
+                    if(tmpFace.getIsSmilingProbability()>face.getIsSmilingProbability()||tmpFace.getIsSmilingProbability()<25){
                         happiestFace=false;
                     }
                 }
@@ -1170,7 +1170,7 @@ public class FdActivity extends Activity implements
             yOffsetFace = ((y-centerOfImage.y)/eyeSeperationPixels)*AverageHumanEyeSeperation;
             thetax=Math.asin(xOffsetFace/(float)DistanceToFace);
             thetay=Math.asin(yOffsetFace/(float) DistanceToFace);
-            thetax= Math.toDegrees(thetax);
+            thetax= Math.toDegrees(thetax)*1.5;
             thetay= Math.toDegrees(thetay);
             result = new PointF((float)thetax, (float)thetay);
 
@@ -1182,7 +1182,7 @@ public class FdActivity extends Activity implements
         }
 
         private void emotionalReaction(double smileProb){
-            if(smileProb>=0.25){
+            if(smileProb>=0.50){
                 kitty.detectedSmile();
             }else{
                 kitty.detectedFrown();
