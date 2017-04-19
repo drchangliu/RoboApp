@@ -307,4 +307,21 @@ public class PololuHandler {
         new standTask().execute();
     }
 
+    private class highFiveTask extends AsyncTask<Void, Void, Void> {
+        protected Void doInBackground(Void... v) {
+            int[] a56 = {170, 12, 31, 3, 1, 104, 42, 104, 50, 104, 62};
+            maestro.explicitSend(getBytes(a56));
+            int [] a57 = {170, 12, 31, 3, 16, 104, 42, 104, 50, 104, 62};
+            maestro.explicitSend(getBytes(a57));
+            int[] a58 = {170, 12, 31, 3, 1, 104, 42, 104, 50, 104, 62};
+            maestro.explicitSend(getBytes(a58));
+            return null;
+        }
+    }
+
+    public void highfive() {
+        new highFiveTask().execute();
+    }
+
+
 }
