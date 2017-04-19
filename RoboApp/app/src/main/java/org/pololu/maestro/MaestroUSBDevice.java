@@ -70,6 +70,19 @@ public class MaestroUSBDevice implements Serializable {
         }
 
         controlConnection.controlTransfer(0x40, command, value, channel, null, 0, 5000);
+        /*byte [] cData = new byte[2];
+        byte [] chData = new byte[2];
+        byte [] vData = new byte[2];
+
+        cData[0] = (byte) (command & 0xFF);
+        cData[1] = (byte) ((command >> 8) & 0xFF);
+        chData[0] = (byte) (channel & 0xFF);
+        chData[1] = (byte) ((channel >> 8) & 0xFF);
+        vData[0] = (byte) (value & 0xFF);
+        vData[1] = (byte) ((value >> 8) & 0xFF);
+        serial.write(cData);
+        serial.write(chData);
+        serial.write(vData);*/
     }
 
     public int readInt() {

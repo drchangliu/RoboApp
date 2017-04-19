@@ -1095,7 +1095,7 @@ public class FdActivity extends Activity implements
                 int tmpFaceID = allDetectedFaces.keyAt(i);
                 tmpFace = allDetectedFaces.valueAt(i);
                 if(tmpFaceID!=face.getId()){
-                    if(tmpFace.getIsSmilingProbability()>face.getIsSmilingProbability()||tmpFace.getIsSmilingProbability()<25){
+                    if(tmpFace.getIsSmilingProbability()>face.getIsSmilingProbability()){
                         happiestFace=false;
                     }
                 }
@@ -1156,6 +1156,7 @@ public class FdActivity extends Activity implements
             //double multiplier = 1024.0/((double)mCameraSource.getPreviewSize().getWidth());
             //Log.i(TAG, "eyeSeperationADJUSTED: " + Double.toString(eyeWidth*multiplier));
             //return -0.4028*eyeWidth*multiplier+89.705;
+            double multiplier = 1920.0/((double)mCameraSource.getPreviewSize().getWidth());
             return 5532.1*Math.pow(eyeWidth, -0.917);
         }
 
