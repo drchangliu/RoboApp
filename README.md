@@ -25,15 +25,15 @@ While connected to the cat, the cat will turn its "head" to center the biggest, 
 in its camera view. Note: this is currently set to work with the front camera of a phone shooting
 a 1024x768 image at 30fps. These values can be modified in createCameraSource() in fdActivity.java.
 
-RoboCat can respond to voice commands through the [PocketSphinx API](https://github.com/cmusphinx/pocketsphinx). Additional info regarding the installation and use of this API can be found in /doc/pocketsphinx-voice-recognition.
+RoboCat can respond to voice commands through the [PocketSphinx API](https://github.com/cmusphinx/pocketsphinx). Additional info regarding the installation and use of this API can be found in /doc/pocketsphinx-voice-recognition. PocketSphinx recognizes voices from a file in 'app/assets/commands.gram'. If you want to add voice commands you must add the key words to this file or the cat wont recognize the words you are saying.
 
-Also currently available in the app are activities which allow terminal contact with the pololu, for log purposes, and to manually send values to the servos (The servos are what allow the bobcat to maneuver through the environment).
+Also currently available in the app are activities which allow terminal contact with the pololu, for log purposes, and to manually send values to the servos (The servos are what allow the bobcat to maneuver through the environment). Similar commands are also found in 'CatEmotion.java' and 'FdActivity'.
 
 Robocat is also able to switch from face tracking mode to color tracking mode, by a simple button press on the main UI. The color to track and sensitivity can be changed by going to robocat's menu and selecting color tracking settings. Robocat creates a 3x3 grid and examines each subsection to determine which area has the most of the specified color, and then turns its "head" towards that area.
 
 ## Installation and Running the Application
 To build and run this application, you should do the following:
-1. `git clone` the master branch of this repo.
+1. `git clone` the master branch of this repo. The repo can be found under kd345312/RoboApp
 2. Download the latest version of [Android Studio](https://developer.android.com/studio/index.html)
 3. Open Android studio, and open an existing project
 4. Open `RoboApp/RoboApp` inside Android Studio. Make sure the app you open in android studio is **not** just simply the RoboApp directory you just cloned, but rather the RoboApp project file within this application, as otherwise the app will not run. RoboApp the repo is composed of several different android applications that are injected into the main RoboApp app, located at RoboApp/RoboApp.
