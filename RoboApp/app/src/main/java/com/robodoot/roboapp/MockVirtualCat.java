@@ -90,7 +90,8 @@ public class MockVirtualCat extends VirtualCat {
     public void turnHeadUp() {
         Log.i(TAG, "mock cat turning head up.");
     }
-
+    @Override
+    public void highFive() { Log.i(TAG, "mock cat highfiving");}
     /*@Override
     public void lookToward(Point relPos) {}*/
 

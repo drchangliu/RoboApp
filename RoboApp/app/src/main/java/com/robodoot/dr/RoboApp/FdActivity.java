@@ -887,6 +887,13 @@ public class FdActivity extends Activity implements
                         .build());
                 virtualCat.stand();
             }
+            else if (result.contains("high five")){
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Command")
+                        .setAction("high five")
+                        .build());
+                virtualCat.highFive();
+            }
             else if (result.contains("right")) {
                 //Make the cat head move right
                 mTracker.send(new HitBuilders.EventBuilder()

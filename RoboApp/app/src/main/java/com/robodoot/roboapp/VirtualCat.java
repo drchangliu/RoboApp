@@ -54,6 +54,8 @@ public abstract class VirtualCat {
 
     public abstract void turnHeadDown();
 
+    public abstract void highFive();
+
     // -- OPENCVRMV
     // public abstract void lookToward(Point relPos);
 

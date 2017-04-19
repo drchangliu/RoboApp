@@ -112,4 +112,6 @@ public class PololuVirtualCat extends VirtualCat {
     public void resetHead() {
         p.home();
     }
+
+    public void highFive() { p.highfive();}
 }

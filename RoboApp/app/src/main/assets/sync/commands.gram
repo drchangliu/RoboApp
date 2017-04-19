@@ -44,6 +44,8 @@ grammar commands;
           deactivate   |
           rufus     |
           vision    |
+          high |
+          five |
           cry   ;
 
 public <digits> = <digit>+;
